@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <v-app>
     <Navbar />
-    <Nuxt />
+    <v-main>
+      <Nuxt />
+    </v-main>
     <Footer />
-  </div>
+  </v-app>
 </template>
 <script>
 import Navbar from "~/components/Navigation/Navbar";
