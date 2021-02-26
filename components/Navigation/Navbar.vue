@@ -7,7 +7,7 @@
     class="hide-height"
   >
       <v-row >
-        <v-col md="2">
+        <v-col  md="2">
           <v-row>
             <v-col cols="2" class="mt-5" v-for="(icon,i) in icons" :key="i">
               <v-btn  icon color="primary"> <v-icon>{{icon.name}}</v-icon></v-btn

@@ -66,8 +66,8 @@
 
   "newsletter": "Newsletter",
   "newsletter_description": "Save with exclusive deals, learn about new products and receive expert advice for you and your pet delivered straight to your inbox.",
-  "name": "Search",
-  "your_zipcode": "Search",
-  "email": "Search",
+  "name": "name",
+  "your_zipcode": "Your Zipcode",
+  "email": "email",
   "submit": "Submit"
 }

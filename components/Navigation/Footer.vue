@@ -66,7 +66,7 @@
       </v-row>
     </v-container>
     <v-row class="copy-rights">
-      <v-col md="12">
+      <v-col md="12" cols="12" sm="12">
         <p class="copy-rights-text">{{ $t('copy_right') }} | {{ $t('terms') }} | {{ $t('privacy') }}</p>
       </v-col>
       <v-progress-linear
