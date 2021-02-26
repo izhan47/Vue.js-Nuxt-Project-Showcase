@@ -1,0 +1,23 @@
+{
+  "name": "Wagenabled_Vue",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "core-js": "^3.8.3",
+    "nuxt": "^2.14.12",
+    "vue": "^2.6.12",
+    "vue-i18n": "^8.22.4"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.11.3",
+    "fibers": "^5.0.0",
+    "sass": "^1.32.7",
+    "sass-loader": "^10.1.1"
+  }
+}
