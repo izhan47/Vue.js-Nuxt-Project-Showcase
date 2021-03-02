@@ -19,7 +19,7 @@
       </div>
       <div class="crew-card-section">
         <v-row justify="center">
-          <v-col col="12" md="4" sm="12" v-for="item in items">
+          <v-col col="12" md="4" sm="12" v-for="(item,i) in items" :key="i">
             <v-container>
               <div>
                 <v-img   max-height="200" max-width="200" :src="item.src"  class="crew-card-img" > </v-img>
