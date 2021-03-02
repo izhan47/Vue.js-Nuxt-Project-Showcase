@@ -15,7 +15,7 @@
 
 
             <div class="list-child">
-                  <v-list dense flat >
+              <v-list dense flat >
                 <v-list-item
                   v-for="(item, i) in menuItems"
                   :key="i"
@@ -204,14 +204,7 @@ export default {
     display: none;
   }
 }
-.nav-title{
-  color: $purple;
-  cursor: pointer;
-}
-.nav-title:hover{
-  color: $pink;
-  //Pulse Grow Effect
-}
+
 .sign-in-btn{
   color: $purple;
   background-color: $white;
