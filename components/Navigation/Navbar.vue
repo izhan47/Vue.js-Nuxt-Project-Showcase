@@ -1,52 +1,83 @@
 <template>
-  <!--Nav Bar Code STart-->
-  <v-app-bar
-    app
-    color="white"
-    dark
-    class="hide-height"
-  >
-      <v-row >
-        <v-col  md="2">
-          <v-row>
-            <v-col cols="2" class="mt-5" v-for="(icon,i) in icons" :key="i">
-              <v-btn  icon color="primary"> <v-icon>{{icon.name}}</v-icon></v-btn
-              ></v-col>
-          </v-row>
-        </v-col>
-        <v-col md="1"></v-col>
-        <v-col md="6">
-          <v-row >
-            <v-col cols="2" class="mt-5" v-for="item in menuItems"  :key="item.title">
-              <img v-if="item.title===''"  class="mr-8" width="100"
-                   src="/images/WagEnabledLogo.jpg" alt="logo">
-              <v-btn
-                class=" mt-2 menu-item"
-                text
-              >
-                {{ item.title }}
-              </v-btn>
-            </v-col>
-          </v-row>
-          <!--        <v-col cols="12" lg="2" md="3" sm="6">-->
-          <!--        </v-col>-->
+  <div>
+      <v-app id="inspire"  >
+        <!--Side Bar Code Start-->
+        <v-navigation-drawer
+          v-model="drawer"
+          app
+          class="nav-draw"
+        >
+          <div class="parent">
+            <div class="show_img_mobile">
+              <v-img max-width="150" max-height="150" src="/images/WagEnabledLogo.jpg" alt="logo"></v-img>
+            </div>
 
-        </v-col>
-        <v-col md="1"></v-col>
-        <v-col md="2 mt-6">
-          <v-btn
-            class="menu-item "
-            style="float: right"
-            outlined
-            rounded
 
-          >
-            {{ $t('sign_in') }}
-          </v-btn>
-        </v-col>
-      </v-row>
-  </v-app-bar>
-  <!--Nav Bar Code End-->
+            <div class="list-child">
+              <v-list dense flat v-for="item in menuItems"  :key="item.title">
+                <v-list-item link :to="item.path">
+                  <v-list-item-content>
+                    <v-list-item-title class="nav-title">{{ item.title }}</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+              <v-list-item link  to="/sign_in">
+                <v-list-item-content>
+                  <v-list-item-title class="nav-title">{{ $t('sign_in') }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </div>
+            <div class="icon-child">
+              <v-btn  v-for="(icon,i) in icons" :key="i" icon color="#332e80"> <v-icon>{{icon.name}}</v-icon></v-btn>
+            </div>
+          </div>
+
+        </v-navigation-drawer>
+        <!--Side Bar Code End-->
+
+        <!--Nav Bar Code STart-->
+        <v-app-bar
+          app
+          color="white"
+          dark
+          height="100"
+        >
+          <div class="show_img">
+            <v-img max-width="100" max-height="100" src="/images/WagEnabledLogo.jpg" alt="logo"></v-img>
+          </div>
+          <div class="icon-position">
+            <v-app-bar-nav-icon  class="show_drawer app-icon" @click.stop="drawer = !drawer" />
+          </div>
+
+          <v-toolbar-title  class="header-title">
+            <div>
+              <v-btn v-for="(icon,i) in icons" :key="i" icon color="#332e80"> <v-icon>{{icon.name}}</v-icon></v-btn>
+            </div>
+            <div class="app-title">
+              <v-btn  text class="nav-title">{{$t('about_us')}}</v-btn>
+              <v-btn  text class="nav-title">{{$t('reviews')}}</v-btn>
+              <div class="mr-5 ml-5 pr-5 pl-5" >
+                <v-img max-width="100" max-height="100" src="/images/WagEnabledLogo.jpg" alt="logo"></v-img>
+              </div>
+              <v-btn  text class="nav-title">{{$t('watch_and_learn')}}</v-btn>
+              <v-btn  text class="nav-title">{{$t('find_a_pet_pro')}}</v-btn>
+            </div>
+            <div>
+              <v-btn outlined rounded class="sign-in-btn mt-2">{{$t('sign_in')}}</v-btn>
+            </div>
+
+            <!--            <div v-for="item in menuItems"  :key="item.title">-->
+<!--              <v-img-->
+<!--                v-if="item.title===''"  class="mr-8" width="100"-->
+<!--                src="/images/WagEnabledLogo.jpg" alt="logo"> </v-img>-->
+<!--              <v-btn  text class="nav-title">{{item.title}}</v-btn>-->
+<!--            </div>-->
+          </v-toolbar-title>
+
+        </v-app-bar>
+        <!--Nav Bar Code End-->
+      </v-app>
+  </div>
 </template>
 
 <script>
@@ -58,17 +89,17 @@ export default {
         // { title: 'Home', path: '/home', icon: 'home' },
         {
           title: this.$i18n.t('about_us'),
-          path: '/about-us',
+          path: '/about',
         },
         {
           title: this.$i18n.t('reviews'),
           path: '/reviews',
         },
 
-        {
-          title: '',
-          path: '/',
-        },
+        // {
+        //   title: '',
+        //   path: '/',
+        // },
 
         { title: this.$i18n.t('watch_and_learn'),
           path: '/watch_and_learn',},
@@ -88,23 +119,110 @@ export default {
         {
           name:"mdi-youtube",
         }
-      ]
+      ],
+      drawer: false,
     }
   },
+  created() {
+
+    window.addEventListener("resize", this.handleWindowResize);
+
+
+    window.addEventListener('resize', function(event){
+      const newWidth = window.innerWidth;
+      const newHeight = window.innerHeight;
+      console.log(newWidth,'screen size', newHeight)
+      this.drawer = newWidth < 768;
+      console.log(this.drawer)
+    });
+  },
+  mounted() {
+    this.$store.commit('Drawer/UPDATE_DRAWER_VALUE',this.drawer)
+  },
+  methods:{
+    // handleWindowResize() {
+    //   console.log('screen size', window.innerWidth)
+    //   this.drawer =  window.innerWidth < 769;
+    //   console.log('val',this.drawer)
+    //   this.$store.commit("Drawer/UPDATE_DRAWER_VALUE",this.drawer);
+    // },
+  }
 }
 </script>
 
 <style  lang="scss" scoped>
 @import "~/assets/sass/main.scss";
-
-.hide-height::v-deep .v-toolbar__content{
-   height: 100px !important;
+.show_drawer{
+  @media (min-width: 769px)   {
+  display: none;
+  }
+}
+.icon-position{
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  @media (min-width: 769px)   {
+    display: none;
   }
 
-.hide-height::v-deep .v-app-bar--fixed{
-  height: 80px ;
 }
+.app-icon::v-deep .v-icon{
+  color: $purple;
+}
+.app-title{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.show_img {
+ @media (min-width: 769px)   {
+      display: none;
+    }
+  }
+.header-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  @media (max-width: 768px)  {
+    display: none;
+  }
+}
+.nav-title{
+  color: $purple;
+  cursor: pointer;
+}
+.nav-title:hover{
+  color: $pink;
+  //Pulse Grow Effect
+}
+.sign-in-btn{
+  color: $purple;
+  background-color: $white;
+}
+.sign-in-btn:hover{
+  color: $white;
+  background-color: $purple;
+  //Pulse Grow Effect
 
+}
+.parent{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.list-child{
+  flex: 1;
+}
+.icon-child{
+text-align: center;
+  padding-bottom: 1rem;
+}
+.show_img_mobile{
+  padding: 1rem;
+  align-items: center;
+}
 </style>
 
 
