@@ -74,5 +74,35 @@
   "name": "Name",
   "your_zipcode": "Your Zipcode",
   "email": "Email",
-  "submit": "Submit"
+  "submit": "Submit",
+
+
+  "from": "From",
+  "with_love": "With Love",
+  "about_banner_description": "Welcome to Wag Enabled! We’re so glad you’re here. Seriously, swishing our tails with joy — which is what we’re all about.",
+  "slide_heading": "Empowering Pets And Their Humans",
+  "slide_description_1": "We at Wag Enabled adore our pets. Plain and simple. We want the best for them and their humans, which is why every product, service provider, video, and blog post we feature helps you connect with your pet through encouragement rather than punishment. ",
+  "slide_description_2": "Basically, we’re in the “good dog!” camp. We’re not interested in keeping your pup in the dog house. We are interested in celebrating our pets’ achievements and rallying around others who feel the same way.",
+  "slide_description_3": "In with the positive reinforcements, and out with fear- and pain-based businesses and methods. Your fur baby needs a nurturing environment built around mutual respect and understanding. And plenty of petting.",
+
+  "pawsitivity_pushers": "Pawsitivity Pushers",
+  "cheer_over_fear": "Cheer Over Fear",
+  "cheer_over_fear_description": "We firmly believe all animals deserve humane treatment -- and treats. We only work with those who share our happy, healthy approach to creating harmony between person and pet.",
+  "oouch_free": "Ouch-Free",
+  "oouch_free_description": "We choose to walk the pain-free path. This means we only recommend products, businesses, and services that promote positive reinforcements and emotional well-being.",
+  "local_love": "Local Love",
+  "local_love_description": "As a small business, we’re big supporters of lifting up other small businesses. We hand-pick brands we trust that know a thing or two about community value and quality pet care.",
+
+  "our_purpose": "Our Purpose",
+  "purpose_description": "We help pet parents raise happy, well-balanced pups by doing the digging for them. We fetch the best in local products, services, and professionals that share our commitment to constructive care and loads of love.",
+
+  "better_together": "Better Together",
+  "join": "Join",
+  "shake_description": "We’re always looking for local pet businesses and brands to join our wag-tastic family. All we ask is that your business or brand shares our pain-free values. Only love and trust here!",
+  "lets_shake": "Let's Shake!",
+
+  "meet_crew": "Meet The Crew"
+
+
+
 }
