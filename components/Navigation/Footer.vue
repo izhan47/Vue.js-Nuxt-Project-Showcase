@@ -75,7 +75,7 @@
               <img  class="mr-10" width="200"
                     src="/images/WagEnabledLogo.jpg" alt="logo">
               <v-col cols="2" class="mr-2 mt-5" v-for="icon in icons" :key="icon">
-                <v-btn  icon color="primary"> <v-icon>{{icon}}</v-icon></v-btn
+                <v-btn  icon color="#332e80"> <v-icon>{{icon}}</v-icon></v-btn
                 ></v-col>
             </v-row>
           </v-col>
@@ -129,18 +129,19 @@
 
         </v-row>
       </v-container>
-      <v-row class="copy-rights">
-        <v-col md="12" cols="12" sm="12">
-          <p class="copy-rights-text">{{ $t('copy_right') }} | {{ $t('terms') }} | {{ $t('privacy') }}</p>
-        </v-col>
-        <v-progress-linear
-          color="teal"
-          height="10"
-          value="100"
 
-        ></v-progress-linear>
-      </v-row>
+<!--      <v-row class="copy-rights">-->
+<!--        <v-col md="12" cols="12" sm="12">-->
+<!--          <p class="copy-rights-text">{{ $t('copy_right') }} | {{ $t('terms') }} | {{ $t('privacy') }}</p>-->
+<!--          <div class="footer-color"></div>-->
+<!--        </v-col>-->
+
+<!--      </v-row>-->
     </v-footer>
+    <div class="copy-rights">
+      <p class="copy-rights-text">{{ $t('copy_right') }} | {{ $t('terms') }} | {{ $t('privacy') }}</p>
+      <div class="footer-color"></div>
+    </div>
   </div>
 
 </template>
@@ -194,16 +195,17 @@ export default {
 .copy-rights{
   background-color:$grey-light;
   float: left;
+  width: 100%;
 }
 .copy-rights-text{
   margin-left: 3rem;
   color: #504d4bfc;
 }
-.progress{
+.footer-color{
   color: $green;
+  border: 5px solid $green;
+  width: 100%;
 }
-
-
 .footer-icon{
   color: $purple;
 }
