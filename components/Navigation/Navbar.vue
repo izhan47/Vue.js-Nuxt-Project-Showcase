@@ -5,8 +5,14 @@
         <v-navigation-drawer
           v-model="drawer"
           app
+          class="nav-draw"
         >
           <div class="parent">
+            <div class="show_img_mobile">
+              <v-img max-width="150" max-height="150" src="/images/WagEnabledLogo.jpg" alt="logo"></v-img>
+            </div>
+
+
             <div class="list-child">
               <v-list dense flat v-for="item in menuItems"  :key="item.title">
                 <v-list-item link :to="item.path">
@@ -37,7 +43,7 @@
           height="100"
         >
           <div class="show_img">
-            <v-img max-width="150" max-height="150" src="/images/WagEnabledLogo.jpg" alt="logo"></v-img>
+            <v-img max-width="100" max-height="100" src="/images/WagEnabledLogo.jpg" alt="logo"></v-img>
           </div>
           <div class="icon-position">
             <v-app-bar-nav-icon  class="show_drawer app-icon" @click.stop="drawer = !drawer" />
@@ -117,7 +123,11 @@ export default {
       drawer: false,
     }
   },
-  mounted() {
+  created() {
+
+    window.addEventListener("resize", this.handleWindowResize);
+
+
     window.addEventListener('resize', function(event){
       const newWidth = window.innerWidth;
       const newHeight = window.innerHeight;
@@ -125,6 +135,17 @@ export default {
       this.drawer = newWidth < 768;
       console.log(this.drawer)
     });
+  },
+  mounted() {
+    this.$store.commit('Drawer/UPDATE_DRAWER_VALUE',this.drawer)
+  },
+  methods:{
+    // handleWindowResize() {
+    //   console.log('screen size', window.innerWidth)
+    //   this.drawer =  window.innerWidth < 769;
+    //   console.log('val',this.drawer)
+    //   this.$store.commit("Drawer/UPDATE_DRAWER_VALUE",this.drawer);
+    // },
   }
 }
 </script>
@@ -195,7 +216,12 @@ export default {
   flex: 1;
 }
 .icon-child{
-
+text-align: center;
+  padding-bottom: 1rem;
+}
+.show_img_mobile{
+  padding: 1rem;
+  align-items: center;
 }
 </style>
 
