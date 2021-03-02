@@ -1,0 +1,37 @@
+.menu-item{
+  color: $purple;
+}
+.purple-section{
+  background-color: $purple;
+  color: $white;
+}
+.grey-section{
+  background-color: $grey-light;
+}
+.green-section{
+  background-color: #00AFAA;
+}
+.purple-section{
+  background-color: #332E80;
+}
+.pink-section{
+  background-color:#FF8189;
+}
+.white-text{
+  color:#fff
+}
+
+
+.heading{
+  color:$purple;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 300;
+  font-size: 25px;
+  text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
+}
+.description{
+  color: $black;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+}

@@ -1,9 +1,9 @@
 <template>
   <v-app class="main-app">
-    <Navbar />
-    <v-main >
-      <Nuxt />
-    </v-main>
+<!--    <Navbar />-->
+<!--    <v-main >-->
+<!--      <Nuxt />-->
+<!--    </v-main>-->
     <Footer />
   </v-app>
 </template>
