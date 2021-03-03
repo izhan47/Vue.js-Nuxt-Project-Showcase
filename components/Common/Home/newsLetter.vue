@@ -1,24 +1,19 @@
 <template>
-<div class="purple-section">
-  <v-container >
-    <div class="news-section">
-      <v-row justify="center">
-        <v-divider class="news-section-divider"></v-divider>
-        <v-col cols="12" md="12" sm="12"  >
-          <div class="news-section-heading mt-3 mb-3">
-            <h2>{{ $t('newsletter') }} </h2>
-          </div>
-          <div class="news-description mt-3 mb-3">
-            <p>{{ $t('newsletter_description') }}</p>
-          </div>
-        </v-col>
-        <v-col cols="12" md="12" sm="12"  >
-
+  <div class="purple-section">
+    <div class="custom-container custom-height center-center" >
+      <div class="news-section line-height">
+        <div class="center-align mt-3 mb-3">
+          <h2 class="news-section-heading">{{ $t('newsletter') }} </h2>
+        </div>
+        <div class="center-align  mt-3 mb-3">
+          <p class=" news-description">{{ $t('newsletter_description') }}</p>
+        </div>
+        <div class="mb-5">
           <v-form
             ref="form"
             @submit.prevent="submit"
           >
-            <v-row justify="center">
+            <v-row>
               <v-col cols="12" md="6" sm="12"  >
                 <v-text-field
                   class="form-field news-section-label"
@@ -50,23 +45,25 @@
                 ></v-text-field>
               </v-col>
               <v-col  cols="12" md="12" sm="12">
-                <v-btn
-                  class=" mt-2 white-text"
-                  text
-                  @click="submit()"
-                >
-                  {{ $t('submit') }}
-                </v-btn>
+                <div class="center-align">
+                  <v-btn
+                    class=" news-section-btn mt-2 white-text"
+                    text
+                    x-large
+                    @click="submit()"
+                  >
+                    {{ $t('submit') }}
+                  </v-btn>
+                </div>
+
               </v-col>
             </v-row>
           </v-form>
-
-        </v-col>
-      </v-row>
+        </div>
+      </div>
     </div>
-  </v-container>
 
-</div>
+  </div>
 </template>
 
 <script>
@@ -103,9 +100,7 @@ export default {
   color:$white
 }
 .news-section{
-  width: 1150px;
-  height: 600px;
-  //No Parallax
+  max-width: 800px;
 }
 .news-section-divider{
   //Tilted Opacity #F6FEFF
@@ -116,8 +111,8 @@ export default {
 .news-section-heading{
   color:$white;
   font-family: 'Nunito Sans', sans-serif;
-  font-weight: 300;
-  font-size: 25px;
+  font-weight: 600;
+  font-size: 45px;
   text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
 }
 .news-section-description{
@@ -125,7 +120,7 @@ export default {
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 600;
   font-size: 16px;
-  padding: 0 175px 0 175px ;  //top right bottom left
+  //padding: 0 175px 0 175px ;  //top right bottom left
 }
 
 .news-section-label{
@@ -139,6 +134,7 @@ export default {
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 500;
   font-size: 30px;
+  text-transform: capitalize;
 }
 </style>
 

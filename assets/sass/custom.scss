@@ -1,3 +1,25 @@
+/*=========================================== =============
+      Custom
+=========================================================*/
+*
+{box-sizing: border-box}
+
+.custom-container{
+  max-width: 1140px;
+  margin: auto;
+  padding: 0 1rem;
+}
+.custom-height{
+  min-height: 700px;
+}
+.center-center{
+  display: grid;
+  place-items: center;
+}
+
+/*=========================================== =============
+       Section Color
+=========================================================*/
 .menu-item{
   color: $purple;
 }
@@ -9,34 +31,28 @@
   background-color: $grey-light;
 }
 .green-section{
-  background-color: #00AFAA;
-}
-.purple-section{
-  background-color: #332E80;
+  background-color: $green;
 }
 .pink-section{
-  background-color:#FF8189;
+  background-color:$pink;
 }
 .white-text{
-  color:#fff
+  color:$white
 }
-
-
-.nav-title{
+.primary-color{
   color: $purple;
-  cursor: pointer;
-}
-.nav-title:hover{
-  color: $pink;
-  //Pulse Grow Effect
 }
 
+/*=========================================== =============
+        Heading and Description
+=========================================================*/
 .heading{
   color:$purple;
   font-family: 'Nunito Sans', sans-serif;
-  font-weight: 300;
-  font-size: 25px;
+  font-weight: 600;
+  font-size: 40px;
   text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
+  text-transform: capitalize;
 }
 .description{
   color: $black;
@@ -44,6 +60,77 @@
   font-weight: 600;
   font-size: 16px;
 }
+
+/*=========================================== =============
+        Line Height
+=========================================================*/
+.line-height{
+  line-height: 2;
+}
+
+/*=========================================== =============
+       Alignment
+=========================================================*/
 .center-align{
   text-align: center;
 }
+.left-align{
+  text-align: left;
+}
+.section-align-center{
+  display: grid;
+  place-items: center;
+}
+.section-align-baseline{
+  display: grid;
+  place-items: baseline;
+}
+
+/*=========================================== =============
+       Image
+=========================================================*/
+.img-fluid{
+  max-width: 100%;
+  height: auto;
+}
+.img-height{
+  max-height: 125px;
+}
+
+/*=========================================== =============
+       Button
+=========================================================*/
+.round-btn{
+  color: $purple;
+  background-color: $white;
+  text-transform: capitalize;
+
+  border-width: 3px 3px 3px 3px;
+  border-color: $purple;
+}
+.round-btn:hover{
+  color: $white;
+  background-color: $purple;
+}
+
+/*=========================================== =============
+      Card
+=========================================================*/
+.grey-section{
+  .card-radius{
+    border-radius: 16px;
+  }
+}
+
+.list-height{
+  .v-list-item{
+    min-height: 32px;
+  }
+  .v-list-item__content{
+    padding: 0;
+  }
+}
+
+
+
+

@@ -7,8 +7,7 @@
   <care-advice></care-advice>
   <featured-product></featured-product>
   <news-letter></news-letter>
-
-</div>
+</div >
 </template>
 
 <script>

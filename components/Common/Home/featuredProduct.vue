@@ -1,28 +1,26 @@
 <template>
 <div class="product-section">
-  <v-container>
+  <div class="custom-container custom-height center-center">
     <v-row justify="center">
       <v-col cols="12" md="6" sm="12">
         <div class="mt-3 mb-3">
-          <img class="product-section-img"
-                  src="/images/ZiwiHomepage.jpg" alt="logo" />
+          <img class="img-fluid" src="/images/ZiwiHomepage.jpg" alt="logo" />
         </div>
       </v-col>
-      <v-col cols="12" md="6" sm="12">
-        <div class="product-section-subheading mt-3 mb-3">
-          <strong class="menu-item">{{ $t('featured_product') }}</strong>
-
+      <v-col cols="12" md="6" sm="12" class="section-align-baseline pa-8">
+        <div class=" mt-3 mb-3">
+          <h2 class="product-section-subheading">{{ $t('featured_product') }}</h2>
         </div>
-        <div class="product-section-heading mt-3 mb-3">
-          <h2>{{ $t('ziwi_premium') }} {{ $t('pet_food') }}</h2>
-
+        <div class=" mt-3 mb-3">
+          <h2 class="product-section-heading">{{ $t('ziwi_premium') }} {{ $t('pet_food') }}</h2>
         </div>
-        <div class="description mt-3 mb-3">
-          <p>{{ $t('featured_product_description') }}</p>
+        <div class=" mt-3 mb-3">
+          <p class="description">{{ $t('featured_product_description') }}</p>
         </div>
         <v-btn
-          class="product-section-btn mt-3"
+          class="round-btn mt-3"
           outlined
+          large
           rounded
         >
           {{ $t('see_product_review') }}
@@ -30,7 +28,7 @@
       </v-col>
     </v-row>
 
-  </v-container>
+  </div>
 </div>
 
 </template>
@@ -53,15 +51,14 @@ export default {
 .product-section-img{
   max-width:100%;
   height: auto;
-
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 .product-section-heading{
   font-family: 'Nunito Sans', sans-serif;
-  font-weight: 300;
-  font-size: 20px;
+  font-weight: 600;
+  font-size: 45px;
   text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
 }
 .product-section-subheading{
