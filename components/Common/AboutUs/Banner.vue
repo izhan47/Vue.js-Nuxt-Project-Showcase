@@ -8,10 +8,10 @@
                      src="/images/Pink-Paw.png" alt="logo">
               </v-col>
               <v-col cols="12" md="6" sm="6" offset-md="1">
-                <div class="heading">
+                <div class="heading center-align">
                   <h2>{{ $t('from') }} {{ $t('pet_people') }}{{ $t('coma') }} {{ $t('with_love') }}</h2>
                 </div>
-                <div class="description mt-5 mb-3">
+                <div class="description center-align mt-5 mb-3">
                   <p>{{ $t('about_banner_description') }}</p>
                 </div>
               </v-col>

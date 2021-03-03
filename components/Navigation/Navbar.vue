@@ -9,18 +9,33 @@
         >
           <div class="parent">
             <div class="show_img_mobile">
-              <v-img max-width="150" max-height="150" src="/images/WagEnabledLogo.jpg" alt="logo"></v-img>
+              <v-img max-width="150" max-height="150" to="/" src="/images/WagEnabledLogo.jpg" alt="logo"></v-img>
             </div>
 
 
+
             <div class="list-child">
-              <v-list dense flat v-for="item in menuItems"  :key="item.title">
+              <v-list dense flat >
+                <v-list-item
+                  v-for="(item, i) in menuItems"
+                  :key="i"
+                  :to="item.to"
+                  router
+                  exact
+                >
+                  <v-list-item-content>
+                    <v-list-item-title class="nav-title" v-text="item.title" />
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+
+              <!-- <v-list dense flat v-for="item in menuItems"  :key="item.title">
                 <v-list-item link :to="item.path">
                   <v-list-item-content>
                     <v-list-item-title class="nav-title">{{ item.title }}</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
-              </v-list>
+              </v-list> -->
               <v-list-item link  to="/sign_in">
                 <v-list-item-content>
                   <v-list-item-title class="nav-title">{{ $t('sign_in') }}</v-list-item-title>
@@ -89,22 +104,22 @@ export default {
         // { title: 'Home', path: '/home', icon: 'home' },
         {
           title: this.$i18n.t('about_us'),
-          path: '/about',
+          to: '/about',
         },
         {
           title: this.$i18n.t('reviews'),
-          path: '/reviews',
+          to: '/reviews',
         },
 
         // {
         //   title: '',
-        //   path: '/',
+        //   to: '/',
         // },
 
         { title: this.$i18n.t('watch_and_learn'),
-          path: '/watch_and_learn',},
+          to: '/watch_and_learn',},
         { title: this.$i18n.t('find_a_pet_pro'),
-          path: '/find_a_pet_pro',},
+          to: '/find_a_pet_pro',},
       ],
       icons:[
         {
@@ -189,14 +204,7 @@ export default {
     display: none;
   }
 }
-.nav-title{
-  color: $purple;
-  cursor: pointer;
-}
-.nav-title:hover{
-  color: $pink;
-  //Pulse Grow Effect
-}
+
 .sign-in-btn{
   color: $purple;
   background-color: $white;

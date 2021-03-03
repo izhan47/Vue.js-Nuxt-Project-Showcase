@@ -1,4 +1,4 @@
-# Wagenabled_Vue
+# Wagenabled
 
 ## Build Setup
 

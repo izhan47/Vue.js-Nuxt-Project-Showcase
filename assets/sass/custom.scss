@@ -22,6 +22,15 @@
 }
 
 
+.nav-title{
+  color: $purple;
+  cursor: pointer;
+}
+.nav-title:hover{
+  color: $pink;
+  //Pulse Grow Effect
+}
+
 .heading{
   color:$purple;
   font-family: 'Nunito Sans', sans-serif;
@@ -34,4 +43,7 @@
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 600;
   font-size: 16px;
+}
+.center-align{
+  text-align: center;
 }
