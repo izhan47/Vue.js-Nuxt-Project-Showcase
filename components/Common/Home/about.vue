@@ -1,25 +1,26 @@
 <template>
 <div class="grey-section">
- <v-container >
-   <div class="about-section mt-5">
+ <div class="custom-container custom-height center-center">
+   <div class="about-section w-100 mt-5">
      <v-row justify="center">
        <v-col cols="12" md="6" sm="6">
          <div>
            <img class="about-img"
                 src="/images/placeholder.png" alt="logo">
          </div>
-
        </v-col>
-       <v-col cols="12" md="6" sm="6">
-         <div class="heading">
-           <h2>{{ $t('we_are') }} {{ $t('wag_enabled') }}</h2>
+<!--       <v-col cols="12" md="6" sm="6" class="section-align pa-8">-->
+       <v-col cols="12" md="6" sm="6" class="mt-8 pa-8">
+         <div class="align-content" >
+           <h2 class="heading">{{ $t('we_are') }} {{ $t('wag_enabled') }}</h2>
          </div>
-         <div class="description mt-5 mb-3">
+         <div class="description left-align mt-5 mb-3">
            <p>{{ $t('wag_enabled_description') }}</p>
          </div>
-         <div >
+         <div class="align-content">
            <v-btn
-             class="about-btn mt-3"
+             large
+             class="round-btn  mt-3 "
              outlined
              rounded
            >
@@ -30,7 +31,7 @@
        </v-col>
      </v-row>
    </div>
- </v-container>
+ </div>
 </div>
 </template>
 
@@ -43,16 +44,30 @@ name: "about.vue"
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
 .about-section{
-  width: 1140px;
+  //width: 1140px;
   //height: 800px;
   //Parallax Effect On Row
 }
 
+.about-heading{
+  color:$purple;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 600;
+  font-size: 45px;
+  text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
+  text-transform: capitalize;
+
+}
 .about-img{
   width: 100%;
+}
+.align-content{
+  width: 100%;
+  text-align: left;
 }
 .about-btn{
   color: $purple;
   background-color: $white;
+  font-weight: bold;
 }
 </style>

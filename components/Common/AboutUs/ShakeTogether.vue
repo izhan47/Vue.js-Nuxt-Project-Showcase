@@ -10,8 +10,8 @@
            </div>
 
           </v-col>
-          <v-col cols="12" md="6" sm="6">
-            <div class="shake-section-align">
+          <v-col cols="12" md="6" sm="6" class="section-align">
+            <div >
               <div class="shake-section-heading mt-3 mb-3">
                 <strong>{{ $t('better_together') }}</strong>
 
@@ -53,6 +53,7 @@ export default {
   //height: 800px;
   //padding: 120px 0 120px 0 ;
   //Parallax Effect On Row
+
   @media (min-width: 320px)  and (max-width: 600px)  {
     padding: 30px;
   }
@@ -67,9 +68,7 @@ export default {
   margin-left: auto;
   margin-right: auto;
 }
-.shake-section-align{
-  vertical-align: center;
-}
+
 .shake-section-heading{
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 300;

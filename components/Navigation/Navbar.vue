@@ -78,7 +78,7 @@
               <v-btn  text class="nav-title">{{$t('find_a_pet_pro')}}</v-btn>
             </div>
             <div>
-              <v-btn outlined rounded class="sign-in-btn mt-2">{{$t('sign_in')}}</v-btn>
+              <v-btn outlined rounded class="round-btn mt-2">{{$t('sign_in')}}</v-btn>
             </div>
 
             <!--            <div v-for="item in menuItems"  :key="item.title">-->
@@ -205,16 +205,7 @@ export default {
   }
 }
 
-.sign-in-btn{
-  color: $purple;
-  background-color: $white;
-}
-.sign-in-btn:hover{
-  color: $white;
-  background-color: $purple;
-  //Pulse Grow Effect
 
-}
 .parent{
   display: flex;
   flex-direction: column;
