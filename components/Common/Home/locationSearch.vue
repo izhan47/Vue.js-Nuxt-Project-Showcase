@@ -6,21 +6,21 @@
         <img  class="img-fluid img-height" src="/images/Pet-Pro-Finder-Collars.png" alt="logo">
       </div>
       <div class="mb-5 ">
-        <h2 class="heading center-align line-height">{{ $t('pet_pro_around_you') }}</h2>
+        <h2 class="heading center-align line-height ">{{ $t('pet_pro_around_you') }}</h2>
       </div>
-      <div>
-        <p class="description center-align line-height ">{{ $t('search_database_description') }}</p>
+      <div class="space">
+        <p class="location-description ">{{ $t('search_database_description') }}</p>
       </div>
         <!--   Filter Section Start     -->
       <v-form>
         <v-row justify="center">
           <v-col cols="12" md="3" sm="6">
             <div class="filter-label">
-              <label class="ml-4">{{ $t('category') }}</label>
+              <label class="ml-4 ">{{ $t('category') }}</label>
             </div>
             <v-select
               class="search-box mt-2"
-              :items="items"
+              :items="category"
               :label="$t('select_category')"
               v-model="form.category"
               outlined
@@ -29,7 +29,7 @@
           </v-col>
           <v-col cols="12" md="3" sm="6">
             <div class="filter-label">
-              <label class="ml-4">{{ $t('location') }}</label>
+              <label class="ml-4 ">{{ $t('location') }}</label>
             </div>
             <v-text-field
               class="search-box  mt-2"
@@ -60,16 +60,16 @@
               class="purple-section  search-btn"
               outlined
               large
-              max-height="50px"
-              max-width="100px"
+
 
             >
               {{ $t('search') }}
             </v-btn>
+            <h5 class="tag-align"> {{ $t('sort_by') }} <strong style="color: #00AFAA">{{ $t('latest_v') }}</strong></h5>
           </v-col>
-          <v-col col="12" md="12" sm="12" class="tag-align">
-            <h5 > {{ $t('sort_by') }} <strong style="color: #00AFAA">{{ $t('latest_v') }}</strong></h5>
-          </v-col>
+<!--          <v-col col="12" md="12" sm="12" class="tag-align">-->
+<!--            <h5 > {{ $t('sort_by') }} <strong style="color: #00AFAA">{{ $t('latest_v') }}</strong></h5>-->
+<!--          </v-col>-->
         </v-row>
       </v-form>
         <!--   Filter Section End     -->
@@ -77,105 +77,144 @@
     <!--  card-section-start   -->
     <div class="custom-height">
         <v-row>
-          <v-col cols="12" md="4" sm="12">
+<!--          <v-col cols="12" md="4" sm="12">-->
+<!--            <v-img-->
+<!--              class="img-fluid card-img"-->
+<!--              src="/images/pet-1.png"-->
+<!--            ></v-img>-->
+<!--            <v-card  class=" card-radius pa-5">-->
+<!--              <v-card-title class="card-heading">Paws On Chicon-->
+<!--                  <v-rating-->
+<!--                    :value="4"-->
+<!--                    length="1"-->
+<!--                    background-color="green lighten-3"-->
+<!--                    color="green"-->
+<!--                    dense-->
+<!--                    readonly-->
+<!--                    size="20"-->
+<!--                  ></v-rating>-->
+<!--                  <span class="card-heading-point">-->
+<!--                    4.5-->
+<!--                  </span>-->
+<!--              </v-card-title>-->
+<!--              <v-card-text>-->
+<!--                <div class="card-description" >Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>-->
+<!--              </v-card-text>-->
+<!--              <v-card-actions>-->
+<!--                <v-btn   class="card-button purple-section  ml-3 mb-3"  outlined rounded>-->
+<!--                  {{ $t('deal_offered') }}-->
+<!--                </v-btn>-->
+<!--                <v-btn  class="pink-section card-button  ml-3 mb-3" outlined  rounded >-->
+<!--                  {{ $t('certified') }}-->
+<!--                </v-btn>-->
+<!--              </v-card-actions>-->
+<!--            </v-card>-->
+<!--          </v-col>-->
+<!--          <v-col cols="12" md="4" sm="12">-->
+<!--            <v-img-->
+<!--              class="img-fluid card-img"-->
+<!--              src="/images/pet-1.png"-->
+<!--            ></v-img>-->
+<!--            <v-card  class=" card-radius pa-5">-->
+<!--              <v-card-title class="card-heading">Paws On Chicon-->
+<!--                  <v-rating-->
+<!--                    :value="4"-->
+<!--                    length="1"-->
+<!--                    background-color="green lighten-3"-->
+<!--                    color="green"-->
+<!--                    dense-->
+<!--                    readonly-->
+<!--                    size="20"-->
+<!--                  ></v-rating>-->
+<!--                  <span class="card-heading-point">-->
+<!--                    4.5-->
+<!--                  </span>-->
+<!--              </v-card-title>-->
+<!--              <v-card-text>-->
+<!--                <div class="card-description" >Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>-->
+<!--              </v-card-text>-->
+<!--              <v-card-actions>-->
+<!--                <v-btn   class="card-button purple-section  ml-3 mb-3"  outlined rounded>-->
+<!--                  {{ $t('deal_offered') }}-->
+<!--                </v-btn>-->
+<!--                <v-btn  class="pink-section card-button  ml-3 mb-3" outlined  rounded >-->
+<!--                  {{ $t('certified') }}-->
+<!--                </v-btn>-->
+<!--              </v-card-actions>-->
+<!--            </v-card>-->
+<!--          </v-col>-->
+<!--          <v-col cols="12" md="4" sm="12">-->
+<!--            <v-img-->
+<!--              class="img-fluid card-img "-->
+<!--              src="/images/pet-2.jpg"-->
+<!--            ></v-img>-->
+<!--            <v-card  class=" card-radius pa-6">-->
+<!--              <v-card-title class="card-heading">Liz's Pet Care-->
+
+<!--                <v-rating-->
+<!--                  :value="4"-->
+<!--                  length="1"-->
+<!--                  background-color="green lighten-3"-->
+<!--                  color="green"-->
+<!--                  dense-->
+<!--                  readonly-->
+<!--                  size="20"-->
+<!--                ></v-rating>-->
+<!--                <span class="card-heading-point">-->
+<!--                    5.0-->
+<!--                  </span>-->
+<!--              </v-card-title>-->
+
+<!--              <v-card-text>-->
+<!--                <div class="card-description">Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>-->
+<!--              </v-card-text>-->
+
+
+
+<!--              <v-card-actions>-->
+<!--                <v-btn   class="card-button purple-section  ml-3 mb-3"  outlined rounded>-->
+<!--                  {{ $t('deal_offered') }}-->
+<!--                </v-btn>-->
+<!--                <v-btn  class="pink-section card-button  ml-3 mb-3" outlined  rounded >-->
+<!--                  {{ $t('certified') }}-->
+<!--                </v-btn>-->
+<!--              </v-card-actions>-->
+<!--            </v-card>-->
+<!--          </v-col>-->
+          <v-col cols="12" md="4" sm="12" v-for="item in items">
             <v-img
               class="img-fluid card-img"
-              src="/images/pet-1.png"
-            ></v-img>
-            <v-card  class=" card-radius pa-5">
-              <v-card-title class="card-heading">Paws On Chicon
-
-                  <v-rating
-                    :value="4"
-                    length="1"
-                    background-color="green lighten-3"
-                    color="green"
-                    dense
-                    readonly
-                    size="20"
-                  ></v-rating>
-                  <span class="card-heading-point">
-                    4.5
-                  </span>
-              </v-card-title>
-              <v-card-text>
-                <div class="card-description" >Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
-              </v-card-text>
-              <v-card-actions>
-                <v-btn   class="card-button purple-section  ml-3 mb-3"  outlined rounded>
-                  {{ $t('deal_offered') }}
-                </v-btn>
-                <v-btn  class="pink-section card-button  ml-3 mb-3" outlined  rounded >
-                  {{ $t('certified') }}
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-          <v-col cols="12" md="4" sm="12">
-            <v-img
-              class="img-fluid card-img "
-              src="/images/pet-2.jpg"
+              :src="item.src"
             ></v-img>
             <v-card  class=" card-radius pa-6">
-              <v-card-title class="card-heading">Liz's Pet Care
-
-                <v-rating
-                  :value="4"
-                  length="1"
-                  background-color="green lighten-3"
-                  color="green"
-                  dense
-                  readonly
-                  size="20"
-                ></v-rating>
-                <span class="card-heading-point">
-                    5.0
+              <v-card-title>
+                <div class=" card-flex">
+                    <h2  class="card-heading">  {{ item.name}}</h2>
+                  <div class="card-flex-rating">
+                    <v-rating
+                      :value="4"
+                      length="1"
+                      background-color="green "
+                      color="green"
+                      dense
+                      readonly
+                      size="20"
+                    ></v-rating>
+                    <span class="card-heading-point">
+                   {{ item.rating }}
                   </span>
+                  </div>
+
+                </div>
+
               </v-card-title>
-
               <v-card-text>
-                <div class="card-description">Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
+                <p class="card-description">{{item.description.length < 50 ? item.description : item.description.slice(0, 50) }}
+                  <span
+                    class="comment-color"
+                    @click="loadMore()"> .... </span>
+                </p>
               </v-card-text>
-
-
-
-              <v-card-actions>
-                <v-btn   class="card-button purple-section  ml-3 mb-3"  outlined rounded>
-                  {{ $t('deal_offered') }}
-                </v-btn>
-                <v-btn  class="pink-section card-button  ml-3 mb-3" outlined  rounded >
-                  {{ $t('certified') }}
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-          <v-col cols="12" md="4" sm="12">
-            <v-img
-              class="img-fluid "
-              src="/images/pet-3.jpg"
-            ></v-img>
-            <v-card  class=" card-radius pa-6">
-              <v-card-title class="card-heading">Pet Behaviorist
-                <v-rating
-                  :value="4"
-                  length="1"
-                  background-color="green lighten-3"
-                  color="green"
-                  dense
-                  readonly
-                  size="20"
-                ></v-rating>
-                <span class="card-heading-point">
-                    4.5
-                  </span>
-              </v-card-title>
-
-              <v-card-text>
-                <div class="card-description">Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
-              </v-card-text>
-
-
-
               <v-card-actions>
                 <v-btn   class="card-button purple-section  ml-3 mb-3"  outlined rounded>
                   {{ $t('deal_offered') }}
@@ -198,14 +237,33 @@ export default {
 name: "locationSearch.vue",
 data(){
   return{
-    items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+    items:[
+      {
+      src:"/images/pet-1.png",
+      name:"Paws On Chicon",
+      rating:"5.0",
+      description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
+    },
+      {
+      src:"/images/pet-2.jpg",
+      name:"Liz's Pet Care",
+      rating:"4.5",
+      description:"Homemade Treats and Food, Pet Store, Self Serve Dog...",
+    },
+      {
+      src:"/images/pet-3.jpg",
+      name:"Pet Behaviorist",
+      rating:"5.0",
+      description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
+    },
+    ],
+    category: ['Foo', 'Bar', 'Fizz', 'Buzz'],
     form:{
       category:'',
       location:'',
       keyword:''
     },
     readMore:false
-
   }
 },
   methods:{
@@ -222,58 +280,69 @@ data(){
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
 .search-box{
-  font-family: 'Nunito Sans', sans-serif;
-  //font-weight: 400;
-  font-size: 14px;
-  font-weight: bold;
-  color: $black;
+  //font-size: 16px;
+  //font-weight: bold;
+
   //min-height: 0;
   //Column Gap 10px
 }
 .search-box::v-deep .v-input__slot{
   min-height: 40px;
 }
+
 .filter-label{
   text-align: left;
+  label{
+    font-size: 14px;
+    font-weight: 400;
+    color: $black;
+  }
 }
 .search-btn{
   background-color: $blue;
   color: $white;
-  font-family: 'Nunito Sans', sans-serif;
   font-weight: 500;
   font-size: 16px;
   text-transform: capitalize;
   border-radius: 100px 100px 100px 100px;
-  padding: 0px 50px 0px 50px;
+  padding: 0 50px 0 50px;
 }
-//.card{
-//  border-radius: 15px;
-//  padding: 10px;
-//  text-shadow: -3px 10px 10px rgba(0, 0, 0, 0.09);
-//}
+.card-flex{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.card-flex-rating{
+  display: flex;
+  align-items: baseline;
+}
 .card-heading{
   color: $purple;
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 30px;
-  font-weight: bold;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 36px;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+  font-style: normal;
 }
 .card-heading-point{
   padding-left: 2px;
   color: $grey;
-  font-family: 'Nunito Sans', sans-serif;
   font-size: 15px;
 }
 .card-description{
   color: $black;
-  font-family: 'Nunito Sans', sans-serif;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 500;
+  line-height: 1.5;
+
 }
 .card-img{
   max-height :270px;
+  border-radius:10px 10px 0 0;
+
 }
 .card-category{
-  font-family: 'Nunito Sans', sans-serif;
   font-weight: 700;
   font-size: 15px;
   background-color:#4D4D4D ;
@@ -291,6 +360,29 @@ data(){
   font-size: 12px;
 }
 .tag-align{
-  text-align: right;
+  text-align: left;
+  margin-top: 1rem;
+  padding-left: 1rem;
 }
+.location-description{
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+  line-height: 2;
+    p{
+      color: $black;
+      font-weight: 400;
+      font-size: 16px;
+
+
+    }
+
+}
+
+.comment-color{
+  cursor: pointer;
+  color: $green;
+}
+
 </style>

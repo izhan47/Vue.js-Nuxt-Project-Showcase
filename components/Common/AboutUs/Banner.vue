@@ -1,28 +1,25 @@
 <template>
-  <div>
-    <v-container >
-      <div class="about-banner">
-        <v-row justify="center">
-              <v-col cols="12" md="6" sm="6" offset-md="3" >
-                <img width="200"
-                     src="/images/Pink-Paw.png" alt="logo">
-              </v-col>
-              <v-col cols="12" md="6" sm="6" offset-md="1">
-                <div class="heading center-align">
-                  <h2>{{ $t('from') }} {{ $t('pet_people') }}{{ $t('coma') }} {{ $t('with_love') }}</h2>
-                </div>
-                <div class="description center-align mt-5 mb-3">
-                  <p>{{ $t('about_banner_description') }}</p>
-                </div>
-              </v-col>
+  <div class="custom-container py-10  " >
+    <div class="section-align-center">
+    <div class="center-align">
+    <img class="img-height img-fluid" src="/images/Pink-Paw.png" alt="logo">
+    </div>
+    <div class="">
+      <h2  class="about-banner-heading center-align line-height">{{ $t('from') }} {{ $t('pet_people') }}{{ $t('coma') }} {{ $t('with_love') }}</h2>
+    </div>
+    <div class="banner-description mt-5 mb-3">
+      <p>
+        {{ $t('about_banner_description') }}
+      </p>
+    </div>
 
-          <v-col col="12" md="12" sm="12" >
-            <v-divider></v-divider>
-          </v-col>
-        </v-row>
+    </div>
+    <div class="mt-5 mb-3">
+      <v-divider></v-divider>
 
-      </div>
-    </v-container>
+    </div>
+
+
   </div>
 </template>
 
@@ -34,30 +31,28 @@ name: "aboutBanner.vue"
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
-.about-banner{
-  height: 500px;
-  //width:900px;
-}
+
 .bottom-divider{
-  color:  #F7F7F7;
+  color:$white;
   width: 100px;
   height: 95px;
-}
-
-.banner-img{
-  width:100%;
-  padding-left: 50px;
-  //15%
-  //-50 bottom padding
 }
 .divider{
   color:  #ADADAD;
   width: 100%;
   padding-bottom: 100px;
-
   //     Weight 1px
-
 }
+.banner-description{
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  width: 100%;
 
-
+  p{
+    color: $grey;
+    font-weight: 400;
+    //font-size: 16px;
+  }
+}
 </style>

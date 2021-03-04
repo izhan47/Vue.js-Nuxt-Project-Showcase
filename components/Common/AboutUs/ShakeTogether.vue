@@ -4,32 +4,34 @@
       <div class="shake-section mt-5">
         <v-row justify="center">
           <v-col cols="12" md="6" sm="6">
-           <div class="mt-3 mb-3">
-             <v-img class="shake-img"  max-width="600" max-height="600"
-                    src="/images/About/Aly-dog.jpg" alt="logo"></v-img>
+           <div class="mt-3 mb-3 center-align">
+             <img class="shake-img img-fluid "
+                    src="/images/About/Aly-dog.jpg" alt="logo"/>
            </div>
 
           </v-col>
-          <v-col cols="12" md="6" sm="6" class="section-align">
+          <v-col cols="12" md="6" sm="6" class="section-align-center">
             <div >
-              <div class="shake-section-heading mt-3 mb-3">
-                <strong>{{ $t('better_together') }}</strong>
+              <div class=" mt-3 mb-3">
+                <h2 class="shake-section-heading line-height">{{ $t('better_together') }}</h2>
 
               </div>
-              <div class="shake-section-subheading mt-3 mb-3">
-                <h2>{{ $t('join') }} {{ $t('wag_enabled') }}</h2>
+              <div class=" mt-3 mb-3">
+                <h2 class="shake-section-subheading line-height">{{ $t('join') }} {{ $t('wag_enabled') }}</h2>
 
               </div>
-              <div class="description mt-3 mb-3">
-                <p>{{ $t('shake_description') }}</p>
+              <div class="shake-section-description mt-3 mb-3">
+                <p class=" line-height">{{ $t('shake_description') }}</p>
               </div>
+              <div class="align-content">
               <v-btn
-                class="shake-section-btn mt-3"
+                class="round-btn mt-3"
                 outlined
                 rounded
               >
                 {{ $t('lets_shake') }}
               </v-btn>
+              </div>
 
             </div>
 
@@ -48,50 +50,38 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
-.shake-section{
-  //max-width: 1140px;
-  //height: 800px;
-  //padding: 120px 0 120px 0 ;
-  //Parallax Effect On Row
-
-  @media (min-width: 320px)  and (max-width: 600px)  {
-    padding: 30px;
-  }
-
-}
-
 .shake-img{
- //width: 80%;
   border-radius: 50px 0 50px 0;
-  box-shadow: rgba(0, 0, 0, 0.07);
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  box-shadow:0 12px 20px 10px rgba(0, 0, 0, 0.07);
+  max-width: 450px;
+  @media (max-width: 1024px) {
+    max-width: 100%;
+  }
 }
-
 .shake-section-heading{
   font-family: 'Nunito Sans', sans-serif;
-  font-weight: 300;
+  font-weight: bold;
   font-size: 20px;
   text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
-  color: #000000;
+  color:$black;
+  text-transform: capitalize;
 }
 .shake-section-subheading{
   font-family: 'Nunito Sans', sans-serif;
-  font-weight: 400;
-  font-size: 25px;
+  font-weight: 600;
+  font-size: 40px;
   color: $green;
 }
-.shake-section-btn{
-  color: $purple;
-  background-color: $white;
+.shake-section-description{
+  padding-right: 90px;
+  p{
+    color: $black;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+  }
 }
-.shake-section-btn:hover{
-  color: $white;
-  background-color: $purple;
-  //Pulse Grow Effect
 
-}
 
 
 

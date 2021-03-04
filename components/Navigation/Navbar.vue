@@ -4,16 +4,14 @@
         <!--Side Bar Code Start-->
         <v-navigation-drawer
           v-model="drawer"
+          v-if="drawer"
           app
           class="nav-draw"
         >
           <div class="parent">
             <div class="show_img_mobile">
-              <v-img max-width="150" max-height="150" to="/" src="/images/WagEnabledLogo.jpg" alt="logo"></v-img>
+              <v-img max-width="250" max-height="250" @click="$router.push('/')" src="/images/WagEnabledLogo.jpg" alt="logo"></v-img>
             </div>
-
-
-
             <div class="list-child">
               <v-list dense flat >
                 <v-list-item
@@ -55,10 +53,12 @@
           app
           color="white"
           dark
-          height="100"
+          height="80"
+
         >
-          <div class="show_img">
-            <v-img max-width="100" max-height="100" src="/images/WagEnabledLogo.jpg" alt="logo"></v-img>
+          <div  class="nav-container">
+          <div class="show_img ">
+            <img class="logo"  src="/images/WagEnabledLogo.jpg" alt="logo" />
           </div>
           <div class="icon-position">
             <v-app-bar-nav-icon  class="show_drawer app-icon" @click.stop="drawer = !drawer" />
@@ -69,16 +69,16 @@
               <v-btn v-for="(icon,i) in icons" :key="i" icon color="#332e80"> <v-icon>{{icon.name}}</v-icon></v-btn>
             </div>
             <div class="app-title">
-              <v-btn  text class="nav-title">{{$t('about_us')}}</v-btn>
+              <v-btn  text class="nav-title " @click="$router.push('/about')">{{$t('about_us')}}</v-btn>
               <v-btn  text class="nav-title">{{$t('reviews')}}</v-btn>
-              <div class="mr-5 ml-5 pr-5 pl-5" >
-                <v-img max-width="100" max-height="100" src="/images/WagEnabledLogo.jpg" alt="logo"></v-img>
+              <div class="mr-5 ml-5 pr-5 pl-5 nav-logo" >
+                <img src="/images/WagEnabledLogo.jpg" alt="logo" />
               </div>
               <v-btn  text class="nav-title">{{$t('watch_and_learn')}}</v-btn>
               <v-btn  text class="nav-title">{{$t('find_a_pet_pro')}}</v-btn>
             </div>
             <div>
-              <v-btn outlined rounded class="round-btn mt-2">{{$t('sign_in')}}</v-btn>
+              <v-btn outlined rounded class="sign-in-btn mt-2">{{$t('sign_in')}}</v-btn>
             </div>
 
             <!--            <div v-for="item in menuItems"  :key="item.title">-->
@@ -88,6 +88,7 @@
 <!--              <v-btn  text class="nav-title">{{item.title}}</v-btn>-->
 <!--            </div>-->
           </v-toolbar-title>
+          </div>
 
         </v-app-bar>
         <!--Nav Bar Code End-->
@@ -140,7 +141,7 @@ export default {
   },
   created() {
 
-    window.addEventListener("resize", this.handleWindowResize);
+    // window.addEventListener("resize", this.handleWindowResize);
 
 
     window.addEventListener('resize', function(event){
@@ -194,7 +195,19 @@ export default {
  @media (min-width: 769px)   {
       display: none;
     }
+    img{
+      max-width: 100%;
+      height: auto;
+    }
   }
+.nav-logo{
+  img{
+    max-width: 100%;
+    height: 70px;
+  }
+
+
+}
 .header-title{
   display: flex;
   justify-content: space-between;
@@ -204,8 +217,6 @@ export default {
     display: none;
   }
 }
-
-
 .parent{
   display: flex;
   flex-direction: column;
