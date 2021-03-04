@@ -67,6 +67,9 @@
 .line-height{
   line-height: 2;
 }
+.space{
+  margin-bottom: 3rem;
+}
 
 /*=========================================== =============
        Alignment
@@ -96,6 +99,15 @@
 .img-height{
   max-height: 125px;
 }
+/*=========================================== =============
+     Icons
+=========================================================*/
+.card-arrow-icon{
+  .circle{
+    background-color:rgb(256,256,256,0.7);
+    border-radius: 50%;
+  }
+}
 
 /*=========================================== =============
        Button
@@ -104,6 +116,7 @@
   color: $purple;
   background-color: $white;
   text-transform: capitalize;
+  letter-spacing: 0.5px;
 
   border-width: 3px 3px 3px 3px;
   border-color: $purple;

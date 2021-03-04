@@ -27,13 +27,13 @@
                   exact
                 >
                   <v-list-item-content>
-                    <v-list-item-title class="nav-title" v-text="item.title" />
+                    <v-list-item-title  v-text="item.title" />
                   </v-list-item-content>
                 </v-list-item>
               </v-list> -->
           <v-col cols="12"  md="6" sm="12"  class="list-height">
             <v-row>
-              <v-col cols="12" md="3" sm="12">
+              <v-col cols="12" md="4" sm="12">
                 <h2  class="footer-menu-heading mb-3"> {{ $t('product') }}</h2>
                 <v-list  flat >
                   <v-list-item
@@ -44,7 +44,7 @@
                     exact
                   >
                     <v-list-item-content>
-                      <v-list-item-title class="nav-title footer-items" v-text="item.title" />
+                      <v-list-item-title class=" footer-items" v-text="item.title" />
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -60,7 +60,7 @@
                     exact
                   >
                     <v-list-item-content>
-                      <v-list-item-title class="nav-title footer-items" v-text="item.title" />
+                      <v-list-item-title class=" footer-items" v-text="item.title" />
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -76,7 +76,7 @@
                     exact
                   >
                     <v-list-item-content>
-                      <v-list-item-title class="nav-title footer-items" v-text="item.title" />
+                      <v-list-item-title class=" footer-items" v-text="item.title" />
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -148,7 +148,12 @@ export default {
   font-weight: 600;
   font-size: 17px;
   text-align: left;
-
+  color: $purple;
+  cursor: pointer;
+}
+.footer-items:hover{
+  color: $pink;
+  //Pulse Grow Effect
 }
 .copy-rights{
   background-color:$grey-light;

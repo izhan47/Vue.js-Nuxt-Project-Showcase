@@ -1,12 +1,12 @@
 <template>
-  <div class="custom-container">
+  <div class="custom-container custom-height center-center">
     <v-row justify="center">
       <v-col cols="12" md="8" sm="12">
         <div>
           <h2 class="banner-heading center-align line-height">{{ $t('search_wag_enabled') }}</h2>
         </div>
-        <div class="mt-5">
-          <p class="description center-align line-height">{{ $t('search_section_description') }}</p>
+        <div class="mt-5 space">
+          <p class="description center-align ">{{ $t('search_section_description') }}</p>
         </div>
         <div class="mt-5">
           <form>
@@ -80,5 +80,6 @@ export default {
   margin-right: -25px !important;
   min-height: 50px;
   color: $white;
+  text-transform: capitalize;
 }
 </style>

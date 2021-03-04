@@ -1,8 +1,39 @@
 .nav-title{
   color: $purple;
   cursor: pointer;
+  //font-weight: 600;
+  font-size: 16px;
+  text-transform: capitalize;
+  letter-spacing: 0;
 }
 .nav-title:hover{
   color: $pink;
   //Pulse Grow Effect
+}
+
+.nav-container{
+  max-width: 1200px;
+  margin: auto;
+  width: 100%;
+  @media (max-width: 769px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .logo{
+        max-height: 60px;
+    }
+  }
+}
+
+
+.sign-in-btn{
+  color: $purple;
+  background-color: $white;
+  text-transform: capitalize;
+  border-width: 2px;
+  border-color: $purple;
+}
+.sign-in-btn:hover{
+  color: $white;
+  background-color: $purple;
 }

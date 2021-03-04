@@ -5,40 +5,40 @@
         <v-row justify="center">
           <v-col col="12" md="12" sm="12">
             <v-card
-              class="mx-auto my-12"
+              class="mx-auto my-12 card-radius"
             >
-<!--              <v-img-->
-<!--                height="150"-->
-<!--                src="https://cdn.vuetifyjs.com/images/cards/cooking.png"-->
-<!--              ></v-img>-->
-              <div v-swiper="swiperOption" class="w-5/6 ml-auto relative" :loadtheme="false">
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide" :key="banner" v-for="banner in banners">
-                    <!-- Render original HTML in server, render Swiper in browser (client) -->
-                    <v-img class="h-64 w-64" :src="banner" ></v-img>
-
-                  </div>
-                </div>
-                <div class="swiper-button-prev" slot="button-prev"></div>
-                <div class="swiper-button-next" slot="button-next"></div>
+              <div class="center-align">
+                <img class="img-fluid " src="/images/Column-Bone.png"/>
               </div>
 
-              <swiper class="swiper" :options="Option">
-                <swiper-slide>Slide 1</swiper-slide>
-                <swiper-slide>Slide 2</swiper-slide>
-                <swiper-slide>Slide 3</swiper-slide>
-                <swiper-slide>Slide 4</swiper-slide>
-                <div class="swiper-pagination" slot="pagination"></div>
-              </swiper>
+<!--              <div v-swiper="swiperOption" class="w-5/6 ml-auto relative" :loadtheme="false">-->
+<!--                <div class="swiper-wrapper">-->
+<!--                  <div class="swiper-slide" :key="banner" v-for="banner in banners">-->
+<!--                    &lt;!&ndash; Render original HTML in server, render Swiper in browser (client) &ndash;&gt;-->
+<!--                    <v-img class="h-64 w-64" :src="banner" ></v-img>-->
 
-              <v-card-title class="card-heading mt-5 mb-5">{{ $t('slide_heading') }}</v-card-title>
-              <v-card-text >
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="swiper-button-prev" slot="button-prev"></div>-->
+<!--                <div class="swiper-button-next" slot="button-next"></div>-->
+<!--              </div>-->
+
+<!--              <swiper class="swiper" :options="Option">-->
+<!--                <swiper-slide>Slide 1</swiper-slide>-->
+<!--                <swiper-slide>Slide 2</swiper-slide>-->
+<!--                <swiper-slide>Slide 3</swiper-slide>-->
+<!--                <swiper-slide>Slide 4</swiper-slide>-->
+<!--                <div class="swiper-pagination" slot="pagination"></div>-->
+<!--              </swiper>-->
+
+              <v-card-title class="card-heading display mb-5">{{ $t('slide_heading') }}</v-card-title>
+              <v-card-text  class="center-align ">
                 <p class="card-description">{{ $t('slide_description_1') }}</p>
               </v-card-text>
-              <v-card-text>
+              <v-card-text class="center-align">
                 <p class="card-description">{{ $t('slide_description_2') }}</p>
               </v-card-text>
-              <v-card-text>
+              <v-card-text class="center-align">
                 <p class="card-description mb-5">{{ $t('slide_description_3') }}</p>
               </v-card-text>
 
@@ -119,7 +119,7 @@ export default {
 .slide-section{
   max-width: 1140px;
   padding: 100px 0 100px 0;
-  color:  #F7F7F7;
+  color:  $white;
   margin-right: auto;
   margin-left: auto;
   position: relative;
@@ -135,25 +135,31 @@ export default {
   height: 350px;
   color:  #332E80;
 }
+.display{
+  display: block;
+  text-align: center;
+  line-height: 2;
+}
 .card-heading{
   color:$purple;
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 600;
   font-size: 40px;
   text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
-  margin: 0 100px 0 100px;
+  //margin: 0 100px 0 100px;
 
-  @media  (max-width: 425px)  {
-    margin-right: auto;
-    margin-left: auto;
-    position: relative;
-  }
+
+  //@media  (max-width: 425px)  {
+  //  margin-right: auto;
+  //  margin-left: auto;
+  //  position: relative;
+  //}
 
 }
 .card-description{
   color: $black;
   font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 16px;
   margin: 0 100px 0 100px;
   @media  (max-width: 425px)  {

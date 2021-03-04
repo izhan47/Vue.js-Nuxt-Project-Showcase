@@ -5,7 +5,7 @@
      <v-row justify="center">
        <v-col cols="12" md="6" sm="6">
          <div>
-           <img class="about-img"
+           <img class="img-fluid"
                 src="/images/placeholder.png" alt="logo">
          </div>
        </v-col>
