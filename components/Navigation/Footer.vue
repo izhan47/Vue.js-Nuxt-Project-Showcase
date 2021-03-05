@@ -4,7 +4,6 @@
       color="white"
      class="custom-container custom-padding"
     >
-      <div >
         <div class="divider"></div>
         <v-row  class="custom-footer-padding">
           <v-col cols="12"  md="2" sm="6">
@@ -16,10 +15,10 @@
                 ></v-col>
             </v-row>
           </v-col>
-          <v-col cols="12"  md="3" sm="6"></v-col>
+          <v-col cols="12"  md="4" sm="6"></v-col>
           <v-col cols="12"  md="6" sm="12"  class="list-height">
             <v-row>
-              <v-col cols="12" md="4" sm="12">
+              <v-col cols="12" md="4" sm="12" class="footer-nav">
                 <h2  class="footer-menu-heading mb-3"> {{ $t('product') }}</h2>
                 <v-list  flat >
                   <v-list-item
@@ -30,12 +29,12 @@
                     exact
                   >
                     <v-list-item-content>
-                      <v-list-item-title class=" footer-items" v-text="item.title" />
+                      <v-list-item-title class="footer-items" v-text="item.title" />
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
               </v-col>
-              <v-col cols="12" md="3" sm="12">
+              <v-col cols="12" md="4" sm="12" class="footer-nav">
                 <h2  class="footer-menu-heading mb-3"> {{ $t('company') }}</h2>
                 <v-list  flat >
                   <v-list-item
@@ -51,7 +50,7 @@
                   </v-list-item>
                 </v-list>
               </v-col>
-              <v-col cols="12" md="3" sm="12">
+              <v-col cols="12" md="4" sm="12" class="footer-nav">
                 <h2 class="footer-menu-heading mb-3"> {{ $t('follow') }}</h2>
                 <v-list  flat >
                   <v-list-item
@@ -71,7 +70,6 @@
 
           </v-col>
         </v-row>
-      </div>
     </v-footer>
     <div class="copy-rights ">
       <h2 class="copy-rights-text">{{ $t('copy_right') }} | {{ $t('terms') }} | {{ $t('privacy') }}</h2>
@@ -118,53 +116,13 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
-.custom-footer-padding{
-  padding-top: 2rem;
-}
-.footer-menu-heading{
-  color: $black;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 700;
-  font-size: 17px;
-  text-align: left;
-  margin-left: 1rem;
-}
-.footer-items{
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 17px;
-  text-align: left;
-  color: $purple;
-  cursor: pointer;
-}
 .footer-items:hover{
   color: $pink;
   //Pulse Grow Effect
 }
-.copy-rights{
-  background-color:$grey-light;
-}
-.copy-rights-text{
-  color: $black;
-  font-family: 'Nunito Sans', sans-serif;  font-size: 13px;
-  font-weight: 600;
-  text-transform: capitalize;
-  padding: 1rem 2rem;
+.footer-nav::v-deep a{
+  padding: 0;
 }
 
-.footer-color{
-  color: $green;
-  border: 5px solid $green;
-  width: 100%;
-}
-.footer-icon{
-  color: $purple;
-}
-.divider{
-  width:100%;
-  height:1px;
-  background:$purple;
-  margin:10px 0;
-}
 
 </style>

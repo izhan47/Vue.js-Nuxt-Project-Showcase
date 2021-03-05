@@ -63,6 +63,7 @@
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 600;
   font-size: 16px;
+  line-height: 1.87;
 }
 
 /*=========================================== =============
@@ -73,6 +74,9 @@
 }
 .space{
   margin-bottom: 3rem;
+}
+.custom-line-height{
+  line-height: 1.87;
 }
 
 /*=========================================== =============
@@ -106,17 +110,20 @@
 /*=========================================== =============
      Icons
 =========================================================*/
-.card-arrow-icon{
-  .circle{
-    background-color:rgb(256,256,256,0.7);
-    border-radius: 50%;
-  }
-}
+//.card-arrow-icon{
+//  .circle{
+//    background-color:rgb(256,256,256,0.7);
+//    border-radius: 50%;
+//  }
+//}
 
 /*=========================================== =============
        Button
 =========================================================*/
 .round-btn{
+  font-family:'Nunito Sans',sans-serif;
+  font-size: 16px;
+  font-weight: 600;
   color: $purple;
   background-color: $white;
   text-transform: capitalize;

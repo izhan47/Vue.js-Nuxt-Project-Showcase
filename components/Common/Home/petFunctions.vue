@@ -1,8 +1,8 @@
 <template>
 <div class="grey-section">
     <div class="custom-container custom-height custom-padding">
-      <div>
-        <h2 class="heading center-align">
+      <div class="function-heading">
+        <h2 class="heading text-center">
           {{ $t('for') }} {{ $t('pet_people') }}{{ $t('coma') }} {{ $t('by') }} {{ $t('pet_people') }}
         </h2>
       </div>
@@ -13,7 +13,7 @@
         <v-col cols="12" md="4" sm="12">
           <v-card class="green-section card-radius pa-6">
             <div>
-              <h2 class="card-heading">  {{ $t('find_a') }}</h2>
+              <h2 class="card-heading">{{ $t('find_a') }}</h2>
               <h2 class="card-heading ">{{ $t('pet_professional') }}</h2>
             </div>
             <div class="card-arrow-icon green-section">
@@ -67,7 +67,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
-
+.function-heading{
+  h2{
+    font-size: 45px;
+  }
+}
 .card-heading{
   color: $white;
   font-family: 'Nunito Sans', sans-serif;
@@ -75,17 +79,24 @@ export default {
   font-weight: 400;
   text-align: left;
 }
+
 .card-arrow-icon{
   size: 19px;
   color: $white;
   text-align: left;
 }
+.circle::v-deep.v-btn{
+  background-color:rgb(256,256,256,0.7);
+  border-radius: 50%;
+  height: 38px;
+  width: 38px;
+}
 .card-img{
-  margin-top: 3rem;
+  margin-top: 7rem;
 }
 .comment-img{
   margin-top: 1rem;
-  max-height: 157px;
+  max-height: 220px;
 }
 </style>
 

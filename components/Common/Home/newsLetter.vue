@@ -1,13 +1,13 @@
 <template>
   <div class="purple-section">
    <news-letter-img></news-letter-img>
-    <div class="custom-container custom-height center-center" >
-      <div class="news-section line-height">
-        <div class="center-align mt-3 mb-3">
-          <h2 class="news-section-heading">{{ $t('newsletter') }} </h2>
+    <div class="custom-container  center-center" >
+      <div class="news-section ">
+        <div class="text-center ">
+          <h2 class="heading">{{ $t('newsletter') }} </h2>
         </div>
-        <div class="center-align  mt-3 mb-3">
-          <p class=" news-description">{{ $t('newsletter_description') }}</p>
+        <div class="text-center">
+          <p class="description">{{ $t('newsletter_description') }}</p>
         </div>
         <div class="mb-5">
           <v-form
@@ -35,7 +35,7 @@
                   required
                 ></v-text-field>
               </v-col>
-              <v-col  cols="12" md="12" sm="12">
+              <v-col  cols="12" md="12" sm="12" class="pt-0">
                 <v-text-field
                   class="form-field news-section-label"
                   color="white"
@@ -44,11 +44,9 @@
                   :label="$t('email')"
                   required
                 ></v-text-field>
-              </v-col>
-              <v-col  cols="12" md="12" sm="12">
                 <div class="center-align">
                   <v-btn
-                    class=" news-section-btn mt-2 white-text"
+                    class=" news-section-btn text-center white-text"
                     text
                     x-large
                     @click="submit()"
@@ -56,8 +54,8 @@
                     {{ $t('submit') }}
                   </v-btn>
                 </div>
-
               </v-col>
+
             </v-row>
           </v-form>
         </div>
@@ -107,33 +105,38 @@ export default {
 
 .news-section{
   max-width: 800px;
+  margin-top: 2rem;
 }
 .news-section-divider{
-  //Tilted Opacity #F6FEFF
+
   color: #F6FEFF;
   width: 108px;
   height: 158px;
 }
-.news-section-heading{
+.heading{
   color:$white;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 45px;
-  text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
+  margin-bottom: 2.3rem;
 }
-.news-section-description{
+.description{
   color:$white;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 16px;
-  //padding: 0 175px 0 175px ;  //top right bottom left
+  margin-bottom: 2.3rem;
 }
+.news-section-label::v-deep .v-input__slot{
+&:before{
+  border-color: $white !important;
+}
+  input{
+    color:$white;
+  }
 
+}
 .news-section-label{
-  color:$white;
+
   font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 16px;
+  background-color: #FFFFFF00;
+
 }
 .news-section-btn{
   color:$white;
@@ -141,6 +144,8 @@ export default {
   font-weight: 500;
   font-size: 30px;
   text-transform: capitalize;
+  margin-bottom: 2rem;
+  letter-spacing: 0;
 }
 </style>
 

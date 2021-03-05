@@ -1,25 +1,17 @@
 <template>
-  <div class="custom-container custom-height center-center">
+  <div class="custom-container custom-height ">
     <v-row justify="center">
       <v-col cols="12" md="8" sm="12">
         <div>
           <h2 class="banner-heading center-align line-height">{{ $t('search_wag_enabled') }}</h2>
         </div>
         <div class="mt-5 space">
-          <p class="description center-align ">{{ $t('search_section_description') }}</p>
+          <p class="description search-description center-align ">{{ $t('search_section_description') }}</p>
         </div>
-        <div class="mt-5">
-          <form>
-            <v-text-field
-              class="search-box"
-              :placeholder="$t('search_wag_enabled')"
-              v-model="search"
-              rounded
-              dense
-              solo
-              @keypress.enter="show"
-            >
-              <template v-slot:append>
+
+          <form class="search-form" role="search" action="#" method="get">
+            <div class="search-container">
+              <input placeholder="Search Wag Enabled" class="search-form-input" type="search" name="s" title="Search" value="">
                 <v-btn
                   elevation="0"
                   class="search-btn"
@@ -28,15 +20,11 @@
                 >
                   {{ $t('search') }}
                 </v-btn>
-              </template>
-            </v-text-field>
+            </div>
           </form>
+        <div class="search-img text-center">
+          <img class="img-fluid" src="/images/Wag-Enabled-HP-Dog.png" alt="logo">
         </div>
-        <v-row >
-          <v-col md="6"  offset-md="2" class="pt-0">
-            <img class="img-fluid" src="/images/Wag-Enabled-HP-Dog.png" alt="logo">
-          </v-col>
-        </v-row>
       </v-col>
     </v-row>
   </div>
@@ -60,26 +48,47 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
-.search-box{
-  width: 100%;
+.search-description{
+  padding: 0 3rem;
+}
+.search-btn::v-deep.v-btn{
+  color: $white;
+  text-transform: capitalize;
+  padding-right: 1rem;
+  border-radius: 0;
+  height: 56px;
+}
+.search-container{
+
+  background-color: white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 8px 13px 5px rgba(224, 224, 224, 0.9);
+
+  padding: 0;
+  border-radius: 100px;
+  overflow: hidden;
+}
+.search-form-input{
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 400;
   font-size: 16px;
-  border-radius: 100px;
-  //color: $grey;
-  //box-shadow: 0 8px 13px 5px rgba(0, 0, 0, 0.9);
-  //0px 8px 13px 5px rgb(0 0 0 / 9%
-
+  width: 100%;
+  padding: 15px;
+  display: inline-block;
+  color: $black;
+  background: $white;
+  margin: 0;
 }
-.search-box::v-deep .v-text-field__slot{
-  min-height: 50px;
-  color: $grey;
+.search-form-input:focus,{
+  background-color: $white;
+  outline: none;
 }
-.search-btn {
-  border-radius: 0 24px 24px 0;
-  margin-right: -25px !important;
-  min-height: 50px;
-  color: $white;
-  text-transform: capitalize;
+.search-img{
+  margin-top:3rem;
+  img{
+ max-height: 200px;
+  }
 }
 </style>

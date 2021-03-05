@@ -42,7 +42,9 @@
 
   "we_are": "We Are",
   "wag_enabled": "Wag Enabled",
-  "wag_enabled_description": "Because we want every pet to live their #bestlife, we made a highly curated and vetted platform for pet owners to connect with local pet professional who share likeminded values.",
+  "wag_enabled_description_first": "Because we want every pet to live their ",
+  "wag_enabled_description_mid":"#bestlife",
+  "wag_enabled_description_last":", we made a highly curated and vetted platform for pet owners to connect with local pet professional who share likeminded values.",
   "about_wag": "About Wag",
 
   "pet_pro_around_you": "Pet Pro's Around You",

@@ -10,23 +10,25 @@
          </div>
        </v-col>
 <!--       <v-col cols="12" md="6" sm="6" class="section-align pa-8">-->
-       <v-col cols="12" md="6" sm="6" class="mt-8 pa-8">
-         <div class="align-content" >
-           <h2 class="heading">{{ $t('we_are') }} {{ $t('wag_enabled') }}</h2>
-         </div>
-         <div class="description left-align mt-5 mb-3">
-           <p>{{ $t('wag_enabled_description') }}</p>
-         </div>
-         <div class="align-content">
-           <v-btn
-             large
-             class="round-btn  mt-3 "
-             outlined
-             rounded
-           >
-             {{ $t('about_wag') }}
-           </v-btn>
+       <v-col cols="12" md="6" sm="6">
+         <div class="center">
+           <div class="align-content" >
+             <h2 class="heading space">{{ $t('we_are') }} {{ $t('wag_enabled') }}</h2>
+           </div>
+           <div class="description  left-align">
+             <p>{{ $t('wag_enabled_description_first') }}<span>{{ $t('wag_enabled_description_mid') }}</span>{{ $t('wag_enabled_description_last') }}</p>
+           </div>
+           <div class="align-content">
+             <v-btn
+               large
+               class="round-btn  mt-3 "
+               outlined
+               rounded
+             >
+               {{ $t('about_wag') }}
+             </v-btn>
 
+           </div>
          </div>
        </v-col>
      </v-row>
@@ -43,12 +45,6 @@ name: "about.vue"
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
-.about-section{
-  //width: 1140px;
-  //height: 800px;
-  //Parallax Effect On Row
-}
-
 .about-heading{
   color:$purple;
   font-family: 'Nunito Sans', sans-serif;
@@ -58,8 +54,19 @@ name: "about.vue"
   text-transform: capitalize;
 
 }
+.description{
+  span{
+    color: $pink;
+  }
+}
 .about-img{
   width: 100%;
+}
+.center{
+  margin:3rem 0 0 3rem;
+}
+.description{
+  margin-bottom: 1.12rem;
 }
 .align-content{
   width: 100%;
