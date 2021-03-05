@@ -7,8 +7,8 @@
             <v-card
               class="mx-auto my-12 card-radius"
             >
-              <div class="center-align">
-                <img class="img-fluid " src="/images/Column-Bone.png"/>
+              <div class="center-align pa-8">
+                <img class="img-fluid card-img-height" src="/images/About/Aly-with-dogs.png"/>
               </div>
 
 <!--              <div v-swiper="swiperOption" class="w-5/6 ml-auto relative" :loadtheme="false">-->
@@ -16,7 +16,6 @@
 <!--                  <div class="swiper-slide" :key="banner" v-for="banner in banners">-->
 <!--                    &lt;!&ndash; Render original HTML in server, render Swiper in browser (client) &ndash;&gt;-->
 <!--                    <v-img class="h-64 w-64" :src="banner" ></v-img>-->
-
 <!--                  </div>-->
 <!--                </div>-->
 <!--                <div class="swiper-button-prev" slot="button-prev"></div>-->
@@ -167,6 +166,9 @@ export default {
     margin-left: auto;
     position: relative;
   }
+}
+.card-img-height{
+  max-height:400px;
 }
 
 .swiper-pagination-bullet.swiper-pagination-bullet-active::after {

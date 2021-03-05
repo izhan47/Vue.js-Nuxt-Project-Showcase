@@ -67,9 +67,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
-.custom-padding{
-  padding-top: 5rem;
-}
+
 .card-heading{
   color: $white;
   font-family: 'Nunito Sans', sans-serif;
