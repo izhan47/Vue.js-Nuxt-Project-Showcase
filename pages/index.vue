@@ -3,7 +3,7 @@
   <banner-search></banner-search>
   <pet-functions></pet-functions>
   <about></about>
-<!--  <location-search></location-search>-->
+  <location-search></location-search>
   <care-advice></care-advice>
   <featured-product></featured-product>
   <news-letter></news-letter>
