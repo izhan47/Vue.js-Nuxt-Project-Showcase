@@ -1,5 +1,6 @@
 <template>
   <div class="purple-section">
+   <news-letter-img></news-letter-img>
     <div class="custom-container custom-height center-center" >
       <div class="news-section line-height">
         <div class="center-align mt-3 mb-3">
@@ -67,8 +68,12 @@
 </template>
 
 <script>
+import NewsLetterImg from "@/components/Common/Home/Svg";
 export default {
   name: "newsLetter.vue",
+  components:{
+    NewsLetterImg
+  },
   data(){
     return{
       form:{
@@ -99,6 +104,7 @@ export default {
 .form-field::v-deep .v-input{
   color:$white
 }
+
 .news-section{
   max-width: 800px;
 }

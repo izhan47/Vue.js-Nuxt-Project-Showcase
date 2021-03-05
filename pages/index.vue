@@ -1,5 +1,5 @@
 <template>
-<div >
+<div>
   <banner-search></banner-search>
   <pet-functions></pet-functions>
   <about></about>
@@ -9,7 +9,6 @@
   <news-letter></news-letter>
 </div >
 </template>
-
 <script>
 import bannerSearch from "@/components/Common/Home/bannerSearch";
 import petFunctions from "@/components/Common/Home/petFunctions";

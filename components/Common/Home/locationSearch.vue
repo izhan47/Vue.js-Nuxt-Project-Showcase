@@ -77,7 +77,7 @@
     <!--  card-section-start   -->
     <div class="custom-height">
         <v-row>
-          <v-col cols="12" md="4" sm="12" v-for="item in items">
+          <v-col cols="12" md="4" sm="12" v-for="(item,i) in cards" :key="i">
             <v-img
               class="img-fluid card-img"
               :src="item.src"
@@ -133,7 +133,7 @@ export default {
 name: "locationSearch.vue",
 data(){
   return{
-    items:[
+    cards:[
       {
       src:"/images/pet-1.png",
       name:"Paws On Chicon",

@@ -2,11 +2,11 @@
   <div>
     <v-footer
       color="white"
-      class="footer"
+     class="custom-container custom-padding"
     >
-      <v-container class="py-0 fill-height">
-        <v-divider></v-divider>
-        <v-row>
+      <div >
+        <div class="divider"></div>
+        <v-row  class="custom-footer-padding">
           <v-col cols="12"  md="2" sm="6">
             <v-row>
               <img  class="mr-10 mt-5 img-fluid img-height"
@@ -17,20 +17,6 @@
             </v-row>
           </v-col>
           <v-col cols="12"  md="3" sm="6"></v-col>
-<!--
-           <v-list dense flat >
-                <v-list-item
-                  v-for="(item, i) in menuItems"
-                  :key="i"
-                  :to="item.to"
-                  router
-                  exact
-                >
-                  <v-list-item-content>
-                    <v-list-item-title  v-text="item.title" />
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list> -->
           <v-col cols="12"  md="6" sm="12"  class="list-height">
             <v-row>
               <v-col cols="12" md="4" sm="12">
@@ -85,7 +71,7 @@
 
           </v-col>
         </v-row>
-      </v-container>
+      </div>
     </v-footer>
     <div class="copy-rights ">
       <h2 class="copy-rights-text">{{ $t('copy_right') }} | {{ $t('terms') }} | {{ $t('privacy') }}</h2>
@@ -132,7 +118,9 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
-
+.custom-footer-padding{
+  padding-top: 2rem;
+}
 .footer-menu-heading{
   color: $black;
   font-family: 'Nunito Sans', sans-serif;
@@ -171,6 +159,12 @@ export default {
 }
 .footer-icon{
   color: $purple;
+}
+.divider{
+  width:100%;
+  height:1px;
+  background:$purple;
+  margin:10px 0;
 }
 
 </style>
