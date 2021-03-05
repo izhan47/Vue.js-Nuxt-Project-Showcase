@@ -6,7 +6,6 @@
           v-model="drawer"
           v-if="drawer"
           app
-          class="nav-draw"
         >
           <div class="parent">
             <div class="show_img_mobile">
@@ -15,6 +14,7 @@
             <div class="list-child">
               <v-list dense flat >
                 <v-list-item
+                  link
                   v-for="(item, i) in menuItems"
                   :key="i"
                   :to="item.to"
@@ -22,18 +22,10 @@
                   exact
                 >
                   <v-list-item-content>
-                    <v-list-item-title class="nav-title" v-text="item.title" />
+                    <v-list-item-title class="nav-title" v-text="item.title"></v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
-
-              <!-- <v-list dense flat v-for="item in menuItems"  :key="item.title">
-                <v-list-item link :to="item.path">
-                  <v-list-item-content>
-                    <v-list-item-title class="nav-title">{{ item.title }}</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list> -->
               <v-list-item link  to="/sign_in">
                 <v-list-item-content>
                   <v-list-item-title class="nav-title">{{ $t('sign_in') }}</v-list-item-title>
@@ -53,40 +45,34 @@
           app
           color="white"
           dark
-          height="80"
-
+          height="90"
         >
           <div  class="nav-container">
+         <!--     Tab/Mobile screen   Start     -->
           <div class="show_img ">
             <img class="logo"  src="/images/WagEnabledLogo.jpg" alt="logo" />
           </div>
-          <div class="icon-position">
+          <div class="drawer-icon">
             <v-app-bar-nav-icon  class="show_drawer app-icon" @click.stop="drawer = !drawer" />
           </div>
-
+          <!--     Tab/Mobile screen End     -->
+          <!--     Large screen       -->
           <v-toolbar-title  class="header-title">
             <div>
               <v-btn v-for="(icon,i) in icons" :key="i" icon color="#332e80"> <v-icon>{{icon.name}}</v-icon></v-btn>
             </div>
             <div class="app-title">
-              <v-btn  text class="nav-title " @click="$router.push('/about')">{{$t('about_us')}}</v-btn>
+              <v-btn  text class="nav-title nav-btn" @click="$router.push('/about')">{{$t('about_us')}}</v-btn>
               <v-btn  text class="nav-title" @click="$router.push('/reviews')">{{$t('reviews')}}</v-btn>
-              <div class="mr-5 ml-5 pr-5 pl-5 nav-logo" >
+              <div class=" nav-logo" >
                 <img src="/images/WagEnabledLogo.jpg" alt="logo" />
               </div>
               <v-btn  text class="nav-title">{{$t('watch_and_learn')}}</v-btn>
               <v-btn  text class="nav-title">{{$t('find_a_pet_pro')}}</v-btn>
             </div>
             <div>
-              <v-btn outlined rounded class="sign-in-btn mt-2">{{$t('sign_in')}}</v-btn>
+              <v-btn outlined rounded class="sign-in-btn">{{$t('sign_in')}}</v-btn>
             </div>
-
-            <!--            <div v-for="item in menuItems"  :key="item.title">-->
-<!--              <v-img-->
-<!--                v-if="item.title===''"  class="mr-8" width="100"-->
-<!--                src="/images/WagEnabledLogo.jpg" alt="logo"> </v-img>-->
-<!--              <v-btn  text class="nav-title">{{item.title}}</v-btn>-->
-<!--            </div>-->
           </v-toolbar-title>
           </div>
 
@@ -173,65 +159,17 @@ export default {
   display: none;
   }
 }
-.icon-position{
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  @media (min-width: 769px)   {
-    display: none;
-  }
-
-}
 .app-icon::v-deep .v-icon{
   color: $purple;
 }
-.app-title{
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.nav-title::v-deep.v-btn{
+  padding: 0 8px;
 }
-.show_img {
- @media (min-width: 769px)   {
-      display: none;
-    }
-    img{
-      max-width: 100%;
-      height: auto;
-    }
-  }
-.nav-logo{
-  img{
-    max-width: 100%;
-    height: 70px;
-  }
-
-
-}
-.header-title{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  @media (max-width: 768px)  {
-    display: none;
-  }
-}
-.parent{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-.list-child{
-  flex: 1;
-}
-.icon-child{
-text-align: center;
-  padding-bottom: 1rem;
-}
-.show_img_mobile{
-  padding: 1rem;
-  align-items: center;
+.sign-in-btn::v-deep.v-btn{
+  height: 42px;
+  min-width: 65px;
+  width:auto;
+  padding: 12px 24px;
 }
 </style>
 

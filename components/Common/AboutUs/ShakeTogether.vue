@@ -1,5 +1,5 @@
 <template>
-  <div class="grey-section">
+  <div>
     <v-container >
       <div class="shake-section mt-5">
         <v-row justify="center">

@@ -1,11 +1,9 @@
 <template>
   <div class="grey-section">
     <div class="custom-container custom-height " >
-      <div class="center-align">
+      <div class="text-center">
         <img class="img-fluid img-height" src="/images/Pink-Paw.png" alt="logo">
-      </div>
-      <div class="center-align line-height">
-        <h2  class="heading space-heading">{{ $t('top_pet_care_advice') }}</h2>
+        <h2  class="heading mt-5 space">{{ $t('top_pet_care_advice') }}</h2>
       </div>
       <div class="categories-buttons" >
            <v-btn v-for="(item,i) in items.slice(0, end)" :key="i"
@@ -36,46 +34,6 @@
           {{ $t('browse_all') }}
         </v-btn>
       </div>
-
-
-
-
-
-
-      <!--        <v-row justify="center" class="row-margin">-->
-<!--              <v-col cols="12"  md="2" sm="12" class="section-align-center "  >-->
-<!--                <v-btn class="care-section-button" large outlined rounded>{{ item }}</v-btn>-->
-<!--              </v-col>-->
-<!--              <v-col cols="12" md="6" sm="12">-->
-<!--                <div class="align-content">-->
-<!--                  <v-btn v-if="items.length>10 && end !== items.length"-->
-<!--                         class=" mt-2 primary-color "-->
-<!--                         text-->
-<!--                         @click="seeMore()"-->
-<!--                  >-->
-<!--                    {{ $t('see_more') }}-->
-<!--                  </v-btn>-->
-<!--                </div>-->
-<!--              </v-col>-->
-<!--            </v-row>-->
-
-<!--      -->
-
-
-<!--              <v-col cols="12" md="12" sm="12">-->
-<!--                <div class="center-align">-->
-<!--                  <v-btn-->
-<!--                    v-if="end !== items.length"-->
-<!--                    class="browse-btn  mt-4 mb-4"-->
-<!--                    outlined-->
-<!--                    large-->
-<!--                    @click="browse()"-->
-<!--                  >-->
-<!--                    {{ $t('browse_all') }}-->
-<!--                  </v-btn>-->
-<!--                </div>-->
-<!--              </v-col>-->
-
     </div>
   </div>
 </template>
@@ -112,25 +70,25 @@ export default {
     width: 100%;
   }
 }
-.space-heading{
-  margin-bottom: 2rem;
-}
+
+
 .categories-buttons{
-  max-width: 800px;
+  max-width: 900px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   margin: auto;
-
   .category-button{
-    margin-right: 1rem;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    margin-right: 1.5rem;
     margin-bottom: 1.5rem;
     color: $black;
     background-color: $white;
     text-transform: capitalize;
-    border-width: 2px 2px 2px 2px ;
+    border-width: 3px;
     border-color: $grey;
     border-style: solid;
     font-weight: bold;
@@ -139,15 +97,22 @@ export default {
 }
 .see-more-btn{
   margin-bottom: 1.5rem;
+  text-transform: inherit;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
 }
 .browse-btn{
   color: $purple;
   background-color: $white;
   text-transform: capitalize;
-  border-width: 2px 2px 2px 2px ;
+  border-width: 2px;
   border-color: $grey;
   border-style: solid;
   border-radius: 10px 10px 10px 10px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 15px;
+  font-weight: bold;
 
 }
 .browse-btn:hover{

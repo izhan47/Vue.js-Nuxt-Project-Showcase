@@ -2,11 +2,11 @@
 <div class="grey-section">
   <div class="custom-container" >
     <div class="location-search">
-      <div class="center-align">
-        <img  class="img-fluid img-height" src="/images/Pet-Pro-Finder-Collars.png" alt="logo">
+      <div class="text-center">
+        <img  class="img-fluid" src="/images/Pet-Pro-Finder-Collars.png" alt="logo">
       </div>
-      <div class="mb-5 ">
-        <h2 class="heading center-align line-height ">{{ $t('pet_pro_around_you') }}</h2>
+      <div class="text-center">
+        <h2 class="heading  line-height ">{{ $t('pet_pro_around_you') }}</h2>
       </div>
       <div class="space">
         <p class="location-description ">{{ $t('search_database_description') }}</p>
@@ -60,8 +60,6 @@
               class="purple-section  search-btn"
               outlined
               large
-
-
             >
               {{ $t('search') }}
             </v-btn>
@@ -77,7 +75,7 @@
     <!--  card-section-start   -->
     <div class="custom-height">
         <v-row>
-          <v-col cols="12" md="4" sm="12" v-for="item in items">
+          <v-col cols="12" md="4" sm="12" v-for="(item,i) in cards" :key="i">
             <v-img
               class="img-fluid card-img"
               :src="item.src"
@@ -133,7 +131,7 @@ export default {
 name: "locationSearch.vue",
 data(){
   return{
-    items:[
+    cards:[
       {
       src:"/images/pet-1.png",
       name:"Paws On Chicon",
@@ -153,7 +151,7 @@ data(){
       description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
     },
     ],
-    category: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+    category: ['All', 'Bar', 'Fizz', 'Buzz'],
     form:{
       category:'',
       location:'',
@@ -175,17 +173,20 @@ data(){
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
-.search-box{
-  //font-size: 16px;
-  //font-weight: bold;
-
-  //min-height: 0;
-  //Column Gap 10px
+.text-center{
+  img{
+    max-height: 200px;
+  }
+  h2{
+    margin-bottom: 2rem;
+  }
 }
 .search-box::v-deep .v-input__slot{
   min-height: 40px;
 }
-
+.search-box::v-deep .v-label {
+  top:14px;
+}
 .filter-label{
   text-align: left;
   label{
@@ -265,17 +266,13 @@ data(){
     margin: auto;
     text-align: center;
     width: 100%;
-  line-height: 2;
+    line-height: 1.87;
     p{
       color: $black;
       font-weight: 400;
-      font-size: 16px;
-
-
+      font-size: 17px;
     }
-
 }
-
 .comment-color{
   cursor: pointer;
   color: $green;

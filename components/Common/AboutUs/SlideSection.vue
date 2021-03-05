@@ -1,56 +1,60 @@
 <template>
-  <div class="grey-section">
-    <v-container >
-      <div class="slide-section">
-        <v-row justify="center">
-          <v-col col="12" md="12" sm="12">
-            <v-card
-              class="mx-auto my-12 card-radius"
-            >
-              <div class="center-align pa-8">
-                <img class="img-fluid card-img-height" src="/images/About/Aly-with-dogs.png"/>
-              </div>
 
-<!--              <div v-swiper="swiperOption" class="w-5/6 ml-auto relative" :loadtheme="false">-->
-<!--                <div class="swiper-wrapper">-->
-<!--                  <div class="swiper-slide" :key="banner" v-for="banner in banners">-->
-<!--                    &lt;!&ndash; Render original HTML in server, render Swiper in browser (client) &ndash;&gt;-->
-<!--                    <v-img class="h-64 w-64" :src="banner" ></v-img>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div class="swiper-button-prev" slot="button-prev"></div>-->
-<!--                <div class="swiper-button-next" slot="button-next"></div>-->
-<!--              </div>-->
+  <div class="wave-img">
+    <div>
+      <v-container >
+        <div class="slide-section">
+          <v-row justify="center">
+            <v-col col="12" md="12" sm="12">
+              <v-card
+                class="mx-auto my-12 card-radius"
+              >
+                <div class="center-align pa-8">
+                  <img class="img-fluid card-img-height" src="/images/About/Aly-with-dogs.png"/>
+                </div>
 
-<!--              <swiper class="swiper" :options="Option">-->
-<!--                <swiper-slide>Slide 1</swiper-slide>-->
-<!--                <swiper-slide>Slide 2</swiper-slide>-->
-<!--                <swiper-slide>Slide 3</swiper-slide>-->
-<!--                <swiper-slide>Slide 4</swiper-slide>-->
-<!--                <div class="swiper-pagination" slot="pagination"></div>-->
-<!--              </swiper>-->
+                <!--              <div v-swiper="swiperOption" class="w-5/6 ml-auto relative" :loadtheme="false">-->
+                <!--                <div class="swiper-wrapper">-->
+                <!--                  <div class="swiper-slide" :key="banner" v-for="banner in banners">-->
+                <!--                    &lt;!&ndash; Render original HTML in server, render Swiper in browser (client) &ndash;&gt;-->
+                <!--                    <v-img class="h-64 w-64" :src="banner" ></v-img>-->
+                <!--                  </div>-->
+                <!--                </div>-->
+                <!--                <div class="swiper-button-prev" slot="button-prev"></div>-->
+                <!--                <div class="swiper-button-next" slot="button-next"></div>-->
+                <!--              </div>-->
 
-              <v-card-title class="card-heading display mb-5">{{ $t('slide_heading') }}</v-card-title>
-              <v-card-text  class="center-align ">
-                <p class="card-description">{{ $t('slide_description_1') }}</p>
-              </v-card-text>
-              <v-card-text class="center-align">
-                <p class="card-description">{{ $t('slide_description_2') }}</p>
-              </v-card-text>
-              <v-card-text class="center-align">
-                <p class="card-description mb-5">{{ $t('slide_description_3') }}</p>
-              </v-card-text>
+                <!--              <swiper class="swiper" :options="Option">-->
+                <!--                <swiper-slide>Slide 1</swiper-slide>-->
+                <!--                <swiper-slide>Slide 2</swiper-slide>-->
+                <!--                <swiper-slide>Slide 3</swiper-slide>-->
+                <!--                <swiper-slide>Slide 4</swiper-slide>-->
+                <!--                <div class="swiper-pagination" slot="pagination"></div>-->
+                <!--              </swiper>-->
+
+                <v-card-title class="card-heading display mb-5">{{ $t('slide_heading') }}</v-card-title>
+                <v-card-text  class="center-align ">
+                  <p class="card-description">{{ $t('slide_description_1') }}</p>
+                </v-card-text>
+                <v-card-text class="center-align">
+                  <p class="card-description">{{ $t('slide_description_2') }}</p>
+                </v-card-text>
+                <v-card-text class="center-align">
+                  <p class="card-description mb-5">{{ $t('slide_description_3') }}</p>
+                </v-card-text>
 
 
 
-              <!--              <v-divider class="mx-4"></v-divider>-->
-            </v-card>
-          </v-col>
-        </v-row>
+                <!--              <v-divider class="mx-4"></v-divider>-->
+              </v-card>
+            </v-col>
+          </v-row>
 
-      </div>
-    </v-container>
+        </div>
+      </v-container>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -115,6 +119,14 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
+
+.wave-img{
+  background-image: url("/images/About/shape.png");
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 5rem;
+}
 .slide-section{
   max-width: 1140px;
   padding: 100px 0 100px 0;

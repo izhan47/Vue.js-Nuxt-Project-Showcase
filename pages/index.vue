@@ -1,15 +1,14 @@
 <template>
-<div >
+<div>
   <banner-search></banner-search>
   <pet-functions></pet-functions>
   <about></about>
-  <location-search></location-search>
+<!--  <location-search></location-search>-->
   <care-advice></care-advice>
   <featured-product></featured-product>
   <news-letter></news-letter>
 </div >
 </template>
-
 <script>
 import bannerSearch from "@/components/Common/Home/bannerSearch";
 import petFunctions from "@/components/Common/Home/petFunctions";
