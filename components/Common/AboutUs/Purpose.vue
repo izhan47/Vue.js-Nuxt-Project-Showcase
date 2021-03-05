@@ -10,18 +10,8 @@
               </div>
               <v-row justify="center">
                 <v-col col="3" md="3" sm="3">
-                  <div class="icon_divider mt-5 mb-5">
-                    <v-divider  inset> </v-divider>
-                  </div>
-                </v-col>
-                <v-col col="1" md="1" sm="1">
-                  <div class="icon mt-1">
-                    <v-icon size="26" color="white" >mdi-cards-heart</v-icon>
-                  </div>
-                </v-col>
-                <v-col col="3" md="3" sm="3">
-                  <div class="icon_divider mt-5 mb-5">
-                    <v-divider > </v-divider>
+                  <div class="center-align mt-5 mb-5">
+                    <img class="img-fluid " src="/images/About/wag.png" alt="">
                   </div>
                 </v-col>
               </v-row>

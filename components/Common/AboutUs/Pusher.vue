@@ -7,40 +7,40 @@
         </div>
         <v-row justify="center">
               <v-col cols="12" md="4" sm="12" >
-                <v-card class="pa-4 card">
+                <v-card class="pa-8 card">
                   <v-container>
                         <div class="card-icon-parent">
                           <v-icon size="55"   class="card-icon" >mdi-dog-side</v-icon>
                         </div>
                     <div>
                       <h2 class="card-heading mb-2">  {{ $t('cheer_over_fear') }}</h2>
-                      <p class="about-banner-description mt-2">{{ $t('cheer_over_fear_description') }}</p>
+                      <p class="card-description mt-2">{{ $t('cheer_over_fear_description') }}</p>
                     </div>
                   </v-container>
                 </v-card>
               </v-col>
               <v-col cols="12" md="4" sm="12" >
-                <v-card class="pa-4 card">
+                <v-card class="pa-8 card">
                   <v-container>
                         <div class="card-icon-parent">
                           <v-icon size="55"  class="card-icon" >mdi-dog-side</v-icon>
                         </div>
                     <div>
                       <h2 class="card-heading mb-2">  {{ $t('oouch_free') }}</h2>
-                      <p class="about-banner-description mt-2">{{ $t('oouch_free_description') }}</p>
+                      <p class="card-description mt-2">{{ $t('oouch_free_description') }}</p>
                     </div>
                   </v-container>
                 </v-card>
               </v-col>
               <v-col cols="12" md="4" sm="12" >
-                <v-card class="pa-4 card">
+                <v-card class="pa-8 card">
                   <v-container>
                         <div class="card-icon-parent">
                           <v-icon size="55"   class="card-icon" >mdi-cards-heart</v-icon>
                         </div>
                     <div>
                       <h2 class="card-heading  mb-2">  {{ $t('local_love') }}</h2>
-                      <p class="about-banner-description mt-2">{{ $t('local_love_description') }}</p>
+                      <p class="card-description mt-2">{{ $t('local_love_description') }}</p>
                     </div>
                   </v-container>
                 </v-card>
@@ -105,6 +105,13 @@ data(){
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 600;
   font-size: 30px;
+}
+.card-description{
+  color: $black;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 25px;
 }
 
 </style>

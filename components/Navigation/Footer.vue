@@ -85,9 +85,7 @@
 
           </v-col>
         </v-row>
-
       </v-container>
-
     </v-footer>
     <div class="copy-rights ">
       <h2 class="copy-rights-text">{{ $t('copy_right') }} | {{ $t('terms') }} | {{ $t('privacy') }}</h2>
@@ -106,7 +104,7 @@ export default {
       products: [
         // { title: 'Home', path: '/home', icon: 'home' },
         { title: this.$i18n.t('find_a_pet_pro'), to:'/'},
-        { title: this.$i18n.t('product_reviews'), to:'/'},
+        { title: this.$i18n.t('product_reviews'), to:'/reviews'},
         { title: this.$i18n.t('watch_and_learn'), to:'/'},
       ],
       company: [

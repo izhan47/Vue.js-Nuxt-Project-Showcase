@@ -70,7 +70,7 @@
             </div>
             <div class="app-title">
               <v-btn  text class="nav-title " @click="$router.push('/about')">{{$t('about_us')}}</v-btn>
-              <v-btn  text class="nav-title">{{$t('reviews')}}</v-btn>
+              <v-btn  text class="nav-title" @click="$router.push('/reviews')">{{$t('reviews')}}</v-btn>
               <div class="mr-5 ml-5 pr-5 pl-5 nav-logo" >
                 <img src="/images/WagEnabledLogo.jpg" alt="logo" />
               </div>
