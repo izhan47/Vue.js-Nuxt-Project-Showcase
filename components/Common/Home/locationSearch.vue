@@ -1,7 +1,10 @@
 <template>
 <div class="grey-section">
   <div class="custom-container" >
-    <div class="location-search">
+    <div class="location-search"
+         data-aos="fade-up"
+         data-aos-easing="linear"
+         data-aos-duration="2500"   >
       <div class="text-center">
         <img  class="img-fluid" src="/images/Pet-Pro-Finder-Collars.png" alt="logo">
       </div>

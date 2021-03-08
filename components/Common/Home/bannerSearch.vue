@@ -22,8 +22,10 @@
                 </v-btn>
             </div>
           </form>
-        <div class="search-img text-center">
-          <img class="img-fluid" src="/images/Wag-Enabled-HP-Dog.png" alt="logo">
+        <div class="search-img" >
+          <img class="img-fluid" src="/images/Wag-Enabled-HP-Dog.png" alt="logo"
+               data-aos="slide-left" data-aos-easing="linear" data-aos-duration="2500"
+               >
         </div>
       </v-col>
     </v-row>
@@ -87,8 +89,9 @@ export default {
 }
 .search-img{
   margin-top:3rem;
+  text-align: center;
   img{
- max-height: 200px;
+    max-height: 200px;
   }
 }
 </style>

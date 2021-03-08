@@ -1,6 +1,6 @@
 <template>
-  <div class="grey-section">
-    <div class="custom-container custom-height " >
+  <div class="grey-section" >
+    <div class="custom-container custom-height "  data-aos="fade-up" data-aos-easing="linear" data-aos-duration="3000" >
       <div class="text-center">
         <img class="img-fluid img-height" src="/images/Pink-Paw.png" alt="logo">
         <h2  class="heading mt-5 space">{{ $t('top_pet_care_advice') }}</h2>
