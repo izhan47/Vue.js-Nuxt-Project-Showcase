@@ -30,11 +30,14 @@ export default {
   plugins: [
     { src: '~/plugins/i18n.js' },
     { src: '~/plugins/vue-awesome-swiper.js' },
-
-
+    { src: "~/plugins/aos.js", mode: "client" },
   ],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
+purgeCSS: {
+  whitelist: ["aos-init", "aos-animate", "data-aos-delay", "data-aos-duration", "fade-up", "zoom-in", "fade-in","fade-down-left"],
+},
+
+    // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
