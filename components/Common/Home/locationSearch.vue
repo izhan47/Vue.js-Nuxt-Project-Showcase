@@ -188,11 +188,15 @@ data(){
   }
 }
 .search-box::v-deep .v-input__slot{
+  background: $white;
   min-height: 48px;
   box-shadow: white;
 }
 .search-box::v-deep .v-label {
   top:14px;
+}
+.search-box::v-deep .v-input__append-inner{
+  margin-top: 12px;
 }
 .filter-label{
   text-align: left;
