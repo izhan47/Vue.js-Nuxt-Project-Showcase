@@ -190,6 +190,18 @@ data(){
     margin-bottom: 2rem;
   }
 }
+.location-description{
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+  line-height: 1.87;
+  p{
+    color: $black;
+    font-weight: 400;
+    font-size: 17px;
+  }
+}
 .search-box::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
@@ -298,18 +310,6 @@ data(){
     text-transform:initial;
     font-weight: 700;
   }
-}
-.location-description{
-    max-width: 500px;
-    margin: auto;
-    text-align: center;
-    width: 100%;
-    line-height: 1.87;
-    p{
-      color: $black;
-      font-weight: 400;
-      font-size: 17px;
-    }
 }
 .comment-color{
   cursor: pointer;
