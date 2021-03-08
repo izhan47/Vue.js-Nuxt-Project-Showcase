@@ -13,8 +13,8 @@
       </div>
         <!--   Filter Section Start     -->
       <v-form>
-        <v-row justify="center">
-          <v-col cols="12" md="3" sm="6">
+        <div class="form-filter">
+          <div class="form-field">
             <div class="filter-label">
               <label class="ml-4 ">{{ $t('category') }}</label>
             </div>
@@ -26,22 +26,22 @@
               outlined
               rounded
             ></v-select>
-          </v-col>
-          <v-col cols="12" md="3" sm="6">
+          </div>
+          <div class="form-field">
             <div class="filter-label">
-              <label class="ml-4 ">{{ $t('location') }}</label>
+              <label class="ml-4">{{ $t('location') }}</label>
             </div>
             <v-text-field
               class="search-box  mt-2"
-              :placeholder="$t('location_placeholder')"
-              v-model="form.search"
+              :placeholder="$t('all')"
+              v-model="form.keyword"
               solo
               clearable
               rounded
               outlined
             ></v-text-field>
-          </v-col>
-          <v-col cols="12" md="3" sm="6">
+          </div>
+          <div class="form-field">
             <div class="filter-label">
               <label class="ml-4">{{ $t('keyword') }}</label>
             </div>
@@ -54,8 +54,8 @@
               rounded
               outlined
             ></v-text-field>
-          </v-col>
-          <v-col cols="12" md="2" sm="6" class="mt-8">
+          </div>
+          <div >
             <v-btn
               class="purple-section  search-btn"
               outlined
@@ -63,12 +63,11 @@
             >
               {{ $t('search') }}
             </v-btn>
-            <h5 class="tag-align"> {{ $t('sort_by') }} <strong style="color: #00AFAA">{{ $t('latest_v') }}</strong></h5>
-          </v-col>
-<!--          <v-col col="12" md="12" sm="12" class="tag-align">-->
-<!--            <h5 > {{ $t('sort_by') }} <strong style="color: #00AFAA">{{ $t('latest_v') }}</strong></h5>-->
-<!--          </v-col>-->
-        </v-row>
+          </div>
+        </div>
+        <div>
+          <h5 class="tag-align"> {{ $t('sort_by') }} <strong>{{ $t('latest_v') }}</strong></h5>
+        </div>
       </v-form>
         <!--   Filter Section End     -->
     </div>
@@ -81,15 +80,15 @@
               :src="item.src"
             ></v-img>
             <v-card  class=" card-radius pa-6">
-              <v-card-title>
-                <div class=" card-flex">
-                    <h2  class="card-heading">  {{ item.name}}</h2>
+              <v-card-title class="card-padding">
+                <div class="card-flex">
+                    <h2 class="card-heading">  {{ item.name}}</h2>
                   <div class="card-flex-rating">
                     <v-rating
                       :value="4"
                       length="1"
-                      background-color="green "
-                      color="green"
+                      background-color="##00afaa"
+                      color="#00afaa"
                       dense
                       readonly
                       size="20"
@@ -98,9 +97,7 @@
                    {{ item.rating }}
                   </span>
                   </div>
-
                 </div>
-
               </v-card-title>
               <v-card-text>
                 <p class="card-description">{{item.description.length < 50 ? item.description : item.description.slice(0, 50) }}
@@ -110,10 +107,10 @@
                 </p>
               </v-card-text>
               <v-card-actions>
-                <v-btn   class="card-button purple-section  ml-3 mb-3"  outlined rounded>
+                <v-btn   class="card-button purple-section"  outlined rounded>
                   {{ $t('deal_offered') }}
                 </v-btn>
-                <v-btn  class="pink-section card-button  ml-3 mb-3" outlined  rounded >
+                <v-btn  class="pink-section card-button" outlined  rounded >
                   {{ $t('certified') }}
                 </v-btn>
               </v-card-actions>
@@ -173,6 +170,15 @@ data(){
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
+.form-filter{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.form-field{
+  margin-right: 1rem;
+}
 .text-center{
   img{
     max-height: 200px;
@@ -182,10 +188,15 @@ data(){
   }
 }
 .search-box::v-deep .v-input__slot{
-  min-height: 40px;
+  background: $white;
+  min-height: 48px;
+  box-shadow: white;
 }
 .search-box::v-deep .v-label {
   top:14px;
+}
+.search-box::v-deep .v-input__append-inner{
+  margin-top: 12px;
 }
 .filter-label{
   text-align: left;
@@ -195,14 +206,28 @@ data(){
     color: $black;
   }
 }
+.search-btn::v-deep.v-btn{
+  min-width: 160px;
+  height: 52px;
+}
 .search-btn{
   background-color: $blue;
   color: $white;
+  font-family: 'Nunito Sans', sans-serif;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15px;
   text-transform: capitalize;
   border-radius: 100px 100px 100px 100px;
   padding: 0 50px 0 50px;
+  letter-spacing: 0;
+}
+
+
+
+
+.card-padding::v-deep.v-card__title{
+
+  padding: 16px 16px 0 16px;
 }
 .card-flex{
   display: flex;
@@ -228,11 +253,11 @@ data(){
   font-size: 15px;
 }
 .card-description{
-  color: $black;
+  color: #4d4d4d;;
   font-size: 15px;
-  font-weight: 500;
-  line-height: 1.5;
-
+  font-weight: 700;
+  line-height: 1.87;
+  font-family: 'Nunito Sans', sans-serif;
 }
 .card-img{
   max-height :270px;
@@ -250,16 +275,26 @@ data(){
   padding: 6px;
 }
 .card-button{
-  padding: 5px 15px;
+  padding: 5px 15px 5px 15px;
   color: $white;
   text-transform: capitalize;
   font-family: 'Nunito Sans', sans-serif;
   font-size: 12px;
+  letter-spacing: 0;
 }
 .tag-align{
-  text-align: left;
-  margin-top: 1rem;
+  text-align: right;
+  text-transform: capitalize;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+;
   padding-left: 1rem;
+  strong{
+    color:$green;
+    text-transform:initial;
+    font-weight: 700;
+  }
 }
 .location-description{
     max-width: 500px;
