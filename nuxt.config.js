@@ -29,7 +29,6 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/i18n.js' },
-    { src: '~/plugins/vue-awesome-swiper.js' },
     { src: "~/plugins/aos.js", mode: "client" },
   ],
 
