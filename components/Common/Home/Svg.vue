@@ -21,5 +21,9 @@ export default {
 svg{
   width: calc(108% + 1.3px);
   height: 158px;
+
+/*@media (max-width: 768px) {*/
+/*  width: calc(100% + 1.3px);*/
+/*}*/
 }
 </style>

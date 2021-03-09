@@ -12,6 +12,7 @@
 <!--       <v-col cols="12" md="6" sm="6" class="section-align pa-8">-->
        <v-col cols="12" md="6" sm="6">
          <div class="center">
+           <div class="paw-print">
            <div class="paw-print-2">
              <div class="pad large"></div>
              <div class="pad small-1"></div>
@@ -34,6 +35,7 @@
              <div class="pad small-2"></div>
              <div class="pad small-3"></div>
              <div class="pad small-4"></div>
+           </div>
            </div>
 
            <div class="align-content" >
@@ -69,6 +71,12 @@ name: "about.vue"
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
+.paw-print{
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
 .about-heading{
   color:$purple;
   font-family: 'Nunito Sans', sans-serif;
@@ -76,7 +84,6 @@ name: "about.vue"
   font-size: 45px;
   text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
   text-transform: capitalize;
-
 }
 .description{
   span{
