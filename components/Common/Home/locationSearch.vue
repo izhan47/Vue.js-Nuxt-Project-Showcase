@@ -3,7 +3,7 @@
   <div class="custom-container" >
     <div data-aos="fade-up"
          data-aos-easing="linear"
-         data-aos-duration="2500"   >
+         data-aos-duration="2500">
       <div class="text-center">
         <img  class="img-fluid" src="/images/Pet-Pro-Finder-Collars.png" alt="logo">
       </div>
@@ -86,15 +86,15 @@
                 :src="item.src"
               ></v-img>
             </div>
-            <v-card  class=" card-radius pa-6">
-              <v-card-title class="card-padding">
+            <v-card  class=" card-radius card-padding">
+              <v-card-title class="card-title-padding">
                 <div class="card-flex">
                     <h2 class="card-heading">  {{ item.name}}</h2>
                   <div class="card-flex-rating">
                     <v-rating
                       :value="4"
                       length="1"
-                      background-color="##00afaa"
+                      background-color="#00afaa"
                       color="#00afaa"
                       dense
                       readonly
@@ -214,9 +214,14 @@ data(){
   min-width: 160px;
   height: 52px;
 }
-.card-padding::v-deep.v-card__title{
-
+.card-title-padding::v-deep.v-card__title{
   padding: 16px 16px 0 16px;
+}
+.card-padding{
+  padding: 24px;
+  @media (max-width: 767px) {
+    padding: 0 0 8px 0;
+  }
 }
 .tag-align{
   text-align: right;

@@ -1,21 +1,20 @@
 <template>
   <div class="custom-container py-10  " >
     <div class="section-align-center">
-      <div class="center-align">
+      <div class="center-align"  data-aos="slide-down"
+           data-aos-easing="linear"
+           data-aos-duration="2500" >
         <img class="img-height img-fluid" src="/images/Pink-Paw.png" alt="logo">
       </div>
       <div class="">
-        <h2  class="about-banner-heading center-align line-height">{{ $t('from') }} {{ $t('pet_people') }}{{ $t('coma') }} {{ $t('with_love') }}</h2>
+        <h2  class="about-banner-heading text-center line-height">{{ $t('from') }} {{ $t('pet_people') }}{{ $t('coma') }} {{ $t('with_love') }}</h2>
       </div>
-      <div class="banner-description mt-5 mb-3">
-        <p>
-          {{ $t('about_banner_description') }}
-        </p>
+      <div class="description mt-7 mb-5">
+        <p>{{ $t('about_banner_description_first') }} <span>{{ $t('wag_enabled') }}</span>{{ $t('about_banner_description_last') }}</p>
       </div>
-
     </div>
     <div class="mt-5 mb-3">
-      <v-divider></v-divider>
+      <div class="divider"></div>
     </div>
   </div>
 </template>
@@ -34,22 +33,32 @@ name: "aboutBanner.vue"
   width: 100px;
   height: 95px;
 }
+//.divider{
+//  color:  #ADADAD;
+//  width: 100%;
+//  padding-bottom: 100px;
+//  margin:10px 0;
+//
+//  //     Weight 1px
+//}
+
 .divider{
-  color:  #ADADAD;
-  width: 100%;
-  padding-bottom: 100px;
-  //     Weight 1px
+  width:100%;
+  height:1px;
+  background:$dark-grey;
+  margin:10px 0;
 }
-.banner-description{
+
+.description{
   max-width: 600px;
   margin: auto;
   text-align: center;
   width: 100%;
-
-  p{
-    color: $grey;
-    font-weight: 400;
-    //font-size: 16px;
+  span{
+    color: $pink;
   }
+}
+.img-height{
+  max-height: 100px;
 }
 </style>
