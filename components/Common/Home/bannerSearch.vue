@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-container custom-height ">
+  <div class="custom-container custom-height custom-padding">
     <v-row justify="center">
       <v-col cols="12" md="8" sm="12">
         <div>

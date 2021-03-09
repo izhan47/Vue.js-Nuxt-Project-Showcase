@@ -70,15 +70,11 @@
         Line Height
 =========================================================*/
 .line-height{
-  line-height: 2;
+  line-height: 1.87;
 }
 .space{
   margin-bottom: 3rem;
 }
-.custom-line-height{
-  line-height: 1.87;
-}
-
 /*=========================================== =============
        Alignment
 =========================================================*/
@@ -110,12 +106,38 @@
 /*=========================================== =============
      Icons
 =========================================================*/
-//.card-arrow-icon{
-//  .circle{
-//    background-color:rgb(256,256,256,0.7);
-//    border-radius: 50%;
-//  }
-//}
+.paw-icons-parent{
+  position: relative;
+}
+.paw-icon{
+  display: flex;
+  position: absolute;
+  flex-wrap: wrap;
+  left: 20px;
+  top: 13px;
+  z-index: 1;
+}
+.paw-purple{
+  background-color:$white;
+  border-radius: 50%;
+  height: 33px;
+  width: 33px;
+  color:$purple
+}
+.paw-pink{
+  background-color:$white;
+  border-radius: 50%;
+  height: 33px;
+  width: 33px;
+  color:$pink
+}
+.paw-green{
+  background-color:$white;
+  border-radius: 50%;
+  height: 33px;
+  width: 33px;
+  color:$green
+}
 
 /*=========================================== =============
        Button
@@ -144,9 +166,9 @@
   .card-radius{
     border-radius: 15px;
     box-shadow: -5px 10px 10px 0px rgb(0 0 0 / 9%);
-
   }
 }
+
 
 .list-height{
   .v-list-item{
@@ -157,6 +179,106 @@
   }
 }
 
+
+
+/*=========================================== =============
+     Location Search & cards
+=========================================================*/
+.search-form-filter{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.search-form-field{
+  margin-right: 1rem;
+}
+.search-form-label{
+  text-align: left;
+  label{
+    font-size: 14px;
+    font-weight: 400;
+    color: $black;
+  }
+}
+.text-center{
+  img{
+    max-height: 200px;
+  }
+  h2{
+    margin-bottom: 2rem;
+  }
+}
+.banner-description{
+  max-width: 650px;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+  line-height: 1.87;
+  p{
+    font-family: 'Nunito Sans', sans-serif;
+    color: $black;
+    font-weight: 600;
+    font-size: 17px;
+  }
+}
+.search-btn{
+  background-color: $blue;
+  color: $white;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: capitalize;
+  border-radius: 100px 100px 100px 100px;
+  padding: 0 50px 0 50px;
+  letter-spacing: 0;
+}
+.card-flex{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.card-flex-rating{
+  display: flex;
+  align-items: baseline;
+}
+.card-heading{
+  color: $purple;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 36px;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+  font-style: normal;
+}
+.card-heading-point{
+  padding-left: 2px;
+  color: $grey;
+  font-size: 15px;
+}
+.card-description{
+  color: $matterhorn;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.87;
+  font-family: 'Nunito Sans', sans-serif;
+}
+.card-img{
+  max-height :270px;
+  border-radius:10px 10px 0 0;
+}
+.card-btn{
+  padding: 5px 15px 5px 15px;
+  color: $white;
+  text-transform: capitalize;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0;
+}
+.comment-color{
+  cursor: pointer;
+  color: $green;
+}
 
 
 
