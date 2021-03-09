@@ -6,7 +6,7 @@
           <v-col cols="12" md="10" sm="12"  >
             <div class="purpose">
               <div class="center-align mt-5 mb-5">
-                <h2 class="purpose-heading">{{ $t('our_purpose') }} </h2>
+                <h2 class="heading">{{ $t('our_purpose') }} </h2>
               </div>
               <v-row justify="center">
                 <v-col col="3" md="3" sm="3">
@@ -15,8 +15,8 @@
                   </div>
                 </v-col>
               </v-row>
-              <div class="center-align mt-5 mb-5">
-                <p class="purpose-description">{{ $t('purpose_description') }}</p>
+              <div class="description mb-5">
+                <p>{{ $t('purpose_description') }}</p>
               </div>
             </div>
           </v-col>
@@ -44,25 +44,19 @@ name: "Purpose.vue"
     padding: 30px;
   }
 }
-.purpose-heading{
+.heading{
   color:$white;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 45px;
-  text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
+  font-size: 40px;
 }
-.purpose-description{
-
+.description{
   max-width: 800px;
   margin: auto;
   text-align: center;
   width: 100%;
-
   p{
     color:$white;
     font-weight: 400;
     font-size: 16px;
-
   }
 }
 .icon_divider{

@@ -2,12 +2,14 @@
   <div>
     <v-container >
       <div class="crew-card-section">
-        <div>
-          <img class="crew-img"
+        <div class="crew-img" data-aos="slide-left" data-aos-easing="linear" data-aos-duration="2500">
+          <img
                src="/images/About/Teal-Ball.png" alt="logo">
         </div>
-        <div class="space">
-          <h2 class="crew-section-heading">{{ $t('meet_crew') }} </h2>
+        <div class="space heading"  data-aos="slide-up"
+             data-aos-easing="linear"
+             data-aos-duration="2500" >
+          <h2>{{ $t('meet_crew') }} </h2>
         </div>
         <div class="crew-divider">
           <v-divider></v-divider>
@@ -67,17 +69,16 @@ data(){
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
-
-.crew-section-heading{
-  color:$purple;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 45px;
-  text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
+.heading{
+ h2{
+   font-size: 60px;
+   font-weight: 550;
+ }
 }
 .space{
-  margin: 4rem 0;
+  margin: 6rem 0;
 }
+
 .crew-divider{
   width: 50%;
   text-align: center;
@@ -85,11 +86,18 @@ data(){
   @media (max-width: 769px) {
     width: 100%;
   }
-
 }
 .crew-img{
-  width: 5%;
-  float: right;
+  img{
+    width: 5%;
+    text-align: right;
+  }
+  @media (max-width: 767px) {
+    img{
+      display:none ;
+    }
+  }
+
 }
 .crew-card-section{
   max-width: 1140px;
@@ -113,9 +121,9 @@ data(){
   text-transform: uppercase;
 }
 .crew-card-sub-heading{
-  color:  #323638 ;
+  color:  $black ;
   font-family: 'Nunito Sans', sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   letter-spacing: 5px;
   font-weight: bold;
   text-align: center;

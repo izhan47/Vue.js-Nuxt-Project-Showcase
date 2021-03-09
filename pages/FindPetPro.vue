@@ -67,7 +67,7 @@
     </div>
   </div>
   <!--  card-section-start   -->
-  <div class="custom-height custom-container custom-padding">
+  <div class="custom-height custom-container custom-card-padding">
     <v-row>
       <v-col cols="12" md="4" sm="12" v-for="(item,i) in cards" :key="i">
         <div class="paw-icons-parent">
@@ -79,15 +79,15 @@
             :src="item.src"
           ></v-img>
         </div>
-        <v-card  class="card-radius pa-6">
-          <v-card-title class="card-padding">
+        <v-card  class="card-radius card-padding">
+          <v-card-title class="card-title-padding">
             <div class="card-flex">
               <h2 class="card-heading">  {{ item.name}}</h2>
               <div class="card-flex-rating">
                 <v-rating
                   :value="4"
                   length="1"
-                  background-color="##00afaa"
+                  background-color="#00afaa"
                   color="#00afaa"
                   dense
                   readonly
@@ -257,6 +257,7 @@ name: "FindPetPro.vue",
 .custom-padding{
   padding-top: 3rem;
 }
+
 .banner-description{
   max-width: 550px;
 }
@@ -292,9 +293,15 @@ name: "FindPetPro.vue",
   min-width: 160px;
   height: 52px;
 }
-.card-padding::v-deep.v-card__title{
-
+.card-title-padding::v-deep.v-card__title{
   padding: 16px 16px 0 16px;
+}
+
+.card-padding{
+  padding: 24px;
+  @media (max-width: 767px) {
+    padding: 0 0 8px 0;
+  }
 }
 
 

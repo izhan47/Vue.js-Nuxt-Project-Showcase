@@ -24,7 +24,7 @@
           </form>
         <div class="search-img" >
           <img class="img-fluid" src="/images/Wag-Enabled-HP-Dog.png" alt="logo"
-               data-aos="slide-left" data-aos-easing="linear" data-aos-duration="2500"
+               data-aos="slide-left" data-aos-easing="linear" data-aos-duration="3500"
                >
         </div>
       </v-col>
@@ -61,7 +61,6 @@ export default {
   height: 56px;
 }
 .search-container{
-
   background-color: white;
   position: relative;
   display: flex;

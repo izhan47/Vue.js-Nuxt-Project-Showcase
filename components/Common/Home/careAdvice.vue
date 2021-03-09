@@ -119,7 +119,7 @@ export default {
   color: $white;
   background-color: $purple;
 }
-
-
-
+.img-height{
+  max-height: 130px;
+}
 </style>

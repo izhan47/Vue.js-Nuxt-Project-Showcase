@@ -3,12 +3,12 @@ import "aos/dist/aos.css";
 
 export default ({ app }) => {
   app.AOS = new AOS.init({
-    disable: window.innerWidth < 768,
+    // disable: window.innerWidth < 768,
     // easing: 'ease-in-out-cubic',
     // once: true,
 
     // Global settings:
-    // disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+    disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
     startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
     initClassName: 'aos-init', // class applied after initialization
     animatedClassName: 'aos-animate', // class applied on animation
