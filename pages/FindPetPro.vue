@@ -67,7 +67,7 @@
     </div>
   </div>
   <!--  card-section-start   -->
-  <div class="custom-height custom-container custom-padding">
+  <div class="custom-height custom-container custom-card-padding">
     <v-row>
       <v-col cols="12" md="4" sm="12" v-for="(item,i) in cards" :key="i">
         <div class="paw-icons-parent">
@@ -257,6 +257,7 @@ name: "FindPetPro.vue",
 .custom-padding{
   padding-top: 3rem;
 }
+
 .banner-description{
   max-width: 550px;
 }

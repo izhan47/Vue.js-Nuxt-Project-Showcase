@@ -66,15 +66,15 @@
     </div>
   </div>
   <!--  card-section-start   -->
-  <div class="custom-container custom-margin">
+  <div class="custom-container custom-margin space">
       <v-row>
         <v-col cols="12" md="4" sm="12" v-for="(item,i) in cards" :key="i">
           <v-img
             class="img-fluid card-img"
             :src="item.src"
           ></v-img>
-          <v-card  class="card-radius card-custom-height  pa-6">
-            <v-card-title class="card-padding">
+          <v-card  class="card-radius card-custom-height card-padding ">
+            <v-card-title class="card-title-padding">
               <div class="card-heading">
                 <h2>  {{ item.name}}</h2>
               </div>
@@ -158,7 +158,7 @@ name: "WatchLearn.vue",
 }
 .bg-review-img{
   background-image: url("/images/WatchLearn/Pink-Dog-Running-Banner-1.png");
-  background-position:50% 60%;
+  background-position:10% 33%;
   background-size: cover;
   background-repeat: no-repeat;
   @media (max-width: 767px) {
@@ -203,8 +203,14 @@ name: "WatchLearn.vue",
   min-width: 140px;
   height: 52px;
 }
-.card-padding::v-deep.v-card__title{
+.card-title-padding::v-deep.v-card__title{
   padding: 16px 0 0 16px;
+}
+.card-padding{
+  padding: 24px;
+  @media (max-width: 767px) {
+    padding: 0 0 8px 0;
+  }
 }
 
 </style>
