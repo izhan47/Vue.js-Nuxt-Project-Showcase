@@ -45,7 +45,8 @@
           app
           color="white"
           dark
-          height="90"
+          height="110"
+          class="remove-shadow"
         >
           <div  class="nav-container">
          <!--     Tab/Mobile screen   Start     -->
@@ -154,6 +155,10 @@ export default {
 
 <style  lang="scss" scoped>
 @import "~/assets/sass/main.scss";
+.remove-shadow::v-deep.v-toolbar:not(.v-sheet--outlined){
+  box-shadow: 0px -2px 13px 5px rgb(0 0 0 / 9%);
+  transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+}
 .show_drawer{
   @media (min-width: 769px)   {
   display: none;
