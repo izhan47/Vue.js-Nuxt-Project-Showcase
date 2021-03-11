@@ -203,7 +203,7 @@ data(){
 .search-field::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
-  box-shadow: unset;
+  box-shadow: unset !important;
 }
 .search-field::v-deep .v-label {
   top:14px;
