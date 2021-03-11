@@ -33,7 +33,7 @@
               </v-list-item>
             </div>
             <div class="icon-child">
-              <v-btn  v-for="(icon,i) in icons" :key="i" icon color="#332e80"> <v-icon>{{icon.name}}</v-icon></v-btn>
+              <v-btn v-for="(icon,i) in icons" :key="i" icon @mouseleave="index = ''" @mouseover="index = i"  :color="index === i ? '#ff8189' : '#332e80'"><v-icon >{{icon.name}}</v-icon></v-btn>
             </div>
           </div>
 
@@ -45,7 +45,8 @@
           app
           color="white"
           dark
-          height="90"
+          height="110"
+          class="remove-shadow"
         >
           <div  class="nav-container">
          <!--     Tab/Mobile screen   Start     -->
@@ -59,16 +60,16 @@
           <!--     Large screen       -->
           <v-toolbar-title  class="header-title">
             <div>
-              <v-btn v-for="(icon,i) in icons" :key="i" icon color="#332e80"> <v-icon>{{icon.name}}</v-icon></v-btn>
+              <v-btn v-for="(icon,i) in icons" :key="i" icon @mouseleave="index = ''" @mouseover="index = i"  :color="index === i ? '#ff8189' : '#332e80'"><v-icon >{{icon.name}}</v-icon></v-btn>
             </div>
             <div class="app-title">
-              <v-btn  text class="nav-title nav-btn" @click="$router.push('/about')">{{$t('about_us')}}</v-btn>
-              <v-btn  text class="nav-title" @click="$router.push('/reviews')">{{$t('reviews')}}</v-btn>
+              <div  class="nav-title  ml-4" @click="$router.push('/about')">{{$t('about_us')}}</div>
+              <div   class="nav-title ml-4" @click="$router.push('/reviews')">{{$t('reviews')}}</div>
               <div class=" nav-logo" >
-                <img src="/images/WagEnabledLogo.jpg" alt="logo" />
+                <img src="/images/WagEnabledLogo.jpg" alt="logo" @click="$router.push('/')" />
               </div>
-              <v-btn  text class="nav-title" @click="$router.push('/WatchLearn')">{{$t('watch_and_learn')}}</v-btn>
-              <v-btn  text class="nav-title" @click="$router.push('/FindPetPro')">{{$t('find_a_pet_pro')}}</v-btn>
+              <div   class="nav-title ml-4" @click="$router.push('/WatchLearn')">{{$t('watch_and_learn')}}</div>
+              <div   class="nav-title ml-4" @click="$router.push('/FindPetPro')">{{$t('find_a_pet_pro')}}</div>
             </div>
             <div>
               <v-btn outlined rounded class="sign-in-btn">{{$t('sign_in')}}</v-btn>
@@ -87,8 +88,8 @@ export default {
   name: "Navbar.vue",
   data(){
     return {
+      index : '',
       menuItems: [
-        // { title: 'Home', path: '/home', icon: 'home' },
         {
           title: this.$i18n.t('about_us'),
           to: '/about',
@@ -97,12 +98,6 @@ export default {
           title: this.$i18n.t('reviews'),
           to: '/reviews',
         },
-
-        // {
-        //   title: '',
-        //   to: '/',
-        // },
-
         { title: this.$i18n.t('watch_and_learn'),
           to: '/WatchLearn',},
         { title: this.$i18n.t('find_a_pet_pro'),
@@ -126,10 +121,7 @@ export default {
     }
   },
   created() {
-
     // window.addEventListener("resize", this.handleWindowResize);
-
-
     window.addEventListener('resize', function(event){
       const newWidth = window.innerWidth;
       const newHeight = window.innerHeight;
@@ -154,6 +146,10 @@ export default {
 
 <style  lang="scss" scoped>
 @import "~/assets/sass/main.scss";
+.remove-shadow::v-deep.v-toolbar:not(.v-sheet--outlined){
+  box-shadow: 0px -2px 13px 5px rgb(0 0 0 / 9%);
+  transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+}
 .show_drawer{
   @media (min-width: 769px)   {
   display: none;
@@ -161,9 +157,6 @@ export default {
 }
 .app-icon::v-deep .v-icon{
   color: $purple;
-}
-.nav-title::v-deep.v-btn{
-  padding: 0 8px;
 }
 .sign-in-btn::v-deep.v-btn{
   height: 42px;

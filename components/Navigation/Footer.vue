@@ -61,7 +61,7 @@
                     exact
                   >
                     <v-list-item-content>
-                      <v-list-item-title class=" footer-items" v-text="item.title" />
+                      <v-list-item-title class="footer-items" v-text="item.title" />
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -122,6 +122,9 @@ export default {
 }
 .footer-nav::v-deep a{
   padding: 0;
+}
+.custom-padding{
+  padding-bottom: 6rem;
 }
 
 

@@ -1,11 +1,11 @@
 <template>
   <div class="grey-section" >
-    <div class="custom-container custom-height "  data-aos="fade-up" data-aos-easing="linear" data-aos-duration="3000" >
+    <div class="custom-container custom-height ">
       <div class="text-center">
         <img class="img-fluid img-height" src="/images/Pink-Paw.png" alt="logo">
-        <h2  class="heading mt-5 space">{{ $t('top_pet_care_advice') }}</h2>
+        <h2  class="heading mt-5">{{ $t('top_pet_care_advice') }}</h2>
       </div>
-      <div class="categories-buttons" >
+      <div class="categories-buttons " >
            <v-btn v-for="(item,i) in items.slice(0, end)" :key="i"
                   large outlined rounded
                   class="category-button"
@@ -63,6 +63,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
+.text-center{
+  img{
+    max-height: 120px;
+  }
+  h2{
+    margin-bottom: 3rem;
+  }
+}
 .align-content{
   width: 50%;
   text-align: center;
@@ -119,7 +127,5 @@ export default {
   color: $white;
   background-color: $purple;
 }
-.img-height{
-  max-height: 130px;
-}
+
 </style>

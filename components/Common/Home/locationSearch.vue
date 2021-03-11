@@ -1,17 +1,16 @@
 <template>
 <div class="grey-section">
   <div class="custom-container" >
-    <div data-aos="fade-up"
-         data-aos-easing="linear"
-         data-aos-duration="2500">
+<!--    <div data-aos="fade-up" data-aos-easing="linear" data-aos-duration="2500">-->
+    <div >
       <div class="text-center">
-        <img  class="img-fluid" src="/images/Pet-Pro-Finder-Collars.png" alt="logo">
+        <img  class="img-fluid img-height" src="/images/Pet-Pro-Finder-Collars.png" alt="logo">
       </div>
       <div class="text-center">
         <h2 class="heading  line-height ">{{ $t('pet_pro_around_you') }}</h2>
       </div>
-      <div class="space banner-description">
-        <p>{{ $t('search_database_description') }}</p>
+      <div class=" banner-description">
+        <p class="space">{{ $t('search_database_description') }}</p>
       </div>
         <!--   Filter Section Start     -->
       <v-form>
@@ -194,6 +193,9 @@ data(){
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
+.img-height{
+  max-height: 250px;
+}
 
 .banner-description{
   max-width: 500px;
@@ -201,7 +203,7 @@ data(){
 .search-field::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
-  box-shadow: white;
+  box-shadow: unset;
 }
 .search-field::v-deep .v-label {
   top:14px;

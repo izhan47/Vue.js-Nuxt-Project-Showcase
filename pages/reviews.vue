@@ -101,7 +101,7 @@ data(){
 .search-field::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
-  box-shadow: white;
+  box-shadow: unset;
   max-width: 170px;
 }
 .search-field::v-deep .v-label {

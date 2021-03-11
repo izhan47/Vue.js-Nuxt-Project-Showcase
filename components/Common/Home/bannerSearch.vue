@@ -3,10 +3,10 @@
     <v-row justify="center">
       <v-col cols="12" md="8" sm="12">
         <div>
-          <h2 class="banner-heading center-align line-height">{{ $t('search_wag_enabled') }}</h2>
+          <h2 class="banner-heading text-center line-height">{{ $t('search_wag_enabled') }}</h2>
         </div>
         <div class="mt-5 space">
-          <p class="description search-description center-align ">{{ $t('search_section_description') }}</p>
+          <p class="description  text-center ">{{ $t('search_section_description') }}</p>
         </div>
 
           <form class="search-form" role="search" action="#" method="get">
@@ -23,9 +23,8 @@
             </div>
           </form>
         <div class="search-img" >
-          <img class="img-fluid" src="/images/Wag-Enabled-HP-Dog.png" alt="logo"
-               data-aos="slide-left" data-aos-easing="linear" data-aos-duration="3500"
-               >
+<!--          data-aos="slide-left" data-aos-easing="linear" data-aos-duration="3500"-->
+          <img class="img-fluid" src="/images/Wag-Enabled-HP-Dog.png" alt="logo">
         </div>
       </v-col>
     </v-row>
@@ -50,8 +49,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
-.search-description{
-  padding: 0 3rem;
+.custom-padding{
+  padding-top: 7rem;
+}
+.description{
+  max-width: 600px;
+  margin: auto;
 }
 .search-btn::v-deep.v-btn{
   color: $white;
@@ -79,7 +82,7 @@ export default {
   padding: 15px;
   display: inline-block;
   color: $black;
-  background: $white;
+  background: $grey-light;
   margin: 0;
 }
 .search-form-input:focus,{
@@ -87,10 +90,10 @@ export default {
   outline: none;
 }
 .search-img{
-  margin-top:3rem;
+  margin-top:2rem;
   text-align: center;
   img{
-    max-height: 200px;
+    max-height: 280px;
   }
 }
 </style>
