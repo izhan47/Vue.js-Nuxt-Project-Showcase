@@ -1,12 +1,12 @@
 <template>
 <div class="grey-section">
     <div class="custom-container custom-height custom-padding">
-      <div class="function-heading">
+      <div class="function-heading space">
         <h2 class="heading text-center">
           {{ $t('for') }} {{ $t('pet_people') }}{{ $t('coma') }} {{ $t('by') }} {{ $t('pet_people') }}
         </h2>
       </div>
-      <div  class="description center-align my-9 ">
+      <div  class="description center-align space">
         <p>{{ $t('pet_functionality_description') }}</p>
       </div>
       <v-row justify="center">
@@ -67,6 +67,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
+
+.custom-padding{
+  padding: 8rem 12px 8rem 12px
+}
 .function-heading{
   h2{
     font-size: 45px;

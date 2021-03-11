@@ -68,7 +68,7 @@
   <!--  card-section-start   -->
   <div class="custom-container custom-margin space">
       <v-row>
-        <v-col cols="12" md="4" sm="12" v-for="(item,i) in cards" :key="i">
+        <v-col cols="12" md="4" sm="12" v-for="(item,i) in cards" :key="i" class="custom-margin">
           <v-img
             class="img-fluid card-img"
             :src="item.src"
@@ -190,7 +190,7 @@ name: "WatchLearn.vue",
 .search-field::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
-  box-shadow: white;
+  box-shadow: unset;
   max-width: 170px;
 }
 .search-field::v-deep .v-label {

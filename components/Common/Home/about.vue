@@ -1,9 +1,9 @@
 <template>
-<div class="grey-section">
- <div class="custom-container custom-height center-center">
+<div class="grey-section custom-padding">
+ <div class="custom-container custom-height center-center ">
    <div class="about-section w-100 mt-5">
      <v-row justify="center">
-       <v-col cols="12" md="6" sm="6">
+       <v-col cols="12" md="6" sm="12">
          <div>
            <img class="img-fluid"
                 src="/images/placeholder.png" alt="logo">
@@ -13,29 +13,29 @@
        <v-col cols="12" md="6" sm="6">
          <div class="center">
            <div class="paw-print">
-           <div class="paw-print-2">
-             <div class="pad large"></div>
-             <div class="pad small-1"></div>
-             <div class="pad small-2"></div>
-             <div class="pad small-3"></div>
-             <div class="pad small-4"></div>
-           </div>
+             <div class="paw-print-2">
+               <div class="pad large"></div>
+               <div class="pad small-1"></div>
+               <div class="pad small-2"></div>
+               <div class="pad small-3"></div>
+               <div class="pad small-4"></div>
+             </div>
 
-           <div class="paw-print-3">
-             <div class="pad large"></div>
-             <div class="pad small-1"></div>
-             <div class="pad small-2"></div>
-             <div class="pad small-3"></div>
-             <div class="pad small-4"></div>
-           </div>
+             <div class="paw-print-3">
+               <div class="pad large"></div>
+               <div class="pad small-1"></div>
+               <div class="pad small-2"></div>
+               <div class="pad small-3"></div>
+               <div class="pad small-4"></div>
+             </div>
 
-           <div class="paw-print-4">
-             <div class="pad large"></div>
-             <div class="pad small-1"></div>
-             <div class="pad small-2"></div>
-             <div class="pad small-3"></div>
-             <div class="pad small-4"></div>
-           </div>
+             <div class="paw-print-4">
+               <div class="pad large"></div>
+               <div class="pad small-1"></div>
+               <div class="pad small-2"></div>
+               <div class="pad small-3"></div>
+               <div class="pad small-4"></div>
+             </div>
            </div>
 
            <div class="align-content" >
@@ -71,6 +71,9 @@ name: "about.vue"
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
+.custom-padding{
+  padding: 8rem 0 3rem 0;
+}
 .paw-print{
   @media (max-width: 768px) {
     display: none;

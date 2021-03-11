@@ -67,9 +67,9 @@
     </div>
   </div>
   <!--  card-section-start   -->
-  <div class="custom-height custom-container custom-card-padding">
+  <div class="custom-height custom-container ">
     <v-row>
-      <v-col cols="12" md="4" sm="12" v-for="(item,i) in cards" :key="i">
+      <v-col cols="12" md="4" sm="12" v-for="(item,i) in cards" :key="i" class="custom-margin">
         <div class="paw-icons-parent">
           <div  class="paw-icon">
             <v-icon  v-for="(icon,j) in item.icons" :key="j" class=" mr-1" :class=" colors[j] ">{{icon}}</v-icon>
@@ -252,7 +252,7 @@ name: "FindPetPro.vue",
   }
 }
 .custom-margin{
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 .custom-padding{
   padding-top: 3rem;
@@ -280,7 +280,7 @@ name: "FindPetPro.vue",
 .search-field-location::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
-  box-shadow: white;
+  box-shadow: unset;
   max-width: 400px;
 }
 .search-field::v-deep .v-label {
