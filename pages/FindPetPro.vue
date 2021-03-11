@@ -259,7 +259,7 @@ name: "FindPetPro.vue",
 }
 
 .banner-description{
-  max-width: 550px;
+  max-width: 650px;
 }
 .bg-review-img{
   background-image: url("/images/Great-Dane-Background.png");
@@ -274,13 +274,13 @@ name: "FindPetPro.vue",
 .search-field::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
-  box-shadow: white;
+  box-shadow: unset !important;
   max-width: 200px;
 }
 .search-field-location::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
-  box-shadow: unset;
+  box-shadow: unset !important;
   max-width: 400px;
 }
 .search-field::v-deep .v-label {
