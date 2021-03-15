@@ -71,8 +71,11 @@
           </v-col>
         </v-row>
     </v-footer>
-    <div class="copy-rights ">
-      <h2 class="copy-rights-text">{{ $t('copy_right') }} | {{ $t('terms') }} | {{ $t('privacy') }}</h2>
+    <div class="copy-rights  ">
+      <div class="custom-container">
+        <p class="copy-rights-text">{{ $t('copy_right') }} | {{ $t('terms') }} | {{ $t('privacy') }}</p>
+
+      </div>
       <div class="footer-color"></div>
     </div>
 

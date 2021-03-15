@@ -1,10 +1,11 @@
 <template>
-  <div class="custom-container center-center custom-padding bg-review-img">
+<div class="bg-review-img">
+  <div class="custom-container center-center custom-padding ">
       <div class="text-center">
         <h2 class="heading  line-height ">{{ $t('product_reviews') }}</h2>
       </div>
       <div class="space banner-description">
-        <p>{{ $t('search_database_description') }}</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
       </div>
       <!--   Filter Section Start     -->
       <v-form>
@@ -29,7 +30,7 @@
             <v-select
               class="search-field mt-2"
               :items="category"
-              :label="$t('select_category')"
+              :label="$t('all')"
               v-model="form.category"
               outlined
               rounded
@@ -64,6 +65,7 @@
 
 
   </div>
+</div>
 </template>
 
 <script>
@@ -87,21 +89,27 @@ data(){
 @import "~/assets/sass/main.scss";
 .bg-review-img{
   background-image: url("/images/Reviews/Reviews-Banner.png");
-  background-position: 10% 90%;
+  background-position: 10% 53%;
   background-size: cover;
   background-repeat: no-repeat;
-  @media (max-width: 767px) {
+  @media (max-width: 1440px) {
+    background-position:10% 82%;
+  }
+  @media (max-width: 1024px) {
+    background-position: 10% 175%;
+  }
+  @media (max-width: 768px) {
     background-image: none !important;
   }
 }
 
 .banner-description{
-  max-width: 450px;
+  max-width: 550px;
 }
 .search-field::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
-  box-shadow: unset;
+   box-shadow: unset !important;
   max-width: 170px;
 }
 .search-field::v-deep .v-label {
