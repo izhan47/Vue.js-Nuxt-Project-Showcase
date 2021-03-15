@@ -8,16 +8,12 @@
             <v-col col="12" md="12" sm="12">
               <v-card
                 class="mx-auto my-12 card-radius">
-
-                  <VueSlickCarousel class="custom-padding " v-bind="settings">
+                  <VueSlickCarousel class="custom-padding slick-dots" v-bind="settings">
                     <div class="" v-for="item in banners">
                       <img class="image-slider img-fluid " :src="item">
                     </div>
                   </VueSlickCarousel>
-
-
-
-                <v-card-title class="card-heading display mb-5">{{ $t('slide_heading') }}</v-card-title>
+                <v-card-title class="card-heading display mb-5 mt-5">{{ $t('slide_heading') }}</v-card-title>
                 <v-card-text  class="center-align ">
                   <p class="card-description">{{ $t('slide_description_1') }}</p>
                 </v-card-text>
@@ -78,6 +74,11 @@ export default {
   padding: 40px 30px 0 30px;
  margin: auto;
   max-width: 800px;
+}
+.slick-dots{
+  @media (max-width: 321px) {
+    padding: 12px 0 12px 0;
+  }
 }
 .slide-section{
   max-width: 1140px;

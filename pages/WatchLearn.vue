@@ -31,7 +31,7 @@
             <v-select
               class="search-field mt-2"
               :items="category"
-              :label="$t('select_category')"
+              :label="$t('all')"
               v-model="form.category"
               outlined
               rounded
@@ -158,9 +158,13 @@ name: "WatchLearn.vue",
 }
 .bg-review-img{
   background-image: url("/images/WatchLearn/Pink-Dog-Running-Banner-1.png");
-  background-position:10% 33%;
+  //background-position:10% 33%;
+  background-position: bottom -51px left 29px;
   background-size: cover;
   background-repeat: no-repeat;
+  @media (max-width: 1440px) {
+    background-position:bottom -34px left 15px;
+  }
   @media (max-width: 767px) {
     background-image: none !important;
   }

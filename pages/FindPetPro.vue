@@ -1,5 +1,5 @@
 <template>
-<div class="find_pro_section">
+<div class="find_pro_section ">
   <div class="bg-review-img">
     <div class="custom-container custom-padding" >
         <div class="text-center">
@@ -67,7 +67,7 @@
     </div>
   </div>
   <!--  card-section-start   -->
-  <div class="custom-height custom-container ">
+  <div class="custom-height custom-container space">
     <v-row>
       <v-col cols="12" md="4" sm="12" v-for="(item,i) in cards" :key="i" class="custom-margin">
         <div class="paw-icons-parent">
@@ -260,13 +260,22 @@ name: "FindPetPro.vue",
 
 .banner-description{
   max-width: 650px;
+  @media (max-width: 1024px) {
+    max-width: 420px;
+  }
 }
 .bg-review-img{
   background-image: url("/images/Great-Dane-Background.png");
-  background-position: 10% 33%;
-  background-size: cover;
+  background-position: 210px -50px;
+  background-size: 75% auto;
   background-repeat: no-repeat;
-  @media (max-width: 767px) {
+  @media (max-width: 1440px) {
+    background-position:237px -37px;
+  }
+  @media (max-width: 1024px) {
+    background-position:280px -30px;
+  }
+  @media (max-width: 768px) {
     background-image: none !important;
   }
 }
