@@ -11,41 +11,33 @@
       <v-form>
         <div class="search-form-filter">
           <div class="search-form-field">
-            <div class="search-filter-label">
-              <label class="ml-4 ">{{ $t('sort_by') }}</label>
-            </div>
+            <label>{{ $t('sort_by') }}</label>
             <v-select
               class="search-field mt-2"
               :items="sorting"
-              :label="$t('sorting')"
-              v-model="form.category"
+              v-model="sorting[0]"
               outlined
               rounded
             ></v-select>
           </div>
           <div class="search-form-field">
-            <div class="filter-label">
-              <label class="ml-4 ">{{ $t('category') }}</label>
-            </div>
+            <label >{{ $t('category') }}</label>
             <v-select
               class="search-field mt-2"
               :items="category"
-              :label="$t('all')"
-              v-model="form.category"
+              v-model="category[0]"
               outlined
               rounded
             ></v-select>
           </div>
           <div class="search-form-field">
-            <div class="filter-label">
-              <label class="ml-4">{{ $t('keyword') }}</label>
-            </div>
+            <label >{{ $t('keyword') }}</label>
             <v-text-field
               class="search-field  mt-2"
               :placeholder="$t('all')"
               v-model="form.keyword"
               solo
-              clearable
+              color="#00afaa"
               rounded
               outlined
             ></v-text-field>
@@ -73,11 +65,11 @@ export default {
 name: "reviews.vue",
 data(){
   return{
-    category: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+    category: ['All', 'Bar', 'Fizz', 'Buzz'],
     sorting: ['Latest', 'Oldest'],
     form:{
       category:'',
-      location:'',
+      sorting:'',
       keyword:''
     },
   }
@@ -88,8 +80,9 @@ data(){
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
 .bg-review-img{
-  background-image: url("/images/Reviews/Reviews-Banner.png");
-  background-position: 10% 53%;
+  background-image: url("/images/Reviews/Product-Reviews-Banner-2.png");
+  //background-image: url("/images/Reviews/Reviews-Banner.png");
+  background-position: 10% 56%;
   background-size: cover;
   background-repeat: no-repeat;
   @media (max-width: 1440px) {
@@ -111,7 +104,20 @@ data(){
   min-height: 48px;
    box-shadow: unset !important;
   max-width: 170px;
+  font-weight: bold;
+  font-family: 'Nunito Sans', sans-serif;
+  .v-text-field__slot{
+    font-weight: bold;
+  }
+  fieldset{
+    color: rgba(0, 0, 0, 0.7) !important;
+  }
+  //.v-input__append-inner{
+  //  margin-top: 0;
+  //}
 }
+
+
 .search-field::v-deep .v-label {
   top:14px;
 }

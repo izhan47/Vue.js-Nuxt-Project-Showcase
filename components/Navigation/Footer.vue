@@ -96,7 +96,7 @@ export default {
       ],
       company: [
         { title: this.$i18n.t('about_us'), to:'/about'},
-        { title: this.$i18n.t('Contact'), to:'/'},
+        { title: this.$i18n.t('Contact'), to:'/Contact'},
       ],
       social_accounts: [
         {title: this.$i18n.t('blog'),to: '/blog',},

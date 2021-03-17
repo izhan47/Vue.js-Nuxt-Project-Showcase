@@ -1,72 +1,64 @@
 <template>
-<div class="watch_and_learn_section">
-  <div class="bg-review-img">
-    <div class="custom-container center-center custom-padding ">
-      <div class="text-center">
-        <h2 class="heading  line-height ">{{ $t('watch_and_learn') }}</h2>
-      </div>
-      <div class=" banner-description">
-        <p>{{ $t('watch_learn_description') }}</p>
-      </div>
-      <!--   Filter Section Start     -->
-      <v-form class="custom-margin">
-        <div class="search-form-filter">
-          <div class="search-form-field">
-            <div class="search-filter-label">
-              <label class="ml-4 ">{{ $t('sort_by') }}</label>
-            </div>
-            <v-select
-              class="search-field mt-2"
-              :items="sorting"
-              :label="$t('sorting')"
-              v-model="form.category"
-              outlined
-              rounded
-            ></v-select>
-          </div>
-          <div class="search-form-field">
-            <div class="filter-label">
-              <label class="ml-4 ">{{ $t('category') }}</label>
-            </div>
-            <v-select
-              class="search-field mt-2"
-              :items="category"
-              :label="$t('all')"
-              v-model="form.category"
-              outlined
-              rounded
-            ></v-select>
-          </div>
-          <div class="search-form-field">
-            <div class="filter-label">
-              <label class="ml-4">{{ $t('keyword') }}</label>
-            </div>
-            <v-text-field
-              class="search-field  mt-2"
-              :placeholder="$t('all')"
-              v-model="form.keyword"
-              solo
-              clearable
-              rounded
-              outlined
-            ></v-text-field>
-          </div>
-          <div >
-            <v-btn
-              class="purple-section  search-btn"
-              outlined
-              large
-            >
-              {{ $t('search') }}
-            </v-btn>
-          </div>
+  <div class="watch_and_learn_section">
+    <div class="bg-review-img">
+      <div class="custom-container center-center custom-padding ">
+        <div class="text-center">
+          <h2 class="heading  line-height ">{{ $t('watch_and_learn') }}</h2>
         </div>
-      </v-form>
-      <!--   Filter Section End     -->
+        <div class=" banner-description">
+          <p>{{ $t('watch_learn_description') }}</p>
+        </div>
+        <!--   Filter Section Start     -->
+        <v-form class="custom-margin">
+          <div class="search-form-filter">
+            <div class="search-form-field">
+              <label>{{ $t('sort_by') }}</label>
+              <v-select
+                class="search-field mt-2"
+                :items="sorting"
+                v-model="sorting[0]"
+                outlined
+                rounded
+              ></v-select>
+            </div>
+            <div class="search-form-field">
+                <label >{{ $t('category') }}</label>
+              <v-select
+                class="search-field mt-2"
+                :items="category"
+                v-model="category[0]"
+                outlined
+                rounded
+              ></v-select>
+            </div>
+            <div class="search-form-field">
+              <label >{{ $t('keyword') }}</label>
+              <v-text-field
+                class="search-field  mt-2"
+                :placeholder="$t('all')"
+                v-model="form.keyword"
+                color="#00afaa"
+                solo
+                rounded
+                outlined
+              ></v-text-field>
+            </div>
+            <div >
+              <v-btn
+                class="purple-section  search-btn"
+                outlined
+                large
+              >
+                {{ $t('search') }}
+              </v-btn>
+            </div>
+          </div>
+        </v-form>
+        <!--   Filter Section End     -->
+      </div>
     </div>
-  </div>
-  <!--  card-section-start   -->
-  <div class="custom-container  space">
+    <!--  card-section-start   -->
+    <div class="custom-container  space">
       <v-row>
         <v-col cols="12" md="4" sm="12" v-for="(item,i) in cards" :key="i" class="custom-margin">
           <v-img
@@ -86,17 +78,18 @@
           </v-card>
         </v-col>
       </v-row>
+    </div>
+    <!--  card-section-end   -->
   </div>
-  <!--  card-section-end   -->
-</div>
+
 </template>
 
 <script>
 export default {
-name: "WatchLearn.vue",
+name: "index.vue",
   data(){
     return{
-      category: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+      category: ['All', 'Bar', 'Fizz', 'Buzz'],
       sorting: ['Latest', 'Oldest'],
       form:{
         category:'',
@@ -135,15 +128,11 @@ name: "WatchLearn.vue",
           name:"4 Steps to Take After Bringing Home Your New Pup",
           description:"Pet Adoption",
         },
-
-
-
       ],
     }
   }
 }
 </script>
-
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
@@ -185,7 +174,7 @@ name: "WatchLearn.vue",
   font-weight: 500;
 }
 .card-img {
- min-height: 285px;
+  min-height: 285px;
 }
 .custom-margin{
   margin-top: 2rem;
@@ -196,6 +185,14 @@ name: "WatchLearn.vue",
   min-height: 48px;
   box-shadow: unset !important;
   max-width: 170px;
+  font-weight: bold;
+  font-family: 'Nunito Sans', sans-serif;
+  .v-text-field__slot{
+    font-weight: bold;
+  }
+  //fieldset{
+  //  color: rgba(0, 0, 0, 0.7) !important;
+  //}
 }
 
 .search-field::v-deep .v-label {

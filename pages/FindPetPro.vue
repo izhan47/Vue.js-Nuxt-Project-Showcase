@@ -12,26 +12,22 @@
         <v-form class="custom-margin">
           <div class="search-form-filter">
             <div class="search-form-field">
-              <div class="search-form-label">
-                <label class="ml-4 ">{{ $t('category') }}</label>
-              </div>
+              <label>{{ $t('category') }}</label>
               <v-select
                 class="search-field mt-2"
                 :items="category"
-                :label="$t('select_category')"
-                v-model="form.category"
+                v-model="category[0]"
                 outlined
                 rounded
               ></v-select>
             </div>
             <div class="search-form-field">
-              <div class="search-form-label">
-                <label class="ml-4">{{ $t('location') }}</label>
-              </div>
+             <label>{{ $t('location') }}</label>
               <v-text-field
                 class="search-field-location  mt-2"
                 :placeholder="$t('all')"
                 v-model="form.location"
+                color="#00afaa"
                 solo
                 clearable
                 rounded
@@ -39,15 +35,14 @@
               ></v-text-field>
             </div>
             <div class="search-form-field">
-              <div class="search-form-label">
-                <label class="ml-4">{{ $t('keyword') }}</label>
-              </div>
+              <label>{{ $t('keyword') }}</label>
+
               <v-text-field
                 class="search-field  mt-2"
                 :placeholder="$t('all')"
                 v-model="form.keyword"
+                color="#00afaa"
                 solo
-                clearable
                 rounded
                 outlined
               ></v-text-field>
@@ -265,7 +260,7 @@ name: "FindPetPro.vue",
   }
 }
 .bg-review-img{
-  background-image: url("/images/Great-Dane-Background.png");
+  background-image: url("/images/Great-Dane-Background-1.png");
   background-position: 210px -50px;
   background-size: 75% auto;
   background-repeat: no-repeat;
@@ -285,12 +280,28 @@ name: "FindPetPro.vue",
   min-height: 48px;
   box-shadow: unset !important;
   max-width: 200px;
+  font-weight: bold;
+  font-family: 'Nunito Sans', sans-serif;
+  .v-text-field__slot{
+    font-weight: bold;
+  }
+  //fieldset{
+  //  color: rgba(0, 0, 0, 0.7) !important;
+  //}
 }
 .search-field-location::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
   box-shadow: unset !important;
   max-width: 400px;
+  font-weight: bold;
+  font-family: 'Nunito Sans', sans-serif;
+  .v-text-field__slot{
+    font-weight: bold;
+  }
+  //fieldset{
+  //  color: rgba(0, 0, 0, 0.7) !important;
+  //}
 }
 .search-field::v-deep .v-label {
   top:14px;

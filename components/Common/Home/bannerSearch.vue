@@ -93,7 +93,7 @@ export default {
   margin-top:2rem;
   text-align: center;
   img{
-    max-height: 280px;
+    max-height: 255px;
   }
 }
 </style>
