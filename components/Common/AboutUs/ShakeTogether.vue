@@ -63,33 +63,33 @@ export default {
 }
 .shake-img{
   border-radius: 50px 0 50px 0;
-  box-shadow:0 12px 20px 10px rgba(0, 0, 0, 0.07);
+  box-shadow:0 12px 20px 10px $text-shadow-secondary;
   max-width: 450px;
   @media (max-width: 1024px) {
     max-width: 100%;
   }
 }
 .shake-section-heading{
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: bold;
-  font-size: 20px;
-  text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
+  font-family:  $font-family-primary;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-20;
+  text-shadow: -3px 2px 5px $text-shadow-primary;
   color:$black;
-  text-transform: capitalize;
+  text-transform: $text-transform-capitalize;
 }
 .shake-section-subheading{
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 40px;
+  font-family:  $font-family-primary;
+  font-weight:  $font-weight-600;
+  font-size: $font-size-40;
   color: $green;
 }
 .description{
   max-width: 500px;
   p{
     color: $black;
-    font-family: 'Nunito Sans', sans-serif;
-    font-weight: 400;
-    font-size: 16px;
+    font-family:  $font-family-primary;
+    font-weight: $font-weight-400;
+    font-size: $font-size-16;
   }
 }
 

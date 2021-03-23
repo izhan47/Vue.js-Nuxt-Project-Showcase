@@ -90,7 +90,7 @@ export default {
     return{
       products: [
         // { title: 'Home', path: '/home', icon: 'home' },
-        { title: this.$i18n.t('find_a_pet_pro'), to:'/FindPetPro'},
+        { title: this.$i18n.t('find_a_pet_pro'), to:'/PetCategory'},
         { title: this.$i18n.t('product_reviews'), to:'/reviews'},
         { title: this.$i18n.t('watch_and_learn'), to:'/WatchLearn'},
       ],

@@ -58,7 +58,7 @@ export default {
 }
 .search-btn::v-deep.v-btn{
   color: $white;
-  text-transform: capitalize;
+  text-transform: $text-transform-capitalize;
   padding-right: 1rem;
   border-radius: 0;
   height: 56px;
@@ -75,9 +75,9 @@ export default {
   overflow: hidden;
 }
 .search-form-input{
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
+  font-family:  $font-family-primary;
+  font-weight: $font-weight-400;
+  font-size: $font-size-16;
   width: 100%;
   padding: 15px;
   display: inline-block;

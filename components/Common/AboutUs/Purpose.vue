@@ -5,12 +5,12 @@
         <v-row justify="center">
           <v-col cols="12" md="10" sm="12"  >
             <div class="purpose">
-              <div class="center-align mt-5 mb-5">
+              <div class="text-center mt-5 mb-5">
                 <h2 class="heading">{{ $t('our_purpose') }} </h2>
               </div>
               <v-row justify="center">
                 <v-col col="3" md="3" sm="3">
-                  <div class="center-align mt-5 mb-5">
+                  <div class="text-center mt-5 mb-5">
                     <img class="img-fluid " src="/images/About/wag.png" alt="">
                   </div>
                 </v-col>
@@ -46,7 +46,7 @@ name: "Purpose.vue"
 }
 .heading{
   color:$white;
-  font-size: 40px;
+  font-size:$font-size-40;
 }
 .description{
   max-width: 800px;
@@ -55,17 +55,11 @@ name: "Purpose.vue"
   width: 100%;
   p{
     color:$white;
-    font-weight: 400;
-    font-size: 16px;
+    font-weight: $font-weight-400;
+    font-size: $font-size-16;
   }
 }
-.icon_divider{
-  width:100%;
-  color: #00AFAA;
-  font-weight: 1.8;
-  gap: 5px;
-  //margin: 0 100px 0 100px;
-}
+
 .icon{
   color: $white;
   letter-spacing:18px

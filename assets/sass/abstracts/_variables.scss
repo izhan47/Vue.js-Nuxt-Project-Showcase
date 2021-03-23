@@ -9,9 +9,6 @@ $spacer-lg: ($spacer * 2);
 /*========================================================
         COLORS
 =========================================================*/
-
-
-
 $primary: #2ba8f5;
 $success: #28c76f;
 $danger: #ea5455;
@@ -19,21 +16,84 @@ $warning: #ff9f43;
 $dark: #1e1e1e;
 //$grey: #b8c2cc;
 //$grey-light: #dae1e7;
-$white: #fff;
+$white: #ffffff;
 
 
 $purple: #332e80;
 $pink: #ff8189;
 $green: #00afaa;
 $mint: #afe2e3;
-$puppy_love_pink: #f5c2cb;
+$puppy-love-pink: #f5c2cb;
 $black: #323638;
 $grey-light:#F7F7F7;
 $grey:#535353;
 $blue:#270089;
-$dark-grey:#ADADAD;
+$silver-chalice:#ADADAD;
 $matterhorn:#4d4d4d;
+$dark-grey:#a7a7a7;
 
-/*=========================================== =============
-        TYPOGRAPHY
+$mostly-black:#141313;
+
+/*========================================================
+        Font Family
 =========================================================*/
+$font-family-primary : 'Nunito Sans', sans-serif;
+
+/*========================================================
+        Font Size
+=========================================================*/
+$font-size-65: 65px;
+$font-size-60: 60px;
+$font-size-55: 55px;
+$font-size-50: 50px;
+$font-size-45: 45px;
+$font-size-40: 40px;
+$font-size-35: 35px;
+$font-size-30: 30px;
+$font-size-28: 28px;
+$font-size-24: 24px;
+$font-size-25: 25px;
+$font-size-20: 20px;
+$font-size-18: 18px;
+$font-size-17: 17px;
+$font-size-16: 16px;
+$font-size-15: 15px;
+$font-size-14: 14px;
+$font-size-13: 13px;
+$font-size-12: 12px;
+$font-size-10: 10px;
+
+/*========================================================
+        Font Weight
+=========================================================*/
+$font-weight-bold: bold;
+$font-weight-700: 700;
+$font-weight-600: 600;
+$font-weight-550: 550;
+$font-weight-500: 500;
+$font-weight-400: 400;
+$font-weight-300: 300;
+
+
+/*========================================================
+        Text-shadow
+=========================================================*/
+
+$text-shadow-primary: rgba(0, 0, 0, 0.09);
+$text-shadow-secondary:rgba(0, 0, 0, 0.07);
+
+
+/*========================================================
+          Text-Transform
+=========================================================*/
+$text-transform-capitalize:capitalize;
+$text-transform-inherit:inherit;
+$text-transform-uppercase:uppercase;
+$text-transform-initial:initial;
+
+
+/*========================================================
+        Img Height
+=========================================================*/
+$img-max-height-125:125px
+

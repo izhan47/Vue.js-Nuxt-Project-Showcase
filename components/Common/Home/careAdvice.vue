@@ -14,7 +14,7 @@
            </v-btn>
 
           <v-btn v-if="items.length>10 && end !== items.length"
-                 class="primary-color see-more-btn"
+                 class=" see-more-btn"
                  text
                  @click="seeMore()"
           >
@@ -23,7 +23,7 @@
 
       </div>
 
-      <div class="center-align">
+      <div class="text-center">
         <v-btn
           v-if="end !== items.length"
           class="browse-btn  mt-4 mb-4"
@@ -89,38 +89,39 @@ export default {
   flex-wrap: wrap;
   margin: auto;
   .category-button{
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 15px;
+    font-family:  $font-family-primary;
+    font-size: $font-size-15;
     margin-right: 1.5rem;
     margin-bottom: 1.5rem;
     color: $black;
     background-color: $white;
-    text-transform: capitalize;
+    text-transform: $text-transform-capitalize;
     border-width: 3px;
     border-color: $grey;
     border-style: solid;
-    font-weight: bold;
+    font-weight: $font-weight-bold;
     //border-radius: 10px 10px 10px 10px;
   }
 }
 .see-more-btn{
   margin-bottom: 1.5rem;
   text-transform: inherit;
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 15px;
-  font-weight: 700;
+  font-family:  $font-family-primary;
+  font-size: $font-size-15;
+  font-weight: $font-weight-700;
+  color: $purple;
 }
 .browse-btn{
   color: $purple;
   background-color: $white;
-  text-transform: capitalize;
+  text-transform: $text-transform-capitalize;
   border-width: 2px;
   border-color: $grey;
   border-style: solid;
   border-radius: 10px 10px 10px 10px;
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 15px;
-  font-weight: bold;
+  font-family:  $font-family-primary;
+  font-size: $font-size-15;
+  font-weight: $font-weight-bold;
 
 }
 .browse-btn:hover{

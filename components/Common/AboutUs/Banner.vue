@@ -1,7 +1,7 @@
 <template>
   <div class="custom-container py-10  " >
     <div class="section-align-center">
-      <div class="center-align"  data-aos="slide-down"
+      <div class="text-center"  data-aos="slide-down"
            data-aos-easing="linear"
            data-aos-duration="2500" >
         <img class="img-height img-fluid" src="/images/Pink-Paw.png" alt="logo">
@@ -45,7 +45,7 @@ name: "aboutBanner.vue"
 .divider{
   width:100%;
   height:1px;
-  background:$dark-grey;
+  background:$silver-chalice;
   margin:10px 0;
 }
 

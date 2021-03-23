@@ -2,7 +2,7 @@
   <div class="grey-section">
     <div class="custom-container">
       <div class="pusher-section">
-        <div class="center-align mb-5">
+        <div class="text-center mb-5">
           <h2 class="heading line-height ">{{ $t('pawsitivity_pushers') }} </h2>
         </div>
         <v-row justify="center">
@@ -81,7 +81,7 @@ data(){
   color: $white;
   padding: 30px;
   //margin: 0 15px 0 15px;
-  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+  text-shadow: 0 10px 20px $text-shadow-secondary;
   border-radius: 10px;
   height: 100%;
 }
@@ -102,15 +102,15 @@ data(){
 }
 .card-heading{
   color: $green;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 30px;
+  font-family:  $font-family-primary;
+  font-weight: $font-weight-600;
+  font-size: $font-size-30;
 }
 .card-description{
   color: $black;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
+  font-family:  $font-family-primary;
+  font-weight:  $font-weight-400;
+  font-size: $font-size-16;
   line-height: 25px;
 }
 

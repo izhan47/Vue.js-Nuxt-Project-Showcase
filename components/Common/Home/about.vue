@@ -82,11 +82,11 @@ name: "about.vue"
 
 .about-heading{
   color:$purple;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 45px;
-  text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
-  text-transform: capitalize;
+  font-family:  $font-family-primary;
+  font-weight: $font-weight-600;
+  font-size: $font-size-45;
+  text-shadow: -3px 2px 5px $text-shadow-primary;
+  text-transform: $text-transform-capitalize;
 }
 .description{
   span{
@@ -109,7 +109,7 @@ name: "about.vue"
 .about-btn{
   color: $purple;
   background-color: $white;
-  font-weight: bold;
+  font-weight: $font-weight-bold;
 }
 
 

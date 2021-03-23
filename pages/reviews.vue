@@ -104,10 +104,10 @@ data(){
   min-height: 48px;
    box-shadow: unset !important;
   max-width: 170px;
-  font-weight: bold;
-  font-family: 'Nunito Sans', sans-serif;
+  font-weight: $font-weight-bold;
+  font-family:$font-family-primary;
   .v-text-field__slot{
-    font-weight: bold;
+    font-weight: $font-weight-bold;
   }
   fieldset{
     color: rgba(0, 0, 0, 0.7) !important;
