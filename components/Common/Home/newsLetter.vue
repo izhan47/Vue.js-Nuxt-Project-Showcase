@@ -44,7 +44,7 @@
                   :label="$t('email')"
                   required
                 ></v-text-field>
-                <div class="center-align">
+                <div class="text-center">
                   <v-btn
                     class=" news-section-btn text-center white-text"
                     text
@@ -132,18 +132,18 @@ export default {
 }
 .news-section-label{
 
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
+  font-family:  $font-family-primary;
+  font-weight: $font-weight-400;
+  font-size:$font-size-16;
   background-color: #FFFFFF00;
 
 }
 .news-section-btn{
   color:$white;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 500;
-  font-size: 30px;
-  text-transform: capitalize;
+  font-family:  $font-family-primary;
+  font-weight: $font-weight-500;
+  font-size: $font-size-30;
+  text-transform: $text-transform-capitalize;
   margin-bottom: 2rem;
   letter-spacing: 0;
 }

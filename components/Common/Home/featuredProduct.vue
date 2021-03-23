@@ -56,9 +56,9 @@ export default {
 }
 
 .product-section-subheading{
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 700;
-  font-size: 15px;
+  font-family:  $font-family-primary;
+  font-weight: $font-weight-700;
+  font-size: $font-size-15;
   color: $purple;
 }
 .heading{
@@ -71,9 +71,9 @@ export default {
 .product-section-btn{
   color: $purple;
   background-color: $white;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: bold;
-  font-size: 16px;
+  font-family:  $font-family-primary;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-16;
 }
 .product-section-btn:hover{
   color: $white;

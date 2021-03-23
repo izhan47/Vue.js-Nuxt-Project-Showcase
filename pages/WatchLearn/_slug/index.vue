@@ -1,7 +1,7 @@
 <template>
 <div class="watch-learn-detail-section">
   <div class="bg-img-watch-detail">
-    <div class="custom-container text-center">
+    <div class="custom-container align-center">
       <img class="img-fluid img-height" src="/images/WatchLearn/pic-2.jpg" alt="">
     </div>
   </div>
@@ -25,15 +25,15 @@
         </div>
           <v-btn color="#ff8189" class=" ma-2 white--text" rounded>
             <v-icon left dark>mdi-facebook</v-icon>
-            FACEBOOK
+            {{ $t('facebook')}}
           </v-btn>
-          <v-btn color="#ff8189" class="ma-2 white--text" rounded>
+          <v-btn color="#ff8189" class=" ma-2 white--text" rounded>
             <v-icon left dark>mdi-twitter</v-icon>
-            TWITTER
+            {{ $t('twitter')}}
           </v-btn>
           <v-btn color="#ff8189" class="ma-2 white--text" rounded>
             <v-icon left dark>mdi-linkedin</v-icon>
-            LINKEDIN
+            {{ $t('linkedin')}}
           </v-btn>
 
 
@@ -42,7 +42,7 @@
           Here’s a look at some fun exercises and activities to keep your pup fit and how to know if he’s getting enough exercise each day.</p>
 
         <h2 class="img-heading mb-4">Ways to Keep Your Dog Fit:</h2>
-        <img src="/images/WatchLearn/dog-water.jpeg" alt="">
+        <img class="img-fluid" src="/images/WatchLearn/dog-water.jpeg" alt="">
         <p class="description space">Taking your dog for an evening walk is a great place to start, and that might be all your dog needs if he’s a senior with lower exercise needs. But keep in mind that even the most dedicated couch potato will appreciate some variety every now and then! Here are some fun exercises and activities to incorporate into your pup’s regular routine.</p>
 
         <h3 class="heading-description">Cycling</h3>
@@ -51,11 +51,11 @@
         <h3 class="heading-description">Swimming</h3>
         <p class="description space">If there’s one thing many dogs love more than going for a walk, it’s swimming. Dogs love the water and it’s a fantastic way to burn off some of that pent-up energy when the weather is hot. It’s also a low impact, so it’s safe for dogs with joint issues. A doggie life vest eliminates any worry of your dog staying afloat if you’re not sure about his swimming abilities.</p>
 
-        <hr class="new3">
+        <hr class="dot-line">
 
         <div class="comment-section">
-          <h2 class="comment-section-heading text-center space">Comments</h2>
-          <h2 class="comment-section-heading text-center mb-5">Leave  A Comment</h2>
+          <h2 class="comment-section-heading text-center space">{{ $t('comments')}}</h2>
+          <h2 class="comment-section-heading text-center mb-5">{{ $t('leave_a_comment')}}</h2>
           <v-textarea
             outlined
             name="input-7-4"
@@ -63,7 +63,7 @@
             value=""
           ></v-textarea>
           <div class="text-center">
-            <v-btn large class=" submit-btn white-text" outlined rounded > {{ $t('submit') }}</v-btn>
+            <v-btn large class=" submit-btn" outlined rounded > {{ $t('submit') }}</v-btn>
 
           </div>
         </div>
@@ -75,7 +75,7 @@
   <!--  card-section-start   -->
   <div class="custom-container  space">
     <div class="text-center">
-      <h1 class="card-section-title">Related Topics</h1>
+      <h1 class="card-section-title">{{ $t('related_topics')}}</h1>
     </div>
 
     <v-row>
@@ -136,9 +136,11 @@ export default {
 .bg-img-watch-detail{
   background-color: transparent;
   background-image: linear-gradient( 180deg, $black 0%, rgba(0,0,0,0) 100%);
-  opacity: 0.5;
   transition: background 0.3s,
   border-radius 0.3s, opacity 0.3s;
+}
+.align-center{
+  text-align: center;
 }
 .img-height{
   max-height: 500px;
@@ -159,58 +161,59 @@ export default {
   }
   h2{
     color:$purple;
-    font-family: 'Nunito Sans', sans-serif;
-    font-weight: 600;
-    font-size: 18px;
+    font-family: $font-family-primary;
+    font-weight:$font-weight-600;
+    font-size: $font-size-18;
     text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
-    text-transform: capitalize;
+    text-transform: $text-transform-capitalize;
     margin-bottom: 15px;
   }
   p{
     color: $black;
-    font-family: 'Nunito Sans', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
+    font-family: $font-family-primary;
+    font-weight:$font-weight-600;
+    font-size: $font-size-13;
     line-height: 1.7em;
+    max-width: 250px;
   }
 }
 .tag{
   span{
     color: $green;
-    font-size: 15px;
-    font-family: 'Nunito Sans', sans-serif;
-    font-weight: 600;
+    font-size:$font-size-15;
+    font-family: $font-family-primary;
+    font-weight:$font-weight-600;
   }
 }
 .heading{
   margin-bottom: 20px;
   h1{
-    font-size: 40px;
-    font-weight: 600;
+    font-size: $font-size-40;
+    font-weight:$font-weight-600;
     text-shadow: -3px 2px 5px rgb(0 0 0 / 9%);
   }
 }
 .social-btn::v-deep .v-btn__content{
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
+  font-family: $font-family-primary;
+  font-size: $font-size-10;
+  font-weight:$font-weight-600;
+  text-transform: $text-transform-uppercase;
 }
 .description{
   line-height: 2em;
-  font-weight: 500;
+  font-weight: $font-weight-500;
 }
 .img-heading{
   color:$purple;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 300;
-  font-size: 30px;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-300;
+  font-size: $font-size-30;
   text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
 }
 .heading-description{
   color: $purple;
   font-size: 1.5625rem;
-  font-weight: 500;
+  font-weight: $font-weight-500;
   text-shadow: -3px 2px 5px rgb(0 0 0 / 9%);
   line-height: 1.4;
 }
@@ -222,23 +225,24 @@ export default {
   padding-top: 5rem;
 }
 .comment-section-heading{
-  color: #270089;
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 45px;
-  font-weight: 600;
-  text-transform: capitalize;
+  color: $blue;
+  font-family: $font-family-primary;
+  font-size: $font-size-45;
+  font-weight:$font-weight-600;
+  text-transform: $text-transform-capitalize;
 }
 
 .submit-btn::v-deep.v-btn{
   min-width: 140px;
   height: 52px;
   padding: 0 75px 0 75px;
-  text-transform: capitalize;
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
+  text-transform: $text-transform-capitalize;
+  font-family: $font-family-primary;
+  font-size: $font-size-15;
+  font-weight:$font-weight-600;
   letter-spacing: unset;
-  background-color: #270089;
+  background-color: $purple;
+  color: $white;
 }
 .round-btn{
   border-style: solid;
@@ -250,16 +254,16 @@ export default {
 
 
 /* Dotted red border */
-hr.new3 {
+hr.dot-line {
   border-top: 1px dotted $black;
 }
 
 .card-section-title{
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 50px;
-  font-weight: 600;
+  font-family: $font-family-primary;
+  font-size: $font-size-50;
+  font-weight:$font-weight-600;
   text-shadow: -3px 2px 5px rgb(0 0 0 / 9%);
-  text-transform: capitalize;
+  text-transform: $text-transform-capitalize;
   color: $purple;
   margin-top: 6rem;
 
@@ -275,15 +279,15 @@ hr.new3 {
 }
 .card-heading{
   h2{
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 24px;
-    font-weight: bold;
+    font-family: $font-family-primary;
+    font-size: $font-size-24;
+    font-weight: $font-weight-bold;
   }
 }
 .card-description{
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 15px;
-  font-weight: 500;
+  font-family: $font-family-primary;
+  font-size: $font-size-15;
+  font-weight: $font-weight-500;
 }
 .card-img {
   min-height: 285px;

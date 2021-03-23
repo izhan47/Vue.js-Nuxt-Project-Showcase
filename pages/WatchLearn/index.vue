@@ -163,15 +163,15 @@ name: "index.vue",
 }
 .card-heading{
   h2{
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 24px;
-    font-weight: bold;
+    font-family: $font-family-primary;
+    font-size: $font-size-24;
+    font-weight: $font-weight-bold;
   }
 }
 .card-description{
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 15px;
-  font-weight: 500;
+  font-family: $font-family-primary;
+  font-size: $font-size-15;
+  font-weight: $font-weight-500;
 }
 .card-img {
   min-height: 285px;
@@ -185,10 +185,10 @@ name: "index.vue",
   min-height: 48px;
   box-shadow: unset !important;
   max-width: 170px;
-  font-weight: bold;
-  font-family: 'Nunito Sans', sans-serif;
+  font-weight: $font-weight-bold;
+  font-family: $font-family-primary;
   .v-text-field__slot{
-    font-weight: bold;
+    font-weight: $font-weight-bold;
   }
   //fieldset{
   //  color: rgba(0, 0, 0, 0.7) !important;

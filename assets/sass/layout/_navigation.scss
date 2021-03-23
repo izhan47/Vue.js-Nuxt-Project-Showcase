@@ -2,10 +2,10 @@
 .nav-title{
   color: $purple;
   cursor: pointer;
-  font-family:'Nunito Sans',sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: capitalize;
+  font-family:  $font-family-primary;
+  font-weight: $font-weight-600;
+  font-size: $font-size-16;
+  text-transform: $text-transform-capitalize;
   letter-spacing: 0;
 }
 .nav-title:hover{
@@ -71,9 +71,9 @@
 .sign-in-btn{
   color: $purple;
   text-transform: inherit;
-  font-family:'Nunito Sans',sans-serif;
-  font-size: 16px;
-  font-weight: 600;
+  font-family:  $font-family-primary;
+  font-weight: $font-weight-600;
+  font-size: $font-size-16;
   letter-spacing: 0;
   background-color: $white;
   border-style: solid;

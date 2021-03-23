@@ -19,6 +19,7 @@
   "twitter": "Twitter",
   "instagram": "Instagram",
   "youtube": "YouTube",
+  "pinterest": "Pinterest",
   "terms": "Terms",
   "privacy": "Privacy",
 
@@ -111,11 +112,19 @@
   "pet_pro_description": "Search our database of wag-tastic, top-ranked, local pet care professionals for all of your pet needs.",
 
   "watch_learn_description": "Fetch written blogs and videos designed to improve your relationship with your pet and create a stronger bond based in mutual respect and understanding",
-  "personal_website":"Personal Website"
+  "personal_website":"Personal Website",
+  "comments":"Comments",
+  "leave_a_comment":"Leave A Comment",
+  "related_topics":"Related Topics",
 
-
-
-
-
-
+  "visit_website":"Visit Website",
+  "get_directions":"Get Directions",
+  "address":"1301 CHICON ST #102",
+  "services_offered":"Services Offered",
+  "share":"Share",
+  "events":"Events",
+  "claim":"Claim",
+  "hours_of_operation":"Hours of Operation",
+  "find_more_pet_pros":"Find More Pet Pros",
+  "deals_offered":"Deals Offered"
 }

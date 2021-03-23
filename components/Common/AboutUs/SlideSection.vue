@@ -10,17 +10,17 @@
                 class="mx-auto my-12 card-radius">
                   <VueSlickCarousel class="custom-padding slick-dots" v-bind="settings">
                     <div class="" v-for="item in banners">
-                      <img class="image-slider img-fluid " :src="item">
+                      <img class="image-slider img-fluid " :src="item" />
                     </div>
                   </VueSlickCarousel>
                 <v-card-title class="card-heading display mb-5 mt-5">{{ $t('slide_heading') }}</v-card-title>
-                <v-card-text  class="center-align ">
+                <v-card-text  class="text-center ">
                   <p class="card-description">{{ $t('slide_description_1') }}</p>
                 </v-card-text>
-                <v-card-text class="center-align">
+                <v-card-text class="text-center">
                   <p class="card-description">{{ $t('slide_description_2') }}</p>
                 </v-card-text>
-                <v-card-text class="center-align">
+                <v-card-text class="text-center">
                   <p class="card-description mb-5">{{ $t('slide_description_3') }}</p>
                 </v-card-text>
               </v-card>
@@ -105,9 +105,9 @@ export default {
 }
 .card-heading{
   color:$purple;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 40px;
+  font-family:  $font-family-primary;
+  font-weight: $font-weight-600;
+  font-size:  $font-size-40;
   text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
   //margin: 0 100px 0 100px;
 
@@ -121,9 +121,9 @@ export default {
 }
 .card-description{
   color: $black;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
+  font-family:  $font-family-primary;
+  font-weight:  $font-weight-400;
+  font-size: $font-size-16;
   margin: 0 100px 0 100px;
   @media  (max-width: 425px)  {
     margin-right: auto;

@@ -24,9 +24,7 @@
 /*=========================================== =============
        Section Color
 =========================================================*/
-.menu-item{
-  color: $purple;
-}
+
 .purple-section{
   background-color: $purple;
   color: $white;
@@ -40,29 +38,27 @@
 .pink-section{
   background-color:$pink;
 }
-.white-text{
-  color:$white
-}
-.primary-color{
-  color: $purple;
-}
+//.white-text{
+//  color:$white
+//}
+
 
 /*=========================================== =============
         Heading and Description
 =========================================================*/
 .heading{
   color:$purple;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 40px;
-  text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
-  text-transform: capitalize;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-600;
+  font-size: $font-size-40;
+  text-shadow:-3px 2px 5px  $text-shadow-primary;
+  text-transform: $text-transform-capitalize;
 }
 .description{
   color: $black;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 16px;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-600;
+  font-size: $font-size-16;
   line-height: 1.87;
 }
 
@@ -79,9 +75,7 @@
 /*=========================================== =============
        Alignment
 =========================================================*/
-.center-align{
-  text-align: center;
-}
+
 .left-align{
   text-align: left;
 }
@@ -118,25 +112,19 @@
   top: 13px;
   z-index: 1;
 }
-.paw-purple{
+.paw{
   background-color:$white;
   border-radius: 50%;
   height: 33px;
   width: 33px;
+}
+.paw-purple{
   color:$purple
 }
 .paw-pink{
-  background-color:$white;
-  border-radius: 50%;
-  height: 33px;
-  width: 33px;
   color:$pink
 }
 .paw-green{
-  background-color:$white;
-  border-radius: 50%;
-  height: 33px;
-  width: 33px;
   color:$green
 }
 
@@ -144,14 +132,14 @@
        Button
 =========================================================*/
 .round-btn{
-  font-family:'Nunito Sans',sans-serif;
-  font-size: 16px;
-  font-weight: 600;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-600;
+  font-size: $font-size-16;
+  text-shadow: -3px 2px 5px  $text-shadow-primary;
+  text-transform: $text-transform-capitalize;
   color: $purple;
   background-color: $white;
-  text-transform: capitalize;
   letter-spacing: 0.5px;
-
   border-width: 3px 3px 3px 3px;
   border-color: $purple;
 }
@@ -166,7 +154,7 @@
 .grey-section{
   .card-radius{
     border-radius: 15px;
-    box-shadow: -5px 10px 10px 0px rgb(0 0 0 / 9%);
+    box-shadow: -5px 10px 10px 0px $text-shadow-primary;
   }
 }
 
@@ -194,9 +182,9 @@
 .search-form-field{
   margin-right: 1rem;
   label{
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
+    font-family: $font-family-primary;
+    font-size: $font-size-14;
+    font-weight: $font-weight-400;
     color: $black;
   }
 }
@@ -211,79 +199,91 @@
     margin-bottom: 2rem;
   }
 }
-.banner-description{
+.banner-description {
   max-width: 650px;
   margin: auto;
   text-align: center;
   width: 100%;
   line-height: 1.87;
-  p{
-    font-family: 'Nunito Sans', sans-serif;
+
+  p {
+    font-family: $font-family-primary;
+    font-size: $font-size-17;
+    font-weight: $font-weight-600;
     color: $black;
-    font-weight: 600;
-    font-size: 17px;
   }
 }
-.search-btn{
-  background-color: $blue;
-  color: $white;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 500;
-  font-size: 15px;
-  text-transform: capitalize;
-  border-radius: 100px 100px 100px 100px;
-  padding: 0 50px 0 50px;
-  letter-spacing: 0;
-}
-.custom-card-padding{
-  padding: 3rem 0 3rem 0;
-}
-.card-flex{
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-.card-flex-rating{
-  display: flex;
-  align-items: baseline;
-}
-.card-heading{
-  color: $purple;
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 36px;
-  margin-bottom: 10px;
-  text-transform: capitalize;
-  font-style: normal;
-}
-.card-heading-point{
-  padding-left: 2px;
-  color: $grey;
-  font-size: 15px;
-}
-.card-description{
-  color: $matterhorn;
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.87;
-  font-family: 'Nunito Sans', sans-serif;
-}
-.card-img{
-  max-height :270px;
-  border-radius:10px 10px 0 0;
-}
-.card-btn{
-  padding: 5px 15px 5px 15px;
-  color: $white;
-  text-transform: capitalize;
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 12px;
-  letter-spacing: 0;
-}
-.comment-color{
-  cursor: pointer;
-  color: $green;
-}
+
+  .search-btn {
+    background-color: $blue;
+    color: $white;
+    font-family: $font-family-primary;
+    font-size: $font-size-15;
+    font-weight: $font-weight-500;
+    text-transform: $text-transform-capitalize;
+    border-radius: 100px;
+    padding: 0 50px 0 50px;
+    letter-spacing: 0;
+  }
+
+  .custom-card-padding {
+    padding: 3rem 0 3rem 0;
+  }
+
+  .card-flex {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .card-flex-rating {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .card-heading {
+    color: $purple;
+    font-size: $font-size-28;
+    font-weight: $font-weight-500;
+    line-height: 36px;
+    margin-bottom: 10px;
+    text-transform: $text-transform-capitalize;
+    font-style: normal;
+  }
+
+  .card-heading-point {
+    padding-left: 2px;
+    color: $grey;
+    font-size: $font-size-15;
+  }
+
+  .card-description {
+    color: $matterhorn;
+    font-size: $font-size-15;
+    font-weight: $font-weight-700;
+    line-height: 1.87;
+    font-family: $font-family-primary;
+  }
+
+  .card-img {
+    max-height: 270px;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .card-btn {
+    padding: 5px 15px 5px 15px;
+    color: $white;
+    text-transform: $text-transform-capitalize;
+    font-family: $font-family-primary;
+    font-size: $font-size-12;
+    letter-spacing: 0;
+  }
+
+  .comment-color {
+    cursor: pointer;
+    color: $green;
+  }
+
 
 
 

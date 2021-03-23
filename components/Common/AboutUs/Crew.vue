@@ -71,8 +71,8 @@ data(){
 @import "~/assets/sass/main.scss";
 .heading{
  h2{
-   font-size: 60px;
-   font-weight: 550;
+   font-size: $font-size-60;
+   font-weight: $font-weight-550;
  }
 }
 .space{
@@ -114,26 +114,27 @@ data(){
 .crew-card-heading{
   color: $green;
   text-align: center;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 25px;
+  font-family:  $font-family-primary;
+  font-size: $font-size-25;
+  font-weight: $font-weight-600;
+
   //line-height: 34px;
-  text-transform: uppercase;
+  text-transform: $text-transform-uppercase;
 }
 .crew-card-sub-heading{
   color:  $black ;
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 16px;
+  font-family:  $font-family-primary;
+  font-size: $font-size-16;
   letter-spacing: 5px;
-  font-weight: bold;
+  font-weight: $font-weight-bold;
   text-align: center;
   margin-bottom: 2rem;
 }
 .crew-card-description{
   color: $black;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
+  font-family:  $font-family-primary;
+  font-weight: $font-weight-400;
+  font-size: $font-size-16;
   line-height: 30px;
   //letter-spacing: 1px;
   text-align: center;

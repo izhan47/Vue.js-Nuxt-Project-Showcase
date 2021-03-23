@@ -1,7 +1,7 @@
 <template>
-<div class="find_pro_section ">
-  <div class="bg-review-img">
-    <div class="custom-container custom-padding" >
+  <div class="find_pro_section ">
+    <div class="bg-review-img">
+      <div class="custom-container custom-padding" >
         <div class="text-center">
           <h2 class="heading  line-height ">{{ $t('pet_pro_around_you') }}</h2>
         </div>
@@ -22,7 +22,7 @@
               ></v-select>
             </div>
             <div class="search-form-field">
-             <label>{{ $t('location') }}</label>
+              <label>{{ $t('location') }}</label>
               <v-text-field
                 class="search-field-location  mt-2"
                 :placeholder="$t('all')"
@@ -59,67 +59,67 @@
           </div>
         </v-form>
         <!--   Filter Section End     -->
+      </div>
     </div>
-  </div>
-  <!--  card-section-start   -->
-  <div class="custom-height custom-container space">
-    <v-row>
-      <v-col cols="12" md="4" sm="12" v-for="(item,i) in cards" :key="i" class="custom-margin">
-        <div class="paw-icons-parent">
-          <div  class="paw-icon">
-            <v-icon  v-for="(icon,j) in item.icons" :key="j" class=" mr-1" :class=" colors[j] ">{{icon}}</v-icon>
+    <!--  card-section-start   -->
+    <div class="custom-height custom-container space">
+      <v-row>
+        <v-col cols="12" md="4" sm="12" v-for="(item,i) in cards" :key="i" class="custom-margin">
+          <div class="paw-icons-parent">
+            <div  class="paw-icon">
+              <v-icon  v-for="(icon,j) in item.icons" :key="j" class="paw mr-1" :class=" colors[j] ">{{icon}}</v-icon>
+            </div>
+            <v-img
+              class="img-fluid card-img"
+              :src="item.src"
+            ></v-img>
           </div>
-          <v-img
-            class="img-fluid card-img"
-            :src="item.src"
-          ></v-img>
-        </div>
-        <v-card  class="card-radius card-padding">
-          <v-card-title class="card-title-padding">
-            <div class="card-flex">
-              <h2 class="card-heading">  {{ item.name}}</h2>
-              <div class="card-flex-rating">
-                <v-rating
-                  :value="4"
-                  length="1"
-                  background-color="#00afaa"
-                  color="#00afaa"
-                  dense
-                  readonly
-                  size="20"
-                ></v-rating>
-                <span class="card-heading-point">
+          <v-card  class="card-radius card-padding">
+            <v-card-title class="card-title-padding">
+              <div class="card-flex">
+                <h2 class="card-heading">  {{ item.name}}</h2>
+                <div class="card-flex-rating">
+                  <v-rating
+                    :value="4"
+                    length="1"
+                    background-color="#00afaa"
+                    color="#00afaa"
+                    dense
+                    readonly
+                    size="20"
+                  ></v-rating>
+                  <span class="card-heading-point">
                    {{ item.rating }}
                   </span>
+                </div>
               </div>
-            </div>
-          </v-card-title>
-          <v-card-text>
-            <p class="card-description">{{item.description.length < 50 ? item.description : item.description.slice(0, 50) }}
-              <span
-                class="comment-color"
-                @click="loadMore()"> .... </span>
-            </p>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn   class="card-btn purple-section"  outlined rounded>
-              {{ $t('deal_offered') }}
-            </v-btn>
-            <v-btn  class="pink-section card-btn" outlined  rounded >
-              {{ $t('certified') }}
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
+            </v-card-title>
+            <v-card-text>
+              <p class="card-description">{{item.description.length < 50 ? item.description : item.description.slice(0, 50) }}
+                <span
+                  class="comment-color"
+                  @click="loadMore()"> .... </span>
+              </p>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn   class="card-btn purple-section"  outlined rounded>
+                {{ $t('deal_offered') }}
+              </v-btn>
+              <v-btn  class="pink-section card-btn" outlined  rounded >
+                {{ $t('certified') }}
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+    </div>
+    <!--  card-section-end   -->
   </div>
-  <!--  card-section-end   -->
-</div>
 </template>
 
 <script>
 export default {
-name: "FindPetPro.vue",
+  name: "index.vue",
   data(){
     return{
       cards:[
@@ -217,13 +217,13 @@ name: "FindPetPro.vue",
     }
   },
   computed:{
-   colors(){
-     return [
-       'paw-purple',
-       'paw-pink',
-       'paw-green',
-     ]
-   }
+    colors(){
+      return [
+        'paw-purple',
+        'paw-pink',
+        'paw-green',
+      ]
+    }
   },
   methods:{
     loadMore() {
@@ -280,10 +280,10 @@ name: "FindPetPro.vue",
   min-height: 48px;
   box-shadow: unset !important;
   max-width: 200px;
-  font-weight: bold;
-  font-family: 'Nunito Sans', sans-serif;
+  font-weight: $font-weight-bold;
+  font-family: $font-family-primary;
   .v-text-field__slot{
-    font-weight: bold;
+    font-weight: $font-weight-bold;
   }
   //fieldset{
   //  color: rgba(0, 0, 0, 0.7) !important;
@@ -294,10 +294,10 @@ name: "FindPetPro.vue",
   min-height: 48px;
   box-shadow: unset !important;
   max-width: 400px;
-  font-weight: bold;
-  font-family: 'Nunito Sans', sans-serif;
+  font-weight: $font-weight-bold;
+  font-family: $font-family-primary;
   .v-text-field__slot{
-    font-weight: bold;
+    font-weight: $font-weight-bold;
   }
   //fieldset{
   //  color: rgba(0, 0, 0, 0.7) !important;

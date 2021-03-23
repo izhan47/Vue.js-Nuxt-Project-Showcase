@@ -6,7 +6,7 @@
           {{ $t('for') }} {{ $t('pet_people') }}{{ $t('coma') }} {{ $t('by') }} {{ $t('pet_people') }}
         </h2>
       </div>
-      <div  class="description center-align space">
+      <div  class="description text-center space">
         <p>{{ $t('pet_functionality_description') }}</p>
       </div>
       <v-row justify="center">
@@ -73,14 +73,14 @@ export default {
 }
 .function-heading{
   h2{
-    font-size: 45px;
+    font-size: $font-size-45;
   }
 }
 .card-heading{
   color: $white;
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 25px;
-  font-weight: 400;
+  font-family:  $font-family-primary;
+  font-size: $font-size-25;
+  font-weight: $font-weight-400;
   text-align: left;
 }
 

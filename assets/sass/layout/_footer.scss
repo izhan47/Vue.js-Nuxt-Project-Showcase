@@ -3,16 +3,16 @@
 }
 .footer-menu-heading{
   color: $black;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 700;
-  font-size: 17px;
+  font-family:  $font-family-primary;
+  font-weight: $font-weight-700;
+  font-size: $font-size-17;
   text-align: left;
 
 }
 .footer-items{
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 16px;
+  font-family:  $font-family-primary;
+  font-weight:  $font-weight-600;
+  font-size: $font-size-16;
   text-align: left;
   color: $purple;
   cursor: pointer;
@@ -37,9 +37,10 @@
 }
 .copy-rights-text{
   color: $black;
-  font-family: 'Nunito Sans', sans-serif;  font-size: 13px;
-  font-weight: 600;
-  text-transform: capitalize;
+  font-family:  $font-family-primary;
+  font-size: $font-size-13;
+  font-weight:  $font-weight-600;
+  text-transform: $text-transform-capitalize;
   cursor: pointer;
   max-width: 660px;
   width: 100%;
