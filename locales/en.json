@@ -126,5 +126,13 @@
   "claim":"Claim",
   "hours_of_operation":"Hours of Operation",
   "find_more_pet_pros":"Find More Pet Pros",
-  "deals_offered":"Deals Offered"
+  "deals_offered":"Deals Offered",
+
+  "welcome":"Welcome.",
+  "lorem_ipsum":"I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
+  "username": "Username or Email Address",
+  "remember_me": "Remember Me",
+  "password": "Password",
+  "log_in": "log in",
+  "lost_password": "Lost your password?"
 }
