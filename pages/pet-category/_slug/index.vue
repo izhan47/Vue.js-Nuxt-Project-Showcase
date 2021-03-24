@@ -135,7 +135,7 @@
     <div class="find-pet-section-heading text-center">
       <h2>{{$t('find_more_pet_pros')}}</h2>
     </div>
-    <pet-category-card></pet-category-card>
+    <pet-category-card class="space"></pet-category-card>
   </div>
 
 </template>
@@ -248,10 +248,13 @@ export default {
 @import "~/assets/sass/main.scss";
 .pet-category-container{
   max-width: 1500px;
-  padding: 12px;
+  padding: 0;
   margin-right: auto;
   margin-left: auto;
   position: relative;
+  @media (max-width:768px) {
+    padding: 12px;
+  }
 }
 .bd-img-container{
   position: relative;
