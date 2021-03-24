@@ -68,11 +68,11 @@
               <div class=" nav-logo" >
                 <img src="/images/WagEnabledLogo.jpg" alt="logo" @click="$router.push('/')" />
               </div>
-              <div   class="nav-title ml-4" @click="$router.push('/WatchLearn')">{{$t('watch_and_learn')}}</div>
-              <div   class="nav-title ml-4" @click="$router.push('/PetCategory')">{{$t('find_a_pet_pro')}}</div>
+              <div   class="nav-title ml-4" @click="$router.push('/watch-learn')">{{$t('watch_and_learn')}}</div>
+              <div   class="nav-title ml-4" @click="$router.push('/pet-category')">{{$t('find_a_pet_pro')}}</div>
             </div>
             <div>
-              <v-btn outlined rounded class="sign-in-btn">{{$t('sign_in')}}</v-btn>
+              <v-btn outlined rounded class="sign-in-btn" @click="$router.push('/auth/Login')">{{$t('sign_in')}}</v-btn>
             </div>
           </v-toolbar-title>
           </div>
@@ -99,9 +99,9 @@ export default {
           to: '/reviews',
         },
         { title: this.$i18n.t('watch_and_learn'),
-          to: '/WatchLearn',},
+          to: '/watch-learn',},
         { title: this.$i18n.t('find_a_pet_pro'),
-          to: '/PetCategory',},
+          to: '/pet-category',},
       ],
       icons:[
         {
