@@ -5,8 +5,8 @@
         <v-row justify="center">
           <v-col cols="12" md="10" sm="12"  >
             <div class="purpose">
-              <div class="text-center mt-5 mb-5">
-                <h2 class="heading">{{ $t('our_purpose') }} </h2>
+              <div class="text-center ">
+                <h2 class="heading  mb-8">{{ $t('our_purpose') }} </h2>
               </div>
               <v-row justify="center">
                 <v-col col="3" md="3" sm="3">

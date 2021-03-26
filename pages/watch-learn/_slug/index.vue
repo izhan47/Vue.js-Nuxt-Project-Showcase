@@ -79,22 +79,8 @@
     </div>
 
     <v-row>
-      <v-col cols="12" md="4" sm="12" v-for="(item,i) in cards" :key="i" class="custom-margin">
-        <v-img
-          class="img-fluid card-img"
-          :src="item.src"
-        ></v-img>
-        <v-card  class="card-radius card-custom-height card-padding ">
-          <v-card-title class="card-title-padding">
-            <div class="card-heading">
-              <h2>  {{ item.name}}</h2>
-            </div>
-          </v-card-title>
-          <v-card-text>
-            <p class="card-description">{{item.description.length < 50 ? item.description : item.description.slice(0, 50) }}
-            </p>
-          </v-card-text>
-        </v-card>
+      <v-col cols="12" md="4" sm="12" v-for="(data,i) in watchCategoryData.slice(0,3)" :key="i" class="custom-margin">
+        <watch-category-card :item="data"></watch-category-card>
       </v-col>
     </v-row>
   </div>
@@ -103,10 +89,14 @@
 </template>
 
 <script>
+import WatchCategoryCard from "@/components/WatchCategoryCard";
+
 export default {
   name: "index.vue",
+  components:{WatchCategoryCard},
   data(){
     return{
+      categoryData:'',
       cards:[
         {
           src:"/images/WatchLearn/pic-2.jpg",
@@ -126,6 +116,25 @@ export default {
 
 
       ],
+    }
+  },
+  computed:{
+    URL(){
+      return this.$route.params.slug
+    },
+    watchCategoryData(){
+      return this.$store.state.category_list
+    }
+  },
+  created() {
+    this.getCategoryDetail()
+  },
+  methods:{
+    getCategoryDetail(){
+      this.$store.dispatch('SingleCategoryDetail',this.URL).then( response => {
+        this.petDetail = response.data.data
+        console.log(this.petDetail)
+      })
     }
   }
 }

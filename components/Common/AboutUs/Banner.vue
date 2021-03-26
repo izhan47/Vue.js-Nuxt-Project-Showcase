@@ -59,6 +59,6 @@ name: "aboutBanner.vue"
   }
 }
 .img-height{
-  max-height: 100px;
+  max-height: 90px;
 }
 </style>

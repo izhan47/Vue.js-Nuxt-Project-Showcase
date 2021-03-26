@@ -2,7 +2,7 @@
 <div class="bg-review-img">
   <div class="custom-container center-center custom-padding ">
       <div class="text-center">
-        <h2 class="heading  line-height ">{{ $t('product_reviews') }}</h2>
+        <h2 class="heading  line-height mb-8">{{ $t('product_reviews') }}</h2>
       </div>
       <div class="space banner-description">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>

@@ -18,7 +18,9 @@
   "facebook": "Facebook",
   "twitter": "Twitter",
   "instagram": "Instagram",
+  "linkedin": "Linkedin",
   "youtube": "YouTube",
+  "Contact": "Contact",
   "pinterest": "Pinterest",
   "terms": "Terms",
   "privacy": "Privacy",
@@ -119,7 +121,6 @@
 
   "visit_website":"Visit Website",
   "get_directions":"Get Directions",
-  "address":"1301 CHICON ST #102",
   "services_offered":"Services Offered",
   "share":"Share",
   "events":"Events",
@@ -134,5 +135,14 @@
   "remember_me": "Remember Me",
   "password": "Password",
   "log_in": "log in",
-  "lost_password": "Lost your password?"
+  "lost_password": "Lost your password?",
+
+  "pet_dashboard": "My Pet Dashboard",
+  "welcome_profile": "Welcome to Wag Enabled! We’re so glad to have you apart of our waggy world.",
+  "account_info": "Account Info",
+  "address":"Address",
+  "phone_number": "Phone Number",
+  "pet_profile": "Pet Profile",
+  "pets": "Pets",
+  "vet_info": "Vet Info"
 }

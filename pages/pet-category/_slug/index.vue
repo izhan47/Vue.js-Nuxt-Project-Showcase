@@ -133,9 +133,20 @@
       </v-row>
     </div>
     <div class="find-pet-section-heading text-center">
-      <h2>{{$t('find_more_pet_pros')}}</h2>
+      <h2 class="mb-8">{{$t('find_more_pet_pros')}}</h2>
     </div>
-    <pet-category-card class="space"></pet-category-card>
+    <!--  card-section-start   -->
+    <div class="custom-height custom-container">
+      <v-row>
+        <v-col cols="12" md="4" sm="12" v-for="(data,i) in petProData.slice(0,3)"   :key="i"  class="custom-margin">
+          <pet-category-card
+            :item="data"
+          ></pet-category-card>
+        </v-col>
+      </v-row>
+    </div>
+    <!--  card-section-end   -->
+<!--    <pet-category-card class="space"></pet-category-card>-->
   </div>
 
 </template>
@@ -147,6 +158,7 @@ export default {
   components:{ PetCategoryCard},
   data(){
     return{
+      petDetail:'',
       images:[
         '/images/PetCategory/img-1.jpg',
         '/images/PetCategory/img-2.jpg',
@@ -239,6 +251,25 @@ export default {
           time:'07:00 AM - 03:00 PM'
         },
       ]
+    }
+  },
+  computed:{
+    URL(){
+      return this.$route.params.slug
+    },
+    petProData(){
+      return this.$store.state.pet_pro_list
+    }
+  },
+  created() {
+    this.getPetDetail()
+  },
+  methods:{
+    getPetDetail(){
+      this.$store.dispatch('SinglePetDetail',this.URL).then( response => {
+        this.petDetail = response.data.data.per_pro
+        console.log(this.petDetail)
+      })
     }
   }
 }

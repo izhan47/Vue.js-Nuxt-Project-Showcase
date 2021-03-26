@@ -26,9 +26,9 @@
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
-              <v-list-item link  to="/sign_in">
+              <v-list-item link  to="/auth/Login">
                 <v-list-item-content>
-                  <v-list-item-title class="nav-title">{{ $t('sign_in') }}</v-list-item-title>
+                  <v-list-item-title class="nav-title" >{{ $t('sign_in') }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </div>
@@ -125,9 +125,9 @@ export default {
     window.addEventListener('resize', function(event){
       const newWidth = window.innerWidth;
       const newHeight = window.innerHeight;
-      console.log(newWidth,'screen size', newHeight)
+      // console.log(newWidth,'screen size', newHeight)
       this.drawer = newWidth < 768;
-      console.log(this.drawer)
+      // console.log(this.drawer)
     });
   },
   mounted() {
