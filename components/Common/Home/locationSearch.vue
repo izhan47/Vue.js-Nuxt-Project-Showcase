@@ -75,7 +75,15 @@
 
   </div>
   <!--  card-section-start   -->
-  <pet-category-card ></pet-category-card>
+  <div class="custom-height custom-container">
+    <v-row>
+      <v-col cols="12" md="4" sm="12" v-for="(data,i) in petProData.slice(0,3)"   :key="i"  class="custom-margin">
+          <pet-category-card
+            :item="data"
+          ></pet-category-card>
+      </v-col>
+    </v-row>
+  </div>
   <!--  card-section-end   -->
 </div>
 </template>
@@ -84,18 +92,27 @@
 import PetCategoryCard from "@/components/PetCategoryCard";
 export default {
 name: "locationSearch.vue",
-  components:{ PetCategoryCard},
-data(){
-  return{
-    category: ['All', 'Bar', 'Fizz', 'Buzz'],
-    form:{
-      category:'',
-      location:'',
-      keyword:''
-    },
-    readMore:false
-  }
-},
+components:{ PetCategoryCard},
+  data(){
+    return{
+      category: ['All', 'Bar', 'Fizz', 'Buzz'],
+      form:{
+        category:'',
+        location:'',
+        keyword:''
+      },
+      readMore:false,
+
+    }
+  },
+  computed:{
+    petProData(){
+      return this.$store.state.pet_pro_list
+    }
+  },
+  created() {
+    this.$store.dispatch('PetProList')
+  },
 }
 </script>
 

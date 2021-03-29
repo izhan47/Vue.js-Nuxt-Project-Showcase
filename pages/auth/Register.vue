@@ -16,10 +16,10 @@
               </div>
             </div>
           </v-col>
-          <v-col cols="12" md="5" sm="12" class="custom-card-padding">
+          <v-col cols="12" md="5" sm="12" class="custom-card-padding  ">
             <div class="right-section">
               <div class="text-center">
-                <img class="img-height img-fluid"  src="/images/Auth/Column-3-Dog.png" alt="logo" />
+                <img class="img-height img-fluid"  src="/images/Auth/Pom-3.png" alt="logo" />
               </div>
               <div>
                 <v-text-field
@@ -44,60 +44,51 @@
                   rounded
                   outlined
                 ></v-text-field>
-                <v-checkbox
-                  class="custom-checkbox"
-                  color="#332e80"
-                  v-model="form.remember"
-                  :label="$t('remember_me')"
-                ></v-checkbox>
                 <div class=" text-center">
-                  <v-btn large class="log-in-btn white-text" outlined rounded @click="Login()"> {{ $t('log_in') }}</v-btn>
-                </div>
-                <div class="mt-4 mb-2">
-                  <span class="forgot-pass"  @click="$router.push('/auth/Forgot-Password')">{{$t('lost_password')}}</span>
-                  <br>
-                  <span class="forgot-pass">{{$t('dont_have_an_account')}}</span>
-                  <nuxt-link class="auth-link" to="/auth/Register">{{$t('sign_up')}}</nuxt-link>
+                  <v-btn large class="log-in-btn white-text" outlined rounded @click="Register()"> {{ $t('sign_up') }}</v-btn>
                 </div>
               </div>
+              <div class="mt-4 mb-2 ">
+                <span class="forgot-pass">{{$t('have_an_account')}}</span>
+                <nuxt-link class="auth-link" to="/auth/Login">{{$t('login')}}</nuxt-link>
+              </div>
+
             </div>
           </v-col>
         </v-row>
       </v-card>
     </div>
   </div>
-
 </template>
-
 <script>
 export default {
-name: "Login.vue",
-data(){
-  return{
-    form:{
-      email:'',
-      password:'',
-      remember:false,
-    },
-    rules: {
+name: "Register.vue",
+  data(){
+    return{
+      form:{
+        email:'',
+        password:'',
+        remember:false,
+      },
+      rules: {
 
-      email: [val => (val || '').length > 0 || 'This field is required'],
-      password: [val => (val || '').length > 0 || 'This field is required'],
-    },
+        email: [val => (val || '').length > 0 || 'This field is required'],
+        password: [val => (val || '').length > 0 || 'This field is required'],
+      },
+    }
+  },
+  methods:{
+    Register(){
+      console.log('sign up',this.form)
+    }
   }
-},
-methods:{
-  Login(){
-    console.log('log in',this.form)
-  }
-}
 }
 </script>
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
 .custom-container{
-  max-width: 1000px;;
+ max-width: 1000px;;
 }
 .register-card{
   .card-radius{
@@ -109,9 +100,10 @@ methods:{
   padding: 0;
   display: grid;
   place-items: center;
+
 }
 .card-align{
-  padding: 0;
+ padding: 0;
   @media (max-width:768px) {
     padding: 12px;
   }
@@ -119,14 +111,16 @@ methods:{
 }
 .custom-height{
   min-height: 500px;
-}
-.img-height{
-  max-height: 200px;
+  margin-top: 8rem;
+  @media (max-width:1440px) {
+    margin-top: 0;
+  }
+
 }
 .bg-left-section{
   background-color: transparent;
   background-image: linear-gradient(
-    290deg
+      290deg
     , #AFE2E3 0%, $green 100%);
 }
 .left-section{
@@ -141,6 +135,7 @@ methods:{
   max-height: 70px;
   border-radius: 5px;
 }
+
 .heading{
   color: $white;
   font-size: $font-size-67;
@@ -218,7 +213,6 @@ methods:{
 .forgot-pass:hover{
   color: $green;
 }
-
 .auth-link{
   font-family: $font-family-primary;
   font-size: $font-size-14;

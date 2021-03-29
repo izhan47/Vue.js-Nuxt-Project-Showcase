@@ -31,6 +31,7 @@ export default {
     { src: '~/plugins/i18n.js' },
     { src: '~/plugins/google-maps.js' },
     { src: "~/plugins/aos.js", mode: "client" },
+    { src: '~/plugins/vuex-persist', ssr: false },
   ],
 
 purgeCSS: {

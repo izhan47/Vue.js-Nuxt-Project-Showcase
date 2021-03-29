@@ -1,15 +1,15 @@
 <template>
-  <div class="watch_and_learn_section">
+  <div>
     <div class="bg-review-img">
       <div class="custom-container center-center custom-padding ">
         <div class="text-center">
-          <h2 class="heading  line-height ">{{ $t('watch_and_learn') }}</h2>
+          <h2 class="heading  line-height mb-8">{{ $t('watch_and_learn') }}</h2>
         </div>
         <div class=" banner-description">
           <p>{{ $t('watch_learn_description') }}</p>
         </div>
         <!--   Filter Section Start     -->
-        <v-form class="custom-margin">
+        <v-form class="mt-8">
           <div class="search-form-filter">
             <div class="search-form-field">
               <label>{{ $t('sort_by') }}</label>
@@ -26,7 +26,7 @@
               <v-select
                 class="search-field mt-2"
                 :items="category"
-                v-model="category[0]"
+                v-model="form.category"
                 outlined
                 rounded
               ></v-select>
@@ -60,22 +60,8 @@
     <!--  card-section-start   -->
     <div class="custom-container  space">
       <v-row>
-        <v-col cols="12" md="4" sm="12" v-for="(item,i) in cards" :key="i" class="custom-margin">
-          <v-img
-            class="img-fluid card-img"
-            :src="item.src"
-          ></v-img>
-          <v-card  class="card-radius card-custom-height card-padding ">
-            <v-card-title class="card-title-padding">
-              <div class="card-heading">
-                <h2>  {{ item.name}}</h2>
-              </div>
-            </v-card-title>
-            <v-card-text>
-              <p class="card-description">{{item.description.length < 50 ? item.description : item.description.slice(0, 50) }}
-              </p>
-            </v-card-text>
-          </v-card>
+        <v-col cols="12" md="4" sm="12" v-for="(data,i) in watchData" :key="i" class="mt-8">
+          <watch-category-card :item="data"></watch-category-card>
         </v-col>
       </v-row>
     </div>
@@ -85,66 +71,59 @@
 </template>
 
 <script>
+import WatchCategoryCard from "@/components/WatchCategoryCard";
 export default {
 name: "index.vue",
+  components:{WatchCategoryCard},
   data(){
     return{
-      category: ['All', 'Bar', 'Fizz', 'Buzz'],
-      sorting: ['Latest', 'Oldest'],
+      category: [],
+      sorting: ['Latest', 'Popular'],
       form:{
         category:'',
         location:'',
         keyword:''
       },
-      cards:[
-        {
-          src:"/images/WatchLearn/pic-2.jpg",
-          name:"After Their Service",
-          description:"Pet Adoption",
-        },
-        {
-          src:"/images/WatchLearn/pic-1.jpg",
-          name:"Exercises and Activities to Keep Your Pup Fit",
-          description:"Play Time and Enrichment",
-        },
-        {
-          src:"/images/WatchLearn/pic-3.jpg",
-          name:"4 Steps to Take After Bringing Home Your New Pup",
-          description:"Pet Adoption",
-        },
-
-        {
-          src:"/images/WatchLearn/pic-2.jpg",
-          name:"After Their Service",
-          description:"Pet Adoption",
-        },
-        {
-          src:"/images/WatchLearn/pic-1.jpg",
-          name:"Exercises and Activities to Keep Your Pup Fit",
-          description:"Play Time and Enrichment",
-        },
-        {
-          src:"/images/WatchLearn/pic-3.jpg",
-          name:"4 Steps to Take After Bringing Home Your New Pup",
-          description:"Pet Adoption",
-        },
-      ],
     }
+  },
+  computed:{
+    watchData(){
+      return this.$store.state.category_list
+    }
+  },
+  created() {
+    this.$store.dispatch('CategoryList')
+    this.watchCategory();
+  },
+  methods:{
+   watchCategory(){
+     this.$store.dispatch('watchCategories').then(response => {
+       console.log('wat',response)
+       let arr = []
+       response.data.data.category_list.forEach(function (data) {
+         // if(data.value === ''){
+         //   this.form.category = data.value
+         //   arr.push({
+         //     'value': data.value,
+         //     'text': data.label,
+         //   })
+         // } else {
+           arr.push({
+             'value': data.value,
+             'text': data.label,
+           })
+         // }
+       })
+       this.category = arr;
+     })
+
+   }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
-.watch_and_learn_section{
-  .card-radius{
-    border-radius: 15px;
-    box-shadow: -5px 10px 10px 0px rgb(0 0 0 / 9%);
-  }
-}
-.card-custom-height{
-  min-height: 250px;
-}
 .bg-review-img{
   background-image: url("/images/WatchLearn/Pink-Dog-Running-Banner-1.png");
   //background-position:10% 33%;
@@ -161,25 +140,6 @@ name: "index.vue",
 .banner-description{
   max-width: 580px;
 }
-.card-heading{
-  h2{
-    font-family: $font-family-primary;
-    font-size: $font-size-24;
-    font-weight: $font-weight-bold;
-  }
-}
-.card-description{
-  font-family: $font-family-primary;
-  font-size: $font-size-15;
-  font-weight: $font-weight-500;
-}
-.card-img {
-  min-height: 285px;
-}
-.custom-margin{
-  margin-top: 2rem;
-}
-
 .search-field::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
@@ -205,14 +165,7 @@ name: "index.vue",
   min-width: 140px;
   height: 52px;
 }
-.card-title-padding::v-deep.v-card__title{
-  padding: 16px 0 0 16px;
-}
-.card-padding{
-  padding: 24px;
-  @media (max-width: 767px) {
-    padding: 0 0 8px 0;
-  }
-}
+
+
 
 </style>

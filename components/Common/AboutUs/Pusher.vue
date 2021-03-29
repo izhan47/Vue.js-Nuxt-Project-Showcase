@@ -2,8 +2,8 @@
   <div class="grey-section">
     <div class="custom-container">
       <div class="pusher-section">
-        <div class="text-center mb-5">
-          <h2 class="heading line-height ">{{ $t('pawsitivity_pushers') }} </h2>
+        <div class="text-center">
+          <h2 class="heading line-height mb-8">{{ $t('pawsitivity_pushers') }} </h2>
         </div>
         <v-row justify="center">
               <v-col cols="12" md="4" sm="12" >
