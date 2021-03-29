@@ -48,6 +48,11 @@
                   <v-btn large class="log-in-btn white-text" outlined rounded @click="Register()"> {{ $t('sign_up') }}</v-btn>
                 </div>
               </div>
+              <div class="mt-4 mb-2 ">
+                <span class="forgot-pass">{{$t('have_an_account')}}</span>
+                <nuxt-link class="auth-link" to="/auth/Login">{{$t('login')}}</nuxt-link>
+              </div>
+
             </div>
           </v-col>
         </v-row>
@@ -200,10 +205,19 @@ name: "Register.vue",
   color:$white ;
 }
 .forgot-pass{
+  font-family: $font-family-primary;
   font-size: .85em;
+  cursor: pointer;
   color: $black;
 }
 .forgot-pass:hover{
   color: $green;
+}
+.auth-link{
+  font-family: $font-family-primary;
+  font-size: $font-size-14;
+  font-weight: $font-weight-bold;
+  text-decoration: unset;
+  color: $black;
 }
 </style>

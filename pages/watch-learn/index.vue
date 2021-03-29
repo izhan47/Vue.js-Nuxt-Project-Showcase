@@ -26,7 +26,7 @@
               <v-select
                 class="search-field mt-2"
                 :items="category"
-                v-model="category[0]"
+                v-model="form.category"
                 outlined
                 rounded
               ></v-select>
@@ -77,52 +77,13 @@ name: "index.vue",
   components:{WatchCategoryCard},
   data(){
     return{
-      category: ['All', 'Bar', 'Fizz', 'Buzz'],
-      sorting: ['Latest', 'Oldest'],
+      category: [],
+      sorting: ['Latest', 'Popular'],
       form:{
         category:'',
         location:'',
         keyword:''
       },
-      cards:[
-        {
-          src:"/images/WatchLearn/pic-2.jpg",
-          name:"After Their Service",
-          description:"Pet Adoption",
-          slug:"Pet-asd",
-        },
-        {
-          src:"/images/WatchLearn/pic-1.jpg",
-          name:"Exercises and Activities to Keep Your Pup Fit",
-          description:"Play Time and Enrichment",
-          slug:"Pet-asd",
-        },
-        {
-          src:"/images/WatchLearn/pic-3.jpg",
-          name:"4 Steps to Take After Bringing Home Your New Pup",
-          description:"Pet Adoption",
-          slug:"Pet-asd",
-        },
-
-        {
-          src:"/images/WatchLearn/pic-2.jpg",
-          name:"After Their Service",
-          description:"Pet Adoption",
-          slug:"Pet-asd",
-        },
-        {
-          src:"/images/WatchLearn/pic-1.jpg",
-          name:"Exercises and Activities to Keep Your Pup Fit",
-          description:"Play Time and Enrichment",
-          slug:"Pet-asd",
-        },
-        {
-          src:"/images/WatchLearn/pic-3.jpg",
-          name:"4 Steps to Take After Bringing Home Your New Pup",
-          description:"Pet Adoption",
-          slug:"Pet-asd",
-        },
-      ],
     }
   },
   computed:{
@@ -132,7 +93,32 @@ name: "index.vue",
   },
   created() {
     this.$store.dispatch('CategoryList')
+    this.watchCategory();
   },
+  methods:{
+   watchCategory(){
+     this.$store.dispatch('watchCategories').then(response => {
+       console.log('wat',response)
+       let arr = []
+       response.data.data.category_list.forEach(function (data) {
+         // if(data.value === ''){
+         //   this.form.category = data.value
+         //   arr.push({
+         //     'value': data.value,
+         //     'text': data.label,
+         //   })
+         // } else {
+           arr.push({
+             'value': data.value,
+             'text': data.label,
+           })
+         // }
+       })
+       this.category = arr;
+     })
+
+   }
+  }
 }
 </script>
 

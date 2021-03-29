@@ -15,8 +15,9 @@
               <label>{{ $t('category') }}</label>
               <v-select
                 class="search-field mt-2"
+                :placeholder="$t('all')"
                 :items="category"
-                v-model="category[0]"
+                v-model="form.category"
                 outlined
                 rounded
               ></v-select>
@@ -165,7 +166,7 @@ export default {
 
 
       ],
-      category: ['All', 'Bar', 'Fizz', 'Buzz'],
+      category: [],
       form:{
         category:'',
         location:'',
@@ -186,7 +187,22 @@ export default {
       return this.$store.state.pet_pro_list
     }
   },
+  created() {
+    this.petCategory();
+  },
   methods:{
+    petCategory(){
+      this.$store.dispatch('PetCategories').then(response => {
+        let arr = []
+        response.data.data.category_list.forEach(data => {
+          arr.push({
+            'value': data.value,
+            'text': data.label,
+          })
+        })
+        this.category = arr;
+      })
+    },
     loadMore() {
       this.readMore = true
     },

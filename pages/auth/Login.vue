@@ -53,8 +53,11 @@
                 <div class=" text-center">
                   <v-btn large class="log-in-btn white-text" outlined rounded @click="Login()"> {{ $t('log_in') }}</v-btn>
                 </div>
-                <div class="mt-4 mb-2 forgot-pass">
-                  <span>{{$t('lost_password')}}</span>
+                <div class="mt-4 mb-2">
+                  <span class="forgot-pass"  @click="$router.push('/auth/Forgot-Password')">{{$t('lost_password')}}</span>
+                  <br>
+                  <span class="forgot-pass">{{$t('dont_have_an_account')}}</span>
+                  <nuxt-link class="auth-link" to="/auth/Register">{{$t('sign_up')}}</nuxt-link>
                 </div>
               </div>
             </div>
@@ -207,10 +210,20 @@ methods:{
   color:$white ;
 }
 .forgot-pass{
+  font-family: $font-family-primary;
   font-size: .85em;
+  cursor: pointer;
   color: $black;
 }
 .forgot-pass:hover{
   color: $green;
+}
+
+.auth-link{
+  font-family: $font-family-primary;
+  font-size: $font-size-14;
+  font-weight: $font-weight-bold;
+  text-decoration: unset;
+  color: $black;
 }
 </style>

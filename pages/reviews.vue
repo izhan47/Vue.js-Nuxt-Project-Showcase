@@ -1,79 +1,116 @@
 <template>
-<div class="bg-review-img">
-  <div class="custom-container center-center custom-padding ">
-      <div class="text-center">
-        <h2 class="heading  line-height mb-8">{{ $t('product_reviews') }}</h2>
-      </div>
-      <div class="space banner-description">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-      </div>
-      <!--   Filter Section Start     -->
-      <v-form>
-        <div class="search-form-filter">
-          <div class="search-form-field">
-            <label>{{ $t('sort_by') }}</label>
-            <v-select
-              class="search-field mt-2"
-              :items="sorting"
-              v-model="sorting[0]"
-              outlined
-              rounded
-            ></v-select>
-          </div>
-          <div class="search-form-field">
-            <label >{{ $t('category') }}</label>
-            <v-select
-              class="search-field mt-2"
-              :items="category"
-              v-model="category[0]"
-              outlined
-              rounded
-            ></v-select>
-          </div>
-          <div class="search-form-field">
-            <label >{{ $t('keyword') }}</label>
-            <v-text-field
-              class="search-field  mt-2"
-              :placeholder="$t('all')"
-              v-model="form.keyword"
-              solo
-              color="#00afaa"
-              rounded
-              outlined
-            ></v-text-field>
-          </div>
-          <div >
-            <v-btn
-              class="purple-section  search-btn"
-              outlined
-              large
-            >
-              {{ $t('search') }}
-            </v-btn>
-          </div>
+  <div>
+    <div class="bg-review-img">
+      <div class="custom-container center-center custom-padding ">
+        <div class="text-center">
+          <h2 class="heading  line-height mb-8">{{ $t('product_reviews') }}</h2>
         </div>
-      </v-form>
-      <!--   Filter Section End     -->
+        <div class="space banner-description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+        </div>
+        <!--   Filter Section Start     -->
+        <v-form>
+          <div class="search-form-filter">
+            <div class="search-form-field">
+              <label>{{ $t('sort_by') }}</label>
+              <v-select
+                class="search-field mt-2"
+                :items="sorting"
+                v-model="sorting[0]"
+                outlined
+                rounded
+              ></v-select>
+            </div>
+            <div class="search-form-field">
+              <label >{{ $t('category') }}</label>
+              <v-select
+                :placeholder="$t('all')"
+                class="search-field mt-2"
+                :items="categoryList"
+                v-model="form.category"
+                outlined
+                rounded
+              ></v-select>
+            </div>
+            <div class="search-form-field">
+              <label >{{ $t('keyword') }}</label>
+              <v-text-field
+                class="search-field  mt-2"
+                :placeholder="$t('all')"
+                v-model="form.keyword"
+                solo
+                color="#00afaa"
+                rounded
+                outlined
+              ></v-text-field>
+            </div>
+            <div >
+              <v-btn
+                class="purple-section  search-btn"
+                outlined
+                large
+              >
+                {{ $t('search') }}
+              </v-btn>
+            </div>
+          </div>
+        </v-form>
+        <!--   Filter Section End     -->
 
+
+      </div>
+    </div>
+      <!--  card-section-start   -->
+      <div class="custom-container  space">
+        <v-row>
+          <v-col cols="12" md="4" sm="12" v-for="(data,i) in reviewData" :key="i" class="mt-8">
+            <product-review-card :item="data"></product-review-card>
+          </v-col>
+        </v-row>
+      </div>
+      <!--  card-section-end   -->
 
   </div>
-</div>
+
 </template>
 
 <script>
+import ProductReviewCard from "@/components/ProductReviewCard";
 export default {
 name: "reviews.vue",
 data(){
   return{
     category: ['All', 'Bar', 'Fizz', 'Buzz'],
-    sorting: ['Latest', 'Oldest'],
+    sorting: ['Latest', 'Popular','Deal offered'],
     form:{
       category:'',
       sorting:'',
       keyword:''
     },
   }
-}
+},
+  components:{ProductReviewCard},
+  computed:{
+    reviewData(){
+      return this.$store.state.review_list
+    },
+    categoryList(){
+      let categories= this.$store.state.product_review_category_list
+      let arr = []
+      categories.forEach(function (data) {
+        arr.push({
+          'value':data.value,
+          'text': data.label,
+        })
+      })
+      console.log(arr);
+     return arr
+    }
+  },
+  created() {
+    this.$store.dispatch('ReviewList')
+    this.$store.dispatch('ReviewCategories')
+  },
 }
 </script>
 

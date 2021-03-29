@@ -1,17 +1,17 @@
 <template>
-<div class="watch-learn-detail-section">
+<div class="watch-learn-detail-section" v-if="categoryData">
   <div class="bg-img-watch-detail">
     <div class="custom-container align-center">
-      <img class="img-fluid img-height" src="/images/WatchLearn/pic-2.jpg" alt="">
+      <img class="img-fluid img-height" :src="categoryData.thumbnail_thumb_full_path" alt="">
     </div>
   </div>
   <div class="watch-detail-custom-container custom-margin">
     <v-row>
       <v-col cols="12" md="3" sm="12">
-        <div class="watch-card">
-          <img src="/images/WatchLearn/nicole.jpg" alt="">
-          <h2>Nicole McCray</h2>
-          <p>Nicole is a die-hard animal lover who has worked in pet care for years. She is a former vet technician, a dog mom to her two rescue pups, and she grew up living and working at her family's pet boarding facility. She loves using her writing talents to share the insight she's learned throughout her career in the hopes that her knowledge can help other pet parents out there!</p>
+        <div class="watch-card"  v-if="categoryData.author">
+          <img :src="categoryData.author.image_thumb_full_path" alt="">
+          <h2>{{categoryData.author.name}}</h2>
+          <p>{{categoryData.author.about}}</p>
           <v-btn large class="round-btn" outlined rounded > {{ $t('personal_website') }}</v-btn>
         </div>
       </v-col>
@@ -21,7 +21,7 @@
           <span>Play Time and Enrichment</span>
         </div>
         <div class="heading mt-2">
-          <h1>  Exercises and Activities to Keep Your Pup Fit </h1>
+          <h1>{{categoryData.title }} </h1>
         </div>
           <v-btn color="#ff8189" class=" ma-2 white--text" rounded>
             <v-icon left dark>mdi-facebook</v-icon>
@@ -35,8 +35,7 @@
             <v-icon left dark>mdi-linkedin</v-icon>
             {{ $t('linkedin')}}
           </v-btn>
-
-
+<!--        <div v-html="categoryData.description"></div>-->
         <p class="description space mt-5">Most dogs love physical activity, and exercise is just as important for their mental and physical health as it is for ours. Staying active will help your dog live a longer, happier life and prevent obesity, which is a common issue for dogs. Not only that but
          <b>dogs who are bored and don’t get enough exercise often develop behavior issues. </b>
           Here’s a look at some fun exercises and activities to keep your pup fit and how to know if he’s getting enough exercise each day.</p>
@@ -132,8 +131,8 @@ export default {
   methods:{
     getCategoryDetail(){
       this.$store.dispatch('SingleCategoryDetail',this.URL).then( response => {
-        this.petDetail = response.data.data
-        console.log(this.petDetail)
+        this.categoryData = response.data.data.watch_and_learn
+        console.log(this.categoryData)
       })
     }
   }

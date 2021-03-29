@@ -144,5 +144,10 @@
   "phone_number": "Phone Number",
   "pet_profile": "Pet Profile",
   "pets": "Pets",
-  "vet_info": "Vet Info"
+  "vet_info": "Vet Info",
+
+  "have_an_account": "Have an account?",
+  "dont_have_an_account": "Don’t have an account?",
+  "reset_password": "Reset Password",
+  "remember_password": "Remember your password?"
 }
