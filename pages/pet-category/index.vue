@@ -16,8 +16,8 @@
               <v-select
                 class="search-field mt-2"
                 :placeholder="$t('all')"
-                :items="category"
-                v-model="form.category"
+                :items="categoryList"
+                v-model="form.category_id"
                 outlined
                 rounded
               ></v-select>
@@ -41,7 +41,7 @@
               <v-text-field
                 class="search-field  mt-2"
                 :placeholder="$t('all')"
-                v-model="form.keyword"
+                v-model="form.search"
                 color="#00afaa"
                 solo
                 rounded
@@ -53,6 +53,7 @@
                 class="purple-section  search-btn"
                 outlined
                 large
+                @click="filterData()"
               >
                 {{ $t('search') }}
               </v-btn>
@@ -168,9 +169,9 @@ export default {
       ],
       category: [],
       form:{
-        category:'',
+        category_id:'',
         location:'',
-        keyword:''
+        search:''
       },
       readMore:false
     }
@@ -184,24 +185,29 @@ export default {
       ]
     },
     petProData(){
+      console.log('after update the state in pet page',this.$store.state.pet_pro_list)
       return this.$store.state.pet_pro_list
+    },
+    categoryList(){
+      let categories= this.$store.state.pet_category_list
+      let arr = []
+      categories.forEach(function (data) {
+        arr.push({
+          'value':data.value,
+          'text': data.label,
+        })
+      })
+      // console.log(arr);
+      return arr
     }
   },
   created() {
-    this.petCategory();
+    this.$store.dispatch('PetCategories')
   },
   methods:{
-    petCategory(){
-      this.$store.dispatch('PetCategories').then(response => {
-        let arr = []
-        response.data.data.category_list.forEach(data => {
-          arr.push({
-            'value': data.value,
-            'text': data.label,
-          })
-        })
-        this.category = arr;
-      })
+    filterData(){
+      console.log('search form pet page',this.form)
+      this.$store.dispatch('PetProList',this.form)
     },
     loadMore() {
       this.readMore = true

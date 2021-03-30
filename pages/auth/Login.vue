@@ -1,5 +1,6 @@
 <template>
   <div class="register-card">
+
     <div class="custom-container space custom-height">
       <v-card class="card-radius">
         <v-row>
@@ -40,6 +41,7 @@
                   :rules="rules.password"
                   required
                   solo
+                  type="password"
                   color="#00afaa"
                   rounded
                   outlined
@@ -80,15 +82,26 @@ data(){
       remember:false,
     },
     rules: {
-
       email: [val => (val || '').length > 0 || 'This field is required'],
-      password: [val => (val || '').length > 0 || 'This field is required'],
+      password: [ (value) => !!value || 'This field is required',
+        (value) => (value && value.length >= 6) || 'minimum 6 characters',
+      ],
     },
   }
 },
+
 methods:{
   Login(){
-    console.log('log in',this.form)
+    let data = {
+      snackbar:true,
+      color:'green',
+      message:'logedd in used'
+    }
+    this.$store.commit('SHOW_SNACKBAR', data)
+    this.$store.dispatch('Login',this.form).then(response => {
+      console.log('login detail',response)
+
+    })
   }
 }
 }

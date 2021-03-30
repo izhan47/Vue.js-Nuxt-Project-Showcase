@@ -24,7 +24,18 @@
               <div>
                 <v-text-field
                   class="input-field  mt-2"
-                  :placeholder="$t('username')"
+                  :placeholder="$t('name')"
+                  v-model="form.name"
+                  :rules="rules.name"
+                  required
+                  solo
+                  color="#00afaa"
+                  rounded
+                  outlined
+                ></v-text-field>
+                <v-text-field
+                  class="input-field  mt-2"
+                  :placeholder="$t('email')"
                   v-model="form.email"
                   :rules="rules.email"
                   required
@@ -38,6 +49,7 @@
                   :placeholder="$t('password')"
                   v-model="form.password"
                   :rules="rules.password"
+                  type="password"
                   required
                   solo
                   color="#00afaa"
@@ -66,20 +78,27 @@ name: "Register.vue",
   data(){
     return{
       form:{
+        name:'',
         email:'',
         password:'',
         remember:false,
       },
       rules: {
 
+        name: [val => (val || '').length > 0 || 'This field is required'],
         email: [val => (val || '').length > 0 || 'This field is required'],
-        password: [val => (val || '').length > 0 || 'This field is required'],
+        password: [ (value) => !!value || 'This field is required',
+                     (value) => (value && value.length >= 6) || 'minimum 6 characters',
+        ],
       },
     }
   },
   methods:{
     Register(){
       console.log('sign up',this.form)
+      this.$store.dispatch('Register',this.form).then(response => {
+        console.log('Register detail',response)
+      })
     }
   }
 }

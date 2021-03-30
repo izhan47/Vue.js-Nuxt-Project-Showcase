@@ -33,11 +33,18 @@ name: "Forgot-Password.vue",
         email: '',
       },
       rules: {
-
         email: [val => (val || '').length > 0 || 'This field is required'],
       },
     }
   },
+  methods:{
+    Login(){
+      console.log('ForgotPassword',this.form)
+      this.$store.dispatch('ForgotPassword',this.form).then(response => {
+        console.log('ForgotPassword detail',response)
+      })
+    }
+  }
 }
 </script>
 

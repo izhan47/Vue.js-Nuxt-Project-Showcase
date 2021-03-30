@@ -16,14 +16,13 @@
       <v-form>
         <div class="search-form-filter">
           <div class="search-form-field">
-            <div class="search-filter-label">
-              <label class="ml-4 ">{{ $t('category') }}</label>
-            </div>
+            <label>{{ $t('category') }}</label>
+            {{form.category_id}}
             <v-select
               class="search-field mt-2"
-              :items="category"
-              :label="$t('select_category')"
-              v-model="form.category"
+              :placeholder="$t('all')"
+              :items="categoryList"
+              v-model="form.category_id"
               outlined
               rounded
             ></v-select>
@@ -35,10 +34,10 @@
             <v-text-field
               class="search-field  mt-2"
               :placeholder="$t('all')"
-              v-model="form.keyword"
+              v-model="form.location"
               solo
-              clearable
               rounded
+
               outlined
             ></v-text-field>
           </div>
@@ -49,9 +48,9 @@
             <v-text-field
               class="search-field  mt-2"
               :placeholder="$t('all')"
-              v-model="form.keyword"
+              v-model="form.search"
+              color="#00afaa"
               solo
-              clearable
               rounded
               outlined
             ></v-text-field>
@@ -61,6 +60,7 @@
               class="purple-section  search-btn"
               outlined
               large
+              @click="filterData()"
             >
               {{ $t('search') }}
             </v-btn>
@@ -95,11 +95,10 @@ name: "locationSearch.vue",
 components:{ PetCategoryCard},
   data(){
     return{
-      category: ['All', 'Bar', 'Fizz', 'Buzz'],
       form:{
-        category:'',
+        category_id:'',
         location:'',
-        keyword:''
+        search:''
       },
       readMore:false,
 
@@ -107,12 +106,34 @@ components:{ PetCategoryCard},
   },
   computed:{
     petProData(){
+      // console.log('after update the state',this.$store.state.pet_pro_list)
       return this.$store.state.pet_pro_list
+    },
+    categoryList(){
+      let categories= this.$store.state.pet_category_list
+      let arr = []
+      categories.forEach(function (data) {
+        arr.push({
+          'value':data.value,
+          'text': data.label,
+        })
+      })
+      return arr
     }
   },
   created() {
+  // console.log('create form',this.form)
     this.$store.dispatch('PetProList')
+    this.$store.dispatch('PetCategories',this.form)
   },
+  methods:{
+    filterData(){
+      // console.log('search form',this.form)
+      this.$store.dispatch('PetProList',this.form)
+
+
+    }
+  }
 }
 </script>
 
@@ -125,10 +146,17 @@ components:{ PetCategoryCard},
 .banner-description{
   max-width: 500px;
 }
+
 .search-field::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
   box-shadow: unset !important;
+  max-width: 300px;
+  font-weight: $font-weight-bold;
+  font-family: $font-family-primary;
+  .v-text-field__slot{
+    font-weight: $font-weight-bold;
+  }
 }
 .search-field::v-deep .v-label {
   top:14px;

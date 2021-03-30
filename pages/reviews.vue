@@ -16,28 +16,46 @@
               <v-select
                 class="search-field mt-2"
                 :items="sorting"
-                v-model="sorting[0]"
+                v-model="form.sort_by"
                 outlined
                 rounded
               ></v-select>
             </div>
             <div class="search-form-field">
               <label >{{ $t('category') }}</label>
+
               <v-select
                 :placeholder="$t('all')"
-                class="search-field mt-2"
+                class="search-field-category mt-2"
                 :items="categoryList"
-                v-model="form.category"
+                v-model="categories"
                 outlined
                 rounded
-              ></v-select>
+                multiple
+               small-chips
+              >
+                <template v-slot:selection="{ item, index }">
+                  <v-chip v-if="index === 0">
+                    <span>{{ item.text }}</span>
+                  </v-chip>
+                  <span
+                    v-if="index === 1"
+                    class="grey--text caption"
+                  >
+                    (+{{ categories.length - 1 }} others)
+                  </span>
+                </template>
+              </v-select>
+
+
+
             </div>
             <div class="search-form-field">
               <label >{{ $t('keyword') }}</label>
               <v-text-field
                 class="search-field  mt-2"
                 :placeholder="$t('all')"
-                v-model="form.keyword"
+                v-model="form.search"
                 solo
                 color="#00afaa"
                 rounded
@@ -49,6 +67,7 @@
                 class="purple-section  search-btn"
                 outlined
                 large
+                @click="filterData()"
               >
                 {{ $t('search') }}
               </v-btn>
@@ -80,18 +99,20 @@ export default {
 name: "reviews.vue",
 data(){
   return{
-    category: ['All', 'Bar', 'Fizz', 'Buzz'],
     sorting: ['Latest', 'Popular','Deal offered'],
+    categories:[],
     form:{
-      category:'',
-      sorting:'',
-      keyword:''
+      category_id:[],
+      sort_by:'Latest',
+      search:''
     },
   }
 },
   components:{ProductReviewCard},
   computed:{
     reviewData(){
+      console.log('state in Review',this.$store.state.review_list)
+
       return this.$store.state.review_list
     },
     categoryList(){
@@ -103,14 +124,39 @@ data(){
           'text': data.label,
         })
       })
-      console.log(arr);
+      // console.log(arr);
      return arr
     }
   },
   created() {
-    this.$store.dispatch('ReviewList')
+    // console.log('in cre',this.form)
+    this.$store.dispatch('ReviewList',this.form)
     this.$store.dispatch('ReviewCategories')
   },
+  methods:{
+    filterData(){
+      console.log('cat list',this.categoryList)
+      let arr = []
+      this.categories.forEach(id => {
+        let x =  this.categoryList.find(e => e.value === id)
+        arr.push({
+          value : x.value,
+          label : x.text
+        })
+      })
+      console.log('array',arr)
+      let arrayToString = JSON.stringify(Object.assign( arr));  // convert array to string
+      console.log('json array to string',arrayToString)
+      // let stringToJsonObject = JSON.parse(arrayToString);  // convert string to json object
+      // console.log('json to object',stringToJsonObject)
+      // this.form.category_id = stringToJsonObject
+
+      // category_id: [{"value":41,"label":"The Essentials"}]
+
+      this.form.category_id = arrayToString
+      this.$store.dispatch('ReviewList',this.form)
+    }
+  }
 }
 </script>
 
@@ -136,6 +182,35 @@ data(){
 .banner-description{
   max-width: 550px;
 }
+.search-field-category::v-deep .v-input__slot{
+  background: $white;
+  min-height: 48px;
+   box-shadow: unset !important;
+  max-width: 280px;
+  font-weight: $font-weight-bold;
+  font-family:$font-family-primary;
+  .v-text-field__slot{
+    font-weight: $font-weight-bold;
+  }
+  fieldset{
+    color: rgba(0, 0, 0, 0.7) !important;
+  }
+  //.v-input__append-inner{
+  //  margin-top: 0;
+  //}
+}
+.search-field-category::v-deep .v-label {
+  top:14px;
+}
+.search-field-category::v-deep .v-input__append-inner{
+  margin-top: 12px;
+}
+
+
+
+
+
+
 .search-field::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;

@@ -10,6 +10,18 @@
           <p class="description">{{ $t('newsletter_description') }}</p>
         </div>
         <div class="mb-5">
+          <v-alert
+            v-model="showAlert"
+            border="left"
+            close-text="Close Alert"
+            dark
+            dismissible
+            style="text-align: center"
+            :type="alertType"
+          >
+            {{errorMsg}}
+
+          </v-alert>
           <v-form
             ref="form"
             @submit.prevent="submit"
@@ -19,8 +31,8 @@
                 <v-text-field
                   class="form-field news-section-label"
                   color="white"
-                  :rules="rules.name"
-                  v-model="form.name"
+                  :rules="rules.first_name"
+                  v-model="form.first_name"
                   :label="$t('name')"
                   required
                 ></v-text-field>
@@ -29,8 +41,8 @@
                 <v-text-field
                   class="form-field news-section-label"
                   color="white"
-                  :rules="rules.zipCode"
-                  v-model="form.zipCode"
+                  :rules="rules.zipcode"
+                  v-model="form.zipcode"
                   :label="$t('your_zipcode')"
                   required
                 ></v-text-field>
@@ -74,21 +86,37 @@ export default {
   },
   data(){
     return{
+      errorMsg: '',
+      showAlert:false,
+      alertType: '',
       form:{
-        name:'',
-        zipCode:'',
+        first_name:'',
+        zipcode:'',
         email:''
       },
       rules: {
-        zipCode: [val => (val || '').length > 0 || 'This field is required'],
+        zipcode: [val => (val || '').length > 0 || 'This field is required'],
         email: [val => (val || '').length > 0 || 'This field is required'],
-        name: [val => (val || '').length > 0 || 'This field is required'],
+        first_name: [val => (val || '').length > 0 || 'This field is required'],
       },
     }
   },
   methods:{
     submit(){
       console.log('submit',this.form)
+      this.$store.dispatch('NewsLetter',this.form).then(response => {
+        console.log('wat',response)
+        if (response.data === 0) {
+          this.showAlert = true
+          this.errorMsg = response.data.message
+          this.alertType = 'success';
+        } else {
+          this.showAlert = true
+          this.errorMsg = response.data
+          this.alertType = 'error'
+        }
+      })
+
     }
   }
 }
