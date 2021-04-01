@@ -161,11 +161,7 @@ export default {
           description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
           category:["Deal Offered"],
           icons:["mdi-paw"],
-
         },
-
-
-
       ],
       category: [],
       form:{
@@ -185,7 +181,6 @@ export default {
       ]
     },
     petProData(){
-      console.log('after update the state in pet page',this.$store.state.pet_pro_list)
       return this.$store.state.pet_pro_list
     },
     categoryList(){
@@ -197,23 +192,15 @@ export default {
           'text': data.label,
         })
       })
-      // console.log(arr);
       return arr
     }
   },
   created() {
-    this.$store.dispatch('PetCategories')
+    this.$store.dispatch('petCategories')
   },
   methods:{
     filterData(){
-      console.log('search form pet page',this.form)
-      this.$store.dispatch('PetProList',this.form)
-    },
-    loadMore() {
-      this.readMore = true
-    },
-    loadLess() {
-      this.readMore = false
+      this.$store.dispatch('petProList',this.form)
     },
   }
 }

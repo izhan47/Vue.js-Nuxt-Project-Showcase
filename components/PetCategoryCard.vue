@@ -94,7 +94,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('PetProList')
+    this.$store.dispatch('petProList')
   },
   methods:{
     loadMore() {

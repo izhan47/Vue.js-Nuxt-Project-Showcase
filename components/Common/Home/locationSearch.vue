@@ -17,7 +17,6 @@
         <div class="search-form-filter">
           <div class="search-form-field">
             <label>{{ $t('category') }}</label>
-            {{form.category_id}}
             <v-select
               class="search-field mt-2"
               :placeholder="$t('all')"
@@ -37,7 +36,7 @@
               v-model="form.location"
               solo
               rounded
-
+              color="#00afaa"
               outlined
             ></v-text-field>
           </div>
@@ -89,6 +88,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import PetCategoryCard from "@/components/PetCategoryCard";
 export default {
 name: "locationSearch.vue",
@@ -100,6 +100,8 @@ components:{ PetCategoryCard},
         location:'',
         search:''
       },
+      query:'pizza in lahore',
+      key:'AIzaSyBaxMfWKuh_m7up5CvIL-LF_EHJ_eWkRWI',
       readMore:false,
 
     }
@@ -123,15 +125,24 @@ components:{ PetCategoryCard},
   },
   created() {
   // console.log('create form',this.form)
-    this.$store.dispatch('PetProList')
-    this.$store.dispatch('PetCategories',this.form)
+    this.$store.dispatch('petProList')
+    this.$store.dispatch('petCategories',this.form)
   },
   methods:{
     filterData(){
       // console.log('search form',this.form)
-      this.$store.dispatch('PetProList',this.form)
+      this.$store.dispatch('petProList',this.form)
 
 
+    },
+    filterLocation(){
+      return axios({
+        method: 'POST',
+        url: 'https://maps.googleapis.com/maps/api/place/textsearch/json' + this.key + this.query,
+      })
+        .then(response => {
+        console.log('api res',response)
+        })
     }
   }
 }

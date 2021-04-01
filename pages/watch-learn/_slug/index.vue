@@ -59,10 +59,11 @@
             outlined
             name="input-7-4"
             label="Message"
-            value=""
+            v-model="form.message"
+            required
           ></v-textarea>
           <div class="text-center">
-            <v-btn large class=" submit-btn" outlined rounded > {{ $t('submit') }}</v-btn>
+            <v-btn large class=" submit-btn" outlined rounded @click="submit"> {{ $t('submit') }}</v-btn>
 
           </div>
         </div>
@@ -95,6 +96,12 @@ export default {
   components:{WatchCategoryCard},
   data(){
     return{
+      form:{
+        comment:'',
+        parent_comment_id:'',
+        slug:''
+      },
+
       categoryData:'',
       cards:[
         {
@@ -130,10 +137,27 @@ export default {
   },
   methods:{
     getCategoryDetail(){
-      this.$store.dispatch('SingleCategoryDetail',this.URL).then( response => {
+      this.$store.dispatch('singleCategoryDetail',this.URL).then( response => {
         this.categoryData = response.data.data.watch_and_learn
-        console.log(this.categoryData)
       })
+    },
+    submit(){
+      if (!this.$store.state.user.isAuthenticated) {
+        return this.$router.push('/auth/Login')
+      }else {
+        this.form.slug=this.categoryData.slug
+        this.form.parent_comment_id=this.categoryData.id
+        this.$store.dispatch('comment',this.form).then(response => {
+          let data = {
+            snackbar:true,
+            color:'#00afaa',
+            message:response.data.message
+          }
+          this.$store.commit('SHOW_SNACKBAR', data)
+
+        })
+      }
+
     }
   }
 }

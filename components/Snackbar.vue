@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <v-snackbar
       v-if="notify.snackbar"
       v-model="notify.snackbar"
@@ -9,15 +8,15 @@
       :color="notify.color"
     >
       {{ notify.message }}
-      <template v-slot:action="{ attrs }">
-        <v-btn
-          color="red"
-          text
-          v-bind="attrs"
-        >
-          Close
-        </v-btn>
-      </template>
+<!--      <template v-slot:action="{ attrs }">-->
+<!--        <v-btn-->
+<!--          color="red"-->
+<!--          text-->
+<!--          v-bind="attrs"-->
+<!--        >-->
+<!--          Close-->
+<!--        </v-btn>-->
+<!--      </template>-->
     </v-snackbar>
   </div>
 
@@ -29,12 +28,11 @@ name: "Snackbar.vue",
   data(){
     return{
       multiLine: true,
-      timeout: 1000,
+      timeout: 1500,
     }
   },
   computed:{
     notify(){
-      console.log('not',this.$store.state.alert)
       return this.$store.state.alert
     }
   }

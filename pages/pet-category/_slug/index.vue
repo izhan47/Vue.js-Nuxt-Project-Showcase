@@ -265,7 +265,7 @@ export default {
   methods:{
     getPetDetail(){
       this.showLoader=true
-      this.$store.dispatch('SinglePetDetail',this.URL).then( response => {
+      this.$store.dispatch('singlePetDetail',this.URL).then( response => {
         this.showLoader=false
         this.petDetail = response.data.data.per_pro
         console.log(this.petDetail)
@@ -480,6 +480,7 @@ hr.dot-line {
   font-size:$font-size-25;
   font-weight:  $font-weight-600;
   text-transform: $text-transform-capitalize;
+  text-align: center;
   @media (max-width:380px){
     padding: 5px;
   }
@@ -525,6 +526,10 @@ hr.dot-line {
   padding-left: 50px;
   @media (max-width:768px) {
     padding: 0;
+  }
+  @media only screen and (max-width:1440px){
+    padding-left: 0;
+    padding-right: 20px;
   }
 }
 .visit-btn::v-deep.v-btn{

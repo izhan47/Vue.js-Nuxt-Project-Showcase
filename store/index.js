@@ -1,13 +1,21 @@
 import Vuex from 'vuex';
 import axios from 'axios'
-import Drawer from './Drawer';
 import { baseURL } from '@/configs/urls'
-
-
+import { setAuthToken, resetAuthToken } from '@/configs/auth'
+const token = localStorage.getItem('x-access-token');
+if (token) {
+  setAuthToken(token)
+} else {
+  resetAuthToken()
+}
 axios.defaults.baseURL = baseURL.API_URL
 export default () => {
   return new Vuex.Store({
     state: {
+      user:{
+        bearerToken : null,
+        isAuthenticated:false
+      },
       pet_pro_list:[],
       category_list:[],
       review_list:[],
@@ -17,7 +25,7 @@ export default () => {
         snackbar:false,
         color:'',
         message:''
-      }
+      },
     },
     mutations: {
       SET_PET_PRO_LIST(state, data) {
@@ -35,14 +43,22 @@ export default () => {
       SET_PET_CATEGORY_LIST(state, data) {
         state.pet_category_list = data
       },
-
       SHOW_SNACKBAR(state, data) {
         state.alert = data;
+      },
+
+
+      SET_USER (state, data) {
+        console.log('mutate',data)
+        state.user = { 'bearerToken': data.token, 'user': data.user , 'isAuthenticated':true }
+      },
+      RESET_USER (state) {
+        state.user = { 'bearerToken': null,'user': null , 'isAuthenticated':false  }
       },
     },
     actions: {
       //Pet Pro
-      PetProList({commit},data) {
+      petProList({commit},data) {
         axios({
           method: 'POST',
           url: 'pet-pro/get-map-list',
@@ -51,13 +67,13 @@ export default () => {
           commit('SET_PET_PRO_LIST',response.data.data.pet_pro_list)
         })
       },
-      SinglePetDetail({dispatch}, slug) {
+      singlePetDetail({dispatch}, slug) {
         return axios({
           method: 'POST',
           url:'pet-pro/get-details/' + slug
         })
       },
-      PetCategories({commit}) {
+      petCategories({commit}) {
        axios({
           method: 'POST',
           url: 'pet-pro/get-category-list',
@@ -66,7 +82,7 @@ export default () => {
        })
       },
       // Watch Learn
-      CategoryList({commit},data) {
+      categoryList({commit},data) {
         axios({
           method: 'POST',
           url: 'watch-and-learn/get-list',
@@ -75,22 +91,30 @@ export default () => {
           commit('SET_CATEGORY_LIST',response.data.data.watch_and_learn_list)
         })
       },
-      SingleCategoryDetail({dispatch}, slug) {
-        console.log('pet slug',slug)
+      singleCategoryDetail({dispatch}, slug) {
         return axios({
           method: 'POST',
           url:'watch-and-learn/get-details/' + slug
         })
       },
-      WatchCategories() {
+      watchCategories() {
         return axios({
           method: 'POST',
           url: 'watch-and-learn/get-category-list',
 
         })
       },
-    //  Product Reviews
-      ReviewList({commit},data) {
+      //Comment
+      comment({commit}, data) {
+        // console.log('news',data)
+        return axios({
+          method: 'POST',
+          url: 'watch-and-learn/store-comment',
+          data
+        })
+      },
+      //Product Reviews
+      reviewList({commit},data) {
         axios({
           method: 'POST',
           url: 'product-reviews/get-list',
@@ -99,7 +123,7 @@ export default () => {
           commit('SET_PRODUCT_REVIEW_LIST',response.data.data.watch_and_learn_list)
         })
       },
-      ReviewCategories({commit}) {
+      reviewCategories({commit}) {
         axios({
           method: 'POST',
           url: 'product-reviews/get-category-list',
@@ -107,9 +131,8 @@ export default () => {
           commit('SET_PRODUCT_REVIEW_CATEGORY_LIST',response.data.data.category_list)
         })
       },
-
-    //  News Letter
-      NewsLetter({commit}, data) {
+      //News Letter
+      newsLetter({commit}, data) {
         // console.log('news',data)
         return axios({
           method: 'POST',
@@ -117,27 +140,45 @@ export default () => {
           data
         })
       },
-    //  Login
-      Login({commit}, data) {
+      //Login
+      async login({dispatch}, data) {
         // console.log('login',data)
         return axios({
           method: 'POST',
           url: 'login',
           data
         })
+          .then(response => {
+            dispatch('setCurrentUser', response)
+            return response
+          })
       },
-
-    //Register
-      Register({commit}, data) {
-        console.log('register',data)
+      setCurrentUser: function ({ commit }, response) {
+        console.log('set curr res',response)
+        if (response.data){
+          commit('SET_USER', response.data)
+          setAuthToken(response.data.token)
+          localStorage.setItem('x-access-token', response.data.token);
+        }
+      },
+      reset ({ commit }) {
+        commit('RESET_USER')
+        resetAuthToken()
+        // cookies.remove('x-access-token')
+        localStorage.removeItem('x-access-token');
+        localStorage.removeItem('vuex');
+        return Promise.resolve()
+      },
+      //Register
+      async register({commit}, data) {
         return axios({
           method: 'POST',
           url: 'register',
           data
-        })
+        });
       },
-    // Forgot password
-      ForgotPassword({commit}, data) {
+      //Forgot password
+      forgotPassword({commit}, data) {
         console.log('ForgotPassword',data)
         return axios({
           method: 'POST',
@@ -145,9 +186,13 @@ export default () => {
           data
         })
       },
+
+
+
+
     },
     modules: {
-      Drawer
+
     },
   });
 };

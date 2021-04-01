@@ -95,27 +95,43 @@ export default {
         email:''
       },
       rules: {
-        zipcode: [val => (val || '').length > 0 || 'This field is required'],
-        email: [val => (val || '').length > 0 || 'This field is required'],
-        first_name: [val => (val || '').length > 0 || 'This field is required'],
+        zipcode: [val => (val || '').length > 0 || 'This Zipcode is required'],
+        email: [val => (val || '').length > 0 || 'This email field is required',
+          val => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(val) || 'E-mail must be valid'],
+        first_name: [val => (val || '').length > 0 || 'This Name is required'],
       },
     }
   },
   methods:{
     submit(){
+      if(this.$refs.form.validate()) {
+
+      }
+
       console.log('submit',this.form)
-      this.$store.dispatch('NewsLetter',this.form).then(response => {
-        console.log('wat',response)
-        if (response.data === 0) {
-          this.showAlert = true
-          this.errorMsg = response.data.message
-          this.alertType = 'success';
-        } else {
-          this.showAlert = true
-          this.errorMsg = response.data
-          this.alertType = 'error'
+      this.$store.dispatch('newsLetter',this.form)
+        .then(response => {
+          let data = {
+            snackbar:true,
+            color:'green',
+            message:response.data.message
+          }
+          this.$store.commit('SHOW_SNACKBAR', data)
+        }).catch(e => {
+        let errors = e.response.data.data
+        for (let item in errors){
+          if(errors.hasOwnProperty(item))
+            errors[item].forEach(err => {
+              let data = {
+                snackbar:true,
+                color:'red',
+                message:err
+              }
+              this.$store.commit('SHOW_SNACKBAR', data)
+            })
         }
       })
+
 
     }
   }

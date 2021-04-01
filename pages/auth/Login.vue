@@ -22,7 +22,7 @@
               <div class="text-center">
                 <img class="img-height img-fluid"  src="/images/Auth/Column-3-Dog.png" alt="logo" />
               </div>
-              <div>
+              <v-form   ref="form">
                 <v-text-field
                   class="input-field  mt-2"
                   :placeholder="$t('username')"
@@ -61,7 +61,7 @@
                   <span class="forgot-pass">{{$t('dont_have_an_account')}}</span>
                   <nuxt-link class="auth-link" to="/auth/Register">{{$t('sign_up')}}</nuxt-link>
                 </div>
-              </div>
+              </v-form>
             </div>
           </v-col>
         </v-row>
@@ -72,6 +72,8 @@
 </template>
 
 <script>
+import error from "@/layouts/error";
+
 export default {
 name: "Login.vue",
 data(){
@@ -82,7 +84,8 @@ data(){
       remember:false,
     },
     rules: {
-      email: [val => (val || '').length > 0 || 'This field is required'],
+      email: [val => (val || '').length > 0 || 'This email field is required',
+        val => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(val) || 'E-mail must be valid'],
       password: [ (value) => !!value || 'This field is required',
         (value) => (value && value.length >= 6) || 'minimum 6 characters',
       ],
@@ -92,16 +95,26 @@ data(){
 
 methods:{
   Login(){
-    let data = {
-      snackbar:true,
-      color:'green',
-      message:'logedd in used'
+    if(this.$refs.form.validate()) {
+      this.$store.dispatch('login',this.form)
+        .then(response => {
+          console.log('login detail',response)
+          this.$router.push('/auth/Profile')
+        }).catch(e => {
+        let errors = e.response.data.data
+        for (let item in errors){
+          if(errors.hasOwnProperty(item))
+            errors[item].forEach(err => {
+              let data = {
+                snackbar:true,
+                color:'red',
+                message:err
+              }
+              this.$store.commit('SHOW_SNACKBAR', data)
+            })
+        }
+      })
     }
-    this.$store.commit('SHOW_SNACKBAR', data)
-    this.$store.dispatch('Login',this.form).then(response => {
-      console.log('login detail',response)
-
-    })
   }
 }
 }

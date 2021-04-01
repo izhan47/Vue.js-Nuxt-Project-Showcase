@@ -89,19 +89,16 @@ name: "index.vue",
   },
   computed:{
     watchData(){
-      console.log('state in watch',this.$store.state.category_list)
-
       return this.$store.state.category_list
     }
   },
   created() {
-    this.$store.dispatch('CategoryList')
+    this.$store.dispatch('categoryList')
     this.watchCategory();
   },
   methods:{
    watchCategory(){
-     this.$store.dispatch('WatchCategories').then(response => {
-       console.log('wat',response.data.data.category_list)
+     this.$store.dispatch('watchCategories').then(response => {
        let arr = []
        response.data.data.category_list.forEach(function (data) {
          // if(data.value === ''){
@@ -121,7 +118,7 @@ name: "index.vue",
      })
    },
    filterData(){
-     this.$store.dispatch('CategoryList',this.form)
+     this.$store.dispatch('categoryList',this.form)
    }
   }
 }

@@ -33,15 +33,35 @@ name: "Forgot-Password.vue",
         email: '',
       },
       rules: {
-        email: [val => (val || '').length > 0 || 'This field is required'],
+        email: [val => (val || '').length > 0 || 'This email field is required',
+          val => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(val) || 'E-mail must be valid'],
       },
     }
   },
   methods:{
     Login(){
       console.log('ForgotPassword',this.form)
-      this.$store.dispatch('ForgotPassword',this.form).then(response => {
-        console.log('ForgotPassword detail',response)
+      this.$store.dispatch('forgotPassword',this.form)
+        .then(response => {
+          let data = {
+            snackbar:true,
+            color:'green',
+            message:response.data.message
+          }
+          this.$store.commit('SHOW_SNACKBAR', data)
+        }).catch(e => {
+        let errors = e.response.data.data
+        for (let item in errors){
+          if(errors.hasOwnProperty(item))
+            errors[item].forEach(err => {
+              let data = {
+                snackbar:true,
+                color:'red',
+                message:err
+              }
+              this.$store.commit('SHOW_SNACKBAR', data)
+            })
+        }
       })
     }
   }

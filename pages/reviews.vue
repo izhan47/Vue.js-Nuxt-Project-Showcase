@@ -111,8 +111,6 @@ data(){
   components:{ProductReviewCard},
   computed:{
     reviewData(){
-      console.log('state in Review',this.$store.state.review_list)
-
       return this.$store.state.review_list
     },
     categoryList(){
@@ -124,18 +122,15 @@ data(){
           'text': data.label,
         })
       })
-      // console.log(arr);
      return arr
     }
   },
   created() {
-    // console.log('in cre',this.form)
-    this.$store.dispatch('ReviewList',this.form)
-    this.$store.dispatch('ReviewCategories')
+    this.$store.dispatch('reviewList')
+    this.$store.dispatch('reviewCategories')
   },
   methods:{
     filterData(){
-      console.log('cat list',this.categoryList)
       let arr = []
       this.categories.forEach(id => {
         let x =  this.categoryList.find(e => e.value === id)
@@ -144,17 +139,8 @@ data(){
           label : x.text
         })
       })
-      console.log('array',arr)
-      let arrayToString = JSON.stringify(Object.assign( arr));  // convert array to string
-      console.log('json array to string',arrayToString)
-      // let stringToJsonObject = JSON.parse(arrayToString);  // convert string to json object
-      // console.log('json to object',stringToJsonObject)
-      // this.form.category_id = stringToJsonObject
-
-      // category_id: [{"value":41,"label":"The Essentials"}]
-
-      this.form.category_id = arrayToString
-      this.$store.dispatch('ReviewList',this.form)
+      this.form.category_id= JSON.stringify(Object.assign( arr));  // convert array to string
+      this.$store.dispatch('reviewList',this.form)
     }
   }
 }
