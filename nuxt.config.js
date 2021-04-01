@@ -1,5 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
-const config = require('./configs/config')
+// const config = require('./configs/config')
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -50,9 +50,9 @@ purgeCSS: {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
   ],
-  env: {
-    BASE_URL: config.API_URL,
-  },
+  // env: {
+  //   BASE_URL: config.API_URL,
+  // },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
