@@ -89,6 +89,7 @@ name: "index.vue",
   },
   computed:{
     watchData(){
+      console.log('after filter',this.$store.state.category_list)
       return this.$store.state.category_list
     }
   },

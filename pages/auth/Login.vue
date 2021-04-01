@@ -96,12 +96,16 @@ data(){
 methods:{
   Login(){
     if(this.$refs.form.validate()) {
+      let loader=true
+      this.$store.commit('SHOW_LOADER', loader)
       this.$store.dispatch('login',this.form)
         .then(response => {
+          this.$store.commit('SHOW_LOADER', loader=false)
           console.log('login detail',response)
           this.$router.push('/auth/Profile')
         }).catch(e => {
         let errors = e.response.data.data
+        this.$store.commit('SHOW_LOADER', loader=false)
         for (let item in errors){
           if(errors.hasOwnProperty(item))
             errors[item].forEach(err => {

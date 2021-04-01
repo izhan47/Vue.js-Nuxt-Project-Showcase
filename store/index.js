@@ -26,6 +26,7 @@ export default () => {
         color:'',
         message:''
       },
+      loader:false
     },
     mutations: {
       SET_PET_PRO_LIST(state, data) {
@@ -45,6 +46,9 @@ export default () => {
       },
       SHOW_SNACKBAR(state, data) {
         state.alert = data;
+      },
+      SHOW_LOADER(state, data) {
+        state.loader = data;
       },
 
 

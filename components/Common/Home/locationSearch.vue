@@ -24,6 +24,7 @@
               v-model="form.category_id"
               outlined
               rounded
+              @click="filterData()"
             ></v-select>
           </div>
           <div class="search-form-field">
@@ -52,6 +53,7 @@
               solo
               rounded
               outlined
+              @click="filterData()"
             ></v-text-field>
           </div>
           <div >
@@ -132,8 +134,6 @@ components:{ PetCategoryCard},
     filterData(){
       // console.log('search form',this.form)
       this.$store.dispatch('petProList',this.form)
-
-
     },
     filterLocation(){
       return axios({
@@ -162,7 +162,7 @@ components:{ PetCategoryCard},
   background: $white;
   min-height: 48px;
   box-shadow: unset !important;
-  max-width: 300px;
+  max-width: 273px;
   font-weight: $font-weight-bold;
   font-family: $font-family-primary;
   .v-text-field__slot{

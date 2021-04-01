@@ -145,19 +145,20 @@ export default {
       if (!this.$store.state.user.isAuthenticated) {
         return this.$router.push('/auth/Login')
       }else {
+        let loader=true
+        this.$store.commit('SHOW_LOADER', loader)
         this.form.slug=this.categoryData.slug
         this.form.parent_comment_id=this.categoryData.id
         this.$store.dispatch('comment',this.form).then(response => {
+          this.$store.commit('SHOW_LOADER', loader=false)
           let data = {
             snackbar:true,
-            color:'#00afaa',
+            color:'green',
             message:response.data.message
           }
           this.$store.commit('SHOW_SNACKBAR', data)
-
         })
       }
-
     }
   }
 }

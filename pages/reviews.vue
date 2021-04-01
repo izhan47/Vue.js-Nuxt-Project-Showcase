@@ -172,7 +172,7 @@ data(){
   background: $white;
   min-height: 48px;
    box-shadow: unset !important;
-  max-width: 280px;
+  max-width: 273px;
   font-weight: $font-weight-bold;
   font-family:$font-family-primary;
   .v-text-field__slot{

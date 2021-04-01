@@ -97,9 +97,11 @@ name: "Register.vue",
   },
   methods:{
     Register(){
-      console.log('beside if',this.form)
+      let loader=true
+      this.$store.commit('SHOW_LOADER', loader)
       if(this.$refs.form.validate()) {
         this.$store.dispatch('register',this.form).then(response => {
+          this.$store.commit('SHOW_LOADER', loader=false)
           console.log('Register detail',response)
           let data = {
             snackbar:true,
@@ -109,7 +111,7 @@ name: "Register.vue",
           this.$store.commit('SHOW_SNACKBAR', data)
           this.$router.push('/auth/Profile')
         }).catch(e=>{
-          console.log('error',e.response.data.data)
+          this.$store.commit('SHOW_LOADER', loader=false)
           let errors = e.response.data.data
           for (let item in errors){
             if(errors.hasOwnProperty(item))

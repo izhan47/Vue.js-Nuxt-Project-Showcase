@@ -21,7 +21,7 @@ export default {
   name:"index",
   components:{
     bannerSearch,petFunctions,about,locationSearch,careAdvice,featuredProduct,newsLetter
-  }
+  },
 }
 </script>
 

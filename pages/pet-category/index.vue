@@ -20,6 +20,7 @@
                 v-model="form.category_id"
                 outlined
                 rounded
+                @click="filterData()"
               ></v-select>
             </div>
             <div class="search-form-field">
@@ -46,6 +47,7 @@
                 solo
                 rounded
                 outlined
+                @click="filterData()"
               ></v-text-field>
             </div>
             <div >
@@ -108,59 +110,6 @@ export default {
           category:["Deal Offered"],
           icons:["mdi-paw"],
 
-        },
-
-        {
-          src:"/images/pet-1.png",
-          name:"Paws On Chicon",
-          rating:"5.0",
-          description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
-          category:["Deal Offered","Certified",],
-          icons:["mdi-paw","mdi-paw","mdi-paw"],
-        },
-        {
-          src:"/images/pet-2.jpg",
-          name:"Liz's Pet Care",
-          rating:"4.5",
-          description:"Homemade Treats and Food, Pet Store, Self Serve Dog...",
-          category:["Deal Offered"],
-          icons:["mdi-paw","mdi-paw"],
-
-        },
-        {
-          src:"/images/pet-3.jpg",
-          name:"Pet Behaviorist",
-          rating:"5.0",
-          description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
-          category:["Deal Offered"],
-          icons:["mdi-paw"],
-
-        },
-
-        {
-          src:"/images/pet-1.png",
-          name:"Paws On Chicon",
-          rating:"5.0",
-          description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
-          category:["Deal Offered","Certified",],
-          icons:["mdi-paw","mdi-paw","mdi-paw"],
-        },
-        {
-          src:"/images/pet-2.jpg",
-          name:"Liz's Pet Care",
-          rating:"4.5",
-          description:"Homemade Treats and Food, Pet Store, Self Serve Dog...",
-          category:["Deal Offered"],
-          icons:["mdi-paw","mdi-paw"],
-
-        },
-        {
-          src:"/images/pet-3.jpg",
-          name:"Pet Behaviorist",
-          rating:"5.0",
-          description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
-          category:["Deal Offered"],
-          icons:["mdi-paw"],
         },
       ],
       category: [],
