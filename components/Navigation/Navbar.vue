@@ -72,7 +72,8 @@
               <div   class="nav-title ml-4" @click="$router.push('/pet-category')">{{$t('find_a_pet_pro')}}</div>
             </div>
             <div>
-              <v-btn outlined rounded class="sign-in-btn" @click="$router.push('/auth/Login')">{{$t('sign_in')}}</v-btn>
+              <v-btn v-if="$store.state.user.isAuthenticated" outlined rounded class="sign-in-btn"  @click="reset()">{{$t('logout')}}</v-btn>
+              <v-btn v-else outlined rounded class="sign-in-btn" @click="$router.push('/auth/Login')">{{$t('sign_in')}}</v-btn>
             </div>
           </v-toolbar-title>
           </div>
@@ -134,6 +135,13 @@ export default {
     this.$store.commit('Drawer/UPDATE_DRAWER_VALUE',this.drawer)
   },
   methods:{
+    reset () {
+      // console.log('inside')
+      this.$store.dispatch('reset').then(response => {
+        // console.log(response)
+        this.$router.push('/auth/Login')
+      })
+    },
     // handleWindowResize() {
     //   console.log('screen size', window.innerWidth)
     //   this.drawer =  window.innerWidth < 769;

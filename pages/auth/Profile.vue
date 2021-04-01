@@ -25,18 +25,17 @@
       <v-card class="card-radius custom-card-padding space">
          <v-card-title class="card-title">{{$t('account_info')}}</v-card-title>
         <hr class="dot-line mb-5">
-        <b >Human Name</b> <br>
-        <span>{{$t('address')}}</span> <br>
-        <span>{{$t('email')}}</span> <br>
-        <span>{{$t('phone_number')}}</span> <br>
+        <b >Human Name</b>: <b>{{userDetail.name}}</b> <br>
+        <span>{{$t('address')}}</span>: <span>{{userDetail.city_id}}</span> <br>
+        <span>{{$t('email')}}</span>:  <span>{{userDetail.email}}</span> <br>
+        <span>{{$t('phone_number')}}</span>: <span>{{userDetail.phone_number}}</span><br>
       </v-card>
       <v-card class="card-radius custom-card-padding">
          <v-card-title class="card-title">{{$t('vet_info')}}</v-card-title>
         <hr class="dot-line mb-5">
-        <b >Human Name</b> <br>
-        <span>Southwest Animal Clinic</span> <br>
-        <span>123 Sunflower Road</span> <br>
-        <span>(740) 844-7456</span> <br>
+        <b >{{userDetail.vet_place_name}}</b> <br>
+        <span>{{userDetail.vet_address}}</span> <br>
+        <span>{{userDetail.vet_phone_number}}</span> <br>
       </v-card>
     </v-col>
   </v-row>
@@ -67,8 +66,10 @@
 <script>
 export default {
   name: "Profile.vue",
+  middleware: [ 'auth'],
   data(){
     return{
+      userDetail:'',
       cards:[
         {
           icon:'mdi-percent-outline',
@@ -112,6 +113,12 @@ export default {
         },
       ],
     }
+  },
+  methods:{
+  },
+  created() {
+   this.userDetail=this.$store.state.user.user
+    console.log('user info',this.userDetail)
   }
 }
 </script>

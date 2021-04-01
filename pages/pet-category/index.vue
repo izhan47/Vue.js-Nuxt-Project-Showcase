@@ -16,8 +16,8 @@
               <v-select
                 class="search-field mt-2"
                 :placeholder="$t('all')"
-                :items="category"
-                v-model="form.category"
+                :items="categoryList"
+                v-model="form.category_id"
                 outlined
                 rounded
               ></v-select>
@@ -41,7 +41,7 @@
               <v-text-field
                 class="search-field  mt-2"
                 :placeholder="$t('all')"
-                v-model="form.keyword"
+                v-model="form.search"
                 color="#00afaa"
                 solo
                 rounded
@@ -53,6 +53,7 @@
                 class="purple-section  search-btn"
                 outlined
                 large
+                @click="filterData()"
               >
                 {{ $t('search') }}
               </v-btn>
@@ -160,17 +161,13 @@ export default {
           description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
           category:["Deal Offered"],
           icons:["mdi-paw"],
-
         },
-
-
-
       ],
       category: [],
       form:{
-        category:'',
+        category_id:'',
         location:'',
-        keyword:''
+        search:''
       },
       readMore:false
     }
@@ -185,29 +182,25 @@ export default {
     },
     petProData(){
       return this.$store.state.pet_pro_list
+    },
+    categoryList(){
+      let categories= this.$store.state.pet_category_list
+      let arr = []
+      categories.forEach(function (data) {
+        arr.push({
+          'value':data.value,
+          'text': data.label,
+        })
+      })
+      return arr
     }
   },
   created() {
-    this.petCategory();
+    this.$store.dispatch('petCategories')
   },
   methods:{
-    petCategory(){
-      this.$store.dispatch('PetCategories').then(response => {
-        let arr = []
-        response.data.data.category_list.forEach(data => {
-          arr.push({
-            'value': data.value,
-            'text': data.label,
-          })
-        })
-        this.category = arr;
-      })
-    },
-    loadMore() {
-      this.readMore = true
-    },
-    loadLess() {
-      this.readMore = false
+    filterData(){
+      this.$store.dispatch('petProList',this.form)
     },
   }
 }

@@ -57,7 +57,8 @@ export default {
 .card-description{
   font-family: $font-family-primary;
   font-size: $font-size-15;
-  font-weight: $font-weight-500;
+  font-weight: $font-weight-700;
+  line-height: 1.87;
 }
 .card-img {
   min-height: 285px;

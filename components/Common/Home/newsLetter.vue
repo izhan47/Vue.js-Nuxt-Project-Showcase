@@ -10,6 +10,18 @@
           <p class="description">{{ $t('newsletter_description') }}</p>
         </div>
         <div class="mb-5">
+          <v-alert
+            v-model="showAlert"
+            border="left"
+            close-text="Close Alert"
+            dark
+            dismissible
+            style="text-align: center"
+            :type="alertType"
+          >
+            {{errorMsg}}
+
+          </v-alert>
           <v-form
             ref="form"
             @submit.prevent="submit"
@@ -19,8 +31,8 @@
                 <v-text-field
                   class="form-field news-section-label"
                   color="white"
-                  :rules="rules.name"
-                  v-model="form.name"
+                  :rules="rules.first_name"
+                  v-model="form.first_name"
                   :label="$t('name')"
                   required
                 ></v-text-field>
@@ -29,8 +41,8 @@
                 <v-text-field
                   class="form-field news-section-label"
                   color="white"
-                  :rules="rules.zipCode"
-                  v-model="form.zipCode"
+                  :rules="rules.zipcode"
+                  v-model="form.zipcode"
                   :label="$t('your_zipcode')"
                   required
                 ></v-text-field>
@@ -74,21 +86,53 @@ export default {
   },
   data(){
     return{
+      errorMsg: '',
+      showAlert:false,
+      alertType: '',
       form:{
-        name:'',
-        zipCode:'',
+        first_name:'',
+        zipcode:'',
         email:''
       },
       rules: {
-        zipCode: [val => (val || '').length > 0 || 'This field is required'],
-        email: [val => (val || '').length > 0 || 'This field is required'],
-        name: [val => (val || '').length > 0 || 'This field is required'],
+        zipcode: [val => (val || '').length > 0 || 'This Zipcode is required'],
+        email: [val => (val || '').length > 0 || 'This email field is required',
+          val => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(val) || 'E-mail must be valid'],
+        first_name: [val => (val || '').length > 0 || 'This Name is required'],
       },
     }
   },
   methods:{
     submit(){
+      if(this.$refs.form.validate()) {
+
+      }
+
       console.log('submit',this.form)
+      this.$store.dispatch('newsLetter',this.form)
+        .then(response => {
+          let data = {
+            snackbar:true,
+            color:'green',
+            message:response.data.message
+          }
+          this.$store.commit('SHOW_SNACKBAR', data)
+        }).catch(e => {
+        let errors = e.response.data.data
+        for (let item in errors){
+          if(errors.hasOwnProperty(item))
+            errors[item].forEach(err => {
+              let data = {
+                snackbar:true,
+                color:'red',
+                message:err
+              }
+              this.$store.commit('SHOW_SNACKBAR', data)
+            })
+        }
+      })
+
+
     }
   }
 }

@@ -21,10 +21,21 @@
               <div class="text-center">
                 <img class="img-height img-fluid"  src="/images/Auth/Pom-3.png" alt="logo" />
               </div>
-              <div>
+              <v-form ref="form">
                 <v-text-field
                   class="input-field  mt-2"
-                  :placeholder="$t('username')"
+                  :placeholder="$t('name')"
+                  v-model="form.name"
+                  :rules="rules.name"
+                  required
+                  solo
+                  color="#00afaa"
+                  rounded
+                  outlined
+                ></v-text-field>
+                <v-text-field
+                  class="input-field  mt-2"
+                  :placeholder="$t('email')"
                   v-model="form.email"
                   :rules="rules.email"
                   required
@@ -38,6 +49,7 @@
                   :placeholder="$t('password')"
                   v-model="form.password"
                   :rules="rules.password"
+                  type="password"
                   required
                   solo
                   color="#00afaa"
@@ -47,7 +59,7 @@
                 <div class=" text-center">
                   <v-btn large class="log-in-btn white-text" outlined rounded @click="Register()"> {{ $t('sign_up') }}</v-btn>
                 </div>
-              </div>
+              </v-form>
               <div class="mt-4 mb-2 ">
                 <span class="forgot-pass">{{$t('have_an_account')}}</span>
                 <nuxt-link class="auth-link" to="/auth/Login">{{$t('login')}}</nuxt-link>
@@ -61,25 +73,59 @@
   </div>
 </template>
 <script>
+import error from "@/layouts/error";
+
 export default {
 name: "Register.vue",
   data(){
     return{
       form:{
+        name:'',
         email:'',
         password:'',
-        remember:false,
       },
       rules: {
 
-        email: [val => (val || '').length > 0 || 'This field is required'],
-        password: [val => (val || '').length > 0 || 'This field is required'],
+        name: [val => (val || '').length > 0 || 'This name field is required'],
+        email: [val => (val || '').length > 0 || 'This email field is required',
+                val => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(val) || 'E-mail must be valid'],
+        password: [ (value) => !!value || 'This password field is required',
+                     (value) => (value && value.length >= 6) || 'minimum 6 characters',
+        ],
       },
     }
   },
   methods:{
     Register(){
-      console.log('sign up',this.form)
+      console.log('beside if',this.form)
+      if(this.$refs.form.validate()) {
+        this.$store.dispatch('register',this.form).then(response => {
+          console.log('Register detail',response)
+          let data = {
+            snackbar:true,
+            color:'green',
+            message:response.data.message
+          }
+          this.$store.commit('SHOW_SNACKBAR', data)
+          this.$router.push('/auth/Profile')
+        }).catch(e=>{
+          console.log('error',e.response.data.data)
+          let errors = e.response.data.data
+          for (let item in errors){
+            if(errors.hasOwnProperty(item))
+              errors[item].forEach(err => {
+                let data = {
+                  snackbar:true,
+                  color:'red',
+                  message:err
+                }
+                this.$store.commit('SHOW_SNACKBAR', data)
+              })
+          }
+        })
+      }
+
+
     }
   }
 }

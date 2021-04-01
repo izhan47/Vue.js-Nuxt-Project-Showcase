@@ -16,7 +16,7 @@
               <v-select
                 class="search-field mt-2"
                 :items="sorting"
-                v-model="sorting[0]"
+                v-model="form.sort_by"
                 outlined
                 rounded
               ></v-select>
@@ -26,7 +26,7 @@
               <v-select
                 class="search-field mt-2"
                 :items="category"
-                v-model="form.category"
+                v-model="form.category_id"
                 outlined
                 rounded
               ></v-select>
@@ -36,7 +36,7 @@
               <v-text-field
                 class="search-field  mt-2"
                 :placeholder="$t('all')"
-                v-model="form.keyword"
+                v-model="form.search"
                 color="#00afaa"
                 solo
                 rounded
@@ -48,6 +48,7 @@
                 class="purple-section  search-btn"
                 outlined
                 large
+                @click="filterData()"
               >
                 {{ $t('search') }}
               </v-btn>
@@ -80,9 +81,9 @@ name: "index.vue",
       category: [],
       sorting: ['Latest', 'Popular'],
       form:{
-        category:'',
-        location:'',
-        keyword:''
+        category_id:'',
+        sort_by:'Latest',
+        search:''
       },
     }
   },
@@ -92,13 +93,12 @@ name: "index.vue",
     }
   },
   created() {
-    this.$store.dispatch('CategoryList')
+    this.$store.dispatch('categoryList')
     this.watchCategory();
   },
   methods:{
    watchCategory(){
      this.$store.dispatch('watchCategories').then(response => {
-       console.log('wat',response)
        let arr = []
        response.data.data.category_list.forEach(function (data) {
          // if(data.value === ''){
@@ -116,7 +116,9 @@ name: "index.vue",
        })
        this.category = arr;
      })
-
+   },
+   filterData(){
+     this.$store.dispatch('categoryList',this.form)
    }
   }
 }
