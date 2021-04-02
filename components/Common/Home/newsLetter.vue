@@ -10,18 +10,6 @@
           <p class="description">{{ $t('newsletter_description') }}</p>
         </div>
         <div class="mb-5">
-          <v-alert
-            v-model="showAlert"
-            border="left"
-            close-text="Close Alert"
-            dark
-            dismissible
-            style="text-align: center"
-            :type="alertType"
-          >
-            {{errorMsg}}
-
-          </v-alert>
           <v-form
             ref="form"
             @submit.prevent="submit"
@@ -105,34 +93,24 @@ export default {
   methods:{
     submit(){
       if(this.$refs.form.validate()) {
-
-      }
-
-      console.log('submit',this.form)
-      this.$store.dispatch('newsLetter',this.form)
-        .then(response => {
-          let data = {
-            snackbar:true,
-            color:'green',
-            message:response.data.message
-          }
-          this.$store.commit('SHOW_SNACKBAR', data)
-        }).catch(e => {
-        let errors = e.response.data.data
-        for (let item in errors){
-          if(errors.hasOwnProperty(item))
-            errors[item].forEach(err => {
-              let data = {
-                snackbar:true,
-                color:'red',
-                message:err
-              }
-              this.$store.commit('SHOW_SNACKBAR', data)
+        this.$store.commit('SHOW_LOADER', true)
+        this.$store.dispatch('newsLetter',this.form)
+          .then(response => {
+            this.$store.commit('SHOW_LOADER', false)
+            this.$store.commit('SHOW_SNACKBAR', { snackbar:true, color:'green',  message:response.data.message
             })
-        }
-      })
-
-
+          }).catch(e => {
+          this.$store.commit('SHOW_LOADER', false)
+          let errors = e.response.data.data
+          for (let item in errors){
+            if(errors.hasOwnProperty(item))
+              errors[item].forEach(err => {
+                this.$store.commit('SHOW_SNACKBAR',  { snackbar:true, color:'red', message:err
+                })
+              })
+          }
+        })
+      }
     }
   }
 }

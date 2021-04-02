@@ -1,7 +1,5 @@
 <template>
-  <div>
     <v-snackbar
-      v-if="notify.snackbar"
       v-model="notify.snackbar"
       :multi-line="multiLine"
       :timeout="timeout"
@@ -18,8 +16,6 @@
 <!--        </v-btn>-->
 <!--      </template>-->
     </v-snackbar>
-  </div>
-
 </template>
 
 <script>

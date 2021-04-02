@@ -26,6 +26,7 @@ export default () => {
         color:'',
         message:''
       },
+      loader:false
     },
     mutations: {
       SET_PET_PRO_LIST(state, data) {
@@ -46,10 +47,12 @@ export default () => {
       SHOW_SNACKBAR(state, data) {
         state.alert = data;
       },
+      SHOW_LOADER(state, data) {
+        state.loader = data;
+      },
 
 
       SET_USER (state, data) {
-        console.log('mutate',data)
         state.user = { 'bearerToken': data.token, 'user': data.user , 'isAuthenticated':true }
       },
       RESET_USER (state) {
@@ -62,9 +65,11 @@ export default () => {
         axios({
           method: 'POST',
           url: 'pet-pro/get-map-list',
-          data
+          data:data
         }).then(response => {
+          console.log('re',response.data.data.pet_pro_list)
           commit('SET_PET_PRO_LIST',response.data.data.pet_pro_list)
+          commit('SHOW_LOADER', false)
         })
       },
       singlePetDetail({dispatch}, slug) {
@@ -89,6 +94,8 @@ export default () => {
           data
         }).then(response => {
           commit('SET_CATEGORY_LIST',response.data.data.watch_and_learn_list)
+          commit('SHOW_LOADER', false)
+
         })
       },
       singleCategoryDetail({dispatch}, slug) {
@@ -121,6 +128,7 @@ export default () => {
           data
         }).then(response => {
           commit('SET_PRODUCT_REVIEW_LIST',response.data.data.watch_and_learn_list)
+          commit('SHOW_LOADER', false)
         })
       },
       reviewCategories({commit}) {

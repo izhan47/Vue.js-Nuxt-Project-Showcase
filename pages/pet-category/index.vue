@@ -20,6 +20,7 @@
                 v-model="form.category_id"
                 outlined
                 rounded
+                @change="filterData()"
               ></v-select>
             </div>
             <div class="search-form-field">
@@ -46,6 +47,7 @@
                 solo
                 rounded
                 outlined
+                @change="filterData()"
               ></v-text-field>
             </div>
             <div >
@@ -107,60 +109,6 @@ export default {
           description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
           category:["Deal Offered"],
           icons:["mdi-paw"],
-
-        },
-
-        {
-          src:"/images/pet-1.png",
-          name:"Paws On Chicon",
-          rating:"5.0",
-          description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
-          category:["Deal Offered","Certified",],
-          icons:["mdi-paw","mdi-paw","mdi-paw"],
-        },
-        {
-          src:"/images/pet-2.jpg",
-          name:"Liz's Pet Care",
-          rating:"4.5",
-          description:"Homemade Treats and Food, Pet Store, Self Serve Dog...",
-          category:["Deal Offered"],
-          icons:["mdi-paw","mdi-paw"],
-
-        },
-        {
-          src:"/images/pet-3.jpg",
-          name:"Pet Behaviorist",
-          rating:"5.0",
-          description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
-          category:["Deal Offered"],
-          icons:["mdi-paw"],
-
-        },
-
-        {
-          src:"/images/pet-1.png",
-          name:"Paws On Chicon",
-          rating:"5.0",
-          description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
-          category:["Deal Offered","Certified",],
-          icons:["mdi-paw","mdi-paw","mdi-paw"],
-        },
-        {
-          src:"/images/pet-2.jpg",
-          name:"Liz's Pet Care",
-          rating:"4.5",
-          description:"Homemade Treats and Food, Pet Store, Self Serve Dog...",
-          category:["Deal Offered"],
-          icons:["mdi-paw","mdi-paw"],
-
-        },
-        {
-          src:"/images/pet-3.jpg",
-          name:"Pet Behaviorist",
-          rating:"5.0",
-          description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
-          category:["Deal Offered"],
-          icons:["mdi-paw"],
         },
       ],
       category: [],
@@ -169,7 +117,7 @@ export default {
         location:'',
         search:''
       },
-      readMore:false
+      categoryList:''
     }
   },
   computed:{
@@ -185,21 +133,24 @@ export default {
     },
     categoryList(){
       let categories= this.$store.state.pet_category_list
-      let arr = []
-      categories.forEach(function (data) {
-        arr.push({
-          'value':data.value,
-          'text': data.label,
-        })
-      })
-      return arr
-    }
+      let arr=   categories.map(category => ({
+        'value':category.value,
+        'text': category.label,
+      }))
+      return [{
+        'value':'',
+        'text': 'All',
+      }, ...arr]
+    },
   },
   created() {
+    this.$store.commit('SHOW_LOADER', true)
+    this.$store.dispatch('petProList',this.form)
     this.$store.dispatch('petCategories')
   },
   methods:{
     filterData(){
+      this.$store.commit('SHOW_LOADER', true)
       this.$store.dispatch('petProList',this.form)
     },
   }

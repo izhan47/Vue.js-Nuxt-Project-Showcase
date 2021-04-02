@@ -19,6 +19,7 @@
                 v-model="form.sort_by"
                 outlined
                 rounded
+                @change="filterData()"
               ></v-select>
             </div>
             <div class="search-form-field">
@@ -33,6 +34,7 @@
                 rounded
                 multiple
                small-chips
+               @change="filterData()"
               >
                 <template v-slot:selection="{ item, index }">
                   <v-chip v-if="index === 0">
@@ -131,6 +133,7 @@ data(){
   },
   methods:{
     filterData(){
+
       let arr = []
       this.categories.forEach(id => {
         let x =  this.categoryList.find(e => e.value === id)
@@ -139,7 +142,8 @@ data(){
           label : x.text
         })
       })
-      this.form.category_id= JSON.stringify(Object.assign( arr));  // convert array to string
+      this.form.category_id= JSON.stringify(Object.assign( arr));// convert array to string
+      this.$store.commit('SHOW_LOADER', true)
       this.$store.dispatch('reviewList',this.form)
     }
   }
@@ -172,7 +176,7 @@ data(){
   background: $white;
   min-height: 48px;
    box-shadow: unset !important;
-  max-width: 280px;
+  max-width: 273px;
   font-weight: $font-weight-bold;
   font-family:$font-family-primary;
   .v-text-field__slot{

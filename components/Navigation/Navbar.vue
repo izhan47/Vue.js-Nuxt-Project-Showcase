@@ -131,23 +131,12 @@ export default {
       // console.log(this.drawer)
     });
   },
-  mounted() {
-    this.$store.commit('Drawer/UPDATE_DRAWER_VALUE',this.drawer)
-  },
   methods:{
     reset () {
-      // console.log('inside')
       this.$store.dispatch('reset').then(response => {
-        // console.log(response)
         this.$router.push('/auth/Login')
       })
     },
-    // handleWindowResize() {
-    //   console.log('screen size', window.innerWidth)
-    //   this.drawer =  window.innerWidth < 769;
-    //   console.log('val',this.drawer)
-    //   this.$store.commit("Drawer/UPDATE_DRAWER_VALUE",this.drawer);
-    // },
   }
 }
 </script>

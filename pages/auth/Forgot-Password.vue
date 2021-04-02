@@ -40,26 +40,20 @@ name: "Forgot-Password.vue",
   },
   methods:{
     Login(){
-      console.log('ForgotPassword',this.form)
+      this.$store.commit('SHOW_LOADER', true)
       this.$store.dispatch('forgotPassword',this.form)
         .then(response => {
-          let data = {
-            snackbar:true,
-            color:'green',
-            message:response.data.message
-          }
-          this.$store.commit('SHOW_SNACKBAR', data)
+          this.$store.commit('SHOW_LOADER', false)
+          this.$store.commit('SHOW_SNACKBAR', { snackbar:true, color:'green', message:response.data.message
+          })
         }).catch(e => {
+        this.$store.commit('SHOW_LOADER', false)
         let errors = e.response.data.data
         for (let item in errors){
           if(errors.hasOwnProperty(item))
             errors[item].forEach(err => {
-              let data = {
-                snackbar:true,
-                color:'red',
-                message:err
-              }
-              this.$store.commit('SHOW_SNACKBAR', data)
+              this.$store.commit('SHOW_SNACKBAR',  {snackbar:true, color:'red',  message:err
+              })
             })
         }
       })
