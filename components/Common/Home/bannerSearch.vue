@@ -45,6 +45,7 @@ export default {
   methods:{
     filterData(){
       this.$emit('filter-data', this.form)
+      this.$router.push('/pet-category')
     },
   }
 }

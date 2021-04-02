@@ -143,7 +143,9 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('petProList',this.form)
+    if(this.$store.state.pet_pro_list.length===0){
+      this.$store.dispatch('petProList',this.form)
+    }
     this.$store.dispatch('petCategories')
   },
   methods:{
