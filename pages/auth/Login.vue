@@ -99,7 +99,6 @@ methods:{
       this.$store.dispatch('login',this.form)
         .then(response => {
           this.$store.commit('SHOW_LOADER', false)
-          console.log('login detail',response)
           this.$router.push('/auth/Profile')
         }).catch(e => {
         let errors = e.response.data.data

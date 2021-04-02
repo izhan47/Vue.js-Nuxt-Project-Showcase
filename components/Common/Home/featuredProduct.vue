@@ -22,6 +22,7 @@
           outlined
           large
           rounded
+          @click="$router.push('/reviews')"
         >
           {{ $t('see_product_review') }}
         </v-btn>

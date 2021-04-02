@@ -14,7 +14,7 @@
                   elevation="0"
                   class="search-btn"
                   color="#270089"
-                  @click="show"
+                  @click="filterData"
                 >
                   {{ $t('search') }}
                 </v-btn>
@@ -43,12 +43,9 @@ export default {
     }
   },
   methods:{
-    show(){
-      this.$store.commit('SHOW_LOADER', true)
-      console.log('data',this.form.search)
-      this.$store.dispatch('petProList',this.form)
-      // this.$router.push('/pet-category')
-    }
+    filterData(){
+      this.$emit('filter-data', this.form)
+    },
   }
 }
 </script>

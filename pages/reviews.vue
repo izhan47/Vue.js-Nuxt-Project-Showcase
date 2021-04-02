@@ -143,7 +143,7 @@ data(){
         })
       })
       this.form.category_id= JSON.stringify(Object.assign( arr));// convert array to string
-      this.$store.commit('SHOW_LOADER', true)
+
       this.$store.dispatch('reviewList',this.form)
     }
   }

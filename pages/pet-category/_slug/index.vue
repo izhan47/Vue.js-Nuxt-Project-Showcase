@@ -1,14 +1,5 @@
 <template>
   <div v-if="petDetail">
-    <div v-if="showLoader">
-      <v-progress-circular
-        :size="70"
-        :width="7"
-        color="primary"
-        indeterminate
-      ></v-progress-circular>
-    </div>
-    <div v-else>
       <div class="pet-category-container ">
         <v-row >
           <v-col cols="12" md="7" sm="12">
@@ -144,7 +135,6 @@
         </v-row>
       </div>
       <!--  card-section-end   -->
-    </div>
   </div>
 </template>
 
@@ -157,13 +147,6 @@ export default {
     return{
       showLoader:false,
       petDetail:'',
-      images:[
-        '/images/PetCategory/img-1.jpg',
-        '/images/PetCategory/img-2.jpg',
-        '/images/PetCategory/img-3.jpg',
-        '/images/PetCategory/img-4.jpg',
-      ],
-      rating: 5,
       social:[
         {
           icon:'mdi-facebook',
@@ -219,36 +202,6 @@ export default {
         { "lat": -60.79249218273802, "lng": 98.52131582979746 },
         { "lat": -57.3633598628284, "lng": -149.33024667020254 },
       ],
-      timings:[
-        {
-          day:'Monday',
-          time:'07:00 AM - 03:00 PM'
-        },
-        {
-          day:'Tuesday',
-          time:'07:00 AM - 03:00 PM'
-        },
-        {
-          day:'Wednesday',
-          time:'07:00 AM - 03:00 PM'
-        },
-        {
-          day:'Thursday',
-          time:'07:00 AM - 03:00 PM'
-        },
-        {
-          day:'Friday',
-          time:'07:00 AM - 03:00 PM'
-        },
-        {
-          day:'Saturday',
-          time:'07:00 AM - 03:00 PM'
-        },
-        {
-          day:'Sunday',
-          time:'07:00 AM - 03:00 PM'
-        },
-      ]
     }
   },
   computed:{
@@ -264,11 +217,10 @@ export default {
   },
   methods:{
     getPetDetail(){
-      this.showLoader=true
+      this.$store.commit('SHOW_LOADER', true)
       this.$store.dispatch('singlePetDetail',this.URL).then( response => {
-        this.showLoader=false
+        this.$store.commit('SHOW_LOADER', false)
         this.petDetail = response.data.data.per_pro
-        console.log(this.petDetail)
       })
     }
   }

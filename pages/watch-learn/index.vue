@@ -91,7 +91,6 @@ name: "index.vue",
   },
   computed:{
     watchData(){
-      console.log('after filter',this.$store.state.category_list)
       return this.$store.state.category_list
     }
   },
@@ -121,8 +120,6 @@ name: "index.vue",
      })
    },
    filterData(){
-     this.$store.commit('SHOW_LOADER', true)
-
      this.$store.dispatch('categoryList',this.form)
    }
   }

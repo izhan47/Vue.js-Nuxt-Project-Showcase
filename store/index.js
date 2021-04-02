@@ -62,14 +62,15 @@ export default () => {
     actions: {
       //Pet Pro
       petProList({commit},data) {
+        commit('SHOW_LOADER', true)
         axios({
           method: 'POST',
           url: 'pet-pro/get-map-list',
           data:data
         }).then(response => {
-          console.log('re',response.data.data.pet_pro_list)
           commit('SET_PET_PRO_LIST',response.data.data.pet_pro_list)
           commit('SHOW_LOADER', false)
+        }).catch(e => {
         })
       },
       singlePetDetail({dispatch}, slug) {
@@ -88,6 +89,7 @@ export default () => {
       },
       // Watch Learn
       categoryList({commit},data) {
+        commit('SHOW_LOADER', true)
         axios({
           method: 'POST',
           url: 'watch-and-learn/get-list',
@@ -113,7 +115,6 @@ export default () => {
       },
       //Comment
       comment({commit}, data) {
-        // console.log('news',data)
         return axios({
           method: 'POST',
           url: 'watch-and-learn/store-comment',
@@ -122,6 +123,7 @@ export default () => {
       },
       //Product Reviews
       reviewList({commit},data) {
+        commit('SHOW_LOADER', true)
         axios({
           method: 'POST',
           url: 'product-reviews/get-list',
@@ -141,7 +143,6 @@ export default () => {
       },
       //News Letter
       newsLetter({commit}, data) {
-        // console.log('news',data)
         return axios({
           method: 'POST',
           url: 'store-newsletter',
@@ -150,7 +151,6 @@ export default () => {
       },
       //Login
       async login({dispatch}, data) {
-        // console.log('login',data)
         return axios({
           method: 'POST',
           url: 'login',
@@ -162,7 +162,6 @@ export default () => {
           })
       },
       setCurrentUser: function ({ commit }, response) {
-        console.log('set curr res',response)
         if (response.data){
           commit('SET_USER', response.data)
           setAuthToken(response.data.token)
@@ -187,7 +186,6 @@ export default () => {
       },
       //Forgot password
       forgotPassword({commit}, data) {
-        console.log('ForgotPassword',data)
         return axios({
           method: 'POST',
           url: 'forgot-password',

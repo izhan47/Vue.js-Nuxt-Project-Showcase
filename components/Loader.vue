@@ -1,5 +1,5 @@
 <template>
-  <div       class="loader">
+  <div class="loader">
     <v-progress-circular
       :size="90"
       :width="7"
@@ -38,18 +38,4 @@ name: "Loader.vue",
   z-index: 111;
   background-color: rgba(0,0,0,0.2);
 }
-//@media (min-width: 425px) and (max-width: 768px)  {
-//  .loader {
-//    position: fixed;
-//    top: 50%;
-//    left: 40%;
-//  }
-//}
-//@media (max-width: 375px)  {
-//  .loader {
-//    position: fixed;
-//    top: 50%;
-//    left: 30%;
-//  }
-//}
 </style>

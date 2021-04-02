@@ -117,7 +117,6 @@ export default {
         location:'',
         search:''
       },
-      categoryList:''
     }
   },
   computed:{
@@ -144,13 +143,11 @@ export default {
     },
   },
   created() {
-    this.$store.commit('SHOW_LOADER', true)
     this.$store.dispatch('petProList',this.form)
     this.$store.dispatch('petCategories')
   },
   methods:{
     filterData(){
-      this.$store.commit('SHOW_LOADER', true)
       this.$store.dispatch('petProList',this.form)
     },
   }
