@@ -97,31 +97,20 @@ name: "Register.vue",
   },
   methods:{
     Register(){
-      let loader=true
-      this.$store.commit('SHOW_LOADER', loader)
+      this.$store.commit('SHOW_LOADER', true)
       if(this.$refs.form.validate()) {
         this.$store.dispatch('register',this.form).then(response => {
-          this.$store.commit('SHOW_LOADER', loader=false)
-          console.log('Register detail',response)
-          let data = {
-            snackbar:true,
-            color:'green',
-            message:response.data.message
-          }
-          this.$store.commit('SHOW_SNACKBAR', data)
+          this.$store.commit('SHOW_LOADER', false)
+          this.$store.commit('SHOW_SNACKBAR', {snackbar:true,color:'green', message:response.data.message
+          })
           this.$router.push('/auth/Profile')
         }).catch(e=>{
-          this.$store.commit('SHOW_LOADER', loader=false)
+          this.$store.commit('SHOW_LOADER', false)
           let errors = e.response.data.data
           for (let item in errors){
             if(errors.hasOwnProperty(item))
               errors[item].forEach(err => {
-                let data = {
-                  snackbar:true,
-                  color:'red',
-                  message:err
-                }
-                this.$store.commit('SHOW_SNACKBAR', data)
+                this.$store.commit('SHOW_SNACKBAR', {  snackbar:true,color:'red',message:err})
               })
           }
         })

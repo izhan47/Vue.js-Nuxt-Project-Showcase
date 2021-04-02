@@ -8,10 +8,8 @@
         <div class="mt-5 space">
           <p class="description  text-center ">{{ $t('search_section_description') }}</p>
         </div>
-
-          <form class="search-form" role="search" action="#" method="get">
             <div class="search-container">
-              <input placeholder="Search Wag Enabled" class="search-form-input" type="search" name="s" title="Search" value="">
+              <input placeholder="Search Wag Enabled" class="search-form-input" type="search" name="s" title="Search" value="" v-model="form.search">
                 <v-btn
                   elevation="0"
                   class="search-btn"
@@ -21,7 +19,6 @@
                   {{ $t('search') }}
                 </v-btn>
             </div>
-          </form>
         <div class="search-img" >
 <!--          data-aos="slide-left" data-aos-easing="linear" data-aos-duration="3500"-->
           <img class="img-fluid" src="/images/Wag-Enabled-HP-Dog.png" alt="logo">
@@ -37,12 +34,20 @@ export default {
   name: "bannerSearch.vue",
   data(){
     return{
-      search:''
+
+      form:{
+        category_id:'',
+        location:'',
+        search:''
+      },
     }
   },
   methods:{
     show(){
-
+      this.$store.commit('SHOW_LOADER', true)
+      console.log('data',this.form.search)
+      this.$store.dispatch('petProList',this.form)
+      // this.$router.push('/pet-category')
     }
   }
 }

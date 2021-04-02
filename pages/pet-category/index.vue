@@ -20,7 +20,7 @@
                 v-model="form.category_id"
                 outlined
                 rounded
-                @click="filterData()"
+                @change="filterData()"
               ></v-select>
             </div>
             <div class="search-form-field">
@@ -47,7 +47,7 @@
                 solo
                 rounded
                 outlined
-                @click="filterData()"
+                @change="filterData()"
               ></v-text-field>
             </div>
             <div >
@@ -109,7 +109,6 @@ export default {
           description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
           category:["Deal Offered"],
           icons:["mdi-paw"],
-
         },
       ],
       category: [],
@@ -118,7 +117,7 @@ export default {
         location:'',
         search:''
       },
-      readMore:false
+      categoryList:''
     }
   },
   computed:{
@@ -134,21 +133,24 @@ export default {
     },
     categoryList(){
       let categories= this.$store.state.pet_category_list
-      let arr = []
-      categories.forEach(function (data) {
-        arr.push({
-          'value':data.value,
-          'text': data.label,
-        })
-      })
-      return arr
-    }
+      let arr=   categories.map(category => ({
+        'value':category.value,
+        'text': category.label,
+      }))
+      return [{
+        'value':'',
+        'text': 'All',
+      }, ...arr]
+    },
   },
   created() {
+    this.$store.commit('SHOW_LOADER', true)
+    this.$store.dispatch('petProList',this.form)
     this.$store.dispatch('petCategories')
   },
   methods:{
     filterData(){
+      this.$store.commit('SHOW_LOADER', true)
       this.$store.dispatch('petProList',this.form)
     },
   }

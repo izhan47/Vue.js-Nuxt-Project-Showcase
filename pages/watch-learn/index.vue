@@ -19,6 +19,7 @@
                 v-model="form.sort_by"
                 outlined
                 rounded
+                @change="filterData()"
               ></v-select>
             </div>
             <div class="search-form-field">
@@ -29,6 +30,7 @@
                 v-model="form.category_id"
                 outlined
                 rounded
+                @change="filterData()"
               ></v-select>
             </div>
             <div class="search-form-field">
@@ -119,6 +121,8 @@ name: "index.vue",
      })
    },
    filterData(){
+     this.$store.commit('SHOW_LOADER', true)
+
      this.$store.dispatch('categoryList',this.form)
    }
   }

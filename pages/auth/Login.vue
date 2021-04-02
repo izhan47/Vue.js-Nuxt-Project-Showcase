@@ -72,7 +72,6 @@
 </template>
 
 <script>
-import error from "@/layouts/error";
 
 export default {
 name: "Login.vue",
@@ -96,25 +95,19 @@ data(){
 methods:{
   Login(){
     if(this.$refs.form.validate()) {
-      let loader=true
-      this.$store.commit('SHOW_LOADER', loader)
+      this.$store.commit('SHOW_LOADER', true)
       this.$store.dispatch('login',this.form)
         .then(response => {
-          this.$store.commit('SHOW_LOADER', loader=false)
+          this.$store.commit('SHOW_LOADER', false)
           console.log('login detail',response)
           this.$router.push('/auth/Profile')
         }).catch(e => {
         let errors = e.response.data.data
-        this.$store.commit('SHOW_LOADER', loader=false)
+        this.$store.commit('SHOW_LOADER', false)
         for (let item in errors){
           if(errors.hasOwnProperty(item))
             errors[item].forEach(err => {
-              let data = {
-                snackbar:true,
-                color:'red',
-                message:err
-              }
-              this.$store.commit('SHOW_SNACKBAR', data)
+              this.$store.commit('SHOW_SNACKBAR',{  snackbar:true,color:'red',message:err})
             })
         }
       })

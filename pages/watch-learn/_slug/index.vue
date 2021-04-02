@@ -151,12 +151,8 @@ export default {
         this.form.parent_comment_id=this.categoryData.id
         this.$store.dispatch('comment',this.form).then(response => {
           this.$store.commit('SHOW_LOADER', loader=false)
-          let data = {
-            snackbar:true,
-            color:'green',
-            message:response.data.message
-          }
-          this.$store.commit('SHOW_SNACKBAR', data)
+          this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message
+          })
         })
       }
     }

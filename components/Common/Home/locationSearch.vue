@@ -24,7 +24,7 @@
               v-model="form.category_id"
               outlined
               rounded
-              @click="filterData()"
+              @change="filterData()"
             ></v-select>
           </div>
           <div class="search-form-field">
@@ -53,7 +53,7 @@
               solo
               rounded
               outlined
-              @click="filterData()"
+              @change="filterData()"
             ></v-text-field>
           </div>
           <div >
@@ -110,12 +110,14 @@ components:{ PetCategoryCard},
   },
   computed:{
     petProData(){
-      // console.log('after update the state',this.$store.state.pet_pro_list)
       return this.$store.state.pet_pro_list
     },
     categoryList(){
       let categories= this.$store.state.pet_category_list
-      let arr = []
+      let arr = [{
+        'value':'',
+        'text': 'All',
+      }]
       categories.forEach(function (data) {
         arr.push({
           'value':data.value,
@@ -126,15 +128,16 @@ components:{ PetCategoryCard},
     }
   },
   created() {
-  // console.log('create form',this.form)
-    this.$store.dispatch('petProList')
-    this.$store.dispatch('petCategories',this.form)
+  // console.log('created location search')
+    this.$store.dispatch('petProList',this.form)
+    this.$store.dispatch('petCategories')
   },
   methods:{
     filterData(){
-      // console.log('search form',this.form)
+      this.$store.commit('SHOW_LOADER', true)
       this.$store.dispatch('petProList',this.form)
     },
+
     filterLocation(){
       return axios({
         method: 'POST',
