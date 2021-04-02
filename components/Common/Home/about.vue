@@ -50,6 +50,7 @@
                class="round-btn  mt-3 "
                outlined
                rounded
+               @click="$router.push('/about')"
              >
                {{ $t('about_wag') }}
              </v-btn>

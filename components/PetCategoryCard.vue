@@ -27,8 +27,7 @@
       <v-card-text>
         <p class="card-description">{{item.description.length < 50 ? item.description : item.description.slice(0, 50) }}
           <span
-            class="comment-color"
-            @click="loadMore()"> .... </span>
+            class="comment-color"> .... </span>
         </p>
 <!--        <nuxt-link :to="`/pet-category/${item.slug}`"><button>READ MORE</button></nuxt-link>-->
       </v-card-text>
@@ -93,18 +92,6 @@ export default {
       return this.$store.state.pet_pro_list
     }
   },
-  created() {
-    this.$store.dispatch('petProList')
-  },
-  methods:{
-    loadMore() {
-      this.readMore = true
-    },
-    loadLess() {
-      this.readMore = false
-    },
-
-  }
 }
 </script>
 

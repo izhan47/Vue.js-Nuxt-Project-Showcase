@@ -39,6 +39,7 @@
               rounded
               color="#00afaa"
               outlined
+
             ></v-text-field>
           </div>
           <div class="search-form-field">
@@ -105,7 +106,6 @@ components:{ PetCategoryCard},
       query:'pizza in lahore',
       key:'AIzaSyBaxMfWKuh_m7up5CvIL-LF_EHJ_eWkRWI',
       readMore:false,
-
     }
   },
   computed:{
@@ -114,28 +114,19 @@ components:{ PetCategoryCard},
     },
     categoryList(){
       let categories= this.$store.state.pet_category_list
-      let arr = [{
+      let arr=categories.map(category => ({
+        'value':category.value,
+        'text': category.label,
+      }))
+      return [{
         'value':'',
         'text': 'All',
-      }]
-      categories.forEach(function (data) {
-        arr.push({
-          'value':data.value,
-          'text': data.label,
-        })
-      })
-      return arr
-    }
-  },
-  created() {
-  // console.log('created location search')
-    this.$store.dispatch('petProList',this.form)
-    this.$store.dispatch('petCategories')
+      }, ...arr]
+    },
   },
   methods:{
     filterData(){
-      this.$store.commit('SHOW_LOADER', true)
-      this.$store.dispatch('petProList',this.form)
+      this.$emit('filter-data', this.form)
     },
 
     filterLocation(){
@@ -144,7 +135,7 @@ components:{ PetCategoryCard},
         url: 'https://maps.googleapis.com/maps/api/place/textsearch/json' + this.key + this.query,
       })
         .then(response => {
-        console.log('api res',response)
+
         })
     }
   }

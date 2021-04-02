@@ -118,7 +118,6 @@ export default {
   },
   created() {
    this.userDetail=this.$store.state.user.user
-    console.log('user info',this.userDetail)
   }
 }
 </script>

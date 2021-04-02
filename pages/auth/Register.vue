@@ -95,10 +95,14 @@ name: "Register.vue",
       },
     }
   },
+  created() {
+    this.$store.commit('SHOW_LOADER', false)
+
+  },
   methods:{
     Register(){
-      this.$store.commit('SHOW_LOADER', true)
       if(this.$refs.form.validate()) {
+        this.$store.commit('SHOW_LOADER', true)
         this.$store.dispatch('register',this.form).then(response => {
           this.$store.commit('SHOW_LOADER', false)
           this.$store.commit('SHOW_SNACKBAR', {snackbar:true,color:'green', message:response.data.message

@@ -125,10 +125,8 @@ export default {
     // window.addEventListener("resize", this.handleWindowResize);
     window.addEventListener('resize', function(event){
       const newWidth = window.innerWidth;
-      const newHeight = window.innerHeight;
-      // console.log(newWidth,'screen size', newHeight)
+      // const newHeight = window.innerHeight;
       this.drawer = newWidth < 768;
-      // console.log(this.drawer)
     });
   },
   methods:{
