@@ -1,8 +1,8 @@
 <template>
 <div>
   <banner-search @filter-data="filterData"></banner-search>
-<!--  <pet-functions></pet-functions>-->
-<!--  <about></about>-->
+  <pet-functions></pet-functions>
+  <about></about>
   <location-search @filter-data="filterData"></location-search>
   <care-advice></care-advice>
   <featured-product></featured-product>

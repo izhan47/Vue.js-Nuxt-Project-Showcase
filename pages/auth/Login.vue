@@ -141,6 +141,10 @@ methods:{
 }
 .custom-height{
   min-height: 500px;
+  margin-top: 8rem;
+  @media (max-width:1440px) {
+    margin-top: 0;
+  }
 }
 .img-height{
   max-height: 200px;

@@ -73,7 +73,6 @@
   </div>
 </template>
 <script>
-import error from "@/layouts/error";
 
 export default {
 name: "Register.vue",
