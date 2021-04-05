@@ -13,8 +13,7 @@
         <p class="space">{{ $t('search_database_description') }}</p>
       </div>
         <!--   Filter Section Start     -->
-      <v-form>
-        <div class="search-form-filter">
+        <v-form class="search-form-filter" @submit.prevent="filterData">
           <div class="search-form-field">
             <label>{{ $t('category') }}</label>
             <v-select
@@ -39,6 +38,7 @@
               rounded
               color="#00afaa"
               outlined
+              @input="debounceSearch"
 
             ></v-text-field>
           </div>
@@ -47,14 +47,15 @@
               <label class="ml-4">{{ $t('keyword') }}</label>
             </div>
             <v-text-field
-              class="search-field  mt-2"
+              class="search-field cross-icon mt-2"
               :placeholder="$t('all')"
               v-model="form.search"
               color="#00afaa"
               solo
               rounded
               outlined
-              @change="filterData()"
+              clearable
+              v-on:keypress.enter="filterData"
             ></v-text-field>
           </div>
           <div >
@@ -62,29 +63,32 @@
               class="purple-section  search-btn"
               outlined
               large
-              @click="filterData()"
             >
               {{ $t('search') }}
             </v-btn>
           </div>
-        </div>
+        </v-form>
         <div>
           <h5 class="tag-align"> {{ $t('sort_by') }} <strong>{{ $t('latest_v') }}</strong></h5>
         </div>
-      </v-form>
+
         <!--   Filter Section End     -->
     </div>
 
   </div>
   <!--  card-section-start   -->
-  <div class="custom-height custom-container">
+  <div class="custom-height custom-container" v-if="petProData.length">
     <v-row>
-      <v-col cols="12" md="4" sm="12" v-for="(data,i) in petProData.slice(0,3)"   :key="i"  class="custom-margin">
+      <v-col cols="12" md="4" sm="12"  v-for="(data,i) in petProData.slice(0,3)"   :key="i"  class="custom-margin">
           <pet-category-card
             :item="data"
           ></pet-category-card>
       </v-col>
     </v-row>
+  </div>
+  <div v-else class="text-center">
+    <img class="img-height img-fluid"  src="/images/Auth/Column-3-Dog.png" alt="logo" />
+    <h2 class="heading">{{$t('nothing_here')}}</h2>
   </div>
   <!--  card-section-end   -->
 </div>
@@ -98,15 +102,17 @@ name: "locationSearch.vue",
 components:{ PetCategoryCard},
   data(){
     return{
+      debounce:'',
       form:{
         category_id:'',
         location:'',
         search:''
       },
-      query:'pizza in lahore',
       key:'AIzaSyBaxMfWKuh_m7up5CvIL-LF_EHJ_eWkRWI',
-      readMore:false,
     }
+  },
+  created(){
+
   },
   computed:{
     petProData(){
@@ -129,14 +135,28 @@ components:{ PetCategoryCard},
       this.$emit('filter-data', this.form)
     },
 
-    filterLocation(){
-      return axios({
-        method: 'POST',
-        url: 'https://maps.googleapis.com/maps/api/place/textsearch/json' + this.key + this.query,
-      })
-        .then(response => {
+   async debounceSearch(event){
+     // console.log('event',event)
+      try{
+        clearTimeout(this.debounce)
+        this.debounce = await setTimeout(async () => {
+          this.query = event
+         // console.log('query',this.query)
+          return axios({
+            method: 'GET',
+            url: 'https://maps.googleapis.com/maps/api/place/textsearch/json' + this.key + this.query,
+            headers: {
+              "Access-Control-Allow-Origin": '*',
+              "Access-Control-Allow-Methods": 'GET',
+            },
+          })
+        }, 600)
 
-        })
+        // console.log('resp',resp)
+      }
+      catch (e){
+        console.log('ee',e)
+      }
     }
   }
 }
@@ -189,6 +209,8 @@ components:{ PetCategoryCard},
     font-weight:  $font-weight-700;
   }
 }
-
+.cross-icon::v-deep .v-input__append-inner{
+  margin-top: 0;
+}
 
 </style>

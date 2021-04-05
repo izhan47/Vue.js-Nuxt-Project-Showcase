@@ -100,7 +100,8 @@ export default () => {
 
         })
       },
-      singleCategoryDetail({dispatch}, slug) {
+      singleCategoryDetail({commit}, slug) {
+        commit('SHOW_LOADER', true)
         return axios({
           method: 'POST',
           url:'watch-and-learn/get-details/' + slug

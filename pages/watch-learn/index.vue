@@ -9,7 +9,7 @@
           <p>{{ $t('watch_learn_description') }}</p>
         </div>
         <!--   Filter Section Start     -->
-        <v-form class="mt-8">
+        <v-form class="mt-8" @submit.prevent="filterData">
           <div class="search-form-filter">
             <div class="search-form-field">
               <label>{{ $t('sort_by') }}</label>
@@ -36,13 +36,14 @@
             <div class="search-form-field">
               <label >{{ $t('keyword') }}</label>
               <v-text-field
-                class="search-field  mt-2"
+                class="search-field cross-icon mt-2"
                 :placeholder="$t('all')"
                 v-model="form.search"
                 color="#00afaa"
                 solo
                 rounded
                 outlined
+                clearable
               ></v-text-field>
             </div>
             <div >
@@ -50,7 +51,6 @@
                 class="purple-section  search-btn"
                 outlined
                 large
-                @click="filterData()"
               >
                 {{ $t('search') }}
               </v-btn>
@@ -61,13 +61,18 @@
       </div>
     </div>
     <!--  card-section-start   -->
-    <div class="custom-container  space">
+    <div class="custom-container  space" v-if="watchData.length">
       <v-row>
         <v-col cols="12" md="4" sm="12" v-for="(data,i) in watchData" :key="i" class="mt-8">
           <watch-category-card :item="data"></watch-category-card>
         </v-col>
       </v-row>
     </div>
+    <div v-else class="text-center">
+      <img class="img-height img-fluid"  src="/images/Auth/Column-3-Dog.png" alt="logo" />
+      <h2 class="heading">{{$t('nothing_here')}}</h2>
+    </div>
+
     <!--  card-section-end   -->
   </div>
 
@@ -170,6 +175,10 @@ name: "index.vue",
   height: 52px;
 }
 
-
-
+.img-height{
+  max-height: 250px;
+}
+.cross-icon::v-deep .v-input__append-inner{
+  margin-top: 0;
+}
 </style>

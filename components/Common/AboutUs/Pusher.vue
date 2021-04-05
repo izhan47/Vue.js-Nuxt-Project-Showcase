@@ -93,12 +93,21 @@ data(){
   box-sizing: border-box;
   height: 80px;
   width: 80px;
+  cursor: pointer;
+}
+.card-icon-parent:hover{
+  border: 3px solid $purple;
+  .card-icon{
+    color: $purple;
+  }
 }
 .card-icon{
   fill: $pink;
-
-  cursor: pointer;
   color: $pink;
+}
+.card-icon:hover{
+  color: $purple;
+
 }
 .card-heading{
   color: $green;

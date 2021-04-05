@@ -9,8 +9,7 @@
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
         </div>
         <!--   Filter Section Start     -->
-        <v-form>
-          <div class="search-form-filter">
+          <v-form class="search-form-filter" @submit.prevent="filterData">
             <div class="search-form-field">
               <label>{{ $t('sort_by') }}</label>
               <v-select
@@ -55,13 +54,14 @@
             <div class="search-form-field">
               <label >{{ $t('keyword') }}</label>
               <v-text-field
-                class="search-field  mt-2"
+                class="search-field cross-icon mt-2"
                 :placeholder="$t('all')"
                 v-model="form.search"
                 solo
                 color="#00afaa"
                 rounded
                 outlined
+                clearable
               ></v-text-field>
             </div>
             <div >
@@ -69,27 +69,28 @@
                 class="purple-section  search-btn"
                 outlined
                 large
-                @click="filterData()"
               >
                 {{ $t('search') }}
               </v-btn>
             </div>
-          </div>
-        </v-form>
+          </v-form>
         <!--   Filter Section End     -->
-
-
       </div>
     </div>
       <!--  card-section-start   -->
-      <div class="custom-container  space">
+      <div class="custom-container  space" v-if="reviewData.length">
         <v-row>
           <v-col cols="12" md="4" sm="12" v-for="(data,i) in reviewData" :key="i" class="mt-8">
             <product-review-card :item="data"></product-review-card>
           </v-col>
         </v-row>
       </div>
-      <!--  card-section-end   -->
+      <div v-else class="text-center">
+        <img class="img-height img-fluid"  src="/images/Auth/Column-3-Dog.png" alt="logo" />
+        <h2 class="heading">{{$t('nothing_here')}}</h2>
+      </div>
+
+    <!--  card-section-end   -->
 
   </div>
 
@@ -133,7 +134,6 @@ data(){
   },
   methods:{
     filterData(){
-
       let arr = []
       this.categories.forEach(id => {
         let x =  this.categoryList.find(e => e.value === id)
@@ -196,11 +196,6 @@ data(){
   margin-top: 12px;
 }
 
-
-
-
-
-
 .search-field::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
@@ -211,9 +206,9 @@ data(){
   .v-text-field__slot{
     font-weight: $font-weight-bold;
   }
-  fieldset{
-    color: rgba(0, 0, 0, 0.7) !important;
-  }
+  //fieldset{
+  //  color: rgba(0, 0, 0, 0.7) !important;
+  //}
   //.v-input__append-inner{
   //  margin-top: 0;
   //}
@@ -231,5 +226,10 @@ data(){
   min-width: 140px;
   height: 52px;
 }
-
+.img-height{
+  max-height: 250px;
+}
+.cross-icon::v-deep .v-input__append-inner{
+  margin-top: 0;
+}
 </style>

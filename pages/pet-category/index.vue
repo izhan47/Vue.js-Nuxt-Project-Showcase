@@ -9,7 +9,7 @@
           <p>{{ $t('pet_pro_description') }}</p>
         </div>
         <!--   Filter Section Start     -->
-        <v-form class="custom-margin">
+        <v-form class="custom-margin" @submit.prevent="filterData">
           <div class="search-form-filter">
             <div class="search-form-field">
               <label>{{ $t('category') }}</label>
@@ -40,13 +40,14 @@
               <label>{{ $t('keyword') }}</label>
 
               <v-text-field
-                class="search-field  mt-2"
+                class="search-field cross-icon mt-2"
                 :placeholder="$t('all')"
                 v-model="form.search"
                 color="#00afaa"
                 solo
                 rounded
                 outlined
+                clearable
                 @change="filterData()"
               ></v-text-field>
             </div>
@@ -55,7 +56,6 @@
                 class="purple-section  search-btn"
                 outlined
                 large
-                @click="filterData()"
               >
                 {{ $t('search') }}
               </v-btn>
@@ -66,7 +66,7 @@
       </div>
     </div>
     <!--  card-section-start   -->
-    <div class="custom-height custom-container space">
+    <div class="custom-height custom-container space" v-if="petProData.length">
       <v-row>
         <v-col cols="12" md="4" sm="12"  v-for="(data,i) in petProData"   :key="i" class="custom-margin">
           <pet-category-card
@@ -74,6 +74,10 @@
           ></pet-category-card>
         </v-col>
       </v-row>
+    </div>
+    <div v-else class="text-center">
+      <img class="img-height img-fluid"  src="/images/Auth/Column-3-Dog.png" alt="logo" />
+      <h2 class="heading">{{$t('nothing_here')}}</h2>
     </div>
     <!--  card-section-end   -->
   </div>
@@ -143,7 +147,12 @@ export default {
     },
   },
   created() {
-      this.$store.dispatch('petProList',this.form)
+    let search =this.$route.query.search ?? ''
+    this.form.search = search;
+      this.$store.dispatch('petProList',{
+        ...this.form,
+        search
+      })
       this.$store.dispatch('petCategories')
   },
   methods:{
@@ -241,7 +250,12 @@ export default {
     padding: 0 0 8px 0;
   }
 }
-
+.img-height{
+  max-height: 250px;
+}
+.cross-icon::v-deep .v-input__append-inner{
+  margin-top: 0;
+}
 
 
 </style>

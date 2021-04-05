@@ -139,6 +139,7 @@ export default {
     getCategoryDetail(){
       this.$store.dispatch('singleCategoryDetail',this.URL).then( response => {
         this.categoryData = response.data.data.watch_and_learn
+        this.$store.commit('SHOW_LOADER', false)
       })
     },
     submit(){

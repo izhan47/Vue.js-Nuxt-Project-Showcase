@@ -93,10 +93,10 @@ data(){
 },
 
 methods:{
-  Login(){
+ async Login(){
     if(this.$refs.form.validate()) {
       this.$store.commit('SHOW_LOADER', true)
-      this.$store.dispatch('login',this.form)
+       await this.$store.dispatch('login',this.form)
         .then(response => {
           this.$store.commit('SHOW_LOADER', false)
           this.$router.push('/auth/Profile')

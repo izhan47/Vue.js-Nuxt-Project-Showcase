@@ -99,6 +99,9 @@ name: "about.vue"
 }
 .center{
   margin:3rem 0 0 3rem;
+  @media (max-width: 768px) {
+    margin: 0;
+  }
 }
 .description{
   margin-bottom: 1.12rem;

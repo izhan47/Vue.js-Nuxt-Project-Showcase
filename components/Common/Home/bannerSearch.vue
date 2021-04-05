@@ -9,7 +9,11 @@
           <p class="description  text-center ">{{ $t('search_section_description') }}</p>
         </div>
             <div class="search-container">
-              <input placeholder="Search Wag Enabled" class="search-form-input" type="search" name="s" title="Search" value="" v-model="form.search">
+              <input placeholder="Search Wag Enabled"
+                     :rules="rules.search"
+                     required   v-model="form.search"
+                     v-on:keypress.enter="filterData"
+                     title="Search" class="search-form-input" >
                 <v-btn
                   elevation="0"
                   class="search-btn"
@@ -34,18 +38,22 @@ export default {
   name: "bannerSearch.vue",
   data(){
     return{
-
       form:{
-        category_id:'',
-        location:'',
         search:''
       },
+      rules:{
+        search: [ (value) => !!value || 'This field is required']
+      }
     }
   },
   methods:{
     filterData(){
-      this.$emit('filter-data', this.form)
-      this.$router.push('/pet-category')
+        if(this.form.search){
+          this.$router.push(`/pet-category?search=${this.form.search}`)
+        }
+       else{
+          this.$store.commit('SHOW_SNACKBAR',{  snackbar:true,color:'red',message:'Search Field is required'})
+        }
     },
   }
 }
