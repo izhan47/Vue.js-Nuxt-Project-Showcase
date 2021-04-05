@@ -47,14 +47,15 @@
               <label class="ml-4">{{ $t('keyword') }}</label>
             </div>
             <v-text-field
-              class="search-field  mt-2"
+              class="search-field cross-icon mt-2"
               :placeholder="$t('all')"
               v-model="form.search"
               color="#00afaa"
               solo
               rounded
               outlined
-              @change="filterData()"
+              clearable
+              v-on:keypress.enter="filterData"
             ></v-text-field>
           </div>
           <div >
@@ -108,7 +109,6 @@ components:{ PetCategoryCard},
         search:''
       },
       key:'AIzaSyBaxMfWKuh_m7up5CvIL-LF_EHJ_eWkRWI',
-      readMore:false,
     }
   },
   created(){
@@ -136,12 +136,12 @@ components:{ PetCategoryCard},
     },
 
    async debounceSearch(event){
-     console.log('event',event)
+     // console.log('event',event)
       try{
         clearTimeout(this.debounce)
         this.debounce = await setTimeout(async () => {
-          this.query = this.form.search
-         console.log('query',this.query)
+          this.query = event
+         // console.log('query',this.query)
           return axios({
             method: 'GET',
             url: 'https://maps.googleapis.com/maps/api/place/textsearch/json' + this.key + this.query,
@@ -208,6 +208,9 @@ components:{ PetCategoryCard},
     text-transform:initial;
     font-weight:  $font-weight-700;
   }
+}
+.cross-icon::v-deep .v-input__append-inner{
+  margin-top: 0;
 }
 
 </style>

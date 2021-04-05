@@ -54,13 +54,14 @@
             <div class="search-form-field">
               <label >{{ $t('keyword') }}</label>
               <v-text-field
-                class="search-field  mt-2"
+                class="search-field cross-icon mt-2"
                 :placeholder="$t('all')"
                 v-model="form.search"
                 solo
                 color="#00afaa"
                 rounded
                 outlined
+                clearable
               ></v-text-field>
             </div>
             <div >
@@ -133,7 +134,6 @@ data(){
   },
   methods:{
     filterData(){
-
       let arr = []
       this.categories.forEach(id => {
         let x =  this.categoryList.find(e => e.value === id)
@@ -196,11 +196,6 @@ data(){
   margin-top: 12px;
 }
 
-
-
-
-
-
 .search-field::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
@@ -211,9 +206,9 @@ data(){
   .v-text-field__slot{
     font-weight: $font-weight-bold;
   }
-  fieldset{
-    color: rgba(0, 0, 0, 0.7) !important;
-  }
+  //fieldset{
+  //  color: rgba(0, 0, 0, 0.7) !important;
+  //}
   //.v-input__append-inner{
   //  margin-top: 0;
   //}
@@ -233,5 +228,8 @@ data(){
 }
 .img-height{
   max-height: 250px;
+}
+.cross-icon::v-deep .v-input__append-inner{
+  margin-top: 0;
 }
 </style>

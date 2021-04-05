@@ -11,7 +11,7 @@
       </nuxt-link>
 
     </div>
-    <v-card  class="card-radius card-padding">
+    <v-card  class="card-radius card-padding" @click="$router.push(`/pet-category/${item.slug}`)">
       <v-card-title class="card-title-padding">
         <div class="card-flex">
           <h2 class="card-heading">  {{ item.store_name}}</h2>

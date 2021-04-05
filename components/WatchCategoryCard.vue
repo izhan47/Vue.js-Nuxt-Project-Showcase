@@ -6,7 +6,7 @@
       :src="item.thumbnail_full_path"
     ></v-img>
   </nuxt-link>
-  <v-card  class="card-radius card-custom-height card-padding ">
+  <v-card  class="card-radius card-custom-height card-padding " @click="$router.push(`/watch-learn/${item.slug}`)">
     <v-card-title class="card-heading">{{ item.category.name}}</v-card-title>
     <v-card-text>
       <p class="card-description card-des">{{item.blog_meta_description.length < 50 ? item.blog_meta_description : item.blog_meta_description.slice(0, 50) }}

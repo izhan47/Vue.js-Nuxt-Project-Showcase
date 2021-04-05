@@ -36,13 +36,14 @@
             <div class="search-form-field">
               <label >{{ $t('keyword') }}</label>
               <v-text-field
-                class="search-field  mt-2"
+                class="search-field cross-icon mt-2"
                 :placeholder="$t('all')"
                 v-model="form.search"
                 color="#00afaa"
                 solo
                 rounded
                 outlined
+                clearable
               ></v-text-field>
             </div>
             <div >
@@ -177,5 +178,7 @@ name: "index.vue",
 .img-height{
   max-height: 250px;
 }
-
+.cross-icon::v-deep .v-input__append-inner{
+  margin-top: 0;
+}
 </style>
