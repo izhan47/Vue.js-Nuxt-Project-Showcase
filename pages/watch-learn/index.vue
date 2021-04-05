@@ -9,7 +9,7 @@
           <p>{{ $t('watch_learn_description') }}</p>
         </div>
         <!--   Filter Section Start     -->
-        <v-form class="mt-8">
+        <v-form class="mt-8" @submit.prevent="filterData">
           <div class="search-form-filter">
             <div class="search-form-field">
               <label>{{ $t('sort_by') }}</label>
@@ -50,7 +50,6 @@
                 class="purple-section  search-btn"
                 outlined
                 large
-                @click="filterData()"
               >
                 {{ $t('search') }}
               </v-btn>

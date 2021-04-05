@@ -6,7 +6,7 @@
         :src="item.thumbnail_thumb_full_path"
       ></v-img>
     </nuxt-link>
-    <v-card  class="card-radius card-custom-height card-padding ">
+    <v-card  class="card-radius card-custom-height card-padding" >
       <v-card-title class="card-heading">{{ item.title}}</v-card-title>
       <v-card-text>
         <p class="card-description card-des">{{item.blog_meta_description.length < 50 ? item.blog_meta_description : item.blog_meta_description.slice(0, 50) }}

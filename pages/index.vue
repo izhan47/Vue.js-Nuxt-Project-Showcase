@@ -1,6 +1,6 @@
 <template>
 <div>
-  <banner-search @filter-data="filterData"></banner-search>
+  <banner-search></banner-search>
   <pet-functions></pet-functions>
   <about></about>
   <location-search @filter-data="filterData"></location-search>

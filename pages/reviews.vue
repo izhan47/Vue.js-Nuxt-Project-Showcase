@@ -9,8 +9,7 @@
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
         </div>
         <!--   Filter Section Start     -->
-        <v-form>
-          <div class="search-form-filter">
+          <v-form class="search-form-filter" @submit.prevent="filterData">
             <div class="search-form-field">
               <label>{{ $t('sort_by') }}</label>
               <v-select
@@ -69,16 +68,12 @@
                 class="purple-section  search-btn"
                 outlined
                 large
-                @click="filterData()"
               >
                 {{ $t('search') }}
               </v-btn>
             </div>
-          </div>
-        </v-form>
+          </v-form>
         <!--   Filter Section End     -->
-
-
       </div>
     </div>
       <!--  card-section-start   -->

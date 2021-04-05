@@ -13,8 +13,7 @@
         <p class="space">{{ $t('search_database_description') }}</p>
       </div>
         <!--   Filter Section Start     -->
-      <v-form>
-        <div class="search-form-filter">
+        <v-form class="search-form-filter" @submit.prevent="filterData">
           <div class="search-form-field">
             <label>{{ $t('category') }}</label>
             <v-select
@@ -39,6 +38,7 @@
               rounded
               color="#00afaa"
               outlined
+              @input="debounceSearch"
 
             ></v-text-field>
           </div>
@@ -62,16 +62,15 @@
               class="purple-section  search-btn"
               outlined
               large
-              @click="filterData()"
             >
               {{ $t('search') }}
             </v-btn>
           </div>
-        </div>
+        </v-form>
         <div>
           <h5 class="tag-align"> {{ $t('sort_by') }} <strong>{{ $t('latest_v') }}</strong></h5>
         </div>
-      </v-form>
+
         <!--   Filter Section End     -->
     </div>
 
@@ -102,12 +101,12 @@ name: "locationSearch.vue",
 components:{ PetCategoryCard},
   data(){
     return{
+      debounce:'',
       form:{
         category_id:'',
         location:'',
         search:''
       },
-      query:'pizza in lahore',
       key:'AIzaSyBaxMfWKuh_m7up5CvIL-LF_EHJ_eWkRWI',
       readMore:false,
     }
@@ -136,14 +135,28 @@ components:{ PetCategoryCard},
       this.$emit('filter-data', this.form)
     },
 
-    filterLocation(){
-      return axios({
-        method: 'POST',
-        url: 'https://maps.googleapis.com/maps/api/place/textsearch/json' + this.key + this.query,
-      })
-        .then(response => {
+   async debounceSearch(event){
+     console.log('event',event)
+      try{
+        clearTimeout(this.debounce)
+        this.debounce = await setTimeout(async () => {
+          this.query = this.form.search
+         console.log('query',this.query)
+          return axios({
+            method: 'GET',
+            url: 'https://maps.googleapis.com/maps/api/place/textsearch/json' + this.key + this.query,
+            headers: {
+              "Access-Control-Allow-Origin": '*',
+              "Access-Control-Allow-Methods": 'GET',
+            },
+          })
+        }, 600)
 
-        })
+        // console.log('resp',resp)
+      }
+      catch (e){
+        console.log('ee',e)
+      }
     }
   }
 }

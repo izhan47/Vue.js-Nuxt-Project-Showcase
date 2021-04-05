@@ -9,7 +9,7 @@
           <p>{{ $t('pet_pro_description') }}</p>
         </div>
         <!--   Filter Section Start     -->
-        <v-form class="custom-margin">
+        <v-form class="custom-margin" @submit.prevent="filterData">
           <div class="search-form-filter">
             <div class="search-form-field">
               <label>{{ $t('category') }}</label>
@@ -55,7 +55,6 @@
                 class="purple-section  search-btn"
                 outlined
                 large
-                @click="filterData()"
               >
                 {{ $t('search') }}
               </v-btn>
@@ -147,7 +146,12 @@ export default {
     },
   },
   created() {
-      this.$store.dispatch('petProList',this.form)
+    let search =this.$route.query.search ?? ''
+    this.form.search = search;
+      this.$store.dispatch('petProList',{
+        ...this.form,
+        search
+      })
       this.$store.dispatch('petCategories')
   },
   methods:{
