@@ -61,13 +61,18 @@
       </div>
     </div>
     <!--  card-section-start   -->
-    <div class="custom-container  space">
+    <div class="custom-container  space" v-if="watchData.length">
       <v-row>
         <v-col cols="12" md="4" sm="12" v-for="(data,i) in watchData" :key="i" class="mt-8">
           <watch-category-card :item="data"></watch-category-card>
         </v-col>
       </v-row>
     </div>
+    <div v-else class="text-center">
+      <img class="img-height img-fluid"  src="/images/Auth/Column-3-Dog.png" alt="logo" />
+      <h2 class="heading">{{$t('nothing_here')}}</h2>
+    </div>
+
     <!--  card-section-end   -->
   </div>
 
@@ -170,6 +175,8 @@ name: "index.vue",
   height: 52px;
 }
 
-
+.img-height{
+  max-height: 250px;
+}
 
 </style>

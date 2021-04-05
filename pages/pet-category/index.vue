@@ -66,7 +66,7 @@
       </div>
     </div>
     <!--  card-section-start   -->
-    <div class="custom-height custom-container space">
+    <div class="custom-height custom-container space" v-if="petProData.length">
       <v-row>
         <v-col cols="12" md="4" sm="12"  v-for="(data,i) in petProData"   :key="i" class="custom-margin">
           <pet-category-card
@@ -74,6 +74,10 @@
           ></pet-category-card>
         </v-col>
       </v-row>
+    </div>
+    <div v-else class="text-center">
+      <img class="img-height img-fluid"  src="/images/Auth/Column-3-Dog.png" alt="logo" />
+      <h2 class="heading">{{$t('nothing_here')}}</h2>
     </div>
     <!--  card-section-end   -->
   </div>
@@ -241,7 +245,7 @@ export default {
     padding: 0 0 8px 0;
   }
 }
-
-
-
+.img-height{
+  max-height: 250px;
+}
 </style>

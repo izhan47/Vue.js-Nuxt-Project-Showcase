@@ -77,14 +77,18 @@
 
   </div>
   <!--  card-section-start   -->
-  <div class="custom-height custom-container">
+  <div class="custom-height custom-container" v-if="petProData.length">
     <v-row>
-      <v-col cols="12" md="4" sm="12" v-for="(data,i) in petProData.slice(0,3)"   :key="i"  class="custom-margin">
+      <v-col cols="12" md="4" sm="12"  v-for="(data,i) in petProData.slice(0,3)"   :key="i"  class="custom-margin">
           <pet-category-card
             :item="data"
           ></pet-category-card>
       </v-col>
     </v-row>
+  </div>
+  <div v-else class="text-center">
+    <img class="img-height img-fluid"  src="/images/Auth/Column-3-Dog.png" alt="logo" />
+    <h2 class="heading">{{$t('nothing_here')}}</h2>
   </div>
   <!--  card-section-end   -->
 </div>
@@ -107,6 +111,9 @@ components:{ PetCategoryCard},
       key:'AIzaSyBaxMfWKuh_m7up5CvIL-LF_EHJ_eWkRWI',
       readMore:false,
     }
+  },
+  created(){
+
   },
   computed:{
     petProData(){
@@ -189,6 +196,5 @@ components:{ PetCategoryCard},
     font-weight:  $font-weight-700;
   }
 }
-
 
 </style>
