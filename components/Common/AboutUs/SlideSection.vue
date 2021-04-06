@@ -87,6 +87,9 @@ export default {
   margin-right: auto;
   margin-left: auto;
   position: relative;
+  @media (max-width: 767px) {
+    padding: 0;
+  }
 
   //Parallax effect on row
 }

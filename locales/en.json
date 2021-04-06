@@ -8,7 +8,9 @@
   "pet_care_advice": "Pet Care Advice",
   "login": "Login",
   "sign_in": "Sign in",
+  "login_with_google": "Login With Google",
   "sign_up": "Sign Up",
+  "sign_up_with_google": "Sign up With Google",
   "menu": "Menu",
   "product": "Product ",
   "product_reviews": "Product Reviews",
@@ -157,5 +159,6 @@
   "remember_password": "Remember your password?",
   "nothing_here": "Nothing Here ...!",
   "enter_location": "Enter Location ...",
-  "forgot_description": "Enter your email and we'll send you a new password."
+  "forgot_description": "Enter your email and we'll send you a new password.",
+  "or": "or"
 }

@@ -15,7 +15,7 @@
             @submit.prevent="submit"
           >
             <v-row>
-              <v-col cols="12" md="6" sm="12"  >
+              <v-col cols="12" md="12" sm="12"  >
                 <v-text-field
                   class="form-field news-section-label"
                   color="white"
@@ -25,16 +25,16 @@
                   required
                 ></v-text-field>
               </v-col>
-              <v-col cols="12" md="6" sm="12" >
-                <v-text-field
-                  class="form-field news-section-label"
-                  color="white"
-                  :rules="rules.zipcode"
-                  v-model="form.zipcode"
-                  :label="$t('your_zipcode')"
-                  required
-                ></v-text-field>
-              </v-col>
+<!--              <v-col cols="12" md="6" sm="12" >-->
+<!--                <v-text-field-->
+<!--                  class="form-field news-section-label"-->
+<!--                  color="white"-->
+<!--                  :rules="rules.zipcode"-->
+<!--                  v-model="form.zipcode"-->
+<!--                  :label="$t('your_zipcode')"-->
+<!--                  required-->
+<!--                ></v-text-field>-->
+<!--              </v-col>-->
               <v-col  cols="12" md="12" sm="12" class="pt-0">
                 <v-text-field
                   class="form-field news-section-label"
@@ -79,11 +79,11 @@ export default {
       alertType: '',
       form:{
         first_name:'',
-        zipcode:'',
+        // zipcode:'',
         email:''
       },
       rules: {
-        zipcode: [val => (val || '').length > 0 || 'This Zipcode is required'],
+        // zipcode: [val => (val || '').length > 0 || 'This Zipcode is required'],
         email: [val => (val || '').length > 0 || 'This email field is required',
           val => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(val) || 'E-mail must be valid'],
         first_name: [val => (val || '').length > 0 || 'This Name is required'],

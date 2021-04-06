@@ -131,7 +131,7 @@ export default {
   .card-radius{
     border-radius: 20px;
     box-shadow: -5px 10px 10px 0px $text-shadow-primary;
-    background-color: $grey-light;
+    background-color: $cultured;
   }
 }
 .custom-card-padding{
