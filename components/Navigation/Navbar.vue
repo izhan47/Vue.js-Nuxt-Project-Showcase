@@ -64,11 +64,11 @@
             </div>
             <div class="app-title">
               <div  class="nav-title  ml-4" @click="$router.push('/about')">{{$t('about_us')}}</div>
-              <div   class="nav-title ml-4" @click="$router.push('/reviews')">{{$t('reviews')}}</div>
+              <div   class="nav-title ml-4" @click="$router.push('/reviews')">{{$t('best_pet_products')}}</div>
               <div class=" nav-logo" >
                 <img src="/images/WagEnabledLogo.jpg" alt="logo" @click="$router.push('/')" />
               </div>
-              <div   class="nav-title ml-4" @click="$router.push('/watch-learn')">{{$t('watch_and_learn')}}</div>
+              <div   class="nav-title ml-4" @click="$router.push('/watch-learn')">{{$t('pet_care_advice')}}</div>
               <div   class="nav-title ml-4" @click="$router.push('/pet-category')">{{$t('find_a_pet_pro')}}</div>
             </div>
             <div>
@@ -96,10 +96,10 @@ export default {
           to: '/about',
         },
         {
-          title: this.$i18n.t('reviews'),
+          title: this.$i18n.t('best_pet_products'),
           to: '/reviews',
         },
-        { title: this.$i18n.t('watch_and_learn'),
+        { title: this.$i18n.t('pet_care_advice'),
           to: '/watch-learn',},
         { title: this.$i18n.t('find_a_pet_pro'),
           to: '/pet-category',},

@@ -73,7 +73,7 @@ name: "about.vue"
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
 .custom-padding{
-  padding: 8rem 0 3rem 0;
+  padding: 3rem 0 3rem 0;
 }
 .paw-print{
   @media (max-width: 768px) {

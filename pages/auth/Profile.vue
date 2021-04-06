@@ -73,14 +73,14 @@ export default {
       cards:[
         {
           icon:'mdi-percent-outline',
-          parent_heading:this.$i18n.t('deals_offered'),
+          parent_heading:this.$i18n.t('saved_deals'),
           subtitle:'Available Through 2.20.2021',
           title:'Free Dog Treats',
           button_text:'claim',
           path:''
         },
         {
-          icon:'mdi-ice-cream',
+          icon:'mdi-heart',
           parent_heading:'Loved Pet Pros',
           subtitle:'May 22, 2021',
           title:'Froyo Day',
@@ -89,22 +89,14 @@ export default {
         },
         {
           icon:'mdi-star',
-          parent_heading:'Saved Watch & Learn',
+          parent_heading:'Saved Pet Care Advice',
           subtitle:this.$i18n.t('name'),
           title:'Review',
           button_text:this.$i18n.t('submit'),
           path:''
         },
         {
-          icon:'mdi-star',
-          parent_heading:'Saved Reviews',
-          subtitle:this.$i18n.t('name'),
-          title:'Review',
-          button_text:this.$i18n.t('submit'),
-          path:''
-        },
-        {
-          icon:'mdi-percent-outline',
+          icon:'mdi-paw',
           parent_heading:'My Reviews',
           subtitle:'Available Through 2.20.2021',
           title:'Free Dog Treats',

@@ -12,6 +12,7 @@
       <div class=" banner-description">
         <p class="space">{{ $t('search_database_description') }}</p>
       </div>
+
         <!--   Filter Section Start     -->
         <v-form class="search-form-filter" @submit.prevent="filterData">
           <div class="search-form-field">
@@ -26,21 +27,28 @@
               @change="filterData()"
             ></v-select>
           </div>
-          <div class="search-form-field">
+          <div class="search-form-field mb-8">
             <div class="search-filter-label">
-              <label class="ml-4">{{ $t('location') }}</label>
+              <label class="ml-4 ">{{ $t('location') }}</label>
             </div>
-            <v-text-field
-              class="search-field  mt-2"
-              :placeholder="$t('all')"
-              v-model="form.location"
-              solo
-              rounded
-              color="#00afaa"
-              outlined
-              @input="debounceSearch"
-
-            ></v-text-field>
+<!--            <v-text-field-->
+<!--              class="search-field cross-icon mt-2"-->
+<!--              :placeholder="$t('all')"-->
+<!--              v-model="form.location"-->
+<!--              solo-->
+<!--              rounded-->
+<!--              clearable-->
+<!--              color="#00afaa"-->
+<!--              outlined-->
+<!--              @input="debounceSearch"-->
+<!--            ></v-text-field>-->
+              <vue-google-autocomplete
+                id="map"
+                class="search-location"
+                :placeholder="$t('all')"
+                v-on:placechanged="getAddressData"
+              >
+              </vue-google-autocomplete>
           </div>
           <div class="search-form-field">
             <div class="search-filter-label">
@@ -63,6 +71,7 @@
               class="purple-section  search-btn"
               outlined
               large
+              @click="filterData"
             >
               {{ $t('search') }}
             </v-btn>
@@ -95,25 +104,23 @@
 </template>
 
 <script>
-import axios from 'axios'
 import PetCategoryCard from "@/components/PetCategoryCard";
+import VueGoogleAutocomplete from 'vue-google-autocomplete'
 export default {
 name: "locationSearch.vue",
-components:{ PetCategoryCard},
+components:{ PetCategoryCard,VueGoogleAutocomplete},
   data(){
     return{
-      debounce:'',
       form:{
         category_id:'',
-        location:'',
+        latitude:'',
+        longitude:'',
         search:''
       },
-      key:'AIzaSyBaxMfWKuh_m7up5CvIL-LF_EHJ_eWkRWI',
+      address: ''
     }
   },
-  created(){
 
-  },
   computed:{
     petProData(){
       return this.$store.state.pet_pro_list
@@ -131,33 +138,15 @@ components:{ PetCategoryCard},
     },
   },
   methods:{
+    getAddressData(addressData, placeResultData, id) {
+      this.address = addressData;
+      this.form.latitude=addressData.latitude
+      this.form.longitude=addressData.longitude
+    },
     filterData(){
       this.$emit('filter-data', this.form)
     },
 
-   async debounceSearch(event){
-     // console.log('event',event)
-      try{
-        clearTimeout(this.debounce)
-        this.debounce = await setTimeout(async () => {
-          this.query = event
-         // console.log('query',this.query)
-          return axios({
-            method: 'GET',
-            url: 'https://maps.googleapis.com/maps/api/place/textsearch/json' + this.key + this.query,
-            headers: {
-              "Access-Control-Allow-Origin": '*',
-              "Access-Control-Allow-Methods": 'GET',
-            },
-          })
-        }, 600)
-
-        // console.log('resp',resp)
-      }
-      catch (e){
-        console.log('ee',e)
-      }
-    }
   }
 }
 </script>
@@ -167,11 +156,9 @@ components:{ PetCategoryCard},
 .img-height{
   max-height: 250px;
 }
-
 .banner-description{
   max-width: 500px;
 }
-
 .search-field::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
@@ -189,12 +176,10 @@ components:{ PetCategoryCard},
 .search-field::v-deep .v-input__append-inner{
   margin-top: 12px;
 }
-
 .search-btn::v-deep.v-btn{
   min-width: 160px;
   height: 52px;
 }
-
 .tag-align{
   text-align: right;
   text-transform: $text-transform-capitalize;

@@ -23,7 +23,7 @@
                 <v-card class="pa-8 card">
                   <v-container>
                         <div class="card-icon-parent">
-                          <v-icon size="55"  class="card-icon" >mdi-dog-side</v-icon>
+                          <v-icon size="55"  class="card-icon" >mdi-paw</v-icon>
                         </div>
                     <div>
                       <h2 class="card-heading mb-2">  {{ $t('oouch_free') }}</h2>

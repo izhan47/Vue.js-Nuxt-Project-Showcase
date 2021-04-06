@@ -2,8 +2,10 @@
   "home": "Home",
   "about_us": "About Us",
   "reviews": "Reviews",
+  "best_pet_products": "Best Pet Products ",
   "find_a_pet_pro": "Find a Pet Pro",
   "watch_and_learn": "Watch & Learn",
+  "pet_care_advice": "Pet Care Advice",
   "login": "Login",
   "sign_in": "Sign in",
   "sign_up": "Sign Up",
@@ -128,6 +130,7 @@
   "hours_of_operation":"Hours of Operation",
   "find_more_pet_pros":"Find More Pet Pros",
   "deals_offered":"Deals Offered",
+  "saved_deals":"Saved Deals",
 
   "welcome":"Welcome.",
   "lorem_ipsum":"I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
@@ -151,5 +154,6 @@
   "dont_have_an_account": "Don’t have an account?",
   "reset_password": "Reset Password",
   "remember_password": "Remember your password?",
-  "nothing_here": "Nothing Here ...!"
+  "nothing_here": "Nothing Here ...!",
+  "enter_location": "Enter Location ..."
 }
