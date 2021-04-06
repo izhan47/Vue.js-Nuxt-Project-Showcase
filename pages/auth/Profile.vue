@@ -11,7 +11,7 @@
 
   </div>
   <v-row class="card-account space">
-    <v-col co="12" md="6" sm="12">
+    <v-col cols="12" md="6" sm="12">
       <v-card class="card-radius custom-card-padding">
         <img class="img-fluid img-border" src="/images/Auth/pet.png" alt="">
         <v-card-title class="card-title">{{$t('pet_profile')}}</v-card-title>
@@ -21,7 +21,7 @@
           <span>Bean, Breed Name, Age 4</span> <br>
       </v-card>
     </v-col>
-    <v-col co="12" md="6" sm="12">
+    <v-col cols="12" md="6" sm="12">
       <v-card class="card-radius custom-card-padding space">
          <v-card-title class="card-title">{{$t('account_info')}}</v-card-title>
         <hr class="dot-line mb-5">
