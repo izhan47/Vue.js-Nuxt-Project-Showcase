@@ -287,5 +287,27 @@
   }
 
 
+//  google place css
+.search-location{
+  border: 1px solid  rgba(0, 0, 0, 0.38);
+  border-radius: 30px;
+  min-height: 48px;
+  max-width: 273px;
+  box-shadow: unset ;
+  font-weight: $font-weight-bold;
+  font-family: $font-family-primary;
+  background-color: $white;
+  padding: 0 24px;
+  margin-top: 8px;
+  &:focus{
+    outline: none !important;
+  }
+}
+//.pac-container.pac-logo{
+//  &:after{
+//    content: unset;
+//  }
+//}
+
 
 

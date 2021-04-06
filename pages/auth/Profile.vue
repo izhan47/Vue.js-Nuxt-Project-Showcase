@@ -11,7 +11,7 @@
 
   </div>
   <v-row class="card-account space">
-    <v-col co="12" md="6" sm="12">
+    <v-col cols="12" md="6" sm="12">
       <v-card class="card-radius custom-card-padding">
         <img class="img-fluid img-border" src="/images/Auth/pet.png" alt="">
         <v-card-title class="card-title">{{$t('pet_profile')}}</v-card-title>
@@ -21,7 +21,7 @@
           <span>Bean, Breed Name, Age 4</span> <br>
       </v-card>
     </v-col>
-    <v-col co="12" md="6" sm="12">
+    <v-col cols="12" md="6" sm="12">
       <v-card class="card-radius custom-card-padding space">
          <v-card-title class="card-title">{{$t('account_info')}}</v-card-title>
         <hr class="dot-line mb-5">
@@ -73,14 +73,14 @@ export default {
       cards:[
         {
           icon:'mdi-percent-outline',
-          parent_heading:this.$i18n.t('deals_offered'),
+          parent_heading:this.$i18n.t('saved_deals'),
           subtitle:'Available Through 2.20.2021',
           title:'Free Dog Treats',
           button_text:'claim',
           path:''
         },
         {
-          icon:'mdi-ice-cream',
+          icon:'mdi-heart',
           parent_heading:'Loved Pet Pros',
           subtitle:'May 22, 2021',
           title:'Froyo Day',
@@ -89,22 +89,14 @@ export default {
         },
         {
           icon:'mdi-star',
-          parent_heading:'Saved Watch & Learn',
+          parent_heading:'Saved Pet Care Advice',
           subtitle:this.$i18n.t('name'),
           title:'Review',
           button_text:this.$i18n.t('submit'),
           path:''
         },
         {
-          icon:'mdi-star',
-          parent_heading:'Saved Reviews',
-          subtitle:this.$i18n.t('name'),
-          title:'Review',
-          button_text:this.$i18n.t('submit'),
-          path:''
-        },
-        {
-          icon:'mdi-percent-outline',
+          icon:'mdi-paw',
           parent_heading:'My Reviews',
           subtitle:'Available Through 2.20.2021',
           title:'Free Dog Treats',

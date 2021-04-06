@@ -3,7 +3,7 @@
     <div class="bg-review-img">
       <div class="custom-container center-center custom-padding ">
         <div class="text-center">
-          <h2 class="heading  line-height mb-8">{{ $t('product_reviews') }}</h2>
+          <h2 class="heading  line-height mb-8">{{ $t('best_pet_products') }}</h2>
         </div>
         <div class="space banner-description">
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -69,6 +69,7 @@
                 class="purple-section  search-btn"
                 outlined
                 large
+                @click="filterData"
               >
                 {{ $t('search') }}
               </v-btn>
@@ -155,7 +156,8 @@ data(){
 .bg-review-img{
   background-image: url("/images/Reviews/Product-Reviews-Banner-2.png");
   //background-image: url("/images/Reviews/Reviews-Banner.png");
-  background-position: 10% 56%;
+  background-position: 10% 68%;
+  //background-position: 10% 56%;
   background-size: cover;
   background-repeat: no-repeat;
   @media (max-width: 1440px) {

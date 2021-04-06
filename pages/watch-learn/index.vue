@@ -3,7 +3,7 @@
     <div class="bg-review-img">
       <div class="custom-container center-center custom-padding ">
         <div class="text-center">
-          <h2 class="heading  line-height mb-8">{{ $t('watch_and_learn') }}</h2>
+          <h2 class="heading  line-height mb-8">{{ $t('pet_care_advice') }}</h2>
         </div>
         <div class=" banner-description">
           <p>{{ $t('watch_learn_description') }}</p>
@@ -51,6 +51,8 @@
                 class="purple-section  search-btn"
                 outlined
                 large
+                @click="filterData"
+
               >
                 {{ $t('search') }}
               </v-btn>

@@ -23,18 +23,28 @@
                 @change="filterData()"
               ></v-select>
             </div>
-            <div class="search-form-field">
-              <label>{{ $t('location') }}</label>
-              <v-text-field
-                class="search-field-location  mt-2"
+            <div class="search-form-field mb-8">
+              <div class="search-filter-label">
+                <label class="ml-4 ">{{ $t('location') }}</label>
+              </div>
+              <!--            <v-text-field-->
+              <!--              class="search-field cross-icon mt-2"-->
+              <!--              :placeholder="$t('all')"-->
+              <!--              v-model="form.location"-->
+              <!--              solo-->
+              <!--              rounded-->
+              <!--              clearable-->
+              <!--              color="#00afaa"-->
+              <!--              outlined-->
+              <!--              @input="debounceSearch"-->
+              <!--            ></v-text-field>-->
+              <vue-google-autocomplete
+                id="map"
+                class="search-location"
                 :placeholder="$t('all')"
-                v-model="form.location"
-                color="#00afaa"
-                solo
-                clearable
-                rounded
-                outlined
-              ></v-text-field>
+                v-on:placechanged="getAddressData"
+              >
+              </vue-google-autocomplete>
             </div>
             <div class="search-form-field">
               <label>{{ $t('keyword') }}</label>
@@ -56,6 +66,8 @@
                 class="purple-section  search-btn"
                 outlined
                 large
+                @click="filterData"
+
               >
                 {{ $t('search') }}
               </v-btn>
@@ -84,8 +96,12 @@
 </template>
 
 <script>
+import VueGoogleAutocomplete from 'vue-google-autocomplete'
+
 export default {
   name: "index.vue",
+  components:{ VueGoogleAutocomplete},
+
   data(){
     return{
       cards:[
@@ -118,9 +134,11 @@ export default {
       category: [],
       form:{
         category_id:'',
-        location:'',
+        latitude:'',
+        longitude:'',
         search:''
       },
+      address: ''
     }
   },
   computed:{
@@ -158,6 +176,11 @@ export default {
   methods:{
     filterData(){
       this.$store.dispatch('petProList',this.form)
+    },
+    getAddressData(addressData, placeResultData, id) {
+      this.address = addressData;
+      this.form.latitude=addressData.latitude
+      this.form.longitude=addressData.longitude
     },
   }
 }

@@ -2,7 +2,7 @@
 <div class="custom-container  mt-10 ">
   <div class="text-center bg-img">
     <div class="mb-5">
-      <h2 class="heading">Enter your email and we'll send you a new password.</h2>
+      <h2 class="heading">{{$t('forgot_description')}}</h2>
     </div>
     <v-text-field
       class="mb-5"
@@ -118,5 +118,8 @@ name: "Forgot-Password.vue",
   font-weight: $font-weight-bold;
   text-decoration: unset;
   color: $black;
+}
+.heading{
+  text-transform: none;
 }
 </style>
