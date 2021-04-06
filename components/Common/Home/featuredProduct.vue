@@ -29,7 +29,7 @@
           </v-btn>
 
           <v-btn
-            class="round-btn mt-3 ml-3"
+            class="round-btn mt-3"
             outlined
             large
             rounded

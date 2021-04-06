@@ -93,7 +93,7 @@ export default {
   padding: 15px;
   display: inline-block;
   color: $black;
-  background: $grey-light;
+  background: $cultured;
   margin: 0;
 }
 .search-form-input:focus,{

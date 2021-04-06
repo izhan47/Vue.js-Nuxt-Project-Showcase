@@ -94,6 +94,10 @@ export default {
   border-radius: 50%;
   height: 38px;
   width: 38px;
+  @media (max-width:768px) {
+    height: 30px;
+    width: 30px;
+  }
 }
 .card-img{
   margin-top: 7rem;

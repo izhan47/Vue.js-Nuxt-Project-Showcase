@@ -53,7 +53,14 @@
                   :label="$t('remember_me')"
                 ></v-checkbox>
                 <div class=" text-center">
-                  <v-btn large class="log-in-btn white-text" outlined rounded @click="Login()"> {{ $t('log_in') }}</v-btn>
+                  <v-btn large class="log-in-btn white-text" outlined rounded @click="Login"> {{ $t('log_in') }}</v-btn>
+                </div>
+                <p class="mt-5 mb-5 or-divider">
+                  <span>{{$t('or')}}</span>
+                </p>
+
+                <div class="text-center">
+                  <v-btn large class="log-in-btn white-text" outlined rounded> {{ $t('login_with_google') }}</v-btn>
                 </div>
                 <div class="mt-4 mb-2">
                   <span class="forgot-pass"  @click="$router.push('/auth/Forgot-Password')">{{$t('lost_password')}}</span>
@@ -61,6 +68,7 @@
                   <span class="forgot-pass">{{$t('dont_have_an_account')}}</span>
                   <nuxt-link class="auth-link" to="/auth/Register">{{$t('sign_up')}}</nuxt-link>
                 </div>
+
               </v-form>
             </div>
           </v-col>
@@ -153,14 +161,15 @@ methods:{
   background-color: transparent;
   background-image: linear-gradient(
     290deg
-    , #AFE2E3 0%, $green 100%);
+    , $powder_blue 0%, $green 100%);
 }
 .left-section{
   transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
-  min-height: 630px;
+  min-height: 700px;
   padding: 75px;
-  @media (max-width:767px) {
+  @media (max-width:768px) {
     padding: 12px;
+    min-height: 400px;
   }
 }
 .logo{
@@ -188,7 +197,7 @@ methods:{
 }
 
 .input-field::v-deep .v-input__slot{
-  background: $grey-light !important;
+  background: $cultured !important;
   border-color: rgba(145,156,167,0.27);
   border-width: 0;
   min-height: 48px;
@@ -251,5 +260,35 @@ methods:{
   font-weight: $font-weight-bold;
   text-decoration: unset;
   color: $black;
+}
+
+p.or-divider{
+  position: relative;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  span{
+    font-size: $font-size-14;
+    font-family: $font-family-primary;
+    color: $lavender_gray;
+    font-weight: $font-weight-500;
+    display: inline-block;
+    background: $white;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 1
+
+  }
+  &:after{
+    position: absolute;
+    content: '';
+    width: 100%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 1px;
+    background: $light_gray;
+  }
 }
 </style>

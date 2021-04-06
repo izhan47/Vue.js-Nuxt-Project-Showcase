@@ -247,7 +247,7 @@ export default {
 }
 .bg-img-section{
   margin-left:39%;
-  background-color:$grey-light;
+  background-color:$cultured;
   border-radius: 20px 20px 20px 20px;
   position: absolute;
   bottom: -100px;
@@ -314,7 +314,7 @@ export default {
   width: 700px;
   margin: 0;
   padding: 0;
-  background-color: $grey-light;
+  background-color: $cultured;
   border-radius: 20px;
 }
 .bg-category-section{
@@ -393,7 +393,7 @@ hr.dot-line {
   .card-radius{
     border-radius: 20px;
     box-shadow: -5px 10px 10px 0px $text-shadow-primary;
-    background-color: $grey-light;
+    background-color: $cultured;
   }
 }
 .custom-card-align{
@@ -507,7 +507,7 @@ hr.dot-line {
 .card-location{
   border-style: solid;
   border-width: 3px 2px 0 2px;
-  border-color: $grey-light;
+  border-color: $cultured;
   transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
 }
 .bg-img-section-height{
