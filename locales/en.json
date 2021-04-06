@@ -37,7 +37,7 @@
   "by": "By",
   "for": "For",
   "pet_people": "Pet People",
-  "pet_functionality_description": "Explore from 100's of pet care professional around you, learn from pet care videos and scope out the best pet products.",
+  "pet_functionality_description": "Explore pet care professionals around you, scope out the best pet products, and get pet care advice.",
   "find_a": "Find a",
   "pet_professional": "Pet Professional",
   "discover_new": "Discover New",
@@ -75,6 +75,7 @@
   "pet_food": "Pet Food",
   "featured_product_description": "Finding a healthy balance between a dog food that is healthy for your dog and one that tastes delicious can be difficult. While an all-natural raw diet is a new phase in the canine world, that doesn't work for every household",
   "see_product_review": "See Product Review",
+  "browse_all_review": "Browse All Review",
 
   "newsletter": "Newsletter",
   "newsletter_description": "Save with exclusive deals, learn about new products and receive expert advice for you and your pet delivered straight to your inbox.",
@@ -155,5 +156,6 @@
   "reset_password": "Reset Password",
   "remember_password": "Remember your password?",
   "nothing_here": "Nothing Here ...!",
-  "enter_location": "Enter Location ..."
+  "enter_location": "Enter Location ...",
+  "forgot_description": "Enter your email and we'll send you a new password."
 }
