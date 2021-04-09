@@ -303,11 +303,11 @@
     outline: none !important;
   }
 }
-//.pac-container.pac-logo{
-//  &:after{
-//    content: unset;
-//  }
-//}
+.pac-container.pac-logo{
+  &:after{
+    content: unset;
+  }
+}
 
 
 

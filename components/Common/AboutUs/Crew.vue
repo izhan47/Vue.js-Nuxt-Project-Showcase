@@ -1,14 +1,10 @@
 <template>
-  <div>
+  <div  >
+
     <v-container >
-      <div class="crew-card-section">
-        <div class="crew-img" data-aos="slide-left" data-aos-easing="linear" data-aos-duration="2500">
-          <img
-               src="/images/About/Teal-Ball.png" alt="logo">
-        </div>
-        <div class="space heading"  data-aos="slide-up"
-             data-aos-easing="linear"
-             data-aos-duration="2500" >
+      <div class="crew-card-section" >
+
+        <div class="space heading">
           <h2>{{ $t('meet_crew') }} </h2>
         </div>
         <div class="crew-divider">
@@ -64,7 +60,8 @@ data(){
 
     ]
   }
-}
+},
+
 }
 </script>
 <style lang="scss" scoped>
@@ -87,18 +84,7 @@ data(){
     width: 100%;
   }
 }
-.crew-img{
-  img{
-    width: 5%;
-    text-align: right;
-  }
-  @media (max-width: 767px) {
-    img{
-      display:none ;
-    }
-  }
 
-}
 .crew-card-section{
   max-width: 1140px;
   margin: auto;

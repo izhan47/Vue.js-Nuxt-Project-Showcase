@@ -1,7 +1,7 @@
 <template>
   <div class="custom-container custom-height custom-padding">
     <v-row justify="center">
-      <v-col cols="12" md="8" sm="12">
+      <v-col cols="12" md="8" sm="12" id="animate">
         <div>
           <h2 class="banner-heading text-center line-height">{{ $t('search_wag_enabled') }}</h2>
         </div>
@@ -23,8 +23,7 @@
                   {{ $t('search') }}
                 </v-btn>
             </div>
-        <div class="search-img" >
-<!--          data-aos="slide-left" data-aos-easing="linear" data-aos-duration="3500"-->
+        <div class="search-img" id="dog-movement">
           <img class="img-fluid" src="/images/Wag-Enabled-HP-Dog.png" alt="logo">
         </div>
       </v-col>
@@ -55,6 +54,38 @@ export default {
           this.$store.commit('SHOW_SNACKBAR',{  snackbar:true,color:'red',message:'Search Field is required'})
         }
     },
+  },
+  mounted(){
+    if(process.browser){
+      let dog = document.getElementById('dog-movement');
+      ;(function(){
+        let throttle = function(type, name, obj){
+          let object = obj || window;
+          let running = false;
+          let func = function(){
+            if (running){
+              return;
+            }
+            running = true;
+            requestAnimationFrame(function(){
+              object.dispatchEvent(new CustomEvent(name));
+              running = false;
+            });
+          };
+          object.addEventListener(type, func);
+        };
+        throttle("scroll", "optimizedScroll");
+      })();
+      window.addEventListener("optimizedScroll", function(){
+        let offset = window.pageYOffset-document.getElementById('animate').offsetTop
+        if(offset<350){
+          dog.style.transform = "translate(-" + (offset)  + "px,0px)";
+        }
+        if(window.screen.width < 769){
+          dog.style.transform = "none";
+        }
+      })
+    }
   }
 }
 </script>
@@ -102,7 +133,8 @@ export default {
 }
 .search-img{
   margin-top:2rem;
-  text-align: center;
+
+  text-align: right;
   img{
     max-height: 255px;
   }
