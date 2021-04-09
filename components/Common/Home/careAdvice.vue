@@ -1,6 +1,6 @@
 <template>
   <div class="grey-section" >
-    <div class="custom-container custom-height ">
+    <div class="custom-container custom-height animate">
       <div class="text-center">
         <img class="img-fluid img-height" src="/images/Pink-Paw.png" alt="logo">
         <h2  class="heading mt-5">{{ $t('top_pet_care_advice') }}</h2>
@@ -48,6 +48,26 @@ export default {
         'Foo', 'Bar', 'Fizz', 'Photography'],
       end:9,
     }
+  },
+  mounted(){
+    if(process.browser){
+      const images=document.querySelector('.animate');
+      let observer =new IntersectionObserver((entries)=>{
+        // console.log(entries);
+        if (entries[0].intersectionRatio>0){
+          // console.log('inside if',entries[0])
+          // entries[0].target.style.animation=`anim1 5s forwards ease-out`
+          entries[0].target.classList.add('fade-in-ease-out')
+        }
+        else{
+          // console.log('inside else')
+          entries[0].target.classList.remove('fade-in-ease-out')
+        }
+
+      })
+      observer.observe(images)
+    }
+
   },
   methods:{
     seeMore(){
@@ -129,4 +149,17 @@ export default {
   background-color: $purple;
 }
 
+.fade-in-ease-out{
+  animation:animate-up 2s forwards ease-out
+}
+@keyframes animate-up {
+  from{
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to{
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 </style>
