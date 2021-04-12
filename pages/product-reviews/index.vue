@@ -9,114 +9,116 @@
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
         </div>
         <!--   Filter Section Start     -->
-          <v-form class="search-form-filter" @submit.prevent="filterData">
-            <div class="search-form-field">
-              <label>{{ $t('sort_by') }}</label>
-              <v-select
-                class="search-field mt-2"
-                :items="sorting"
-                v-model="form.sort_by"
-                outlined
-                rounded
-                @change="filterData()"
-              ></v-select>
-            </div>
-            <div class="search-form-field">
-              <label >{{ $t('category') }}</label>
+        <v-form class="search-form-filter" @submit.prevent="filterData">
+          <div class="search-form-field">
+            <label>{{ $t('sort_by') }}</label>
+            <v-select
+              class="search-field mt-2"
+              :items="sorting"
+              v-model="form.sort_by"
+              outlined
+              rounded
+              @change="filterData()"
+            ></v-select>
+          </div>
+          <div class="search-form-field">
+            <label >{{ $t('category') }}</label>
 
-              <v-select
-                :placeholder="$t('all')"
-                class="search-field-category mt-2"
-                :items="categoryList"
-                v-model="categories"
-                outlined
-                rounded
-                multiple
-               small-chips
-               @change="filterData()"
-              >
-                <template v-slot:selection="{ item, index }">
-                  <v-chip v-if="index === 0">
-                    <span>{{ item.text }}</span>
-                  </v-chip>
-                  <span
-                    v-if="index === 1"
-                    class="grey--text caption"
-                  >
+            <v-select
+              :placeholder="$t('all')"
+              class="search-field-category mt-2"
+              :items="categoryList"
+              v-model="categories"
+              outlined
+              rounded
+              multiple
+              small-chips
+              @change="filterData()"
+            >
+              <template v-slot:selection="{ item, index }">
+                <v-chip v-if="index === 0">
+                  <span>{{ item.text }}</span>
+                </v-chip>
+                <span
+                  v-if="index === 1"
+                  class="grey--text caption"
+                >
                     (+{{ categories.length - 1 }} others)
                   </span>
-                </template>
-              </v-select>
+              </template>
+            </v-select>
 
 
 
-            </div>
-            <div class="search-form-field">
-              <label >{{ $t('keyword') }}</label>
-              <v-text-field
-                class="search-field cross-icon mt-2"
-                :placeholder="$t('all')"
-                v-model="form.search"
-                solo
-                color="#00afaa"
-                rounded
-                outlined
-                clearable
-              ></v-text-field>
-            </div>
-            <div >
-              <v-btn
-                class="purple-section  search-btn"
-                outlined
-                large
-                @click="filterData"
-              >
-                {{ $t('search') }}
-              </v-btn>
-            </div>
-          </v-form>
+          </div>
+          <div class="search-form-field">
+            <label >{{ $t('keyword') }}</label>
+            <v-text-field
+              class="search-field cross-icon mt-2"
+              :placeholder="$t('all')"
+              v-model="form.search"
+              solo
+              color="#00afaa"
+              rounded
+              outlined
+              clearable
+            ></v-text-field>
+          </div>
+          <div >
+            <v-btn
+              class="purple-section  search-btn"
+              outlined
+              large
+              @click="filterData"
+            >
+              {{ $t('search') }}
+            </v-btn>
+          </div>
+        </v-form>
         <!--   Filter Section End     -->
       </div>
     </div>
-      <!--  card-section-start   -->
-      <div class="custom-container  space" v-if="reviewData.length">
-        <v-row>
-          <v-col cols="12" md="4" sm="12" v-for="(data,i) in reviewData" :key="i" class="mt-8">
-            <product-review-card :item="data"></product-review-card>
-          </v-col>
-        </v-row>
-      </div>
-      <div v-else class="text-center">
-        <img class="img-height img-fluid"  src="/images/Auth/Column-3-Dog.png" alt="logo" />
-        <h2 class="heading">{{$t('nothing_here')}}</h2>
-      </div>
+    <!--  card-section-start   -->
+
+    <div class="custom-container  space" v-if="reviewData.length">
+      <v-row>
+        <v-col cols="12" md="4" sm="12" v-for="(data,i) in reviewData" :key="i" class="mt-8">
+          <product-review-card :item="data"></product-review-card>
+        </v-col>
+      </v-row>
+    </div>
+    <div v-else class="text-center">
+      <img class="img-height img-fluid"  src="/images/Auth/Column-3-Dog.png" alt="logo" />
+      <h2 class="heading">{{$t('nothing_here')}}</h2>
+    </div>
 
     <!--  card-section-end   -->
 
   </div>
-
 </template>
 
 <script>
 import ProductReviewCard from "@/components/ProductReviewCard";
+
 export default {
-name: "reviews.vue",
-data(){
-  return{
-    sorting: ['Latest', 'Popular','Deal offered'],
-    categories:[],
-    form:{
-      category_id:[],
-      sort_by:'Latest',
-      search:''
-    },
-  }
-},
+  name: "index.vue",
+  data(){
+    return{
+      sorting: ['Latest', 'Popular','Deal offered'],
+      categories:[],
+      form:{
+        category_id:[],
+        sort_by:'Latest',
+        search:''
+      },
+    }
+  },
   components:{ProductReviewCard},
   computed:{
     reviewData(){
       return this.$store.state.review_list
     },
+
     categoryList(){
       let categories= this.$store.state.product_review_category_list
       let arr = []
@@ -126,7 +128,7 @@ data(){
           'text': data.label,
         })
       })
-     return arr
+      return arr
     }
   },
   created() {
@@ -177,7 +179,7 @@ data(){
 .search-field-category::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
-   box-shadow: unset !important;
+  box-shadow: unset !important;
   max-width: 273px;
   font-weight: $font-weight-bold;
   font-family:$font-family-primary;
@@ -201,7 +203,7 @@ data(){
 .search-field::v-deep .v-input__slot{
   background: $white;
   min-height: 48px;
-   box-shadow: unset !important;
+  box-shadow: unset !important;
   max-width: 170px;
   font-weight: $font-weight-bold;
   font-family:$font-family-primary;

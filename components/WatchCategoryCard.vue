@@ -1,15 +1,13 @@
 <template>
 <div class="watch_and_learn_section">
-  <nuxt-link :to="`/watch-learn/${item.slug}`">
-    <v-img
-      class="img-fluid card-img"
-      :src="item.thumbnail_full_path"
-    ></v-img>
+  <nuxt-link :to="`/watch-learn/${item.slug}`" >
+    <div  class="bg-img-height" :style="`background-image: url(${item.thumbnail_full_path})`">
+    </div>
   </nuxt-link>
   <v-card  class="card-radius card-custom-height card-padding " @click="$router.push(`/watch-learn/${item.slug}`)">
-    <v-card-title class="card-heading">{{ item.category.name}}</v-card-title>
+    <v-card-title class="card-heading">{{ item.title}}</v-card-title>
     <v-card-text>
-      <p class="card-description card-des">{{item.blog_meta_description.length < 50 ? item.blog_meta_description : item.blog_meta_description.slice(0, 50) }}
+      <p class="card-description card-des">{{item.category.name}}
       </p>
     </v-card-text>
   </v-card>
@@ -37,7 +35,7 @@ export default {
   }
 }
 .card-custom-height{
-  min-height: 250px;
+  min-height: 240px;
 }
 .card-padding{
   padding: 24px;
@@ -47,9 +45,7 @@ export default {
 }
 .card-heading::v-deep.v-card__title{
   padding:6px;
-    font-family: $font-family-primary;
-    font-size: $font-size-24;
-    font-weight: $font-weight-bold;
+
 }
 .card-des::v-deep.v-card__subtitle, .v-card__text, .v-card__title {
   padding: 6px;
@@ -57,11 +53,14 @@ export default {
 .card-description{
   font-family: $font-family-primary;
   font-size: $font-size-15;
-  font-weight: $font-weight-700;
+  font-weight: normal;
   line-height: 1.87;
 }
-.card-img {
-  min-height: 285px;
+.bg-img-height{
+  height: 270px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 10px 10px 0 0;
 }
-
 </style>

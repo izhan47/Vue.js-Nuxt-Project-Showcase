@@ -91,7 +91,7 @@ export default {
       products: [
         // { title: 'Home', path: '/home', icon: 'home' },
         { title: this.$i18n.t('find_a_pet_pro'), to:'/pet-category'},
-        { title: this.$i18n.t('product_reviews'), to:'/reviews'},
+        { title: this.$i18n.t('product_reviews'), to:'/product-reviews'},
         { title: this.$i18n.t('pet_care_advice'), to:'/watch-learn'},
       ],
       company: [

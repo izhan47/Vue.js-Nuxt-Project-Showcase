@@ -1,13 +1,17 @@
 <template>
   <div class="watch_and_learn_section">
-      <v-img
-        class="img-fluid card-img"
-        :src="item.thumbnail_thumb_full_path"
-      ></v-img>
+    <nuxt-link :to="`/product-reviews/${item.slug}`" >
+      <div  class="bg-img-height" :style="`background-image: url(${item.thumbnail_thumb_full_path})`">
+      </div>
+    </nuxt-link>
+<!--      <v-img-->
+<!--        class="img-fluid card-img"-->
+<!--        :src="item.thumbnail_thumb_full_path"-->
+<!--      ></v-img>-->
     <v-card  class="card-radius card-custom-height card-padding" >
       <v-card-title class="card-heading">{{ item.title}}</v-card-title>
-      <v-card-text>
-        <p class="card-description card-des">{{item.blog_meta_description.length < 50 ? item.blog_meta_description : item.blog_meta_description.slice(0, 50) }}
+      <v-card-text v-if="item.categories" v-for="category in item.categories">
+        <p class="card-description card-des">{{category.category.name }}
         </p>
       </v-card-text>
     </v-card>
@@ -35,9 +39,9 @@ export default {
     box-shadow: -5px 10px 10px 0px $text-shadow-primary;
   }
 }
-.card-custom-height{
-  min-height: 250px;
-}
+//.card-custom-height{
+//  min-height: 280px;
+//}
 .card-padding{
   padding: 24px;
   @media (max-width: 767px) {
@@ -46,17 +50,26 @@ export default {
 }
 .card-heading::v-deep.v-card__title{
   padding:6px;
+  color: $dark-charcoal;
+  //font-size: $font-size-28;
+  font-size: $font-size-22;
+  //font-weight: $font-weight-600;
+  font-weight: normal;
+  line-height: 32px;
+  margin-bottom: 10px;
+  text-transform: $text-transform-capitalize;
+  font-style: normal;
+  word-break: break-word;
   font-family: $font-family-primary;
-  font-size: $font-size-24;
-  font-weight: $font-weight-bold;
 }
 .card-des::v-deep.v-card__subtitle, .v-card__text, .v-card__title {
-  padding: 6px;
+  padding: 0 6px;
 }
 .card-description{
   font-family: $font-family-primary;
   font-size: $font-size-15;
-  font-weight: $font-weight-500;
+  font-weight: $font-weight-600;
+  margin-bottom: 0;
 }
 .card-img {
   min-height: 285px;

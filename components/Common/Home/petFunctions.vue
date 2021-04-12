@@ -1,6 +1,6 @@
 <template>
 <div class="grey-section">
-    <div class="custom-container custom-height custom-padding">
+    <div class="custom-container custom-height custom-padding" id="animate">
       <div class="function-heading space">
         <h2 class="heading text-center">
           {{ $t('for') }} {{ $t('pet_people') }}{{ $t('coma') }} {{ $t('by') }} {{ $t('pet_people') }}
@@ -54,14 +54,50 @@
           </v-card>
         </v-col>
       </v-row>
+      <div class="search-img" id="dog-movement">
+        <img class="img-fluid" src="/images/Wag-Enabled-HP-Dog.png" alt="logo">
+      </div>
     </div>
+
 </div>
 
 </template>
 
 <script>
 export default {
-  name: "petFunctions.vue"
+  name: "petFunctions.vue",
+  mounted(){
+    if(process.browser){
+      let dog = document.getElementById('dog-movement');
+      ;(function(){
+        let throttle = function(type, name, obj){
+          let object = obj || window;
+          let running = false;
+          let func = function(){
+            if (running){
+              return;
+            }
+            running = true;
+            requestAnimationFrame(function(){
+              object.dispatchEvent(new CustomEvent(name));
+              running = false;
+            });
+          };
+          object.addEventListener(type, func);
+        };
+        throttle("scroll", "optimizedScroll");
+      })();
+      window.addEventListener("optimizedScroll", function(){
+        let offset = window.pageYOffset-document.getElementById('animate').offsetTop
+        if(offset<350){
+          dog.style.transform = "translate(-" + (offset)  + "px,0px)";
+        }
+        if(window.screen.width < 769){
+          dog.style.transform = "none";
+        }
+      })
+    }
+  }
 }
 </script>
 
@@ -69,7 +105,7 @@ export default {
 @import "~/assets/sass/main.scss";
 
 .custom-padding{
-  padding: 8rem 12px 8rem 12px
+  padding: 8rem 12px 12px 12px
 }
 .function-heading{
   h2{
@@ -105,6 +141,14 @@ export default {
 .comment-img{
   margin-top: 1rem;
   max-height: 220px;
+}
+.search-img{
+  margin-top:2rem;
+
+  text-align: right;
+  img{
+    max-height: 255px;
+  }
 }
 </style>
 

@@ -102,6 +102,8 @@ name: "index.vue",
     }
   },
   created() {
+    console.log('watch data',this.$store.state.category_list)
+
     this.$store.dispatch('categoryList')
     this.watchCategory();
   },

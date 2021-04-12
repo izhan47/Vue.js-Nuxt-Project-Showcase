@@ -241,16 +241,21 @@
     display: flex;
     align-items: baseline;
   }
-
+.card-custom-height{
+  min-height: 280px;
+}
   .card-heading {
-    color: $purple;
-    font-size: $font-size-28;
-    font-weight: $font-weight-500;
-    line-height: 36px;
+    color: $dark-charcoal;
+    //font-size: $font-size-28;
+    //font-weight: $font-weight-600;
+    font-size: $font-size-22;
+    font-weight: normal;
+    line-height: 32px;
     margin-bottom: 10px;
     text-transform: $text-transform-capitalize;
     font-style: normal;
     word-break: break-word;
+    font-family: $font-family-primary;
   }
 
   .card-heading-point {
@@ -260,13 +265,20 @@
   }
 
   .card-description {
-    color: $matterhorn;
+    //color: $matterhorn;
+    color: $light-charcoal;
     font-size: $font-size-15;
-    font-weight: $font-weight-700;
+    font-weight: $font-weight-600;
     line-height: 1.87;
     font-family: $font-family-primary;
   }
-
+.bg-img-height{
+  height: 270px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 10px 10px 0 0;
+}
   .card-img {
     max-height: 270px;
     border-radius: 10px 10px 0 0;
