@@ -59,20 +59,48 @@
           <!--     Tab/Mobile screen End     -->
           <!--     Large screen       -->
           <v-toolbar-title  class="header-title">
-            <div>
+            <div class="accounts">
               <v-btn v-for="(icon,i) in icons" :key="i" icon @mouseleave="index = ''" @mouseover="index = i"  :color="index === i ? '#ff8189' : '#332e80'"><v-icon >{{icon.name}}</v-icon></v-btn>
             </div>
             <div class="app-title">
-              <div  class="nav-title  ml-4" @click="$router.push('/about')">{{$t('about_us')}}</div>
-              <div   class="nav-title ml-4" @click="$router.push('/product-reviews')">{{$t('best_pet_products')}}</div>
+              <nuxt-link class="nav-title unset-underline ml-4" to="/about">{{$t('about_us')}}</nuxt-link>
+              <nuxt-link class="nav-title unset-underline ml-4" to="/product-reviews">{{$t('best_pet_products')}}</nuxt-link>
+<!--              <div  class="nav-title  ml-4" @click="$router.push('/about')">{{$t('about_us')}}</div>-->
+<!--              <div   class="nav-title ml-4" @click="$router.push('/product-reviews')">{{$t('best_pet_products')}}</div>-->
               <div class=" nav-logo" >
                 <img src="/images/WagEnabledLogo.jpg" alt="logo" @click="$router.push('/')" />
               </div>
-              <div   class="nav-title ml-4" @click="$router.push('/watch-learn')">{{$t('pet_care_advice')}}</div>
-              <div   class="nav-title ml-4" @click="$router.push('/pet-category')">{{$t('find_a_pet_pro')}}</div>
+              <nuxt-link class="nav-title unset-underline ml-4" to="/watch-learn">{{$t('pet_care_advice')}}</nuxt-link>
+
+              <nuxt-link class="nav-title unset-underline ml-4" to="/pet-category">{{$t('find_a_pet_pro')}}</nuxt-link>
+
+<!--              <div   class="nav-title ml-4" @click="$router.push('/watch-learn')">{{$t('pet_care_advice')}}</div>-->
+<!--              <div   class="nav-title ml-4" @click="$router.push('/pet-category')">{{$t('find_a_pet_pro')}}</div>-->
             </div>
             <div>
-              <v-btn v-if="$store.state.user.isAuthenticated" outlined rounded class="sign-in-btn"  @click="reset()">{{$t('logout')}}</v-btn>
+<!--              <v-btn v-if="$store.state.user.isAuthenticated" outlined rounded class="sign-in-btn"  @click="reset()">{{$t('logout')}}</v-btn>-->
+              <v-menu offset-y v-if="$store.state.user.isAuthenticated">
+                <template v-slot:activator="{ on }">
+                  <v-btn icon large v-on="on">
+                    <v-avatar size="35px" item>
+                      <v-img v-if="userDetail.profile_image_thumb_full_path"  :src="userDetail.profile_image_thumb_full_path"></v-img>
+                    </v-avatar>
+                  </v-btn>
+                </template>
+                <v-list>
+                  <v-list-item    to="/auth/Profile">
+                    <v-list-item-title >
+                      <v-icon>mdi-settings</v-icon>  My Profile
+                    </v-list-item-title>
+                  </v-list-item>
+                  <v-list-item @click="reset">
+                    <v-list-item-title>
+                      <v-icon>mdi-logout-variant</v-icon> Logout
+                    </v-list-item-title>
+                  </v-list-item>
+                </v-list>
+
+              </v-menu>
               <v-btn v-else outlined rounded class="sign-in-btn" @click="$router.push('/auth/Login')">{{$t('sign_in')}}</v-btn>
             </div>
           </v-toolbar-title>
@@ -119,6 +147,7 @@ export default {
         }
       ],
       drawer: false,
+      userDetail:{}
     }
   },
   created() {
@@ -128,6 +157,7 @@ export default {
       // const newHeight = window.innerHeight;
       this.drawer = newWidth < 768;
     });
+    this.userDetail=this.$store.state.user.user
   },
   methods:{
     reset () {
@@ -158,6 +188,15 @@ export default {
   min-width: 65px;
   width:auto;
   padding: 12px 24px;
+}
+
+.accounts{
+  @media (min-width: 770px) and (max-width: 1100px){
+    display: none;
+  }
+}
+.unset-underline{
+  text-decoration: none;
 }
 </style>
 

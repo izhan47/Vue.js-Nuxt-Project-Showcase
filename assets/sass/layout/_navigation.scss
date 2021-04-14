@@ -19,6 +19,10 @@
     height: 90px;
     cursor: pointer;
   }
+  @media(max-width: 1024px){
+    padding:0 1rem;
+  }
+
 }
 
 .nav-container{
