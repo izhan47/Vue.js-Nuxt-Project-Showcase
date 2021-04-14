@@ -1,17 +1,29 @@
 <template>
-<div class="watch_and_learn_section">
-  <nuxt-link :to="`/watch-learn/${item.slug}`" >
-    <div  class="bg-img-height" :style="`background-image: url(${item.thumbnail_full_path})`">
+  <div class="card-section mb-3">
+      <nuxt-link :to="`/watch-learn/${item.slug}`" >
+        <div  class="bg-img-height" :style="`background-image: url(${item.thumbnail_full_path})`">
+        </div>
+      </nuxt-link>
+    <div class="card-category" @click="$router.push(`/watch-learn/${item.slug}`)">
+      <h2 class="mb-2 mt-2">{{item.title}}</h2>
+      <div class="mb-3" >
+        <span class="category-title"> {{item.category.name}}</span>
+      </div>
     </div>
-  </nuxt-link>
-  <v-card  class="card-radius card-custom-height card-padding " @click="$router.push(`/watch-learn/${item.slug}`)">
-    <v-card-title class="card-heading">{{ item.title}}</v-card-title>
-    <v-card-text>
-      <p class="card-description card-des">{{item.category.name}}
-      </p>
-    </v-card-text>
-  </v-card>
-</div>
+  </div>
+<!--<div class="watch_and_learn_section">-->
+<!--  <nuxt-link :to="`/watch-learn/${item.slug}`" >-->
+<!--    <div  class="bg-img-height" :style="`background-image: url(${item.thumbnail_full_path})`">-->
+<!--    </div>-->
+<!--  </nuxt-link>-->
+<!--  <v-card  class="card-radius card-custom-height card-padding " @click="$router.push(`/watch-learn/${item.slug}`)">-->
+<!--    <v-card-title class="card-heading">{{ item.title}}</v-card-title>-->
+<!--    <v-card-text>-->
+<!--      <p class="card-description card-des">{{item.category.name}}-->
+<!--      </p>-->
+<!--    </v-card-text>-->
+<!--  </v-card>-->
+<!--</div>-->
 </template>
 
 <script>

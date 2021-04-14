@@ -2,7 +2,7 @@
   <div v-if="petDetail">
       <div class="pet-category-container ">
         <v-row >
-          <v-col cols="12" md="7" sm="12">
+          <v-col cols="12" md="7" sm="12" v-if="petDetail.cover_image">
             <img class="img-fluid img-height" :src="petDetail.cover_image.image_thumb_full_path" alt="">
           </v-col>
           <v-col cols="12" md="5" sm="12" class="bd-img-container">
@@ -87,8 +87,8 @@
               </div>
               <div class="service-section mb-10">
                 <h2 class="mb-6">{{$t('services_offered')}}</h2>
-                <ul class="service-list" v-for="cat in petDetail.categories">
-                  <li >{{cat.name}}</li>
+                <ul class="service-list" v-for="cat in petDetail.services_offered">
+                  <li >{{cat.service}}</li>
                 </ul>
               </div>
               <div class="mb-10">
@@ -108,15 +108,15 @@
                   />
                 </GmapMap>
               </div>
-              <div class="operation-section">
-                <h2>{{$t('hours_of_operation')}}</h2>
-                <div v-for="time in petDetail.timetable" class="mb-2">
-                  <span>{{time.day}}</span>
-                  <span class="separator"></span>
-                  <span v-if="time.open || time.close">{{time.open}}-{{time.close}}</span>
-                  <span v-else>00:00:00 - 00:00:00 </span>
-                </div>
-              </div>
+<!--              <div class="operation-section">-->
+<!--                <h2>{{$t('hours_of_operation')}}</h2>-->
+<!--                <div v-for="time in petDetail.timetable" class="mb-2">-->
+<!--                  <span>{{time.day}}</span>-->
+<!--                  <span class="separator"></span>-->
+<!--                  <span v-if="time.open || time.close">{{time.open}}-{{time.close}}</span>-->
+<!--                  <span v-else>00:00:00 - 00:00:00 </span>-->
+<!--                </div>-->
+<!--              </div>-->
             </div>
           </v-col>
         </v-row>
@@ -219,8 +219,10 @@ export default {
     getPetDetail(){
       this.$store.commit('SHOW_LOADER', true)
       this.$store.dispatch('singlePetDetail',this.URL).then( response => {
+
         this.$store.commit('SHOW_LOADER', false)
         this.petDetail = response.data.data.per_pro
+        console.log('sads',this.petDetail)
       })
     }
   }

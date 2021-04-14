@@ -23,9 +23,6 @@
                   {{ $t('search') }}
                 </v-btn>
             </div>
-        <div class="search-img" id="dog-movement">
-          <img class="img-fluid" src="/images/Wag-Enabled-HP-Dog.png" alt="logo">
-        </div>
       </v-col>
     </v-row>
   </div>
@@ -55,38 +52,7 @@ export default {
         }
     },
   },
-  mounted(){
-    if(process.browser){
-      let dog = document.getElementById('dog-movement');
-      ;(function(){
-        let throttle = function(type, name, obj){
-          let object = obj || window;
-          let running = false;
-          let func = function(){
-            if (running){
-              return;
-            }
-            running = true;
-            requestAnimationFrame(function(){
-              object.dispatchEvent(new CustomEvent(name));
-              running = false;
-            });
-          };
-          object.addEventListener(type, func);
-        };
-        throttle("scroll", "optimizedScroll");
-      })();
-      window.addEventListener("optimizedScroll", function(){
-        let offset = window.pageYOffset-document.getElementById('animate').offsetTop
-        if(offset<350){
-          dog.style.transform = "translate(-" + (offset)  + "px,0px)";
-        }
-        if(window.screen.width < 769){
-          dog.style.transform = "none";
-        }
-      })
-    }
-  }
+
 }
 </script>
 <style lang="scss" scoped>
