@@ -1,30 +1,31 @@
 <template>
 <div>
-<!--  <div class="card-section mb-8" v-for="card in cards">-->
-<!--    <v-img-->
-<!--      class="img-fluid card-img"-->
-<!--      :src="card.src"-->
-<!--    ></v-img>-->
-<!--    <div class="card-category">-->
-<!--      <span> {{card.features}}</span>-->
-<!--      <h2 class="mt-1">{{card.name}}</h2>-->
-<!--      <v-btn v-for="(cat,k) in card.category" :key="k" :class=" category[k] "   class="cat-btn"  outlined rounded>-->
-<!--&lt;!&ndash;        <v-icon class="ml-1"&ndash;&gt;-->
-<!--&lt;!&ndash;         left&ndash;&gt;-->
-<!--&lt;!&ndash;          dark&ndash;&gt;-->
-<!--&lt;!&ndash;        >&ndash;&gt;-->
-<!--&lt;!&ndash;          mdi-cloud-upload&ndash;&gt;-->
-<!--&lt;!&ndash;        </v-icon>&ndash;&gt;-->
-<!--        <img class="img-fluid icon-img mr-1" src="/images/Vector.png" alt="">-->
-<!--        {{ cat }}-->
-<!--      </v-btn>-->
-<!--      &lt;!&ndash;          <v-card-actions v-for="(item,p) in cards" :key="p">&ndash;&gt;-->
-<!--      &lt;!&ndash;            <v-btn v-for="(cat,k) in item.categories" :key="k" :class=" category[k] "   class="card-btn"  outlined rounded>&ndash;&gt;-->
-<!--      &lt;!&ndash;              {{ cat }}&ndash;&gt;-->
-<!--      &lt;!&ndash;            </v-btn>&ndash;&gt;-->
-<!--      &lt;!&ndash;          </v-card-actions>&ndash;&gt;-->
-<!--    </div>-->
-<!--  </div>-->
+  <div class="card-section mb-8">
+    <div v-if="item.cover_image">
+      <nuxt-link :to="`/pet-category/${item.slug}`" >
+        <div  class="bg-img-height" :style="`background-image: url(${item.cover_image.image_full_path})`">
+        </div>
+      </nuxt-link>
+    </div>
+
+    <div class="card-category" v-for="card in cards">
+      <h2 class="mb-1">{{card.name}}</h2>
+      <div class=" mb-3">
+        <span> {{card.features}}</span>
+      </div>
+      <v-btn v-for="(cat,k) in card.category" :key="k" :class=" category[k] "   class="cat-btn"  outlined rounded>
+        <img class="img-fluid icon-img mr-1" src="/images/tick.png" alt="">
+        {{ cat }}
+      </v-btn>
+      <!--          <v-card-actions v-for="(item,p) in cards" :key="p">-->
+      <!--            <v-btn v-for="(cat,k) in item.categories" :key="k" :class=" category[k] "   class="card-btn"  outlined rounded>-->
+      <!--              {{ cat }}-->
+      <!--            </v-btn>-->
+      <!--          </v-card-actions>-->
+    </div>
+  </div>
+
+
   <div class="category_card_section">
     <div class="paw-icons-parent" v-if="item.cover_image">
       <!--    for time being       -->
@@ -83,32 +84,32 @@ export default {
       cards:[
         {
           src:"/images/pet-1.png",
-          name:"Paws On Chicon",
+          name:"Best Dog Food For Dogs With Allergies: Jiminy's Cricket Crave",
           rating:"5.0",
           features:"Pet Food",
           description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
           category:["Deal Offered","Certified",],
           icons:["mdi-paw","mdi-paw","mdi-paw"],
         },
-        {
-          src:"/images/pet-2.jpg",
-          name:"Liz's Pet Care",
-          rating:"4.5",
-          features:"Interactive Toys",
-          description:"Homemade Treats and Food, Pet Store, Self Serve Dog...",
-          category:["Deal Offered"],
-          icons:["mdi-paw","mdi-paw"],
-
-        },
-        {
-          src:"/images/pet-3.jpg",
-          name:"Pet Behaviorist",
-          rating:"5.0",
-          features:"Treats",
-          description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
-          category:["Deal Offered"],
-          icons:["mdi-paw"],
-        },
+        // {
+        //   src:"/images/pet-2.jpg",
+        //   name:"Liz's Pet Care",
+        //   rating:"4.5",
+        //   features:"Interactive Toys",
+        //   description:"Homemade Treats and Food, Pet Store, Self Serve Dog...",
+        //   category:["Deal Offered"],
+        //   icons:["mdi-paw","mdi-paw"],
+        //
+        // },
+        // {
+        //   src:"/images/pet-3.jpg",
+        //   name:"KONG Wobbler Interactive Dog Feeder",
+        //   rating:"5.0",
+        //   features:"Treats",
+        //   description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
+        //   category:["Deal Offered"],
+        //   icons:["mdi-paw"],
+        // },
       ],
       readMore:false
     }
@@ -116,7 +117,7 @@ export default {
   computed:{
     category(){
       return[
-        'neon-blue',
+        'blue-gem',
         'orange',
       ]
     },
@@ -154,32 +155,24 @@ export default {
   }
 }
 .bg-img-height{
-  height: 270px;
+  height: 269px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 10px 10px 0 0;
+  border-radius: 19px 19px 0 0  ;
 }
 
 .card-section{
-  min-width: 350px;
-  height: 412px;
+  //min-width: 350px;
+  min-height: 412px;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   border-radius: 19px;
+}
 
-}
-.card-img{
-  min-width: 350px;
-  min-height: 269px;
-  //background: url(.jpg), #C4C4C4;
-  border-radius: 19px 19px 0 0  ;
-}
 .card-category{
   padding: 16px;
   span{
-    min-width: 56px;
-    min-height: 19px;
     font-family:$font-family-primary;
     font-style: normal;
     font-weight: normal;
@@ -188,34 +181,34 @@ export default {
     color: #878787;
   }
   h2{
-    min-width: 296.36px;
-    min-height: 35px;
     font-family: $font-family-primary;
     font-style: normal;
     font-weight: bold;
     font-size: 18px;
     line-height: 25px;
-
-    color: #040430;
+    color: $black_currant;
   }
-  .neon-blue{
-    background-color: #6161FF;
+  .blue-gem{
+    background-color: $blue_gem;
     color: $white;
+    //background-image: url("/images/percent.png");
   }
   .orange{
-    background-color:  #FFA800;
+    background-color: $orange;
     color: $white;
+    //background-image: url("/images/tick.png");
+
   }
 }
 .cat-btn{
-  min-width: 130px;
-  min-height: 25px;
+  //min-width: 130px;
+  //min-height: 25px;
   font-family: $font-family-primary;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 18px;
-  color: #FFFFFF;
+  color: $white;
   margin-right: 4px;
   text-transform: capitalize;
 

@@ -164,6 +164,7 @@ export default () => {
       },
       setCurrentUser: function ({ commit }, response) {
         if (response.data){
+          console.log('set user',response.data.data)
           commit('SET_USER', response.data)
           setAuthToken(response.data.token)
           localStorage.setItem('x-access-token', response.data.token);
@@ -178,11 +179,15 @@ export default () => {
         return Promise.resolve()
       },
       //Register
-      async register({commit}, data) {
+      async register({dispatch}, data) {
         return axios({
           method: 'POST',
           url: 'register',
           data
+        }).then(response => {
+          console.log('res',response)
+          dispatch('setCurrentUser', response)
+          return response
         });
       },
       //Forgot password

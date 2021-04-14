@@ -21,6 +21,7 @@
           <span>Bean, Breed Name, Age 4</span> <br>
       </v-card>
     </v-col>
+    {{userDetail}}
     <v-col cols="12" md="6" sm="12">
       <v-card class="card-radius custom-card-padding space">
          <v-card-title class="card-title">{{$t('account_info')}}</v-card-title>
@@ -69,7 +70,7 @@ export default {
   middleware: [ 'auth'],
   data(){
     return{
-      userDetail:'',
+
       cards:[
         {
           icon:'mdi-percent-outline',
@@ -108,9 +109,16 @@ export default {
   },
   methods:{
   },
-  created() {
-   this.userDetail=this.$store.state.user.user
-  }
+  computed:{
+    userDetail(){
+      return this.$store.state.user.user;
+    }
+  },
+  mounted(  ){
+    console.log('asas',this.userDetail)
+  },
+
+
 }
 </script>
 
