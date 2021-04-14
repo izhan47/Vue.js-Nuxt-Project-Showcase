@@ -117,7 +117,8 @@ components:{ PetCategoryCard,VueGoogleAutocomplete},
         longitude:'',
         search:''
       },
-      address: ''
+      address: '',
+      page:1
     }
   },
 
@@ -144,7 +145,7 @@ components:{ PetCategoryCard,VueGoogleAutocomplete},
       this.form.longitude=addressData.longitude
     },
     filterData(){
-      this.$emit('filter-data', this.form)
+      this.$emit('filter-data', this.form,this.page)
     },
 
   }

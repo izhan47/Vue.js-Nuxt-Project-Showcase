@@ -1,29 +1,30 @@
 <template>
 <div>
-  <div class="card-section mb-8">
-    <div v-if="item.cover_image">
-      <nuxt-link :to="`/pet-category/${item.slug}`" >
-        <div  class="bg-img-height" :style="`background-image: url(${item.cover_image.image_full_path})`">
-        </div>
-      </nuxt-link>
-    </div>
+<!--  <div class="card-section mb-8">-->
+<!--    <div v-if="item.cover_image">-->
+<!--      <nuxt-link :to="`/pet-category/${item.slug}`" >-->
+<!--        <div  class="bg-img-height" :style="`background-image: url(${item.cover_image.image_full_path})`">-->
+<!--        </div>-->
+<!--      </nuxt-link>-->
+<!--    </div>-->
 
-    <div class="card-category" v-for="card in cards">
-      <h2 class="mb-1">{{card.name}}</h2>
-      <div class=" mb-3">
-        <span> {{card.features}}</span>
-      </div>
-      <v-btn v-for="(cat,k) in card.category" :key="k" :class=" category[k] "   class="cat-btn"  outlined rounded>
-        <img class="img-fluid icon-img mr-1" src="/images/tick.png" alt="">
-        {{ cat }}
-      </v-btn>
-      <!--          <v-card-actions v-for="(item,p) in cards" :key="p">-->
-      <!--            <v-btn v-for="(cat,k) in item.categories" :key="k" :class=" category[k] "   class="card-btn"  outlined rounded>-->
-      <!--              {{ cat }}-->
-      <!--            </v-btn>-->
-      <!--          </v-card-actions>-->
-    </div>
-  </div>
+<!--    <div class="card-category" v-for="card in cards">-->
+<!--      <h2 class="mb-1">{{card.name}}</h2>-->
+<!--      <div class=" mb-3">-->
+<!--        <span> {{card.features}}</span>-->
+<!--      </div>-->
+<!--      <v-btn v-for="(cat,k) in card.category" :key="k" :class=" category[k] "   class="cat-btn"  outlined rounded>-->
+<!--        <img class="img-fluid icon-img mr-1" src="/images/tick.png" alt="">-->
+<!--        {{ cat }}-->
+<!--      </v-btn>-->
+<!--      &lt;!&ndash;          <v-card-actions v-for="(item,p) in cards" :key="p">&ndash;&gt;-->
+<!--      &lt;!&ndash;            <v-btn v-for="(cat,k) in item.categories" :key="k" :class=" category[k] "   class="card-btn"  outlined rounded>&ndash;&gt;-->
+<!--      &lt;!&ndash;              {{ cat }}&ndash;&gt;-->
+<!--      &lt;!&ndash;            </v-btn>&ndash;&gt;-->
+<!--      &lt;!&ndash;          </v-card-actions>&ndash;&gt;-->
+<!--    </div>-->
+<!--  </div>-->
+
 
 
   <div class="category_card_section">
@@ -80,6 +81,7 @@ export default {
   },
   data(){
     return{
+
       items:[],
       cards:[
         {

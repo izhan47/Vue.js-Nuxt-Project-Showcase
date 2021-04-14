@@ -24,9 +24,9 @@
 <!--            {{ $t('linkedin')}}-->
 <!--          </v-btn>-->
                   <div v-html="categoryData.description"></div>
-          <p class="description space mt-5">Most dogs love physical activity, and exercise is just as important for their mental and physical health as it is for ours. Staying active will help your dog live a longer, happier life and prevent obesity, which is a common issue for dogs. Not only that but
-            <b>dogs who are bored and don’t get enough exercise often develop behavior issues. </b>
-            Here’s a look at some fun exercises and activities to keep your pup fit and how to know if he’s getting enough exercise each day.</p>
+<!--          <p class="description space mt-5">Most dogs love physical activity, and exercise is just as important for their mental and physical health as it is for ours. Staying active will help your dog live a longer, happier life and prevent obesity, which is a common issue for dogs. Not only that but-->
+<!--            <b>dogs who are bored and don’t get enough exercise often develop behavior issues. </b>-->
+<!--            Here’s a look at some fun exercises and activities to keep your pup fit and how to know if he’s getting enough exercise each day.</p>-->
 
 
           <hr class="dot-line">

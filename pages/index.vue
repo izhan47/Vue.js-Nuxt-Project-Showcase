@@ -22,8 +22,17 @@ export default {
   components:{
     BannerSearch,PetFunctions,About,LocationSearch,CareAdvice,FeaturedProduct,NewsLetter
   },
+  data(){
+    return{
+      page:1
+    }
+  },
   created() {
-    this.$store.dispatch('petProList',{})
+    let filters= {
+      data:{},
+      page:this.page,
+    }
+    this.$store.dispatch('petProList',filters)
     this.$store.dispatch('petCategories')
   },
   methods: {

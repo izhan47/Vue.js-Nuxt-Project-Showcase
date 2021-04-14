@@ -86,6 +86,17 @@
           <product-review-card :item="data"></product-review-card>
         </v-col>
       </v-row>
+      <div class="text-center ">
+        <v-pagination
+          class="pagination"
+          v-model="page"
+          :length="totalPage"
+          prev-icon="mdi-menu-left"
+          next-icon="mdi-menu-right"
+          circle
+          @input="filterData"
+        ></v-pagination>
+      </div>
     </div>
     <div v-else class="text-center">
       <img class="img-height img-fluid"  src="/images/Auth/Column-3-Dog.png" alt="logo" />
@@ -104,6 +115,7 @@ export default {
   name: "index.vue",
   data(){
     return{
+      page: 1,
       sorting: ['Latest', 'Popular','Deal offered'],
       categories:[],
       form:{
@@ -117,6 +129,9 @@ export default {
   computed:{
     reviewData(){
       return this.$store.state.review_list
+    },
+    totalPage(){
+      return this.$store.state.total_page
     },
 
     categoryList(){
@@ -132,7 +147,11 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('reviewList')
+    let filters= {
+      form:{},
+      page:this.page,
+    }
+    this.$store.dispatch('reviewList',filters)
     this.$store.dispatch('reviewCategories')
   },
   methods:{
@@ -147,7 +166,12 @@ export default {
       })
       this.form.category_id= JSON.stringify(Object.assign( arr));// convert array to string
 
-      this.$store.dispatch('reviewList',this.form)
+      let filters= {
+        form:this.form,
+        page:this.page,
+      }
+
+      this.$store.dispatch('reviewList',filters)
     }
   }
 }
