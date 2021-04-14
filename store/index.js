@@ -164,7 +164,7 @@ export default () => {
       },
       setCurrentUser: function ({ commit }, response) {
         if (response.data){
-          console.log('set user',response.data.data)
+          console.log('set user',response.data)
           commit('SET_USER', response.data)
           setAuthToken(response.data.token)
           localStorage.setItem('x-access-token', response.data.token);
@@ -185,9 +185,9 @@ export default () => {
           url: 'register',
           data
         }).then(response => {
-          console.log('res',response)
-          dispatch('setCurrentUser', response)
-          return response
+          console.log('res',response.data)
+          dispatch('setCurrentUser', response.data)
+          return response.data
         });
       },
       //Forgot password
