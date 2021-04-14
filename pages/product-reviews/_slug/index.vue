@@ -1,99 +1,79 @@
 <template>
-<div class="watch-learn-detail-section" v-if="categoryData">
-<!--  <div class="bg-img-watch-detail">-->
-<!--    <div class="custom-container align-center">-->
-<!--      <img class="img-fluid img-height" :src="categoryData.thumbnail_thumb_full_path" alt="">-->
-<!--    </div>-->
-<!--  </div>-->
-  <div class="watch-detail-custom-container custom-margin">
-    <v-row>
-      <v-col cols="12" md="3" sm="12">
-        <div class="watch-card"  v-if="categoryData.author">
-          <img :src="categoryData.author.image_thumb_full_path" alt="">
-          <h2>{{categoryData.author.name}}</h2>
-          <p>{{categoryData.author.about}}</p>
-          <v-btn large class="round-btn" outlined rounded > {{ $t('personal_website') }}</v-btn>
-        </div>
-      </v-col>
-      <v-col cols="12" md="9" sm="12">
-        <div class="tag">
-          <v-icon color="#00afaa">mdi-tag</v-icon>
-          <span>Play Time and Enrichment</span>
-        </div>
-        <div class="heading mt-2">
-          <h1>{{categoryData.title }} </h1>
-        </div>
-          <v-btn color="#ff8189" class=" ma-2 white--text" rounded>
-            <v-icon left dark>mdi-facebook</v-icon>
-            {{ $t('facebook')}}
-          </v-btn>
-          <v-btn color="#ff8189" class=" ma-2 white--text" rounded>
-            <v-icon left dark>mdi-twitter</v-icon>
-            {{ $t('twitter')}}
-          </v-btn>
-          <v-btn color="#ff8189" class="ma-2 white--text" rounded>
-            <v-icon left dark>mdi-linkedin</v-icon>
-            {{ $t('linkedin')}}
-          </v-btn>
-<!--        <div v-html="categoryData.description"></div>-->
-        <p class="description space mt-5">Most dogs love physical activity, and exercise is just as important for their mental and physical health as it is for ours. Staying active will help your dog live a longer, happier life and prevent obesity, which is a common issue for dogs. Not only that but
-         <b>dogs who are bored and don’t get enough exercise often develop behavior issues. </b>
-          Here’s a look at some fun exercises and activities to keep your pup fit and how to know if he’s getting enough exercise each day.</p>
+  <div class="watch-learn-detail-section" v-if="categoryData">
 
-        <h2 class="img-heading mb-4">Ways to Keep Your Dog Fit:</h2>
-        <img class="img-fluid" src="/images/WatchLearn/dog-water.jpeg" alt="">
-        <p class="description space">Taking your dog for an evening walk is a great place to start, and that might be all your dog needs if he’s a senior with lower exercise needs. But keep in mind that even the most dedicated couch potato will appreciate some variety every now and then! Here are some fun exercises and activities to incorporate into your pup’s regular routine.</p>
-
-        <h3 class="heading-description">Cycling</h3>
-        <p class="description space">Cycling is a fun way to <b class="green-description">exercise with your dog</b>, especially if you have a bike path nearby where you can get away from dangerous traffic. Puppies shouldn’t run until their joints are developed, but many adult dogs will love to run alongside their owners while they ride, especially if they’re high energy. Of course, if your dog is a senior or has joint issues, this probably isn’t the activity for him.</p>
-
-        <h3 class="heading-description">Swimming</h3>
-        <p class="description space">If there’s one thing many dogs love more than going for a walk, it’s swimming. Dogs love the water and it’s a fantastic way to burn off some of that pent-up energy when the weather is hot. It’s also a low impact, so it’s safe for dogs with joint issues. A doggie life vest eliminates any worry of your dog staying afloat if you’re not sure about his swimming abilities.</p>
-
-        <hr class="dot-line">
-
-        <div class="comment-section">
-          <h2 class="comment-section-heading text-center space">{{ $t('comments')}}</h2>
-          <h2 class="comment-section-heading text-center mb-5">{{ $t('leave_a_comment')}}</h2>
-          <v-textarea
-            outlined
-            name="input-7-4"
-            label="Message"
-            v-model="form.message"
-            required
-          ></v-textarea>
-          <div class="text-center">
-            <v-btn large class=" submit-btn" outlined rounded @click="submit"> {{ $t('submit') }}</v-btn>
-
+    <div class="custom-container custom-margin">
+      <v-row>
+        <v-col cols="12" md="12" sm="12">
+<!--          <div class="tag">-->
+<!--            <v-icon color="#00afaa">mdi-tag</v-icon>-->
+<!--            <span>Play Time and Enrichment</span>-->
+<!--          </div>-->
+          <div class="heading mt-2">
+            <h1>{{categoryData.title }} </h1>
           </div>
-        </div>
+<!--          <v-btn color="#ff8189" class=" ma-2 white&#45;&#45;text" rounded>-->
+<!--            <v-icon left dark>mdi-facebook</v-icon>-->
+<!--            {{ $t('facebook')}}-->
+<!--          </v-btn>-->
+<!--          <v-btn color="#ff8189" class=" ma-2 white&#45;&#45;text" rounded>-->
+<!--            <v-icon left dark>mdi-twitter</v-icon>-->
+<!--            {{ $t('twitter')}}-->
+<!--          </v-btn>-->
+<!--          <v-btn color="#ff8189" class="ma-2 white&#45;&#45;text" rounded>-->
+<!--            <v-icon left dark>mdi-linkedin</v-icon>-->
+<!--            {{ $t('linkedin')}}-->
+<!--          </v-btn>-->
+                  <div v-html="categoryData.description"></div>
+<!--          <p class="description space mt-5">Most dogs love physical activity, and exercise is just as important for their mental and physical health as it is for ours. Staying active will help your dog live a longer, happier life and prevent obesity, which is a common issue for dogs. Not only that but-->
+<!--            <b>dogs who are bored and don’t get enough exercise often develop behavior issues. </b>-->
+<!--            Here’s a look at some fun exercises and activities to keep your pup fit and how to know if he’s getting enough exercise each day.</p>-->
 
 
-      </v-col>
-    </v-row>
-  </div>
-  <!--  card-section-start   -->
-  <div class="custom-container  space">
-    <div class="text-center">
-      <h1 class="card-section-title">{{ $t('related_topics')}}</h1>
+          <hr class="dot-line">
+
+          <div class="comment-section">
+            <h2 class="comment-section-heading text-center space">{{ $t('comments')}}</h2>
+            <h2 class="comment-section-heading text-center mb-5">{{ $t('leave_a_comment')}}</h2>
+            <v-textarea
+              outlined
+              name="input-7-4"
+              label="Message"
+              v-model="form.message"
+              required
+            ></v-textarea>
+            <div class="text-center">
+              <v-btn large class=" submit-btn" outlined rounded @click="submit"> {{ $t('submit') }}</v-btn>
+
+            </div>
+          </div>
+
+
+        </v-col>
+      </v-row>
+    </div>
+    <!--  card-section-start   -->
+    <div class="custom-container  space" v-if="reviewData.length">
+      <v-row>
+        <v-col cols="12" md="4" sm="12" v-for="(data,i) in reviewData.slice(0,3)" :key="i" class="mt-8">
+          <product-review-card :item="data"></product-review-card>
+        </v-col>
+      </v-row>
+    </div>
+    <div v-else class="text-center">
+      <img class="img-height img-fluid"  src="/images/Auth/Column-3-Dog.png" alt="logo" />
+      <h2 class="heading">{{$t('nothing_here')}}</h2>
     </div>
 
-    <v-row>
-      <v-col cols="12" md="4" sm="12" v-for="(data,i) in watchCategoryData.slice(0,3)" :key="i" class="custom-margin">
-        <watch-category-card :item="data"></watch-category-card>
-      </v-col>
-    </v-row>
+    <!--  card-section-end   -->
   </div>
-  <!--  card-section-end   -->
-</div>
 </template>
 
 <script>
-import WatchCategoryCard from "@/components/WatchCategoryCard";
+import ProductReviewCard from "@/components/ProductReviewCard";
 
 export default {
   name: "index.vue",
-  components:{WatchCategoryCard},
+  components:{ProductReviewCard},
   data(){
     return{
       form:{
@@ -128,11 +108,12 @@ export default {
     URL(){
       return this.$route.params.slug
     },
-    watchCategoryData(){
-      return this.$store.state.category_list
-    }
+    reviewData(){
+      return this.$store.state.review_list
+    },
   },
   created() {
+    console.log('llll',this.$store.state.review_list)
     this.getCategoryDetail()
   },
   methods:{
@@ -175,11 +156,11 @@ export default {
 .img-height{
   max-height: 500px;
 }
-.watch-detail-custom-container{
-  max-width: 1250px;
-  margin: auto;
-  padding: 0 1rem;
-}
+//.watch-detail-custom-container{
+//  max-width: 1250px;
+//  margin: auto;
+//  padding: 0 1rem;
+//}
 .custom-margin{
   margin-top: 3rem;
 }

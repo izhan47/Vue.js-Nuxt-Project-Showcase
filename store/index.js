@@ -26,7 +26,8 @@ export default () => {
         color:'',
         message:''
       },
-      loader:false
+      loader:false,
+      total_page:''
     },
     mutations: {
       SET_PET_PRO_LIST(state, data) {
@@ -51,6 +52,10 @@ export default () => {
         state.loader = data;
       },
 
+      SET_TOTAL_PAGE(state, data) {
+        state.total_page = data;
+      },
+
 
       SET_USER (state, data) {
         state.user = { 'bearerToken': data.token, 'user': data.user , 'isAuthenticated':true }
@@ -65,10 +70,11 @@ export default () => {
         commit('SHOW_LOADER', true)
         axios({
           method: 'POST',
-          url: 'pet-pro/get-map-list',
-          data:data
+          url: 'pet-pro/get-list/' + data.page,
+          data:data.form
         }).then(response => {
           commit('SET_PET_PRO_LIST',response.data.data.pet_pro_list)
+          commit('SET_TOTAL_PAGE',response.data.data.total_page)
           commit('SHOW_LOADER', false)
         }).catch(e => {
         })
@@ -92,10 +98,12 @@ export default () => {
         commit('SHOW_LOADER', true)
         axios({
           method: 'POST',
-          url: 'watch-and-learn/get-list',
-          data
+          url: 'watch-and-learn/get-list/' + data.page,
+          data:data.form
         }).then(response => {
+          console.log(response)
           commit('SET_CATEGORY_LIST',response.data.data.watch_and_learn_list)
+          commit('SET_TOTAL_PAGE',response.data.data.total_page)
           commit('SHOW_LOADER', false)
 
         })
@@ -127,10 +135,11 @@ export default () => {
         commit('SHOW_LOADER', true)
         axios({
           method: 'POST',
-          url: 'product-reviews/get-list',
-          data
+          url: 'product-reviews/get-list/' + data.page,
+          data:data.form
         }).then(response => {
           commit('SET_PRODUCT_REVIEW_LIST',response.data.data.watch_and_learn_list)
+          commit('SET_TOTAL_PAGE',response.data.data.total_page)
           commit('SHOW_LOADER', false)
         })
       },
@@ -178,11 +187,15 @@ export default () => {
         return Promise.resolve()
       },
       //Register
-      async register({commit}, data) {
+      async register({dispatch}, data) {
         return axios({
           method: 'POST',
           url: 'register',
           data
+        }).then(response => {
+
+          dispatch('setCurrentUser', response.data)
+          return response.data
         });
       },
       //Forgot password

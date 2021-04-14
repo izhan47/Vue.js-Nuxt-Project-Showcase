@@ -86,6 +86,18 @@
           ></pet-category-card>
         </v-col>
       </v-row>
+
+      <div class="text-center ">
+        <v-pagination
+          class="pagination"
+          v-model="page"
+          :length="totalPage"
+          prev-icon="mdi-menu-left"
+          next-icon="mdi-menu-right"
+          circle
+          @input="filterData"
+        ></v-pagination>
+      </div>
     </div>
     <div v-else class="text-center">
       <img class="img-height img-fluid"  src="/images/Auth/Column-3-Dog.png" alt="logo" />
@@ -104,6 +116,7 @@ export default {
 
   data(){
     return{
+      page: 1,
       cards:[
         {
           src:"/images/pet-1.png",
@@ -150,7 +163,11 @@ export default {
       ]
     },
     petProData(){
+      console.log('pet pro',this.$store.state.pet_pro_list)
       return this.$store.state.pet_pro_list
+    },
+    totalPage(){
+      return this.$store.state.total_page
     },
     categoryList(){
       let categories= this.$store.state.pet_category_list
@@ -175,7 +192,12 @@ export default {
   },
   methods:{
     filterData(){
-      this.$store.dispatch('petProList',this.form)
+      let filters= {
+        form:this.form,
+        page:this.page,
+      }
+      this.$store.dispatch('petProList',filters)
+      this.$store.dispatch('petProList',this.form,this.page)
     },
     getAddressData(addressData, placeResultData, id) {
       this.address = addressData;

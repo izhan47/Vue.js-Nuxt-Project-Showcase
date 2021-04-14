@@ -45,6 +45,7 @@
                   color="#00afaa"
                   rounded
                   outlined
+                  v-on:keypress.enter="Login"
                 ></v-text-field>
                 <v-checkbox
                   class="custom-checkbox"

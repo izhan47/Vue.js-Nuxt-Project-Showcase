@@ -69,6 +69,18 @@
           <watch-category-card :item="data"></watch-category-card>
         </v-col>
       </v-row>
+      <div class="text-center">
+        <v-pagination
+          class="pagination"
+          v-model="page"
+          :length="totalPage"
+          :total-visible="6"
+          prev-icon="mdi-menu-left"
+          next-icon="mdi-menu-right"
+          circle
+          @input="filterData"
+        ></v-pagination>
+      </div>
     </div>
     <div v-else class="text-center">
       <img class="img-height img-fluid"  src="/images/Auth/Column-3-Dog.png" alt="logo" />
@@ -88,6 +100,7 @@ name: "index.vue",
   data(){
     return{
       category: [],
+      page:1,
       sorting: ['Latest', 'Popular'],
       form:{
         category_id:'',
@@ -99,10 +112,18 @@ name: "index.vue",
   computed:{
     watchData(){
       return this.$store.state.category_list
-    }
+    },
+    totalPage(){
+      return this.$store.state.total_page
+    },
   },
   created() {
-    this.$store.dispatch('categoryList')
+    let filters= {
+      form:{},
+      page:this.page,
+    }
+
+    this.$store.dispatch('categoryList',filters)
     this.watchCategory();
   },
   methods:{
@@ -127,7 +148,12 @@ name: "index.vue",
      })
    },
    filterData(){
-     this.$store.dispatch('categoryList',this.form)
+
+     let filters= {
+       form:this.form,
+       page:this.page,
+     }
+     this.$store.dispatch('categoryList',filters)
    }
   }
 }

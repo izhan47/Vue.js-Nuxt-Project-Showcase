@@ -43,7 +43,7 @@
         <!--Nav Bar Code STart-->
         <v-app-bar
           app
-          color="white"
+          color="#FDFDFD"
           dark
           height="110"
           class="remove-shadow"
@@ -64,7 +64,7 @@
             </div>
             <div class="app-title">
               <div  class="nav-title  ml-4" @click="$router.push('/about')">{{$t('about_us')}}</div>
-              <div   class="nav-title ml-4" @click="$router.push('/reviews')">{{$t('best_pet_products')}}</div>
+              <div   class="nav-title ml-4" @click="$router.push('/product-reviews')">{{$t('best_pet_products')}}</div>
               <div class=" nav-logo" >
                 <img src="/images/WagEnabledLogo.jpg" alt="logo" @click="$router.push('/')" />
               </div>
@@ -97,7 +97,7 @@ export default {
         },
         {
           title: this.$i18n.t('best_pet_products'),
-          to: '/reviews',
+          to: '/product-reviews',
         },
         { title: this.$i18n.t('pet_care_advice'),
           to: '/watch-learn',},
