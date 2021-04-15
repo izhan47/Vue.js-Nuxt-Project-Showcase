@@ -101,7 +101,9 @@
                 </v-list>
 
               </v-menu>
-              <v-btn v-else outlined rounded class="sign-in-btn" @click="$router.push('/auth/Login')">{{$t('sign_in')}}</v-btn>
+              <nuxt-link v-else to="/auth/login" class="unset-underline">
+                <v-btn  outlined rounded class="sign-in-btn" >{{$t('sign_in')}}</v-btn>
+              </nuxt-link>
             </div>
           </v-toolbar-title>
           </div>
@@ -195,9 +197,7 @@ export default {
     display: none;
   }
 }
-.unset-underline{
-  text-decoration: none;
-}
+
 </style>
 
 

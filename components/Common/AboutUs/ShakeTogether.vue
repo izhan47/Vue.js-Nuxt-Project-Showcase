@@ -20,7 +20,7 @@
               <div class="description mb-3">
                 <p>{{ $t('shake_description') }}</p>
               </div>
-              <div class="align-content">
+              <nuxt-link to="" class="align-content unset-underline">
               <v-btn
                 class="round-btn mt-3"
                 outlined
@@ -29,7 +29,7 @@
               >
                 {{ $t('lets_shake') }}
               </v-btn>
-              </div>
+              </nuxt-link>
             </div>
           </v-col>
         </v-row>

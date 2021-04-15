@@ -44,18 +44,17 @@
            <div class="description  left-align">
              <p>{{ $t('wag_enabled_description_first') }}<span>{{ $t('wag_enabled_description_mid') }}</span>{{ $t('wag_enabled_description_last') }}</p>
            </div>
-           <div class="align-content">
+           <nuxt-link to="/about" class="align-content unset-underline">
              <v-btn
                large
                class="round-btn  mt-3 "
                outlined
                rounded
-               @click="$router.push('/about')"
              >
                {{ $t('about_wag') }}
              </v-btn>
 
-           </div>
+           </nuxt-link>
          </div>
        </v-col>
      </v-row>
