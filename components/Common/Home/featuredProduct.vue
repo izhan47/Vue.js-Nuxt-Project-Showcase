@@ -18,16 +18,17 @@
           <p class="description">{{ $t('featured_product_description') }}</p>
         </div>
         <div>
+          <nuxt-link to="/product-reviews" class="unset-underline">
           <v-btn
             class="round-btn mt-3"
             outlined
             large
             rounded
-            @click="$router.push('/reviews')"
           >
             {{ $t('see_product_review') }}
           </v-btn>
-
+          </nuxt-link>
+          <nuxt-link to="/product-reviews" class="unset-underline">
           <v-btn
             class="round-btn mt-3"
             outlined
@@ -37,6 +38,7 @@
           >
             {{ $t('browse_all_review') }}
           </v-btn>
+          </nuxt-link>
         </div>
       </v-col>
     </v-row>

@@ -7,9 +7,16 @@
           </v-col>
           <v-col cols="12" md="5" sm="12" class="bd-img-container">
             <div class="title-card">
-              <p  class="chip-title white-text">
-                Homemade Treats and Food,Pet Store,Self-Serve Dog Wash </p>
-              <h2>{{petDetail.store_name}}</h2>
+              <span class="chip-title white-text" v-for="cat in petDetail.categories"> {{cat.name}} |</span>
+              <div class="love-section">
+                <h2>{{petDetail.store_name}}</h2>
+                <div class="mt-8">
+                  <img v-if="is_liked===0" class="heart-img" src="/images/gray-love.svg" alt="" @click="like">
+                  <img v-else class="heart-img" src="/images/pink-love.svg" alt="" @click="like">
+                </div>
+
+              </div>
+
             </div>
             <div class="bg-img-section">
             </div>
@@ -39,27 +46,126 @@
                   <span > {{item.title}}</span>
                 </div>
               </div>
-              <div v-for="card in cards" class="category-section">
+
+              <!--  Deals Offerd  -->
+              <div class="category-section">
                 <div class="space heading">
-                  <v-icon  color="#332e80" size="30">{{card.icon}}</v-icon>
-                  <h2 class="pl-1">{{card.parent_heading}}</h2>
+                  <v-icon  color="#332e80" size="30">mdi-percent-outline</v-icon>
+                  <h2 class="pl-1">{{$t('deals_offered')}}</h2>
                 </div>
                 <hr class="dot-line space">
-                <v-card class="card-radius space">
-                  <div class="custom-card-align">
+                <v-card class="card-radius space"  v-if="petDetail.deals.length" >
+                  <div class="custom-card-align"  v-for="deal in petDetail.deals">
                     <v-btn icon class="card-inner-icon">
-                      <v-icon  color="#332e80" size="50">{{card.icon}}</v-icon>
+                      <v-icon  color="#332e80" size="50">mdi-percent-outline</v-icon>
                     </v-btn>
                     <div>
-                      <v-card-subtitle class="card-sub-heading">{{card.subtitle}}</v-card-subtitle>
-                      <v-card-title class="card-title">{{card.title}}</v-card-title>
+<!--                      <v-card-subtitle class="card-sub-heading">{{card.subtitle}}</v-card-subtitle>-->
+                      <v-card-title class="card-title mt-6">{{deal.deal}}</v-card-title>
                     </div>
                     <v-card-actions class="custom-card-padding">
-                      <v-btn large class=" card-btn white-text" outlined rounded > {{card.button_text}}</v-btn>
+<!--                      <v-dialog-->
+<!--                        v-model="dialog"-->
+<!--                        persistent-->
+<!--                        max-width="490"-->
+<!--                      >-->
+<!--                        <template v-slot:activator="{ on, attrs }">-->
+<!--                          <v-btn color="#1B3659" dark rounded x-large v-bind="attrs" v-on="on"> {{$t('claim')}}</v-btn>-->
+<!--                        </template>-->
+<!--                        <v-card>-->
+
+<!--                          <v-card-subtitle class="headline">-->
+<!--                            To use, show this at the store.-->
+<!--                          </v-card-subtitle>-->
+<!--                          <span class="ml-5 mt-2">Deal</span>-->
+<!--                          <v-card-title>{{deal.deal}}</v-card-title>-->
+<!--                          <hr class="dot-line space">-->
+<!--                          <v-card-text>Fine Print</v-card-text>-->
+<!--                          <v-card-text>{{deal.fine_print}}</v-card-text>-->
+<!--                          <v-card-actions>-->
+<!--                            <v-spacer></v-spacer>-->
+<!--                            <v-btn-->
+<!--                              color="#1B3659"-->
+<!--                              text-->
+<!--                              @click="dialog = false"-->
+<!--                            >-->
+<!--                              {{$t('cancel')}}-->
+<!--                            </v-btn>-->
+<!--                            <v-btn-->
+<!--                              color="#1B3659" dark class=" white-text"-->
+<!--                              rounded x-large-->
+<!--                              @click="dialog = false"-->
+<!--                            >-->
+<!--                              {{$t('claimed_deal')}}-->
+<!--                            </v-btn>-->
+<!--                          </v-card-actions>-->
+<!--                        </v-card>-->
+<!--                      </v-dialog>-->
+                      <v-btn v-if="is_claimed===0"  large class=" card-btn white-text" outlined rounded @click="claim(deal)"> {{$t('claim')}}</v-btn>
+                      <v-btn v-else  large class=" card-btn white-text" outlined rounded readonly> {{$t('claimed')}}</v-btn>
+
+                    </v-card-actions>
+
+
+
+                  </div>
+                </v-card>
+                <div class="not-found space"   v-else> {{$t('no_deals_found')}}</div>
+              </div>
+
+
+
+              <!--  Event -->
+              <div  class="category-section">
+                <div class="space heading">
+                  <v-icon  color="#332e80" size="30">mdi-percent-outline</v-icon>
+                  <h2 class="pl-1">{{$t('events')}}</h2>
+                </div>
+                <hr class="dot-line space">
+                <v-card class="card-radius space" v-if="petDetail.events.length"  >
+                  <div class="custom-card-align" v-for="event in petDetail.events">
+                    <v-btn icon class="card-inner-icon">
+                      <v-icon  color="#332e80" size="50">mdi-percent-outline</v-icon>
+                    </v-btn>
+                    <div>
+                      <v-card-title class="card-title mb-2">{{event.name}}</v-card-title>
+                      <v-card-subtitle class="card-sub-heading mb-1">{{event.formated_event_start_date}} - {{event.formated_event_end_date}} </v-card-subtitle>
+                      <span class="card-description">{{event.formated_event_start_time}} - {{event.formated_event_end_time}} at {{event.address}} </span>
+
+                    </div>
+                    <v-card-actions class="custom-card-padding">
+                      <v-btn   large class=" card-btn white-text" outlined rounded @click="getInfo(event.url)"> {{$t('info')}}</v-btn>
                     </v-card-actions>
                   </div>
                 </v-card>
+                <div v-else class="not-found space"> {{$t('no_events_found')}}</div>
+
               </div>
+
+
+
+
+<!--              <div v-for="card in cards" class="category-section">-->
+<!--                <div class="space heading">-->
+<!--                  <v-icon  color="#332e80" size="30">{{card.icon}}</v-icon>-->
+<!--                  <h2 class="pl-1">{{card.parent_heading}}</h2>-->
+<!--                </div>-->
+<!--                <hr class="dot-line space">-->
+<!--                <v-card class="card-radius space">-->
+<!--                  <div class="custom-card-align">-->
+<!--                    <v-btn icon class="card-inner-icon">-->
+<!--                      <v-icon  color="#332e80" size="50">{{card.icon}}</v-icon>-->
+<!--                    </v-btn>-->
+<!--                    <div>-->
+<!--                      <v-card-subtitle class="card-sub-heading">{{card.subtitle}}</v-card-subtitle>-->
+<!--                      <v-card-title class="card-title">{{card.title}}</v-card-title>-->
+<!--                    </div>-->
+<!--                    <v-card-actions class="custom-card-padding">-->
+<!--                      <v-btn large class=" card-btn white-text" outlined rounded > {{card.button_text}}</v-btn>-->
+<!--                    </v-card-actions>-->
+<!--                  </div>-->
+<!--                </v-card>-->
+<!--              </div>-->
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="12" >
@@ -85,7 +191,7 @@
                 </div>
                 <v-divider class="divider-section"></v-divider>
               </div>
-              <div class="service-section mb-10">
+              <div class="service-section mb-10" v-if="petDetail.services_offered">
                 <h2 class="mb-6">{{$t('services_offered')}}</h2>
                 <ul class="service-list" v-for="cat in petDetail.services_offered">
                   <li >{{cat.service}}</li>
@@ -108,15 +214,15 @@
                   />
                 </GmapMap>
               </div>
-<!--              <div class="operation-section">-->
-<!--                <h2>{{$t('hours_of_operation')}}</h2>-->
-<!--                <div v-for="time in petDetail.timetable" class="mb-2">-->
-<!--                  <span>{{time.day}}</span>-->
-<!--                  <span class="separator"></span>-->
-<!--                  <span v-if="time.open || time.close">{{time.open}}-{{time.close}}</span>-->
-<!--                  <span v-else>00:00:00 - 00:00:00 </span>-->
-<!--                </div>-->
-<!--              </div>-->
+              <div class="operation-section">
+                <h2>{{$t('hours_of_operation')}}</h2>
+                <div v-for="time in petDetail.timetable" class="mb-2">
+                  <span>{{time.day}}</span>
+                  <span class="separator"></span>
+                  <span v-if="time.open || time.close">{{time.open}}-{{time.close}}</span>
+                  <span v-else>00:00:00 - 00:00:00 </span>
+                </div>
+              </div>
             </div>
           </v-col>
         </v-row>
@@ -145,8 +251,11 @@ export default {
   components:{ PetCategoryCard},
   data(){
     return{
+      dialog: false,
       showLoader:false,
       petDetail:'',
+      is_liked:'',
+      is_claimed:'',
       social:[
         {
           icon:'mdi-facebook',
@@ -172,14 +281,6 @@ export default {
       ],
       index : '',
       cards:[
-        {
-          icon:'mdi-percent-outline',
-          parent_heading:this.$i18n.t('deals_offered'),
-          subtitle:'Available Through 2.20.2021',
-          title:'Free Dog Treats',
-          button_text:'claim',
-          path:''
-        },
         {
           icon:'mdi-ice-cream',
           parent_heading:'Events',
@@ -219,12 +320,62 @@ export default {
     getPetDetail(){
       this.$store.commit('SHOW_LOADER', true)
       this.$store.dispatch('singlePetDetail',this.URL).then( response => {
-
         this.$store.commit('SHOW_LOADER', false)
-        this.petDetail = response.data.data.per_pro
-        console.log('sads',this.petDetail)
+        let res=response.data.data
+        this.is_liked=res.is_liked
+        this.petDetail = res.per_pro
+        // console.log('sads',this.petDetail)
       })
-    }
+    },
+   async like(){
+      if (!this.$store.state.user.isAuthenticated) {
+        this.$store.commit('SET_CURRENT_PATH',this.$route.path)
+        return this.$router.push('/auth/Login')
+        }
+      else {
+          let loader = true
+          let slug = this.petDetail.slug
+          this.$store.commit('SHOW_LOADER', loader)
+          await this.$store.dispatch('like',slug).then(response => {
+            this.$store.commit('SHOW_LOADER', loader=false)
+            this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message})
+            if(this.is_liked===0){
+              this.is_liked=1
+            }else{
+              this.is_liked=0
+            }
+
+          })
+        }
+    },
+   async claim(deal){
+     if (!this.$store.state.user.isAuthenticated) {
+       this.$store.commit('SET_CURRENT_PATH',this.$route.path)
+       return this.$router.push('/auth/Login')
+     }
+     else {
+       let loader = true
+       let data={
+         slug: this.petDetail.slug,
+         pet_deal_id: deal.id
+       }
+
+       this.$store.commit('SHOW_LOADER', loader)
+       await this.$store.dispatch('claim',data).then(response => {
+         this.$store.commit('SHOW_LOADER', loader=false)
+         this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message})
+         if(this.is_claimed===0){
+           this.is_claimed=1
+         }else{
+           this.is_claimed=0
+         }
+
+       })
+     }
+   },
+   getInfo(url){
+      window.location=url
+   }
   }
 }
 </script>
@@ -301,8 +452,12 @@ export default {
     line-height: 105px;
     letter-spacing: 0px;
     text-shadow: -3px 2px 5px $text-shadow-primary;
+    @media(max-width:374px) {
+      font-size:$font-size-55;
+    }
   }
 }
+
 .category-left-section{
   margin-top: 150px;
   display: flex;
@@ -427,6 +582,14 @@ hr.dot-line {
   font-family:$font-family-primary;
   font-size:$font-size-15;
   font-weight:  $font-weight-400;
+}
+.card-description{
+  line-height: 24px;
+  font-size: $font-size-18;
+  text-align: justify;
+  margin-top: 6px;
+  font-weight: $font-weight-300;
+  //color: $dark-charcoal;
 }
 .card-title{
   color: $blue;
@@ -596,5 +759,27 @@ hr.dot-line {
   text-transform: $text-transform-capitalize;
   text-shadow: -3px 2px 5px $text-shadow-primary;
   line-height: 2.5em;
+}
+
+.love-section{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.heart-img{
+  width: 45px;
+  height: 45px;
+  margin: auto;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.not-found{
+  font-size: $font-size-20;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-300;
+  color:$light-charcoal;
+  line-height: 30px;
+  padding: 10px;
+
 }
 </style>

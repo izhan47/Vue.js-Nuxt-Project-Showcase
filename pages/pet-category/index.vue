@@ -163,7 +163,6 @@ export default {
       ]
     },
     petProData(){
-      console.log('pet pro',this.$store.state.pet_pro_list)
       return this.$store.state.pet_pro_list
     },
     totalPage(){

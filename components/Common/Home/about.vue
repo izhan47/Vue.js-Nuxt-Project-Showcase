@@ -12,31 +12,31 @@
 <!--       <v-col cols="12" md="6" sm="6" class="section-align pa-8">-->
        <v-col cols="12" md="6" sm="6">
          <div class="center">
-<!--           <div class="paw-print">-->
-<!--             <div class="paw-print-2">-->
-<!--               <div class="pad large"></div>-->
-<!--               <div class="pad small-1"></div>-->
-<!--               <div class="pad small-2"></div>-->
-<!--               <div class="pad small-3"></div>-->
-<!--               <div class="pad small-4"></div>-->
-<!--             </div>-->
+           <div class="paw-print">
+             <div class="paw-print-2">
+               <div class="pad large"></div>
+               <div class="pad small-1"></div>
+               <div class="pad small-2"></div>
+               <div class="pad small-3"></div>
+               <div class="pad small-4"></div>
+             </div>
 
-<!--             <div class="paw-print-3">-->
-<!--               <div class="pad large"></div>-->
-<!--               <div class="pad small-1"></div>-->
-<!--               <div class="pad small-2"></div>-->
-<!--               <div class="pad small-3"></div>-->
-<!--               <div class="pad small-4"></div>-->
-<!--             </div>-->
+             <div class="paw-print-3">
+               <div class="pad large"></div>
+               <div class="pad small-1"></div>
+               <div class="pad small-2"></div>
+               <div class="pad small-3"></div>
+               <div class="pad small-4"></div>
+             </div>
 
-<!--             <div class="paw-print-4">-->
-<!--               <div class="pad large"></div>-->
-<!--               <div class="pad small-1"></div>-->
-<!--               <div class="pad small-2"></div>-->
-<!--               <div class="pad small-3"></div>-->
-<!--               <div class="pad small-4"></div>-->
-<!--             </div>-->
-<!--           </div>-->
+             <div class="paw-print-4">
+               <div class="pad large"></div>
+               <div class="pad small-1"></div>
+               <div class="pad small-2"></div>
+               <div class="pad small-3"></div>
+               <div class="pad small-4"></div>
+             </div>
+           </div>
 
            <div class="align-content" >
              <h2 class="heading space">{{ $t('we_are') }} {{ $t('wag_enabled') }}</h2>
@@ -44,18 +44,17 @@
            <div class="description  left-align">
              <p>{{ $t('wag_enabled_description_first') }}<span>{{ $t('wag_enabled_description_mid') }}</span>{{ $t('wag_enabled_description_last') }}</p>
            </div>
-           <div class="align-content">
+           <nuxt-link to="/about" class="align-content unset-underline">
              <v-btn
                large
                class="round-btn  mt-3 "
                outlined
                rounded
-               @click="$router.push('/about')"
              >
                {{ $t('about_wag') }}
              </v-btn>
 
-           </div>
+           </nuxt-link>
          </div>
        </v-col>
      </v-row>

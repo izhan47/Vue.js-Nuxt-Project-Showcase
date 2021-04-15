@@ -1,11 +1,19 @@
 <template>
 <div>
   <div class="card-section mb-3">
-    <div v-if="item.cover_image">
+    <div v-if="item.cover_image" class="rating-section">
       <nuxt-link :to="`/pet-category/${item.slug}`" >
         <div  class="bg-img-height" :style="`background-image: url(${item.cover_image.image_full_path})`">
         </div>
+
       </nuxt-link>
+      <div class="rating-field">
+        <v-rating :value="4" length="1" background-color="#00afaa" color="#00afaa" dense   readonly size="20"
+        ></v-rating>
+        <span class="card-heading-point">
+         {{ item.avg_rating }}
+        </span>
+      </div>
     </div>
     <div v-else>
       <nuxt-link :to="`/pet-category/${item.slug}`" >
@@ -27,15 +35,13 @@
 
 <!--  <div class="category_card_section">-->
 <!--    <div class="paw-icons-parent" v-if="item.cover_image">-->
-<!--      &lt;!&ndash;    for time being       &ndash;&gt;-->
-<!--      &lt;!&ndash;          <div  class="paw-icon" v-for="(item,y) in cards" :key="y">&ndash;&gt;-->
-<!--      &lt;!&ndash;            <v-icon  v-for="(icon,j) in item.icons" :key="j" class="paw mr-1" :class=" colors[j] ">{{icon}}</v-icon>&ndash;&gt;-->
-<!--      &lt;!&ndash;          </div>&ndash;&gt;-->
+<!--      <div  class="paw-icon" v-for="(item,y) in cards" :key="y">-->
+<!--        <v-icon  v-for="(icon,j) in item.icons" :key="j" class="paw mr-1" :class=" colors[j] ">{{icon}}</v-icon>-->
+<!--      </div>-->
 <!--      <nuxt-link :to="`/pet-category/${item.slug}`" >-->
 <!--        <div  class="bg-img-height" :style="`background-image: url(${item.cover_image.image_full_path})`">-->
 <!--        </div>-->
 <!--      </nuxt-link>-->
-
 <!--    </div>-->
 <!--    <v-card  class="card-radius card-padding card-custom-height" @click="$router.push(`/pet-category/${item.slug}`)">-->
 <!--      <v-card-title class="card-title-padding">-->
@@ -55,14 +61,13 @@
 <!--          <span-->
 <!--            class="comment-color"> .... {{$t('read_more')}}</span>-->
 <!--        </p>-->
-<!--&lt;!&ndash;        <nuxt-link :to="`/pet-category/${item.slug}`"><button>READ MORE</button></nuxt-link>&ndash;&gt;-->
+<!--        <nuxt-link :to="`/pet-category/${item.slug}`"><button>READ MORE</button></nuxt-link>-->
 <!--      </v-card-text>-->
-<!--      &lt;!&ndash;    for time being       &ndash;&gt;-->
-<!--      &lt;!&ndash;          <v-card-actions v-for="(item,p) in cards" :key="p">&ndash;&gt;-->
-<!--      &lt;!&ndash;            <v-btn v-for="(cat,k) in item.categories" :key="k" :class=" category[k] "   class="card-btn"  outlined rounded>&ndash;&gt;-->
-<!--      &lt;!&ndash;              {{ cat }}&ndash;&gt;-->
-<!--      &lt;!&ndash;            </v-btn>&ndash;&gt;-->
-<!--      &lt;!&ndash;          </v-card-actions>&ndash;&gt;-->
+<!--      <v-card-actions v-for="(item,p) in cards" :key="p">-->
+<!--        <v-btn v-for="(cat,k) in item.categories" :key="k" :class=" category[k] "   class="card-btn"  outlined rounded>-->
+<!--          {{ cat }}-->
+<!--        </v-btn>-->
+<!--      </v-card-actions>-->
 <!--    </v-card>-->
 <!--  </div>-->
 </div>
@@ -164,4 +169,24 @@ export default {
   color: $white;
   //background-image: url("/images/tick.png");
 }
+
+
+.rating-section{
+  position:relative;
+}
+.rating-field{
+  position: absolute;
+  background: #FFFFFF;
+  border-radius: 51px;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  width: 48.59px;
+  height: 25.39px;
+  left: 20px;
+  top: 27px;
+  border: 1px;
+
+}
+
 </style>

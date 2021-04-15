@@ -84,24 +84,27 @@
                   <v-btn icon large v-on="on">
                     <v-avatar size="35px" item>
                       <v-img v-if="userDetail.profile_image_thumb_full_path"  :src="userDetail.profile_image_thumb_full_path"></v-img>
+                      <v-img v-else src="/images/avatar.jpg"></v-img>
                     </v-avatar>
                   </v-btn>
                 </template>
                 <v-list>
                   <v-list-item    to="/auth/Profile">
                     <v-list-item-title >
-                      <v-icon>mdi-settings</v-icon>  My Profile
+                        {{$t('my_profile')}}
                     </v-list-item-title>
                   </v-list-item>
                   <v-list-item @click="reset">
                     <v-list-item-title>
-                      <v-icon>mdi-logout-variant</v-icon> Logout
+                       {{$t('logout')}}
                     </v-list-item-title>
                   </v-list-item>
                 </v-list>
 
               </v-menu>
-              <v-btn v-else outlined rounded class="sign-in-btn" @click="$router.push('/auth/Login')">{{$t('sign_in')}}</v-btn>
+              <nuxt-link v-else to="/auth/login" class="unset-underline">
+                <v-btn  outlined rounded class="sign-in-btn" >{{$t('sign_in')}}</v-btn>
+              </nuxt-link>
             </div>
           </v-toolbar-title>
           </div>
@@ -195,9 +198,7 @@ export default {
     display: none;
   }
 }
-.unset-underline{
-  text-decoration: none;
-}
+
 </style>
 
 
