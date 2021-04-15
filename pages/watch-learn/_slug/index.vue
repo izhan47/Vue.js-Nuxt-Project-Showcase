@@ -144,6 +144,7 @@ export default {
     },
     submit(){
       if (!this.$store.state.user.isAuthenticated) {
+        this.$store.commit('SET_CURRENT_PATH',this.$route.path)
         return this.$router.push('/auth/Login')
       }else {
         let loader=true

@@ -188,4 +188,5 @@ export default {
   border: 1px;
 
 }
+
 </style>

@@ -12,31 +12,31 @@
 <!--       <v-col cols="12" md="6" sm="6" class="section-align pa-8">-->
        <v-col cols="12" md="6" sm="6">
          <div class="center">
-<!--           <div class="paw-print">-->
-<!--             <div class="paw-print-2">-->
-<!--               <div class="pad large"></div>-->
-<!--               <div class="pad small-1"></div>-->
-<!--               <div class="pad small-2"></div>-->
-<!--               <div class="pad small-3"></div>-->
-<!--               <div class="pad small-4"></div>-->
-<!--             </div>-->
+           <div class="paw-print">
+             <div class="paw-print-2">
+               <div class="pad large"></div>
+               <div class="pad small-1"></div>
+               <div class="pad small-2"></div>
+               <div class="pad small-3"></div>
+               <div class="pad small-4"></div>
+             </div>
 
-<!--             <div class="paw-print-3">-->
-<!--               <div class="pad large"></div>-->
-<!--               <div class="pad small-1"></div>-->
-<!--               <div class="pad small-2"></div>-->
-<!--               <div class="pad small-3"></div>-->
-<!--               <div class="pad small-4"></div>-->
-<!--             </div>-->
+             <div class="paw-print-3">
+               <div class="pad large"></div>
+               <div class="pad small-1"></div>
+               <div class="pad small-2"></div>
+               <div class="pad small-3"></div>
+               <div class="pad small-4"></div>
+             </div>
 
-<!--             <div class="paw-print-4">-->
-<!--               <div class="pad large"></div>-->
-<!--               <div class="pad small-1"></div>-->
-<!--               <div class="pad small-2"></div>-->
-<!--               <div class="pad small-3"></div>-->
-<!--               <div class="pad small-4"></div>-->
-<!--             </div>-->
-<!--           </div>-->
+             <div class="paw-print-4">
+               <div class="pad large"></div>
+               <div class="pad small-1"></div>
+               <div class="pad small-2"></div>
+               <div class="pad small-3"></div>
+               <div class="pad small-4"></div>
+             </div>
+           </div>
 
            <div class="align-content" >
              <h2 class="heading space">{{ $t('we_are') }} {{ $t('wag_enabled') }}</h2>

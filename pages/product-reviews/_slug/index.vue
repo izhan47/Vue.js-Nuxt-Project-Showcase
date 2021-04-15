@@ -113,7 +113,6 @@ export default {
     },
   },
   created() {
-    console.log('llll',this.$store.state.review_list)
     this.getCategoryDetail()
   },
   methods:{

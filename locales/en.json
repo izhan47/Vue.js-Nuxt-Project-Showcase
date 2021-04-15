@@ -130,6 +130,7 @@
   "share":"Share",
   "events":"Events",
   "claim":"Claim",
+  "claimed":"Claimed",
   "hours_of_operation":"Hours of Operation",
   "find_more_pet_pros":"Find More Pet Pros",
   "deals_offered":"Deals Offered",
@@ -161,5 +162,13 @@
   "enter_location": "Enter Location ...",
   "forgot_description": "Enter your email and we'll send you a new password.",
   "or": "or",
-  "read_more": "Read More"
+  "read_more": "Read More",
+
+  "my_profile": " My Profile",
+  "info": "Info",
+
+  "no_deals_found": "No Deals Found",
+  "no_events_found": "No Events Found",
+  "cancel": "Cancel",
+  "claimed_deal": "Claimed Deal"
 }

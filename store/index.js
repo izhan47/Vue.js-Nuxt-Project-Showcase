@@ -27,7 +27,8 @@ export default () => {
         message:''
       },
       loader:false,
-      total_page:''
+      total_page:'',
+      current_path:''
     },
     mutations: {
       SET_PET_PRO_LIST(state, data) {
@@ -54,6 +55,10 @@ export default () => {
 
       SET_TOTAL_PAGE(state, data) {
         state.total_page = data;
+      },
+
+      SET_CURRENT_PATH(state, data) {
+        state.current_path = data;
       },
 
 
@@ -101,7 +106,6 @@ export default () => {
           url: 'watch-and-learn/get-list/' + data.page,
           data:data.form
         }).then(response => {
-          console.log(response)
           commit('SET_CATEGORY_LIST',response.data.data.watch_and_learn_list)
           commit('SET_TOTAL_PAGE',response.data.data.total_page)
           commit('SHOW_LOADER', false)
@@ -207,6 +211,21 @@ export default () => {
         })
       },
 
+     //Like Dislike
+       like({dispatch},slug){
+        return axios({
+          method:'POST',
+          url:'pet-pro/like-dislike/' + slug
+        })
+      },
+
+     //claim Dislike
+       claim({dispatch},data){
+        return axios({
+          method:'POST',
+          url:'pet-pro/deal/claim/' + data.slug +'/'+ data.pet_deal_id
+        })
+      }
 
 
 
