@@ -225,7 +225,30 @@ export default () => {
           method:'POST',
           url:'pet-pro/deal/claim/' + data.slug +'/'+ data.pet_deal_id
         })
-      }
+      },
+
+       review({dispatch},data){
+        return axios({
+          method:'POST',
+          url:'pet-pro/review/' + data.slug ,
+          data:data.form
+        })
+      },
+       getReview({dispatch},slug){
+        return axios({
+          method:'POST',
+          url:'pet-pro/get-reviews/' + slug ,
+
+        })
+      },
+       deleteReview({dispatch},data){
+        console.log('assaasdasa',data)
+        return axios({
+          method:'POST',
+          url:'pet-pro/delete-review/' + data.slug +'/'+ data.id,
+
+        })
+      },
 
 
 

@@ -181,7 +181,7 @@ export default {
   z-index: 1;
   display: flex;
   flex-wrap: wrap;
-  width: 48.59px;
+  width: 60px;
   height: 25.39px;
   left: 20px;
   top: 27px;

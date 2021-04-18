@@ -54,8 +54,9 @@
                   <h2 class="pl-1">{{$t('deals_offered')}}</h2>
                 </div>
                 <hr class="dot-line space">
-                <v-card class="card-radius space"  v-if="petDetail.deals.length" >
-                  <div class="custom-card-align"  v-for="deal in petDetail.deals">
+                <div v-if="petDetail.deals.length" >
+                <v-card class="card-radius space"   v-for="deal in petDetail.deals">
+                  <div class="custom-card-align">
                     <v-btn icon class="card-inner-icon">
                       <v-icon  color="#332e80" size="50">mdi-percent-outline</v-icon>
                     </v-btn>
@@ -105,16 +106,11 @@
                       <v-btn v-else  large class=" card-btn white-text" outlined rounded readonly> {{$t('claimed')}}</v-btn>
 
                     </v-card-actions>
-
-
-
                   </div>
                 </v-card>
+                </div>
                 <div class="not-found space"   v-else> {{$t('no_deals_found')}}</div>
               </div>
-
-
-
               <!--  Event -->
               <div  class="category-section">
                 <div class="space heading">
@@ -122,7 +118,8 @@
                   <h2 class="pl-1">{{$t('events')}}</h2>
                 </div>
                 <hr class="dot-line space">
-                <v-card class="card-radius space" v-if="petDetail.events.length"  >
+                <div v-if="petDetail.events.length">
+                <v-card class="card-radius space" >
                   <div class="custom-card-align" v-for="event in petDetail.events">
                     <v-btn icon class="card-inner-icon">
                       <v-icon  color="#332e80" size="50">mdi-percent-outline</v-icon>
@@ -138,34 +135,90 @@
                     </v-card-actions>
                   </div>
                 </v-card>
+                </div>
                 <div v-else class="not-found space"> {{$t('no_events_found')}}</div>
 
               </div>
 
+              <!-- Reviews     -->
+              <div  class="category-section">
+                <div class="space heading">
+                  <v-icon  color="#332e80" size="30">mdi-star</v-icon>
+                  <h2 class="pl-1">{{$t('reviews')}}</h2>
+                </div>
+                <hr class="dot-line space">
+                <div class="reviews-block">
+                  <div class=" pb-8">
+                    <div class="reviews-section">
+                      <v-icon  color="white" size="40">mdi-star</v-icon>
+                      <span class="rating">{{petDetail.avg_rating}}</span>
+                      <p class="count-review">{{reviews_count}}</p>
+                    </div>
+                  </div>
+                  <div class="reviews-comment-section">
+                    <v-form   ref="form">
+                      <div class="mb-4">
+                        <div class=" reviews-icon">
+                            <div class="" v-if="$store.state.user.user">
+                              <input name="name" v-model="$store.state.user.user.name" placeholder="Name" disabled="" type="text" autocomplete="off" class="review-message" value="">
+                            </div>
+                            <div class="review-rating">
+                              <v-rating
+                                v-model="form.rate"
+                                color="#332e80"
+                                background-color="#332e80 lighten-3"
+                                half-increments
+                                hover
+                                large
+                                required
+                              ></v-rating>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="mb-4">
+                        <div class="">
+                          <v-textarea
+                            outlined
+                            name="input-7-4"
+                            :label="$t('review')"
+                            v-model="form.description"
+                            required
+                            :rules="rules.description"
+                            rows="3"
+                            row-height="20"
+                          ></v-textarea>
+                        </div>
+                      </div>
+                      <div class="review-submit">
+                        <v-btn rounded x-large color="#332e80" class="review-submit-btn" @click="submitReview">{{$t('submit')}}</v-btn>
+                      </div>
+                    </v-form>
+                  </div>
+                </div>
+              </div>
 
 
+              <!-- Review List  -->
+              <div class="reviews-details-block" v-if="reviewDetail.length">
+                <div class="reviews-details-list-main" v-for="review in reviewDetail ">
+                  <div class="clearfix">
+                    <div class="reviews-use-pic"><img src="/images/placeholder.png" alt="Muhammad Izhan"></div>
+                  </div>
+                  <div class="reviews-details">
+                    <div class="delete-icon" @click="deleteReview(review.id)">
+                      <v-icon>mdi-delete</v-icon>
+                    </div>
+                    <div class="reviews-star-details">
 
-<!--              <div v-for="card in cards" class="category-section">-->
-<!--                <div class="space heading">-->
-<!--                  <v-icon  color="#332e80" size="30">{{card.icon}}</v-icon>-->
-<!--                  <h2 class="pl-1">{{card.parent_heading}}</h2>-->
-<!--                </div>-->
-<!--                <hr class="dot-line space">-->
-<!--                <v-card class="card-radius space">-->
-<!--                  <div class="custom-card-align">-->
-<!--                    <v-btn icon class="card-inner-icon">-->
-<!--                      <v-icon  color="#332e80" size="50">{{card.icon}}</v-icon>-->
-<!--                    </v-btn>-->
-<!--                    <div>-->
-<!--                      <v-card-subtitle class="card-sub-heading">{{card.subtitle}}</v-card-subtitle>-->
-<!--                      <v-card-title class="card-title">{{card.title}}</v-card-title>-->
-<!--                    </div>-->
-<!--                    <v-card-actions class="custom-card-padding">-->
-<!--                      <v-btn large class=" card-btn white-text" outlined rounded > {{card.button_text}}</v-btn>-->
-<!--                    </v-card-actions>-->
-<!--                  </div>-->
-<!--                </v-card>-->
-<!--              </div>-->
+                      <h4 class="rate-text">{{review.rate}}<span>/5</span></h4>
+                      <p class="date-text">{{review.formated_created_at}}</p>
+                    </div>
+                    <p class="comments-text">{{ review.description }}</p>
+                    <p class="user-name">{{review.name}}</p>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="12" >
@@ -191,7 +244,7 @@
                 </div>
                 <v-divider class="divider-section"></v-divider>
               </div>
-              <div class="service-section mb-10" v-if="petDetail.services_offered">
+              <div class="service-section mb-10" v-if="petDetail.services_offered.length">
                 <h2 class="mb-6">{{$t('services_offered')}}</h2>
                 <ul class="service-list" v-for="cat in petDetail.services_offered">
                   <li >{{cat.service}}</li>
@@ -227,10 +280,10 @@
           </v-col>
         </v-row>
       </div>
-      <div class="find-pet-section-heading text-center">
+    <!--  card-section-start   -->
+    <div class="find-pet-section-heading text-center">
         <h2 class="mb-8">{{$t('find_more_pet_pros')}}</h2>
       </div>
-      <!--  card-section-start   -->
       <div class="custom-height custom-container">
         <v-row>
           <v-col cols="12" md="4" sm="12" v-for="(data,i) in petProData.slice(0,3)"   :key="i"  class="custom-margin">
@@ -256,6 +309,16 @@ export default {
       petDetail:'',
       is_liked:'',
       is_claimed:'',
+      reviews_count:'',
+      reviewDetail:'',
+      form:{
+        description:'',
+        rate:0,
+      },
+      rules: {
+        rate: [val => (val || '').length > 0 || 'This rate field is required'],
+        description: [val => (val || '').length > 0 || 'This description field is required'],
+      },
       social:[
         {
           icon:'mdi-facebook',
@@ -280,24 +343,6 @@ export default {
 
       ],
       index : '',
-      cards:[
-        {
-          icon:'mdi-ice-cream',
-          parent_heading:'Events',
-          subtitle:'May 22, 2021',
-          title:'Froyo Day',
-          button_text:this.$i18n.t('sign_up'),
-          path:''
-        },
-        {
-          icon:'mdi-star',
-          parent_heading:this.$i18n.t('reviews'),
-          subtitle:this.$i18n.t('name'),
-          title:'Review',
-          button_text:this.$i18n.t('submit'),
-          path:''
-        },
-      ],
       markers:[
         { "lat": -37.8265057, "lng": 144.7464312 },
         { "lat": -60.79249218273802, "lng": 98.52131582979746 },
@@ -315,6 +360,7 @@ export default {
   },
   created() {
     this.getPetDetail()
+    this.getReviews()
   },
   methods:{
     getPetDetail(){
@@ -324,7 +370,7 @@ export default {
         let res=response.data.data
         this.is_liked=res.is_liked
         this.petDetail = res.per_pro
-        // console.log('sads',this.petDetail)
+        console.log('sads',this.petDetail)
       })
     },
    async like(){
@@ -334,9 +380,8 @@ export default {
         }
       else {
           let loader = true
-          let slug = this.petDetail.slug
           this.$store.commit('SHOW_LOADER', loader)
-          await this.$store.dispatch('like',slug).then(response => {
+          await this.$store.dispatch('like',this.URL).then(response => {
             this.$store.commit('SHOW_LOADER', loader=false)
             this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message})
             if(this.is_liked===0){
@@ -354,28 +399,76 @@ export default {
        return this.$router.push('/auth/Login')
      }
      else {
-       let loader = true
+
        let data={
          slug: this.petDetail.slug,
          pet_deal_id: deal.id
        }
 
-       this.$store.commit('SHOW_LOADER', loader)
+       this.$store.commit('SHOW_LOADER', true)
        await this.$store.dispatch('claim',data).then(response => {
-         this.$store.commit('SHOW_LOADER', loader=false)
+         this.$store.commit('SHOW_LOADER', false)
          this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message})
          if(this.is_claimed===0){
            this.is_claimed=1
          }else{
            this.is_claimed=0
          }
-
        })
      }
    },
    getInfo(url){
       window.location=url
+   },
+   async submitReview(){
+     if (!this.$store.state.user.isAuthenticated) {
+       this.$store.commit('SET_CURRENT_PATH',this.$route.path)
+       return this.$router.push('/auth/Login')
+     }
+     else {
+       let loader = true
+       let data={
+         slug: this.petDetail.slug,
+         form: this.form
+       }
+       if(this.$refs.form.validate()) {
+         this.$store.commit('SHOW_LOADER', loader)
+         await this.$store.dispatch('review',data).then(response => {
+           console.log('resss',response)
+           this.$store.commit('SHOW_LOADER', loader=false)
+           this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message})
+           data.form.rate=0
+           data.form.description=''
+           this.getReviews()
+         })
+       }
+
+     }
+   },
+   async getReviews(){
+     this.$store.commit('SHOW_LOADER', true)
+    await this.$store.dispatch('getReview',this.URL).then( response => {
+       this.$store.commit('SHOW_LOADER', false)
+       this.reviews_count=response.data.data.reviews_count
+       this.reviewDetail=response.data.data.pet_pro_reviews
+
+       console.log('review list', this.reviewDetail)
+     })
+   },
+   async deleteReview(id){
+     let data={
+       slug: this.petDetail.slug,
+       id: id
+     }
+     this.$store.commit('SHOW_LOADER', true)
+     await this.$store.dispatch('deleteReview',data).then( response => {
+       this.$store.commit('SHOW_LOADER', false)
+       this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message})
+       this.getReviews()
+
+     })
    }
+
   }
 }
 </script>
@@ -457,7 +550,6 @@ export default {
     }
   }
 }
-
 .category-left-section{
   margin-top: 150px;
   display: flex;
@@ -781,5 +873,138 @@ hr.dot-line {
   line-height: 30px;
   padding: 10px;
 
+}
+.reviews-block{
+  display: flex;
+  width: 100%;
+}
+.reviews-section{
+  background:  $purple;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  min-width: 150px;
+  margin-right: 15px;
+}
+.rating{
+  font-size: $font-size-50;
+  color: white;
+  line-height: normal;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-normal;
+}
+.count-review{
+  font-family: $font-family-primary;
+  font-weight: $font-weight-normal;
+  color: white;
+  font-size: $font-size-15;
+}
+.reviews-comment-section{
+  flex: auto;
+  width: calc(100% - 140px);
+}
+.reviews-icon{
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+.review-rating{
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.review-message{
+  font-size: $font-size-14;
+  color: $dark-charcoal;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-normal;
+  background: $white;
+  border: 1px solid $gainsboro;
+  border-radius: 4px;
+  padding: 12px;
+}
+.review-submit{
+  justify-content: flex-end;
+  width: 100%;
+  display: flex;
+}
+.review-submit-btn{
+  padding: 5px 15px 5px 15px;
+  //background: #1B3659;
+  //height: 45px;
+  //min-width: 160px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 700;
+  color: $white;
+  border: none;
+  text-transform: uppercase;
+}
+
+
+.reviews-details-block{
+  margin: 35px 0;
+}
+.reviews-details-list-main{
+  padding: 25px;
+  background: $cultured;
+  display: flex;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+.reviews-use-pic{
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 1000px;
+}
+.reviews-details{
+  flex: 1;
+  margin-left: 20px;
+}
+.reviews-star-details{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 5px;
+}
+.delete-icon{
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+.rate-text{
+  font-size: 36px;
+  color: $dark-charcoal;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-normal;
+}
+.date-text{
+  font-size:$font-size-14;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-normal;
+  color: rgba(51,51,51,0.5);
+  line-height: 30px;
+}
+.comments-text{
+  padding: 15px 0 20px;
+  font-size:$font-size-16;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-normal;
+  color: rgba(51,51,51,0.5);
+  line-height: 30px;
+}
+.user-name{
+  font-size:$font-size-16;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-normal;
+  color: $dark-charcoal;
+  display: inline-block;
 }
 </style>
