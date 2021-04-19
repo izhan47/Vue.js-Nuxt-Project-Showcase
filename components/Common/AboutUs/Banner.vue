@@ -33,22 +33,12 @@ name: "aboutBanner.vue"
   width: 100px;
   height: 95px;
 }
-//.divider{
-//  color:  #ADADAD;
-//  width: 100%;
-//  padding-bottom: 100px;
-//  margin:10px 0;
-//
-//  //     Weight 1px
-//}
-
 .divider{
   width:100%;
   height:1px;
   background:$silver-chalice;
   margin:10px 0;
 }
-
 .description{
   max-width: 600px;
   margin: auto;

@@ -187,9 +187,6 @@ name: "index.vue",
   .v-text-field__slot{
     font-weight: $font-weight-bold;
   }
-  //fieldset{
-  //  color: rgba(0, 0, 0, 0.7) !important;
-  //}
 }
 
 .search-field::v-deep .v-label {

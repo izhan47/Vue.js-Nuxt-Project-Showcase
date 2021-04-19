@@ -1,9 +1,7 @@
 <template>
-  <div  >
-
+  <div>
     <v-container >
       <div class="crew-card-section" >
-
         <div class="space heading">
           <h2>{{ $t('meet_crew') }} </h2>
         </div>
@@ -23,7 +21,6 @@
 
               <p class="crew-card-description">{{item.description}}</p>
             </v-container>
-
           </v-col>
         </v-row>
       </div>
@@ -39,7 +36,6 @@ data(){
     items:[
       {
         src: '/images/About/Aly-About.jpg',
-        // title: this.$i18n.t('about_us'),
         title: 'ALY',
         sub_title:'HUMAN IN CHARGE' ,
         description: 'Hi there! I’m Aly, the head person behind Wag Enabled. We needed a human to sign things after all. My approach to pet care emphasizes connecting through trust and love, not fear and intimidation.',
@@ -56,8 +52,6 @@ data(){
         sub_title:'JUNIOR TROUBLE MAKER' ,
         description: 'Bean ensures that all businesses we work with value patience. As resident mischief finder, he requires extra doses of love and care, especially when his wild ways wreak havoc on our office. We trust those who know how to handle his spirit — and do so in a kind and constructive manner.',
       },
-
-
     ]
   }
 },
@@ -104,7 +98,6 @@ data(){
   font-size: $font-size-25;
   font-weight: $font-weight-600;
 
-  //line-height: 34px;
   text-transform: $text-transform-uppercase;
 }
 .crew-card-sub-heading{
@@ -122,7 +115,6 @@ data(){
   font-weight: $font-weight-400;
   font-size: $font-size-16;
   line-height: 30px;
-  //letter-spacing: 1px;
   text-align: center;
 
 }

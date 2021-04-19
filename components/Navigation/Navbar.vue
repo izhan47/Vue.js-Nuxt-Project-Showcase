@@ -65,25 +65,19 @@
             <div class="app-title">
               <nuxt-link class="nav-title unset-underline ml-4" to="/about">{{$t('about_us')}}</nuxt-link>
               <nuxt-link class="nav-title unset-underline ml-4" to="/product-reviews">{{$t('best_pet_products')}}</nuxt-link>
-<!--              <div  class="nav-title  ml-4" @click="$router.push('/about')">{{$t('about_us')}}</div>-->
-<!--              <div   class="nav-title ml-4" @click="$router.push('/product-reviews')">{{$t('best_pet_products')}}</div>-->
               <div class=" nav-logo" >
                 <img src="/images/WagEnabledLogo.jpg" alt="logo" @click="$router.push('/')" />
               </div>
               <nuxt-link class="nav-title unset-underline ml-4" to="/watch-learn">{{$t('pet_care_advice')}}</nuxt-link>
 
               <nuxt-link class="nav-title unset-underline ml-4" to="/pet-category">{{$t('find_a_pet_pro')}}</nuxt-link>
-
-<!--              <div   class="nav-title ml-4" @click="$router.push('/watch-learn')">{{$t('pet_care_advice')}}</div>-->
-<!--              <div   class="nav-title ml-4" @click="$router.push('/pet-category')">{{$t('find_a_pet_pro')}}</div>-->
             </div>
             <div>
-<!--              <v-btn v-if="$store.state.user.isAuthenticated" outlined rounded class="sign-in-btn"  @click="reset()">{{$t('logout')}}</v-btn>-->
               <v-menu offset-y v-if="$store.state.user.isAuthenticated">
                 <template v-slot:activator="{ on }">
                   <v-btn icon large v-on="on">
                     <v-avatar size="35px" item>
-                      <v-img v-if="userDetail.profile_image_thumb_full_path"  :src="userDetail.profile_image_thumb_full_path"></v-img>
+                      <v-img v-if="userDetail && userDetail.profile_image_thumb_full_path"  :src="userDetail.profile_image_thumb_full_path"></v-img>
                       <v-img v-else src="/images/avatar.jpg"></v-img>
                     </v-avatar>
                   </v-btn>

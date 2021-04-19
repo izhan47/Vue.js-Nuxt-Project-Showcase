@@ -131,7 +131,7 @@ export default {
 }
 .news-section-divider{
 
-  color: #F6FEFF;
+  color: $azure;
   width: 108px;
   height: 158px;
 }

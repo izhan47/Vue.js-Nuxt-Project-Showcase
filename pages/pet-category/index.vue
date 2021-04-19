@@ -27,17 +27,6 @@
               <div class="search-filter-label">
                 <label class="ml-4 ">{{ $t('location') }}</label>
               </div>
-              <!--            <v-text-field-->
-              <!--              class="search-field cross-icon mt-2"-->
-              <!--              :placeholder="$t('all')"-->
-              <!--              v-model="form.location"-->
-              <!--              solo-->
-              <!--              rounded-->
-              <!--              clearable-->
-              <!--              color="#00afaa"-->
-              <!--              outlined-->
-              <!--              @input="debounceSearch"-->
-              <!--            ></v-text-field>-->
               <vue-google-autocomplete
                 id="map"
                 class="search-location"
@@ -117,33 +106,6 @@ export default {
   data(){
     return{
       page: 1,
-      cards:[
-        {
-          src:"/images/pet-1.png",
-          name:"Paws On Chicon",
-          rating:"5.0",
-          description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
-          category:["Deal Offered","Certified",],
-          icons:["mdi-paw","mdi-paw","mdi-paw"],
-        },
-        {
-          src:"/images/pet-2.jpg",
-          name:"Liz's Pet Care",
-          rating:"4.5",
-          description:"Homemade Treats and Food, Pet Store, Self Serve Dog...",
-          category:["Deal Offered"],
-          icons:["mdi-paw","mdi-paw"],
-
-        },
-        {
-          src:"/images/pet-3.jpg",
-          name:"Pet Behaviorist",
-          rating:"5.0",
-          description:"Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.",
-          category:["Deal Offered"],
-          icons:["mdi-paw"],
-        },
-      ],
       category: [],
       form:{
         category_id:'',

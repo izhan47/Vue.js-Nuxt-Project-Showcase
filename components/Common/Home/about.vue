@@ -9,7 +9,6 @@
                 src="/images/placeholder.png" alt="logo">
          </div>
        </v-col>
-<!--       <v-col cols="12" md="6" sm="6" class="section-align pa-8">-->
        <v-col cols="12" md="6" sm="6">
          <div class="center">
            <div class="paw-print">
@@ -114,7 +113,4 @@ name: "about.vue"
   background-color: $white;
   font-weight: $font-weight-bold;
 }
-
-
-
 </style>

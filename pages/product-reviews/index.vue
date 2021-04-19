@@ -181,7 +181,6 @@ export default {
 @import "~/assets/sass/main.scss";
 .bg-review-img{
   background-image: url("/images/Reviews/Product-Reviews-Banner-2.png");
-  //background-image: url("/images/Reviews/Reviews-Banner.png");
   background-position: 10% 68%;
   //background-position: 10% 56%;
   background-size: cover;
@@ -213,9 +212,6 @@ export default {
   fieldset{
     color: rgba(0, 0, 0, 0.7) !important;
   }
-  //.v-input__append-inner{
-  //  margin-top: 0;
-  //}
 }
 .search-field-category::v-deep .v-label {
   top:14px;
@@ -234,12 +230,6 @@ export default {
   .v-text-field__slot{
     font-weight: $font-weight-bold;
   }
-  //fieldset{
-  //  color: rgba(0, 0, 0, 0.7) !important;
-  //}
-  //.v-input__append-inner{
-  //  margin-top: 0;
-  //}
 }
 
 

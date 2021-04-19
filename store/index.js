@@ -66,7 +66,8 @@ export default () => {
         state.user = { 'bearerToken': data.token, 'user': data.user , 'isAuthenticated':true }
       },
       RESET_USER (state) {
-        state.user = { 'bearerToken': null,'user': null , 'isAuthenticated':false  }
+        state.user = { 'bearerToken': null,'user': null , 'isAuthenticated':false  },
+        state.current_path = ''
       },
     },
     actions: {
@@ -132,6 +133,22 @@ export default () => {
           method: 'POST',
           url: 'watch-and-learn/store-comment',
           data
+        })
+      },
+      //get Comment List
+      getComment({commit}, slug) {
+        commit('SHOW_LOADER', true)
+        return axios({
+          method: 'POST',
+          url: 'watch-and-learn/get-comments/' + slug + '/0/0',
+        })
+      },
+      //Delete Comment
+      deleteComment({commit}, data) {
+        commit('SHOW_LOADER', true)
+        return axios({
+          method: 'POST',
+          url: 'watch-and-learn/delete-comment/'+ data.slug +'/'+ data.id,
         })
       },
       //Product Reviews
@@ -242,7 +259,6 @@ export default () => {
         })
       },
        deleteReview({dispatch},data){
-        console.log('assaasdasa',data)
         return axios({
           method:'POST',
           url:'pet-pro/delete-review/' + data.slug +'/'+ data.id,

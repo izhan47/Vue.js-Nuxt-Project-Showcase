@@ -75,9 +75,6 @@ name: "Purpose.vue",
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
 .purpose-section {
-
-  //max-width: 800px;
-  //max-height: 250px;
   padding: 100px;
   @media (min-width: 320px)  and (max-width: 600px)  {
     padding: 30px;

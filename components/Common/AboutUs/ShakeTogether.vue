@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <v-container >
-      <div class="shake-section mt-5">
+
+    <v-container class="shake-section mt-5">
+
         <v-row justify="center">
           <v-col cols="12" md="6" sm="6">
            <div class="custom-padding text-right">
@@ -33,9 +33,9 @@
             </div>
           </v-col>
         </v-row>
-      </div>
+
     </v-container>
-  </div>
+
 </template>
 
 <script>
