@@ -24,7 +24,9 @@
     <div class="card-category" @click="$router.push(`/pet-category/${item.slug}`)">
       <h2 class="mb-2 mt-2">{{item.store_name}}</h2>
       <div class="mb-3" >
-        <span class="category-title" v-for="cat in item.categories"> {{cat.name}} |</span>
+        <span class="category-title" v-for="(cat,i) in item.categories" :key="i"> {{cat.name}}
+          <span v-if="i !== item.categories.length-1"> | </span>
+        </span>
       </div>
       <v-btn v-if="item.deals_count !== 0 "   class="cat-btn"  outlined rounded>
         <img class="img-fluid icon-img mr-1" src="/images/tick.png" alt="">

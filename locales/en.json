@@ -170,6 +170,10 @@
 
   "no_deals_found": "No Deals Found",
   "no_events_found": "No Events Found",
+  "no_reviews_found": "No Reviews Found",
+  "no_comments_found": "No Comments Found",
   "cancel": "Cancel",
-  "claimed_deal": "Claimed Deal"
+  "claimed_deal": "Claimed Deal",
+
+  "review_error": "Sign in to submit a review."
 }

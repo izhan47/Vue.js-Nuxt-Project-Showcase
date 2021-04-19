@@ -1,34 +1,12 @@
 <template>
   <div class="watch-learn-detail-section" v-if="categoryData">
-
     <div class="custom-container custom-margin">
       <v-row>
         <v-col cols="12" md="12" sm="12">
-<!--          <div class="tag">-->
-<!--            <v-icon color="#00afaa">mdi-tag</v-icon>-->
-<!--            <span>Play Time and Enrichment</span>-->
-<!--          </div>-->
           <div class="heading mt-2">
             <h1>{{categoryData.title }} </h1>
           </div>
-<!--          <v-btn color="#ff8189" class=" ma-2 white&#45;&#45;text" rounded>-->
-<!--            <v-icon left dark>mdi-facebook</v-icon>-->
-<!--            {{ $t('facebook')}}-->
-<!--          </v-btn>-->
-<!--          <v-btn color="#ff8189" class=" ma-2 white&#45;&#45;text" rounded>-->
-<!--            <v-icon left dark>mdi-twitter</v-icon>-->
-<!--            {{ $t('twitter')}}-->
-<!--          </v-btn>-->
-<!--          <v-btn color="#ff8189" class="ma-2 white&#45;&#45;text" rounded>-->
-<!--            <v-icon left dark>mdi-linkedin</v-icon>-->
-<!--            {{ $t('linkedin')}}-->
-<!--          </v-btn>-->
-                  <div v-html="categoryData.description"></div>
-<!--          <p class="description space mt-5">Most dogs love physical activity, and exercise is just as important for their mental and physical health as it is for ours. Staying active will help your dog live a longer, happier life and prevent obesity, which is a common issue for dogs. Not only that but-->
-<!--            <b>dogs who are bored and don’t get enough exercise often develop behavior issues. </b>-->
-<!--            Here’s a look at some fun exercises and activities to keep your pup fit and how to know if he’s getting enough exercise each day.</p>-->
-
-
+            <div v-html="categoryData.description"></div>
           <hr class="dot-line">
 
           <div class="comment-section">
@@ -43,11 +21,8 @@
             ></v-textarea>
             <div class="text-center">
               <v-btn large class=" submit-btn" outlined rounded @click="submit"> {{ $t('submit') }}</v-btn>
-
             </div>
           </div>
-
-
         </v-col>
       </v-row>
     </div>
@@ -81,27 +56,8 @@ export default {
         parent_comment_id:'',
         slug:''
       },
-
       categoryData:'',
-      cards:[
-        {
-          src:"/images/WatchLearn/pic-2.jpg",
-          name:"After Their Service",
-          description:"Pet Adoption",
-        },
-        {
-          src:"/images/WatchLearn/pic-1.jpg",
-          name:"Exercises and Activities to Keep Your Pup Fit",
-          description:"Play Time and Enrichment",
-        },
-        {
-          src:"/images/WatchLearn/pic-3.jpg",
-          name:"4 Steps to Take After Bringing Home Your New Pup",
-          description:"Pet Adoption",
-        },
 
-
-      ],
     }
   },
   computed:{
@@ -155,11 +111,6 @@ export default {
 .img-height{
   max-height: 500px;
 }
-//.watch-detail-custom-container{
-//  max-width: 1250px;
-//  margin: auto;
-//  padding: 0 1rem;
-//}
 .custom-margin{
   margin-top: 3rem;
 }
@@ -258,11 +209,6 @@ export default {
   border-style: solid;
   border-width: 2px 2px 2px 2px;
 }
-
-
-
-
-
 /* Dotted red border */
 hr.dot-line {
   border-top: 1px dotted $black;
@@ -272,7 +218,7 @@ hr.dot-line {
   font-family: $font-family-primary;
   font-size: $font-size-50;
   font-weight:$font-weight-600;
-  text-shadow: -3px 2px 5px rgb(0 0 0 / 9%);
+  text-shadow: -3px 2px 5px $text-shadow-primary;
   text-transform: $text-transform-capitalize;
   color: $purple;
   margin-top: 6rem;
@@ -281,7 +227,7 @@ hr.dot-line {
 .watch-learn-detail-section{
   .card-radius{
     border-radius: 15px;
-    box-shadow: -5px 10px 10px 0px rgb(0 0 0 / 9%);
+    box-shadow: -5px 10px 10px 0px $text-shadow-primary;
   }
 }
 .card-custom-height{

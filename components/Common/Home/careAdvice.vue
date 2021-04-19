@@ -53,14 +53,10 @@ export default {
     if(process.browser){
       const images=document.querySelector('.animate');
       let observer =new IntersectionObserver((entries)=>{
-        // console.log(entries);
         if (entries[0].intersectionRatio>0){
-          // console.log('inside if',entries[0])
-          // entries[0].target.style.animation=`anim1 5s forwards ease-out`
           entries[0].target.classList.add('fade-in-ease-out')
         }
         else{
-          // console.log('inside else')
           entries[0].target.classList.remove('fade-in-ease-out')
         }
 
@@ -98,8 +94,6 @@ export default {
     width: 100%;
   }
 }
-
-
 .categories-buttons{
   max-width: 900px;
   width: 100%;
@@ -120,7 +114,6 @@ export default {
     border-color: $grey;
     border-style: solid;
     font-weight: $font-weight-bold;
-    //border-radius: 10px 10px 10px 10px;
   }
 }
 .see-more-btn{

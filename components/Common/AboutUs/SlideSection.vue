@@ -1,37 +1,31 @@
 <template>
+  <v-container class="wave-img">
+    <div class="slide-section">
+      <v-row justify="center">
+        <v-col col="12" md="12" sm="12">
+          <v-card
+            class="mx-auto my-12 card-radius">
+            <VueSlickCarousel class="custom-padding slick-dots" v-bind="settings">
+              <div class="" v-for="item in banners">
+                <img class="image-slider img-fluid " :src="item" />
+              </div>
+            </VueSlickCarousel>
+            <v-card-title class="card-heading display mb-5 mt-5">{{ $t('slide_heading') }}</v-card-title>
+            <v-card-text  class="text-center ">
+              <p class="card-description">{{ $t('slide_description_1') }}</p>
+            </v-card-text>
+            <v-card-text class="text-center">
+              <p class="card-description">{{ $t('slide_description_2') }}</p>
+            </v-card-text>
+            <v-card-text class="text-center">
+              <p class="card-description mb-5">{{ $t('slide_description_3') }}</p>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
 
-  <div class="wave-img">
-    <div>
-      <v-container >
-        <div class="slide-section">
-          <v-row justify="center">
-            <v-col col="12" md="12" sm="12">
-              <v-card
-                class="mx-auto my-12 card-radius">
-                  <VueSlickCarousel class="custom-padding slick-dots" v-bind="settings">
-                    <div class="" v-for="item in banners">
-                      <img class="image-slider img-fluid " :src="item" />
-                    </div>
-                  </VueSlickCarousel>
-                <v-card-title class="card-heading display mb-5 mt-5">{{ $t('slide_heading') }}</v-card-title>
-                <v-card-text  class="text-center ">
-                  <p class="card-description">{{ $t('slide_description_1') }}</p>
-                </v-card-text>
-                <v-card-text class="text-center">
-                  <p class="card-description">{{ $t('slide_description_2') }}</p>
-                </v-card-text>
-                <v-card-text class="text-center">
-                  <p class="card-description mb-5">{{ $t('slide_description_3') }}</p>
-                </v-card-text>
-              </v-card>
-            </v-col>
-          </v-row>
-
-        </div>
-      </v-container>
     </div>
-  </div>
-
+  </v-container>
 </template>
 
 <script>
@@ -90,8 +84,6 @@ export default {
   @media (max-width: 767px) {
     padding: 0;
   }
-
-  //Parallax effect on row
 }
 .slide-card{
   border-radius: 15px;
@@ -112,15 +104,6 @@ export default {
   font-weight: $font-weight-600;
   font-size:  $font-size-40;
   text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
-  //margin: 0 100px 0 100px;
-
-
-  //@media  (max-width: 425px)  {
-  //  margin-right: auto;
-  //  margin-left: auto;
-  //  position: relative;
-  //}
-
 }
 .card-description{
   color: $black;

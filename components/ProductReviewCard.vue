@@ -1,33 +1,18 @@
 <template>
   <div class="card-section mb-3">
-    <nuxt-link :to="`/watch-learn/${item.slug}`" >
+    <nuxt-link :to="`/product-reviews/${item.slug}`" >
       <div  class="bg-img-height" :style="`background-image: url(${item.thumbnail_full_path})`">
       </div>
     </nuxt-link>
-    <div class="card-category" @click="$router.push(`/watch-learn/${item.slug}`)">
+    <div class="card-category" @click="$router.push(`/product-reviews/${item.slug}`)">
       <h2 class="mb-2 mt-2">{{item.title}}</h2>
       <div class="mb-3" v-if="item.categories">
-        <span class="category-title"  v-for="category in item.categories"> {{category.category.name }}</span>
+           <span class="category-title" v-for="(cat,i) in item.categories" :key="i"> {{cat.category.name}}
+          <span v-if="i !== item.categories.length-1"> | </span>
+        </span>
       </div>
     </div>
   </div>
-<!--  <div class="watch_and_learn_section">-->
-<!--    <nuxt-link :to="`/product-reviews/${item.slug}`" >-->
-<!--      <div  class="bg-img-height" :style="`background-image: url(${item.thumbnail_thumb_full_path})`">-->
-<!--      </div>-->
-<!--    </nuxt-link>-->
-<!--&lt;!&ndash;      <v-img&ndash;&gt;-->
-<!--&lt;!&ndash;        class="img-fluid card-img"&ndash;&gt;-->
-<!--&lt;!&ndash;        :src="item.thumbnail_thumb_full_path"&ndash;&gt;-->
-<!--&lt;!&ndash;      ></v-img>&ndash;&gt;-->
-<!--    <v-card  class="card-radius card-custom-height card-padding" >-->
-<!--      <v-card-title class="card-heading">{{ item.title}}</v-card-title>-->
-<!--      <v-card-text v-if="item.categories" v-for="category in item.categories">-->
-<!--        <p class="card-description card-des">{{category.category.name }}-->
-<!--        </p>-->
-<!--      </v-card-text>-->
-<!--    </v-card>-->
-<!--  </div>-->
 </template>
 
 <script>
@@ -51,9 +36,6 @@ export default {
     box-shadow: -5px 10px 10px 0px $text-shadow-primary;
   }
 }
-//.card-custom-height{
-//  min-height: 280px;
-//}
 .card-padding{
   padding: 24px;
   @media (max-width: 767px) {

@@ -1,8 +1,7 @@
 <template>
 <div class="grey-section">
   <div class="custom-container" >
-<!--    <div data-aos="fade-up" data-aos-easing="linear" data-aos-duration="2500">-->
-    <div >
+    <div>
       <div class="text-center">
         <img  class="img-fluid img-height" src="/images/Pet-Pro-Finder-Collars.png" alt="logo">
       </div>

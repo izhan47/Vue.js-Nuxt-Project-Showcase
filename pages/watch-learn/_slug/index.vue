@@ -16,10 +16,10 @@
         </div>
       </v-col>
       <v-col cols="12" md="9" sm="12">
-        <div class="tag">
-          <v-icon color="#00afaa">mdi-tag</v-icon>
-          <span>Play Time and Enrichment</span>
-        </div>
+<!--        <div class="tag">-->
+<!--          <v-icon color="#00afaa">mdi-tag</v-icon>-->
+<!--          <span>Play Time and Enrichment</span>-->
+<!--        </div>-->
         <div class="heading mt-2">
           <h1>{{categoryData.title }} </h1>
         </div>
@@ -35,25 +35,48 @@
             <v-icon left dark>mdi-linkedin</v-icon>
             {{ $t('linkedin')}}
           </v-btn>
-<!--        <div v-html="categoryData.description"></div>-->
-        <p class="description space mt-5">Most dogs love physical activity, and exercise is just as important for their mental and physical health as it is for ours. Staying active will help your dog live a longer, happier life and prevent obesity, which is a common issue for dogs. Not only that but
-         <b>dogs who are bored and don’t get enough exercise often develop behavior issues. </b>
-          Here’s a look at some fun exercises and activities to keep your pup fit and how to know if he’s getting enough exercise each day.</p>
+        <div v-html="categoryData.description"></div>
+<!--        <p class="description space mt-5">Most dogs love physical activity, and exercise is just as important for their mental and physical health as it is for ours. Staying active will help your dog live a longer, happier life and prevent obesity, which is a common issue for dogs. Not only that but-->
+<!--         <b>dogs who are bored and don’t get enough exercise often develop behavior issues. </b>-->
+<!--          Here’s a look at some fun exercises and activities to keep your pup fit and how to know if he’s getting enough exercise each day.</p>-->
 
-        <h2 class="img-heading mb-4">Ways to Keep Your Dog Fit:</h2>
-        <img class="img-fluid" src="/images/WatchLearn/dog-water.jpeg" alt="">
-        <p class="description space">Taking your dog for an evening walk is a great place to start, and that might be all your dog needs if he’s a senior with lower exercise needs. But keep in mind that even the most dedicated couch potato will appreciate some variety every now and then! Here are some fun exercises and activities to incorporate into your pup’s regular routine.</p>
+<!--        <h2 class="img-heading mb-4">Ways to Keep Your Dog Fit:</h2>-->
+<!--        <img class="img-fluid" src="/images/WatchLearn/dog-water.jpeg" alt="">-->
+<!--        <p class="description space">Taking your dog for an evening walk is a great place to start, and that might be all your dog needs if he’s a senior with lower exercise needs. But keep in mind that even the most dedicated couch potato will appreciate some variety every now and then! Here are some fun exercises and activities to incorporate into your pup’s regular routine.</p>-->
 
-        <h3 class="heading-description">Cycling</h3>
-        <p class="description space">Cycling is a fun way to <b class="green-description">exercise with your dog</b>, especially if you have a bike path nearby where you can get away from dangerous traffic. Puppies shouldn’t run until their joints are developed, but many adult dogs will love to run alongside their owners while they ride, especially if they’re high energy. Of course, if your dog is a senior or has joint issues, this probably isn’t the activity for him.</p>
+<!--        <h3 class="heading-description">Cycling</h3>-->
+<!--        <p class="description space">Cycling is a fun way to <b class="green-description">exercise with your dog</b>, especially if you have a bike path nearby where you can get away from dangerous traffic. Puppies shouldn’t run until their joints are developed, but many adult dogs will love to run alongside their owners while they ride, especially if they’re high energy. Of course, if your dog is a senior or has joint issues, this probably isn’t the activity for him.</p>-->
 
-        <h3 class="heading-description">Swimming</h3>
-        <p class="description space">If there’s one thing many dogs love more than going for a walk, it’s swimming. Dogs love the water and it’s a fantastic way to burn off some of that pent-up energy when the weather is hot. It’s also a low impact, so it’s safe for dogs with joint issues. A doggie life vest eliminates any worry of your dog staying afloat if you’re not sure about his swimming abilities.</p>
+<!--        <h3 class="heading-description">Swimming</h3>-->
+<!--        <p class="description space">If there’s one thing many dogs love more than going for a walk, it’s swimming. Dogs love the water and it’s a fantastic way to burn off some of that pent-up energy when the weather is hot. It’s also a low impact, so it’s safe for dogs with joint issues. A doggie life vest eliminates any worry of your dog staying afloat if you’re not sure about his swimming abilities.</p>-->
 
-        <hr class="dot-line">
-
+<!--        <hr class="dot-line">-->
+        <!-- Comment Section -->
         <div class="comment-section">
           <h2 class="comment-section-heading text-center space">{{ $t('comments')}}</h2>
+          <div class="reviews-details-block" v-if="commentData.length">
+            <div class="reviews-details-list-main" v-for="comment in commentData ">
+              <div class="clearfix">
+                <div class="reviews-use-pic">
+                  <v-img v-if="comment.user && comment.user.profile_image_thumb_full_path"  :src="comment.user.profile_image_thumb_full_path"></v-img>
+                  <img v-else src="/images/placeholder.png" alt="">
+                </div>
+              </div>
+              <div class="reviews-details">
+                <div  v-if="userDetail && userDetail.id === comment.user.id" class="delete-icon" @click="deleteComment(comment.id)">
+                  <v-icon>mdi-delete</v-icon>
+                </div>
+                <div class="reviews-star-details">
+                  <p class=" rate-text user-name">{{comment.name}}</p>
+                  <p class="date-text">{{comment.formated_created_at}}</p>
+                </div>
+                <p class="comments-text">{{ comment.message }}</p>
+
+              </div>
+            </div>
+          </div>
+          <div v-else class="reviews-details-block custom-container text-center">{{$t('no_comments_found')}}</div>
+          <!-- Add a Comment Section -->
           <h2 class="comment-section-heading text-center mb-5">{{ $t('leave_a_comment')}}</h2>
           <v-textarea
             outlined
@@ -63,8 +86,7 @@
             required
           ></v-textarea>
           <div class="text-center">
-            <v-btn large class=" submit-btn" outlined rounded @click="submit"> {{ $t('submit') }}</v-btn>
-
+            <v-btn large class=" submit-btn" outlined rounded @click="submitReview"> {{ $t('submit') }}</v-btn>
           </div>
         </div>
 
@@ -97,12 +119,13 @@ export default {
   data(){
     return{
       form:{
-        comment:'',
-        parent_comment_id:'',
+        message:'',
+        parent_comment_id:0,
         slug:''
       },
 
       categoryData:'',
+      commentData:'',
       cards:[
         {
           src:"/images/WatchLearn/pic-2.jpg",
@@ -134,30 +157,59 @@ export default {
   },
   created() {
     this.getCategoryDetail()
+    this.getComments()
+    this.userDetail=this.$store.state.user.user
   },
   methods:{
-    getCategoryDetail(){
-      this.$store.dispatch('singleCategoryDetail',this.URL).then( response => {
-        this.categoryData = response.data.data.watch_and_learn
-        this.$store.commit('SHOW_LOADER', false)
-      })
-    },
-    submit(){
-      if (!this.$store.state.user.isAuthenticated) {
-        this.$store.commit('SET_CURRENT_PATH',this.$route.path)
-        return this.$router.push('/auth/Login')
-      }else {
-        let loader=true
-        this.$store.commit('SHOW_LOADER', loader)
-        this.form.slug=this.categoryData.slug
-        this.form.parent_comment_id=this.categoryData.id
-        this.$store.dispatch('comment',this.form).then(response => {
-          this.$store.commit('SHOW_LOADER', loader=false)
-          this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message
+     async getCategoryDetail(){
+         await this.$store.dispatch('singleCategoryDetail',this.URL).then( response => {
+            this.categoryData = response.data.data.watch_and_learn
+            this.$store.commit('SHOW_LOADER', false)
           })
-        })
-      }
-    }
+        },
+     async submitReview(){
+          if (!this.$store.state.user.isAuthenticated) {
+            this.$store.commit('SET_CURRENT_PATH',this.$route.path)
+            return this.$router.push('/auth/Login')
+          }else {
+            let loader=true
+            this.$store.commit('SHOW_LOADER', loader)
+            this.form.slug=this.categoryData.slug
+            // this.form.parent_comment_id=this.categoryData.id
+            await this.$store.dispatch('comment',this.form).then(response => {
+              this.$store.commit('SHOW_LOADER', loader=false)
+              this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message
+              })
+            })
+            this.form.message=''
+            await this.getComments();
+          }
+        },
+     async getComments(){
+       await this.$store.dispatch('getComment',this.URL).then( response => {
+            this.commentData=response.data.data.comments
+            this.$store.commit('SHOW_LOADER', false)
+          })
+     },
+     async deleteComment(id){
+       if (!this.$store.state.user.isAuthenticated) {
+         this.$store.commit('SET_CURRENT_PATH',this.$route.path)
+         return this.$router.push('/auth/Login')
+       }
+       else {
+         let data = {
+           slug: this.URL,
+           id: id
+         }
+         this.$store.commit('SHOW_LOADER', true)
+         await this.$store.dispatch('deleteComment', data).then(response => {
+           this.$store.commit('SHOW_LOADER', false)
+           this.$store.commit('SHOW_SNACKBAR', {snackbar: true, color: 'green', message: response.data.message})
+          this.getComments()
+         })
+       }
+
+        }
   }
 }
 </script>
@@ -195,7 +247,7 @@ export default {
     font-family: $font-family-primary;
     font-weight:$font-weight-600;
     font-size: $font-size-18;
-    text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
+    text-shadow: -3px 2px 5px $text-shadow-primary;
     text-transform: $text-transform-capitalize;
     margin-bottom: 15px;
   }
@@ -221,7 +273,7 @@ export default {
   h1{
     font-size: $font-size-40;
     font-weight:$font-weight-600;
-    text-shadow: -3px 2px 5px rgb(0 0 0 / 9%);
+    text-shadow: -3px 2px 5px $text-shadow-primary;
   }
 }
 .social-btn::v-deep .v-btn__content{
@@ -239,13 +291,13 @@ export default {
   font-family: $font-family-primary;
   font-weight: $font-weight-300;
   font-size: $font-size-30;
-  text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.09);
+  text-shadow: -3px 2px 5px $text-shadow-primary;
 }
 .heading-description{
   color: $purple;
   font-size: 1.5625rem;
   font-weight: $font-weight-500;
-  text-shadow: -3px 2px 5px rgb(0 0 0 / 9%);
+  text-shadow: -3px 2px 5px $text-shadow-primary;
   line-height: 1.4;
 }
 .green-description{
@@ -279,11 +331,6 @@ export default {
   border-style: solid;
   border-width: 2px 2px 2px 2px;
 }
-
-
-
-
-
 /* Dotted red border */
 hr.dot-line {
   border-top: 1px dotted $black;
@@ -293,7 +340,7 @@ hr.dot-line {
   font-family: $font-family-primary;
   font-size: $font-size-50;
   font-weight:$font-weight-600;
-  text-shadow: -3px 2px 5px rgb(0 0 0 / 9%);
+  text-shadow: -3px 2px 5px $text-shadow-primary;
   text-transform: $text-transform-capitalize;
   color: $purple;
   margin-top: 6rem;
@@ -302,7 +349,7 @@ hr.dot-line {
 .watch-learn-detail-section{
   .card-radius{
     border-radius: 15px;
-    box-shadow: -5px 10px 10px 0px rgb(0 0 0 / 9%);
+    box-shadow: -5px 10px 10px 0px $text-shadow-primary;
   }
 }
 .card-custom-height{

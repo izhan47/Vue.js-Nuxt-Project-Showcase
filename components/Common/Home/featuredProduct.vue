@@ -57,7 +57,7 @@ export default {
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
 .product-section{
-  background-color: #F6FEFF;
+  background-color: $azure;
   @media (min-width: 320px)  and (max-width: 600px)  {
     padding: 30px;
   }

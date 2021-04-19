@@ -66,13 +66,11 @@ data(){
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
 .pusher-section{
-  //max-width: 1400px;
   padding: 0  0 100px 0;
   color:  $white;
   margin-right: auto;
   margin-left: auto;
   position: relative;
-  //Parallax effect on row
 }
 .pusher-section-heading{
   text-align: center;
@@ -80,7 +78,6 @@ data(){
 .card{
   color: $white;
   padding: 30px;
-  //margin: 0 15px 0 15px;
   text-shadow: 0 10px 20px $text-shadow-secondary;
   border-radius: 10px;
   height: 100%;

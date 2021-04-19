@@ -7,16 +7,16 @@
           </v-col>
           <v-col cols="12" md="5" sm="12" class="bd-img-container">
             <div class="title-card">
-              <span class="chip-title white-text" v-for="cat in petDetail.categories"> {{cat.name}} |</span>
+               <span class="chip-title white-text" v-for="(cat,c) in petDetail.categories" :key="c"> {{cat.name}}
+                  <span v-if="i !== petDetail.categories.length-1"> | </span>
+               </span>
               <div class="love-section">
                 <h2>{{petDetail.store_name}}</h2>
                 <div class="mt-8">
                   <img v-if="is_liked===0" class="heart-img" src="/images/gray-love.svg" alt="" @click="like">
                   <img v-else class="heart-img" src="/images/pink-love.svg" alt="" @click="like">
                 </div>
-
               </div>
-
             </div>
             <div class="bg-img-section">
             </div>
@@ -28,10 +28,14 @@
               <div class="bg-category-img">
               </div>
               <div class="bg-category-section">
-                <img v-for="img in petDetail.images" class="img-fluid category-img ml-3" :src="img.image_small_thumb_full_path" alt="">
-                <v-rating class="mt-5 mb-5 "
-                          :value="petDetail.avg_rating" :length="petDetail.avg_rating" background-color="#00afaa" color="#00afaa" dense readonly size="30"
-                ></v-rating>
+                <img v-for="(img,i) in petDetail.images" :key="i" class="img-fluid category-img ml-3" :src="img.image_small_thumb_full_path" alt="">
+                <div class="product-rating">
+                  <v-rating class="mt-5 mb-5 " :value="4" length="1"
+                            background-color="#00afaa" color="#00afaa" dense readonly size="30"
+                  ></v-rating>
+                  <span class="product-rating-child">{{petDetail.avg_rating}}</span>
+                </div>
+
                 <div class="category-section-container">
                   <p class="description  space">{{petDetail.description}}</p>
                 </div>
@@ -41,7 +45,7 @@
               <hr class="dot-line space">
               <div class="space display-section">
                 <p class="share-tag">{{ $t('share')}} :</p>
-                <div v-for="(item,i) in social"  class="social ml-2">
+                <div v-for="(item,i) in social" :key="i"  class="social ml-2">
                   <v-icon color="#332e80" size="15" class="ml-2">{{item.icon}}</v-icon>
                   <span > {{item.title}}</span>
                 </div>
@@ -55,7 +59,7 @@
                 </div>
                 <hr class="dot-line space">
                 <div v-if="petDetail.deals.length" >
-                <v-card class="card-radius space"   v-for="deal in petDetail.deals">
+                <v-card class="card-radius space"   v-for="(deal,d) in petDetail.deals" :key="d" >
                   <div class="custom-card-align">
                     <v-btn icon class="card-inner-icon">
                       <v-icon  color="#332e80" size="50">mdi-percent-outline</v-icon>
@@ -120,7 +124,7 @@
                 <hr class="dot-line space">
                 <div v-if="petDetail.events.length">
                 <v-card class="card-radius space" >
-                  <div class="custom-card-align" v-for="event in petDetail.events">
+                  <div class="custom-card-align" v-for="(event,e) in petDetail.events" :key="e">
                     <v-btn icon class="card-inner-icon">
                       <v-icon  color="#332e80" size="50">mdi-percent-outline</v-icon>
                     </v-btn>
@@ -147,20 +151,20 @@
                   <h2 class="pl-1">{{$t('reviews')}}</h2>
                 </div>
                 <hr class="dot-line space">
-                <div class="reviews-block">
-                  <div class=" pb-8">
+                <v-row class="reviews-block">
+                  <v-col cols="12" md="3" sm="12" class="">
                     <div class="reviews-section">
                       <v-icon  color="white" size="40">mdi-star</v-icon>
                       <span class="rating">{{petDetail.avg_rating}}</span>
                       <p class="count-review">{{reviews_count}}</p>
                     </div>
-                  </div>
-                  <div class="reviews-comment-section">
+                  </v-col>
+                  <v-col cols="12" md="9" sm="12" class="reviews-comment-section" v-if="$store.state.user.isAuthenticated">
                     <v-form   ref="form">
                       <div class="mb-4">
                         <div class=" reviews-icon">
-                            <div class="" v-if="$store.state.user.user">
-                              <input name="name" v-model="$store.state.user.user.name" placeholder="Name" disabled="" type="text" autocomplete="off" class="review-message" value="">
+                            <div class="name-title" v-if="userDetail">
+                              <input name="name" v-model="userDetail.name" placeholder="Name" disabled="" type="text" autocomplete="off" class="review-message" value="">
                             </div>
                             <div class="review-rating">
                               <v-rating
@@ -193,8 +197,11 @@
                         <v-btn rounded x-large color="#332e80" class="review-submit-btn" @click="submitReview">{{$t('submit')}}</v-btn>
                       </div>
                     </v-form>
-                  </div>
-                </div>
+                  </v-col>
+                  <nuxt-link v-else  to="/auth/login" class="unset-underline custom-container">
+                  <v-btn rounded   class=" card-btn white-text"> {{$t('review_error')}}</v-btn>
+                  </nuxt-link>
+                </v-row>
               </div>
 
 
@@ -202,10 +209,13 @@
               <div class="reviews-details-block" v-if="reviewDetail.length">
                 <div class="reviews-details-list-main" v-for="review in reviewDetail ">
                   <div class="clearfix">
-                    <div class="reviews-use-pic"><img src="/images/placeholder.png" alt="Muhammad Izhan"></div>
+                    <div class="reviews-use-pic">
+                      <v-img v-if="review.user && review.user.profile_image_thumb_full_path"  :src="review.user.profile_image_thumb_full_path"></v-img>
+                      <img v-else src="/images/placeholder.png" alt="">
+                    </div>
                   </div>
                   <div class="reviews-details">
-                    <div class="delete-icon" @click="deleteReview(review.id)">
+                    <div  v-if="userDetail && userDetail.id === review.user.id" class="delete-icon" @click="deleteReview(review.id)">
                       <v-icon>mdi-delete</v-icon>
                     </div>
                     <div class="reviews-star-details">
@@ -218,6 +228,7 @@
                   </div>
                 </div>
               </div>
+              <div v-else class="reviews-details-block custom-container text-center">{{$t('no_reviews_found')}}</div>
 
             </div>
           </v-col>
@@ -246,8 +257,8 @@
               </div>
               <div class="service-section mb-10" v-if="petDetail.services_offered.length">
                 <h2 class="mb-6">{{$t('services_offered')}}</h2>
-                <ul class="service-list" v-for="cat in petDetail.services_offered">
-                  <li >{{cat.service}}</li>
+                <ul class="service-list" v-for="(service,s) in petDetail.services_offered" :key="s">
+                  <li >{{service.service}}</li>
                 </ul>
               </div>
               <div class="mb-10">
@@ -269,7 +280,7 @@
               </div>
               <div class="operation-section">
                 <h2>{{$t('hours_of_operation')}}</h2>
-                <div v-for="time in petDetail.timetable" class="mb-2">
+                <div v-for="(time,t) in petDetail.timetable" :key="t" class="mb-2">
                   <span>{{time.day}}</span>
                   <span class="separator"></span>
                   <span v-if="time.open || time.close">{{time.open}}-{{time.close}}</span>
@@ -361,6 +372,7 @@ export default {
   created() {
     this.getPetDetail()
     this.getReviews()
+    this.userDetail=this.$store.state.user.user
   },
   methods:{
     getPetDetail(){
@@ -370,7 +382,6 @@ export default {
         let res=response.data.data
         this.is_liked=res.is_liked
         this.petDetail = res.per_pro
-        console.log('sads',this.petDetail)
       })
     },
    async like(){
@@ -434,7 +445,6 @@ export default {
        if(this.$refs.form.validate()) {
          this.$store.commit('SHOW_LOADER', loader)
          await this.$store.dispatch('review',data).then(response => {
-           console.log('resss',response)
            this.$store.commit('SHOW_LOADER', loader=false)
            this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message})
            data.form.rate=0
@@ -452,21 +462,25 @@ export default {
        this.reviews_count=response.data.data.reviews_count
        this.reviewDetail=response.data.data.pet_pro_reviews
 
-       console.log('review list', this.reviewDetail)
      })
    },
    async deleteReview(id){
-     let data={
-       slug: this.petDetail.slug,
-       id: id
+     if (!this.$store.state.user.isAuthenticated) {
+       this.$store.commit('SET_CURRENT_PATH',this.$route.path)
+       return this.$router.push('/auth/Login')
      }
-     this.$store.commit('SHOW_LOADER', true)
-     await this.$store.dispatch('deleteReview',data).then( response => {
-       this.$store.commit('SHOW_LOADER', false)
-       this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message})
-       this.getReviews()
-
-     })
+     else {
+       let data = {
+         slug: this.petDetail.slug,
+         id: id
+       }
+       this.$store.commit('SHOW_LOADER', true)
+       await this.$store.dispatch('deleteReview', data).then(response => {
+         this.$store.commit('SHOW_LOADER', false)
+         this.$store.commit('SHOW_SNACKBAR', {snackbar: true, color: 'green', message: response.data.message})
+         this.getReviews()
+       })
+     }
    }
 
   }
@@ -578,6 +592,14 @@ export default {
   max-height: 230px;
   border-radius: 10px;
 }
+.product-rating{
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.product-rating-child{
+  margin: 27px 0;
+}
 .category-section-container{
   max-width: 965px;
 }
@@ -589,6 +611,7 @@ export default {
   text-decoration: none;
   line-height: 35px;
   letter-spacing: 0;
+  font-weight: $font-weight-400;
 }
 .social-category-section{
   max-width: 965px;
@@ -811,7 +834,7 @@ hr.dot-line {
       color: $purple;
       font-family: $font-family-primary;
       font-size: $font-size-18;
-      font-weight: $font-weight-600;
+      font-weight: $font-weight-400;
 
     }
   }
@@ -874,10 +897,6 @@ hr.dot-line {
   padding: 10px;
 
 }
-.reviews-block{
-  display: flex;
-  width: 100%;
-}
 .reviews-section{
   background:  $purple;
   border-radius: 8px;
@@ -887,7 +906,7 @@ hr.dot-line {
   align-items: center;
   padding: 15px;
   min-width: 150px;
-  margin-right: 15px;
+
 }
 .rating{
   font-size: $font-size-50;
@@ -910,13 +929,25 @@ hr.dot-line {
   align-items: center;
   display: flex;
   justify-content: space-between;
+  @media (max-width: 767px){
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
 }
 .review-rating{
-  display: inline-flex;
+  //display: inline-flex;
   justify-content: space-between;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.name-title{
   width: 100%;
 }
 .review-message{
+  width: 100%;
   font-size: $font-size-14;
   color: $dark-charcoal;
   font-family: $font-family-primary;
@@ -948,63 +979,5 @@ hr.dot-line {
 }
 
 
-.reviews-details-block{
-  margin: 35px 0;
-}
-.reviews-details-list-main{
-  padding: 25px;
-  background: $cultured;
-  display: flex;
-  border-radius: 10px;
-  margin-bottom: 25px;
-}
-.reviews-use-pic{
-  width: 80px;
-  height: 80px;
-  overflow: hidden;
-  border-radius: 1000px;
-}
-.reviews-details{
-  flex: 1;
-  margin-left: 20px;
-}
-.reviews-star-details{
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding-top: 5px;
-}
-.delete-icon{
-  display: flex;
-  justify-content: flex-end;
-  cursor: pointer;
-}
-.rate-text{
-  font-size: 36px;
-  color: $dark-charcoal;
-  font-family: $font-family-primary;
-  font-weight: $font-weight-normal;
-}
-.date-text{
-  font-size:$font-size-14;
-  font-family: $font-family-primary;
-  font-weight: $font-weight-normal;
-  color: rgba(51,51,51,0.5);
-  line-height: 30px;
-}
-.comments-text{
-  padding: 15px 0 20px;
-  font-size:$font-size-16;
-  font-family: $font-family-primary;
-  font-weight: $font-weight-normal;
-  color: rgba(51,51,51,0.5);
-  line-height: 30px;
-}
-.user-name{
-  font-size:$font-size-16;
-  font-family: $font-family-primary;
-  font-weight: $font-weight-normal;
-  color: $dark-charcoal;
-  display: inline-block;
-}
+
 </style>
