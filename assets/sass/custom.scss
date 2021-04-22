@@ -380,9 +380,11 @@
 .reviews-details-list-main{
   padding: 25px;
   background: $cultured;
-  display: flex;
   border-radius: 10px;
   margin-bottom: 25px;
+}
+.reviews-details-list{
+  display: flex;
 }
 .reviews-use-pic{
   width: 80px;
@@ -432,4 +434,8 @@
   font-weight: $font-weight-normal;
   color: $dark-charcoal;
   display: inline-block;
+}
+
+.reply-comment{
+  cursor: pointer;
 }

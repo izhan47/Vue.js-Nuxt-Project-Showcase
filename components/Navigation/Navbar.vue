@@ -70,7 +70,7 @@
               </div>
               <nuxt-link class="nav-title unset-underline ml-4" to="/watch-learn">{{$t('pet_care_advice')}}</nuxt-link>
 
-              <nuxt-link class="nav-title unset-underline ml-4" to="/pet-category">{{$t('find_a_pet_pro')}}</nuxt-link>
+              <nuxt-link class="nav-title unset-underline ml-4" to="/pet-category">{{$t('find_a_pet_biz')}}</nuxt-link>
             </div>
             <div>
               <v-menu offset-y v-if="$store.state.user.isAuthenticated">
@@ -126,7 +126,7 @@ export default {
         },
         { title: this.$i18n.t('pet_care_advice'),
           to: '/watch-learn',},
-        { title: this.$i18n.t('find_a_pet_pro'),
+        { title: this.$i18n.t('find_a_pet_biz'),
           to: '/pet-category',},
       ],
       icons:[

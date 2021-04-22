@@ -40,8 +40,8 @@ export default {
   },
   data() {
     return {
-      banners: ["/images/About/Aly-with-dogs.png", "/images/About/slider-2.png", "/images/About/slider-3.png",
-        "/images/About/slider-4.png", "/images/About/slider-5.png"],
+      banners: ["/images/About/slider-1.jpg", "/images/About/slider-2.jpg", "/images/About/slider-3.jpg",
+        "/images/About/slider-4.jpg", "/images/About/slider-5.jpg"],
       settings: {
         arrows: false,
         dots: true,
@@ -87,7 +87,7 @@ export default {
 }
 .slide-card{
   border-radius: 15px;
-  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+  text-shadow: 0 10px 20px $text-shadow-secondary;
 }
 .image-slider{
   height: auto;

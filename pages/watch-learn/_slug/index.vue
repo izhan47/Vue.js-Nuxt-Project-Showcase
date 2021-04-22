@@ -53,27 +53,45 @@
 <!--        <hr class="dot-line">-->
         <!-- Comment Section -->
         <div class="comment-section">
+          <!-- Comments List -->
           <h2 class="comment-section-heading text-center space">{{ $t('comments')}}</h2>
           <div class="reviews-details-block" v-if="commentData.length">
-            <div class="reviews-details-list-main" v-for="comment in commentData ">
-              <div class="clearfix">
-                <div class="reviews-use-pic">
-                  <v-img v-if="comment.user && comment.user.profile_image_thumb_full_path"  :src="comment.user.profile_image_thumb_full_path"></v-img>
-                  <img v-else src="/images/placeholder.png" alt="">
+            <div v-for="(comment,c) in commentData" :key="c" class="reviews-details-list-main">
+              <div class="reviews-details-list" >
+                <div class="clearfix">
+                  <div class="reviews-use-pic space">
+                    <v-img v-if="comment.user && comment.user.profile_image_thumb_full_path"  :src="comment.user.profile_image_thumb_full_path"></v-img>
+                    <img v-else src="/images/placeholder.png" alt="">
+                  </div>
                 </div>
-              </div>
-              <div class="reviews-details">
-                <div  v-if="userDetail && userDetail.id === comment.user.id" class="delete-icon" @click="deleteComment(comment.id)">
-                  <v-icon>mdi-delete</v-icon>
-                </div>
-                <div class="reviews-star-details">
-                  <p class=" rate-text user-name">{{comment.name}}</p>
-                  <p class="date-text">{{comment.formated_created_at}}</p>
-                </div>
-                <p class="comments-text">{{ comment.message }}</p>
+                <div class="reviews-details">
+                  <div  v-if="userDetail && userDetail.id === comment.user.id" class="delete-icon" @click="deleteComment(comment.id)">
+                    <v-icon>mdi-delete</v-icon>
+                  </div>
+                  <div class="reviews-star-details">
+                    <p class=" rate-text user-name">{{comment.name}}</p>
+                    <p class="date-text">{{comment.formated_created_at}}</p>
+                  </div>
+                  <p class="comments-text">{{ comment.message }}</p>
 
+                </div>
               </div>
+
+<!--              <span class="reply-comment " @click="activeReply=!activeReply">{{$t('reply')}}</span>-->
+<!--              <div class="mt-4" v-if="activeReply===true">-->
+<!--                <v-textarea-->
+<!--                  outlined-->
+<!--                  name="input-7-4"-->
+<!--                  label="Message"-->
+<!--                  v-model="message"-->
+<!--                  required-->
+<!--                ></v-textarea>-->
+<!--                <div class="text-center">-->
+<!--                  <v-btn large class=" submit-btn" outlined rounded @click="replyComment"> {{ $t('reply') }}</v-btn>-->
+<!--                </div>-->
+<!--              </div>-->
             </div>
+
           </div>
           <div v-else class="reviews-details-block custom-container text-center">{{$t('no_comments_found')}}</div>
           <!-- Add a Comment Section -->
@@ -123,7 +141,7 @@ export default {
         parent_comment_id:0,
         slug:''
       },
-
+      activeReply:false,
       categoryData:'',
       commentData:'',
       cards:[

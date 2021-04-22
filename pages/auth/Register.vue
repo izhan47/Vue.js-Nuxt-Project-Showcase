@@ -8,10 +8,10 @@
               <div class="left-section">
                 <img class="logo img-fluid"  src="/images/WagEnabledLogo.jpg" alt="logo" />
                 <div class="mb-5 mt-10">
-                  <h2 class="heading">{{$t('welcome')}}</h2>
+                  <h2 class="heading">{{$t('sing_up_heading')}}</h2>
                 </div>
                 <div class="mt-10">
-                  <p class="description">{{$t('lorem_ipsum')}}</p>
+                  <p class="description">{{$t('sing_up_subheading')}}</p>
                 </div>
               </div>
             </div>
@@ -186,7 +186,7 @@ name: "Register.vue",
 }
 .heading{
   color: $white;
-  font-size: $font-size-67;
+  font-size: $font-size-45;
   @media (max-width:767px) {
     font-size: 51px;
   }

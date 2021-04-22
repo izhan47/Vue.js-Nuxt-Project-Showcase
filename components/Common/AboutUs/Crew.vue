@@ -41,13 +41,13 @@ data(){
         description: 'Hi there! I’m Aly, the head person behind Wag Enabled. We needed a human to sign things after all. My approach to pet care emphasizes connecting through trust and love, not fear and intimidation.',
     },
       {
-        src: '/images/About/Dog-About-1.jpg',
+        src: '/images/About/Truffle.jpg',
         title: 'TRUFFLE',
         sub_title:'SENIOR PRODUCT TESTER' ,
         description: 'No product enters Wag Enabled without the “Truffle Test.” He sniffs, tastes, tugs, and snuggles to guarantee that only the top toys, nibbles, and supplies join our roster. He takes his job seriously and has been known to put in overtime for treat trials.',
       },
       {
-        src: '/images/About/Dog-About-2.jpg',
+        src: '/images/About/Bean.jpg',
         title: 'BEAN',
         sub_title:'JUNIOR TROUBLE MAKER' ,
         description: 'Bean ensures that all businesses we work with value patience. As resident mischief finder, he requires extra doses of love and care, especially when his wild ways wreak havoc on our office. We trust those who know how to handle his spirit — and do so in a kind and constructive manner.',

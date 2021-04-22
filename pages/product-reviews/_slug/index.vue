@@ -53,7 +53,7 @@ export default {
     return{
       form:{
         comment:'',
-        parent_comment_id:'',
+        parent_comment_id:0,
         slug:''
       },
       categoryData:'',
@@ -85,7 +85,7 @@ export default {
         let loader=true
         this.$store.commit('SHOW_LOADER', loader)
         this.form.slug=this.categoryData.slug
-        this.form.parent_comment_id=this.categoryData.id
+        // this.form.parent_comment_id=this.categoryData.id
         this.$store.dispatch('comment',this.form).then(response => {
           this.$store.commit('SHOW_LOADER', loader=false)
           this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message
