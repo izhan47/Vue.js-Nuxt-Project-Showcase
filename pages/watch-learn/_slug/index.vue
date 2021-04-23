@@ -36,78 +36,87 @@
             {{ $t('linkedin')}}
           </v-btn>
         <div v-html="categoryData.description"></div>
-<!--        <p class="description space mt-5">Most dogs love physical activity, and exercise is just as important for their mental and physical health as it is for ours. Staying active will help your dog live a longer, happier life and prevent obesity, which is a common issue for dogs. Not only that but-->
-<!--         <b>dogs who are bored and don’t get enough exercise often develop behavior issues. </b>-->
-<!--          Here’s a look at some fun exercises and activities to keep your pup fit and how to know if he’s getting enough exercise each day.</p>-->
-
-<!--        <h2 class="img-heading mb-4">Ways to Keep Your Dog Fit:</h2>-->
-<!--        <img class="img-fluid" src="/images/WatchLearn/dog-water.jpeg" alt="">-->
-<!--        <p class="description space">Taking your dog for an evening walk is a great place to start, and that might be all your dog needs if he’s a senior with lower exercise needs. But keep in mind that even the most dedicated couch potato will appreciate some variety every now and then! Here are some fun exercises and activities to incorporate into your pup’s regular routine.</p>-->
-
-<!--        <h3 class="heading-description">Cycling</h3>-->
-<!--        <p class="description space">Cycling is a fun way to <b class="green-description">exercise with your dog</b>, especially if you have a bike path nearby where you can get away from dangerous traffic. Puppies shouldn’t run until their joints are developed, but many adult dogs will love to run alongside their owners while they ride, especially if they’re high energy. Of course, if your dog is a senior or has joint issues, this probably isn’t the activity for him.</p>-->
-
-<!--        <h3 class="heading-description">Swimming</h3>-->
-<!--        <p class="description space">If there’s one thing many dogs love more than going for a walk, it’s swimming. Dogs love the water and it’s a fantastic way to burn off some of that pent-up energy when the weather is hot. It’s also a low impact, so it’s safe for dogs with joint issues. A doggie life vest eliminates any worry of your dog staying afloat if you’re not sure about his swimming abilities.</p>-->
-
 <!--        <hr class="dot-line">-->
         <!-- Comment Section -->
         <div class="comment-section">
           <!-- Comments List -->
           <h2 class="comment-section-heading text-center space">{{ $t('comments')}}</h2>
           <div class="reviews-details-block" v-if="commentData.length">
-            <div v-for="(comment,c) in commentData" :key="c" class="reviews-details-list-main">
-              <div class="reviews-details-list" >
-                <div class="clearfix">
-                  <div class="reviews-use-pic space">
-                    <v-img v-if="comment.user && comment.user.profile_image_thumb_full_path"  :src="comment.user.profile_image_thumb_full_path"></v-img>
-                    <img v-else src="/images/placeholder.png" alt="">
+            <div v-for="(comment,index) in commentData" :key="index" >
+              <div class="reviews-details-list-main">
+                <div class="reviews-details-list" >
+                  <div class="clearfix">
+                    <div class="reviews-use-pic space">
+                      <v-img v-if="comment.user && comment.user.profile_image_thumb_full_path"  :src="comment.user.profile_image_thumb_full_path"></v-img>
+                      <img v-else src="/images/placeholder.png" alt="">
+                    </div>
+                  </div>
+                  <div class="reviews-details">
+                    <div  v-if="userDetail && userDetail.id === comment.user.id" class="delete-icon" @click="deleteComment(comment.id)">
+                      <v-icon>mdi-delete</v-icon>
+                    </div>
+                    <div class="reviews-star-details">
+                      <p class=" rate-text user-name">{{comment.name}}</p>
+                      <p class="date-text">{{comment.formated_created_at}}</p>
+                    </div>
+                    <p class="comments-text">{{ comment.message }}</p>
                   </div>
                 </div>
-                <div class="reviews-details">
-                  <div  v-if="userDetail && userDetail.id === comment.user.id" class="delete-icon" @click="deleteComment(comment.id)">
-                    <v-icon>mdi-delete</v-icon>
-                  </div>
-                  <div class="reviews-star-details">
-                    <p class=" rate-text user-name">{{comment.name}}</p>
-                    <p class="date-text">{{comment.formated_created_at}}</p>
-                  </div>
-                  <p class="comments-text">{{ comment.message }}</p>
+                <!-- add a reply comment  -->
+                <span class="reply-comment " @click="activeReply=!activeReply">{{$t('reply')}}</span>
+                <div class="mt-4" v-if="activeReply===true">
+                  <v-textarea outlined
+                    name="input-7-4"
+                    :label="$t('comment')" v-model="reply.message"  required :rules="rules.message"
+                    :ref="index"
 
+                  ></v-textarea>
+                  <div class="text-center">
+                    <v-btn large class="  submit-btn"  outlined rounded @click="replyComment(comment)"> {{ $t('reply') }}</v-btn>
+                  </div>
                 </div>
               </div>
+              <!--  reply comment List -->
+              <div v-if="comment.children && comment.children.length">
+                <div class="reviews-details-list-main custom-reply-ml"   v-for="item in comment.children" >
+                  <div class="reviews-details-list ">
+                    <div class="clearfix">
+                      <div class="reviews-use-pic space">
+                        <v-img v-if="item.user && item.user.profile_image_thumb_full_path"  :src="item.user.profile_image_thumb_full_path"></v-img>
+                        <img v-else src="/images/placeholder.png" alt="">
+                      </div>
+                    </div>
+                    <div class="reviews-details">
+                      <div class="reviews-star-details">
+                        <p class=" rate-text user-name">{{item.name}}</p>
+                        <p class="date-text">{{item.formated_created_at}}</p>
+                      </div>
+                      <p class="comments-text">{{ item.message }}</p>
+                    </div>
+                  </div>
+                </div>
 
-<!--              <span class="reply-comment " @click="activeReply=!activeReply">{{$t('reply')}}</span>-->
-<!--              <div class="mt-4" v-if="activeReply===true">-->
-<!--                <v-textarea-->
-<!--                  outlined-->
-<!--                  name="input-7-4"-->
-<!--                  label="Message"-->
-<!--                  v-model="message"-->
-<!--                  required-->
-<!--                ></v-textarea>-->
-<!--                <div class="text-center">-->
-<!--                  <v-btn large class=" submit-btn" outlined rounded @click="replyComment"> {{ $t('reply') }}</v-btn>-->
-<!--                </div>-->
-<!--              </div>-->
+              </div>
             </div>
-
           </div>
           <div v-else class="reviews-details-block custom-container text-center">{{$t('no_comments_found')}}</div>
           <!-- Add a Comment Section -->
           <h2 class="comment-section-heading text-center mb-5">{{ $t('leave_a_comment')}}</h2>
-          <v-textarea
-            outlined
-            name="input-7-4"
-            label="Message"
-            v-model="form.message"
-            required
-          ></v-textarea>
-          <div class="text-center">
-            <v-btn large class=" submit-btn" outlined rounded @click="submitReview"> {{ $t('submit') }}</v-btn>
-          </div>
+          <v-form ref="form">
+            <v-textarea
+              outlined
+              name="input-7-4"
+              :label="$t('comment')"
+              v-model="form.message"
+              :rules="rules.message"
+              required
+            ></v-textarea>
+            <div class="text-center">
+              <v-btn large class=" submit-btn" outlined rounded @click="submitComment"> {{ $t('submit') }}</v-btn>
+            </div>
+          </v-form>
         </div>
-
+        <!-- End Comment Section -->
 
       </v-col>
     </v-row>
@@ -141,28 +150,17 @@ export default {
         parent_comment_id:0,
         slug:''
       },
+      reply:{
+        message:'',
+        parent_comment_id:0,
+        slug:''
+      },
+      rules: {
+        message: [val => (val || '').length > 0 || 'This message field is required'],
+      },
       activeReply:false,
       categoryData:'',
       commentData:'',
-      cards:[
-        {
-          src:"/images/WatchLearn/pic-2.jpg",
-          name:"After Their Service",
-          description:"Pet Adoption",
-        },
-        {
-          src:"/images/WatchLearn/pic-1.jpg",
-          name:"Exercises and Activities to Keep Your Pup Fit",
-          description:"Play Time and Enrichment",
-        },
-        {
-          src:"/images/WatchLearn/pic-3.jpg",
-          name:"4 Steps to Take After Bringing Home Your New Pup",
-          description:"Pet Adoption",
-        },
-
-
-      ],
     }
   },
   computed:{
@@ -185,27 +183,32 @@ export default {
             this.$store.commit('SHOW_LOADER', false)
           })
         },
-     async submitReview(){
+     async submitComment(){
           if (!this.$store.state.user.isAuthenticated) {
             this.$store.commit('SET_CURRENT_PATH',this.$route.path)
             return this.$router.push('/auth/Login')
-          }else {
-            let loader=true
-            this.$store.commit('SHOW_LOADER', loader)
-            this.form.slug=this.categoryData.slug
-            // this.form.parent_comment_id=this.categoryData.id
-            await this.$store.dispatch('comment',this.form).then(response => {
-              this.$store.commit('SHOW_LOADER', loader=false)
-              this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message
+          }
+          else {
+            if(this.$refs.form.validate()) {
+              console.log('validate')
+              let loader=true
+              this.$store.commit('SHOW_LOADER', loader)
+              this.form.slug=this.categoryData.slug
+              // this.form.parent_comment_id=this.categoryData.id
+              await this.$store.dispatch('comment',this.form).then(response => {
+                this.$store.commit('SHOW_LOADER', loader=false)
+                this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message
+                })
               })
-            })
-            this.form.message=''
-            await this.getComments();
+
+              await this.getComments();
+            }
           }
         },
      async getComments(){
        await this.$store.dispatch('getComment',this.URL).then( response => {
             this.commentData=response.data.data.comments
+         console.log(this.commentData)
             this.$store.commit('SHOW_LOADER', false)
           })
      },
@@ -227,7 +230,32 @@ export default {
          })
        }
 
+        },
+     // activeTab(index){
+     //     console.log('index no',index)
+     //  },
+     async replyComment(comment){
+        if (!this.$store.state.user.isAuthenticated) {
+          this.$store.commit('SET_CURRENT_PATH',this.$route.path)
+          return this.$router.push('/auth/Login')
         }
+        else {
+            console.log('reply comment')
+            let loader = true
+            this.$store.commit('SHOW_LOADER', loader)
+            this.reply.slug = this.categoryData.slug
+            this.reply.parent_comment_id = comment.id
+            await this.$store.dispatch('comment', this.reply).then(response => {
+              this.$store.commit('SHOW_LOADER', loader = false)
+              this.$store.commit('SHOW_SNACKBAR', {
+                snackbar: true, color: 'green', message: response.data.message
+              })
+            })
+            this.activeReply=false
+            this.reply.message=''
+            await this.getComments();
+          }
+      }
   }
 }
 </script>

@@ -129,6 +129,7 @@ export default () => {
       },
       //Comment
       comment({commit}, data) {
+        console.log('re',data)
         return axios({
           method: 'POST',
           url: 'watch-and-learn/store-comment',

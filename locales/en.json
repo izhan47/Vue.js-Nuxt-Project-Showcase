@@ -185,5 +185,6 @@
   "claimed_deal": "Claimed Deal",
 
   "review_error": "Sign in to submit a review.",
-  "reply": "Reply"
+  "reply": "Reply",
+  "comment": "Comment"
 }

@@ -329,10 +329,11 @@
 .category-title{
   font-family:$font-family-primary;
   font-style: normal;
-  font-weight: normal;
+  //font-weight: normal;
   font-size: 14px;
   line-height: 19px;
   color: $primary_gray;
+  font-weight: $font-weight-600;
 }
 .cat-btn{
   //min-width: 130px;
@@ -387,8 +388,8 @@
   display: flex;
 }
 .reviews-use-pic{
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   overflow: hidden;
   border-radius: 1000px;
 }
@@ -435,7 +436,9 @@
   color: $dark-charcoal;
   display: inline-block;
 }
-
 .reply-comment{
   cursor: pointer;
+}
+.custom-reply-ml{
+  margin-left: 40px;
 }
