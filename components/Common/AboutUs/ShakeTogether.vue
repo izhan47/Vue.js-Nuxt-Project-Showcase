@@ -6,7 +6,7 @@
           <v-col cols="12" md="6" sm="6">
            <div class="custom-padding text-right">
              <img class="shake-img img-fluid "
-                    src="/images/About/Aly-dog.jpg" alt="logo"/>
+                    src="/images/About/Join_Us.jpg" alt="logo"/>
            </div>
           </v-col>
           <v-col cols="12" md="6" sm="6" class="shake-section">
@@ -52,7 +52,7 @@ export default {
   flex-wrap: wrap;
 }
 .custom-padding{
-  padding-top: 5rem;
+  padding-top: 2rem;
   padding-right: 2rem;
   @media (max-width: 767px  ) {
     padding-right: 0;

@@ -3,7 +3,7 @@
     <div class="bg-review-img">
       <div class="custom-container custom-padding" >
         <div class="text-center">
-          <h2 class="heading  line-height mb-8">{{ $t('pet_pro_around_you') }}</h2>
+          <h2 class="heading  line-height mb-8">{{ $t('only_the_best_for_your_pets') }}</h2>
         </div>
         <div class="space banner-description">
           <p>{{ $t('pet_pro_description') }}</p>

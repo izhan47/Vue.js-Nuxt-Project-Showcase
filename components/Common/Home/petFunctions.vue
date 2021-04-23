@@ -1,7 +1,7 @@
 <template>
 <div class="grey-section">
     <div class="custom-container custom-height custom-padding" id="animate">
-      <div class="function-heading space">
+      <div class="function-heading mb-5">
         <h2 class="heading text-center">
           {{ $t('for') }} {{ $t('pet_people') }}{{ $t('coma') }} {{ $t('by') }} {{ $t('pet_people') }}
         </h2>

@@ -6,7 +6,7 @@
           <h2 class="heading  line-height mb-8">{{ $t('best_pet_products') }}</h2>
         </div>
         <div class="space banner-description">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+          <p>{{$t('best_pet_products_description')}} </p>
         </div>
         <!--   Filter Section Start     -->
         <v-form class="search-form-filter" @submit.prevent="filterData">

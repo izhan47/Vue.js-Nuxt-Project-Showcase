@@ -135,7 +135,7 @@
 
                     </div>
                     <v-card-actions class="custom-card-padding">
-                      <v-btn   large class=" card-btn white-text" outlined rounded @click="getInfo(event.url)"> {{$t('info')}}</v-btn>
+                      <v-btn   large class=" card-btn white-text" outlined rounded   @click="getInfo(event.url)"> {{$t('info')}}</v-btn>
                     </v-card-actions>
                   </div>
                 </v-card>

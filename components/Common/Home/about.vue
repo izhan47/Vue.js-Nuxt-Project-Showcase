@@ -6,7 +6,7 @@
        <v-col cols="12" md="6" sm="12">
          <div>
            <img class="img-fluid"
-                src="/images/placeholder.png" alt="logo">
+                src="/images/home.jpg" alt="logo">
          </div>
        </v-col>
        <v-col cols="12" md="6" sm="6">

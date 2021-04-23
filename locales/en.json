@@ -4,7 +4,9 @@
   "reviews": "Reviews",
   "review": "Review",
   "best_pet_products": "Best Pet Products ",
+  "best_pet_products_description": "Truffle & Bean give their stamp of approval! Our four-legged testers guarantee that every product listed will help you strengthen your person/pet bond. ",
   "find_a_pet_pro": "Find a Pet Pro",
+  "find_a_pet_biz": "Find A Pet Biz",
   "watch_and_learn": "Watch & Learn",
   "pet_care_advice": "Pet Care Advice",
   "login": "Login",
@@ -56,7 +58,8 @@
   "about_wag": "About Wag",
 
   "pet_pro_around_you": "Pet Pro's Around You",
-  "search_database_description": "Search our database of wag-tastic, top-ranked, local pet care professional for all of your pets",
+  "only_the_best_for_your_pets": "Only the Best for Your Pets",
+  "search_database_description": "We empower pet owners to take better care of their pets by sniffing out the best local pet resources and businesses.",
   "category": "Category",
   "select_category": "Select Category",
   "location": "Location (City, State, Zip)",
@@ -138,6 +141,12 @@
   "saved_deals":"Saved Deals",
 
   "welcome":"Welcome.",
+  "sing_in_heading":"Welcome to Your Wag Profile.",
+  "sing_in_subheading":"Save your favorite pet people & places to get updates on pooch-approved events and sweet deals. ",
+
+  "sing_up_heading":"Join the Treat Spot ",
+  "sing_up_subheading":"Sign up to access exclusive deals, bookmark your favorite articles, and secure all kinds of goodies. ",
+
   "lorem_ipsum":"I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
   "username": "Username or Email Address",
   "remember_me": "Remember Me",
@@ -175,5 +184,7 @@
   "cancel": "Cancel",
   "claimed_deal": "Claimed Deal",
 
-  "review_error": "Sign in to submit a review."
+  "review_error": "Sign in to submit a review.",
+  "reply": "Reply",
+  "comment": "Comment"
 }
