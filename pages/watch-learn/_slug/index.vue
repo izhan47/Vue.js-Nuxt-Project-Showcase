@@ -64,11 +64,8 @@
                 </div>
                 <!-- add a reply comment  -->
                 <span class="reply-comment " @click="activeReply === -1 ? activeReply = index : activeReply = -1">{{$t('reply')}}</span>
-                <v-form ref="form1" class="mt-4" v-if="activeReply===index">
-                  <v-textarea outlined
-                    name="input-7-4"
-                    :label="$t('comment')" v-model="form.message"  required :rules="rules.message"
-                  ></v-textarea>
+                <v-form ref="replyForm" class="mt-4" v-if="activeReply===index">
+                  <v-textarea outlined :label="$t('comment')" v-model="form.message"  required :rules="rules.message"></v-textarea>
                   <div class="text-center">
                     <v-btn large class="  submit-btn"  outlined rounded @click="submit(comment.id)"> {{ $t('reply') }}</v-btn>
                   </div>
@@ -101,16 +98,9 @@
           <!-- Add a Comment Section -->
           <h2 class="comment-section-heading text-center mb-5">{{ $t('leave_a_comment')}}</h2>
           <v-form ref="form">
-            <v-textarea
-              outlined
-              name="input-7-4"
-              :label="$t('comment')"
-              v-model="form.message"
-              :rules="rules.message"
-              required
-            ></v-textarea>
+            <v-textarea outlined :label="$t('comment')" v-model="form.message" :rules="rules.message" required></v-textarea>
             <div class="text-center">
-              <v-btn large class=" submit-btn" outlined rounded @click="submit(0,)"> {{ $t('submit') }}</v-btn>
+              <v-btn large class=" submit-btn" outlined rounded @click="submit(form.parent_comment_id)"> {{ $t('submit') }}</v-btn>
             </div>
           </v-form>
         </div>
@@ -179,7 +169,6 @@ export default {
      async getComments(){
        await this.$store.dispatch('getComment',this.URL).then( response => {
             this.commentData=response.data.data.comments
-         console.log(this.commentData)
             this.$store.commit('SHOW_LOADER', false)
           })
      },
@@ -208,7 +197,7 @@ export default {
         return this.$router.push('/auth/Login')
       }
       else{
-        if(id === 0 ? this.$refs.form.validate() : this.$refs.form1[0].validate()) {
+        if(id === 0 ? this.$refs.form.validate() : this.$refs.replyForm[0].validate()) {
           let loader=true
           this.$store.commit('SHOW_LOADER', loader)
           this.form.slug=this.categoryData.slug
