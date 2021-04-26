@@ -109,7 +109,7 @@ export default {
   text-align: center;
 }
 .img-height{
-  max-height: 500px;
+  max-height: $img-max-height-500;
 }
 .custom-margin{
   margin-top: 3rem;

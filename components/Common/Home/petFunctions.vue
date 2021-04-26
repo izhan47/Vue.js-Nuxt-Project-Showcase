@@ -140,14 +140,14 @@ export default {
 }
 .comment-img{
   margin-top: 1rem;
-  max-height: 220px;
+  max-height: $img-max-height-220;
 }
 .search-img{
   margin-top:2rem;
 
   text-align: right;
   img{
-    max-height: 255px;
+    max-height: $img-max-height-255;
   }
 }
 </style>

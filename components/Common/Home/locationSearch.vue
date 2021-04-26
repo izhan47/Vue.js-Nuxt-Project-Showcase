@@ -154,7 +154,7 @@ components:{ PetCategoryCard,VueGoogleAutocomplete},
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
 .img-height{
-  max-height: 250px;
+  max-height: $img-max-height-250;
 }
 .banner-description{
   max-width: 500px;

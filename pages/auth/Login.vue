@@ -161,7 +161,7 @@ methods:{
   }
 }
 .img-height{
-  max-height: 200px;
+  max-height: $img-max-height-200;
 }
 .bg-left-section{
   background-color: transparent;
@@ -179,7 +179,7 @@ methods:{
   }
 }
 .logo{
-  max-height: 70px;
+  max-height: $img-max-height-70;
   border-radius: 5px;
 }
 .heading{

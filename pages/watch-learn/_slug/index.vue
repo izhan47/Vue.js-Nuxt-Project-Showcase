@@ -231,7 +231,7 @@ export default {
   text-align: center;
 }
 .img-height{
-  max-height: 500px;
+  max-height: $img-max-height-500;
 }
 .watch-detail-custom-container{
   max-width: 1250px;

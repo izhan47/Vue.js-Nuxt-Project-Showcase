@@ -102,7 +102,7 @@ export default {
 
   text-align: right;
   img{
-    max-height: 255px;
+    max-height: $img-max-height-255;
   }
 }
 </style>
