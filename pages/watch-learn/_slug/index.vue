@@ -63,18 +63,13 @@
                   </div>
                 </div>
                 <!-- add a reply comment  -->
-                <span class="reply-comment " @click="activeReply=!activeReply">{{$t('reply')}}</span>
-                <div class="mt-4" v-if="activeReply===true">
-                  <v-textarea outlined
-                    name="input-7-4"
-                    :label="$t('comment')" v-model="reply.message"  required :rules="rules.message"
-                    :ref="index"
-
-                  ></v-textarea>
+                <span class="reply-comment " @click="activeReply === -1 ? activeReply = index : activeReply = -1">{{$t('reply')}}</span>
+                <v-form ref="replyForm" class="mt-4" v-if="activeReply===index">
+                  <v-textarea outlined :label="$t('comment')" v-model="form.message"  required :rules="rules.message"></v-textarea>
                   <div class="text-center">
-                    <v-btn large class="  submit-btn"  outlined rounded @click="replyComment(comment)"> {{ $t('reply') }}</v-btn>
+                    <v-btn large class="  submit-btn"  outlined rounded @click="submit(comment.id)"> {{ $t('reply') }}</v-btn>
                   </div>
-                </div>
+                </v-form>
               </div>
               <!--  reply comment List -->
               <div v-if="comment.children && comment.children.length">
@@ -103,16 +98,9 @@
           <!-- Add a Comment Section -->
           <h2 class="comment-section-heading text-center mb-5">{{ $t('leave_a_comment')}}</h2>
           <v-form ref="form">
-            <v-textarea
-              outlined
-              name="input-7-4"
-              :label="$t('comment')"
-              v-model="form.message"
-              :rules="rules.message"
-              required
-            ></v-textarea>
+            <v-textarea outlined :label="$t('comment')" v-model="form.message" :rules="rules.message" required></v-textarea>
             <div class="text-center">
-              <v-btn large class=" submit-btn" outlined rounded @click="submitComment"> {{ $t('submit') }}</v-btn>
+              <v-btn large class=" submit-btn" outlined rounded @click="submit(form.parent_comment_id)"> {{ $t('submit') }}</v-btn>
             </div>
           </v-form>
         </div>
@@ -150,15 +138,10 @@ export default {
         parent_comment_id:0,
         slug:''
       },
-      reply:{
-        message:'',
-        parent_comment_id:0,
-        slug:''
-      },
       rules: {
         message: [val => (val || '').length > 0 || 'This message field is required'],
       },
-      activeReply:false,
+      activeReply:-1,
       categoryData:'',
       commentData:'',
     }
@@ -183,32 +166,9 @@ export default {
             this.$store.commit('SHOW_LOADER', false)
           })
         },
-     async submitComment(){
-          if (!this.$store.state.user.isAuthenticated) {
-            this.$store.commit('SET_CURRENT_PATH',this.$route.path)
-            return this.$router.push('/auth/Login')
-          }
-          else {
-            if(this.$refs.form.validate()) {
-              console.log('validate')
-              let loader=true
-              this.$store.commit('SHOW_LOADER', loader)
-              this.form.slug=this.categoryData.slug
-              // this.form.parent_comment_id=this.categoryData.id
-              await this.$store.dispatch('comment',this.form).then(response => {
-                this.$store.commit('SHOW_LOADER', loader=false)
-                this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message
-                })
-              })
-
-              await this.getComments();
-            }
-          }
-        },
      async getComments(){
        await this.$store.dispatch('getComment',this.URL).then( response => {
             this.commentData=response.data.data.comments
-         console.log(this.commentData)
             this.$store.commit('SHOW_LOADER', false)
           })
      },
@@ -231,31 +191,30 @@ export default {
        }
 
         },
-     // activeTab(index){
-     //     console.log('index no',index)
-     //  },
-     async replyComment(comment){
-        if (!this.$store.state.user.isAuthenticated) {
-          this.$store.commit('SET_CURRENT_PATH',this.$route.path)
-          return this.$router.push('/auth/Login')
-        }
-        else {
-            console.log('reply comment')
-            let loader = true
-            this.$store.commit('SHOW_LOADER', loader)
-            this.reply.slug = this.categoryData.slug
-            this.reply.parent_comment_id = comment.id
-            await this.$store.dispatch('comment', this.reply).then(response => {
-              this.$store.commit('SHOW_LOADER', loader = false)
-              this.$store.commit('SHOW_SNACKBAR', {
-                snackbar: true, color: 'green', message: response.data.message
-              })
-            })
-            this.activeReply=false
-            this.reply.message=''
-            await this.getComments();
-          }
+     async submit(id){
+      if (!this.$store.state.user.isAuthenticated) {
+        this.$store.commit('SET_CURRENT_PATH',this.$route.path)
+        return this.$router.push('/auth/Login')
       }
+      else{
+        if(id === 0 ? this.$refs.form.validate() : this.$refs.replyForm[0].validate()) {
+          let loader=true
+          this.$store.commit('SHOW_LOADER', loader)
+          this.form.slug=this.categoryData.slug
+          this.form.parent_comment_id = id
+          await this.$store.dispatch('comment',this.form).then(response => {
+            this.$store.commit('SHOW_LOADER', loader=false)
+            this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message
+            })
+          })
+          this.activeReply=-1
+          this.form.message=''
+          await this.getComments();
+        }
+
+      }
+    }
+
   }
 }
 </script>
