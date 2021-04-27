@@ -199,6 +199,7 @@
   "image_rules": "Acceptable formats: jbg, png Max file size: 500 kb ",
   "phone_no": "Phone No",
   "gender": "Gender",
+  "zipcode": "Zipcode",
   "male": "Male",
   "female": "Female",
   "other": "Other",

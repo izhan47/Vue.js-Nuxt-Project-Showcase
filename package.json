@@ -16,6 +16,7 @@
     "vue": "^2.6.12",
     "vue-google-autocomplete": "^1.1.1",
     "vue-i18n": "^8.22.4",
+    "vue-phone-number-input": "^1.1.10",
     "vue-slick-carousel": "^1.0.6",
     "vue2-google-maps": "^0.10.7",
     "vuex-persist": "^3.1.3"

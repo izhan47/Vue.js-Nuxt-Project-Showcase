@@ -262,7 +262,30 @@ export default () => {
         return axios({
           method:'POST',
           url:'pet-pro/delete-review/' + data.slug +'/'+ data.id,
+        })
+      },
 
+
+
+    //  Profile Dashboard Section profile/update-vet
+      profileDetails() {
+        return axios({
+          method: 'POST',
+          url: 'profile/get-details',
+        })
+      },
+      updateProfile({commit}, data) {
+        return axios({
+          method: 'POST',
+          url: 'profile/update',
+          data
+        })
+      },
+      updateVet({commit}, data) {
+        return axios({
+          method: 'POST',
+          url: 'profile/update-vet',
+          data
         })
       },
 

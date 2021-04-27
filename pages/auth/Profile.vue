@@ -87,7 +87,7 @@ export default {
   data(){
     return{
       userDetail:'',
-      showTab:1,
+      showTab:2,
       cards:[
         {
           icon:'mdi-percent-outline',
