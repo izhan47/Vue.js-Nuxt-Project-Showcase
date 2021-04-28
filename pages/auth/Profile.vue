@@ -35,21 +35,11 @@
               {{$t('loved_pet_pros')}}
             </v-list-item-title>
           </v-list-item>
-          <v-list-item @click="showTab=7">
-            <v-list-item-title>
-              {{$t('saved_pet_care_advice')}}
-            </v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="showTab=8">
-            <v-list-item-title>
-              {{$t('my_reviews')}}
-            </v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="showTab=9">
-            <v-list-item-title>
-              {{$t('deals_offered')}}
-            </v-list-item-title>
-          </v-list-item>
+<!--          <v-list-item @click="showTab=7">-->
+<!--            <v-list-item-title>-->
+<!--              {{$t('my_reviews')}}-->
+<!--            </v-list-item-title>-->
+<!--          </v-list-item>-->
         </v-list>
       </div>
     </v-col>
@@ -61,9 +51,7 @@
         <business v-if="showTab===4"></business>
         <saved-deals v-if="showTab===5"></saved-deals>
         <loved-pet-pros v-if="showTab===6"></loved-pet-pros>
-        <saved-pet-care v-if="showTab===7"></saved-pet-care>
-        <reviews v-if="showTab===8"></reviews>
-        <deals-offered v-if="showTab===9"></deals-offered>
+<!--        <reviews v-if="showTab===7"></reviews>-->
       </div>
     </v-col>
   </v-row>
@@ -77,17 +65,15 @@ import VetInfo from "@/components/Profile/VetInfo";
 import Business from "@/components/Profile/Business/Business";
 import SavedDeals from "@/components/Profile/SavedDeals";
 import LovedPetPros from "@/components/Profile/LovedPetPros";
-import SavedPetCare from "@/components/Profile/SavedPetCare";
 import Reviews from "@/components/Profile/Reviews";
-import DealsOffered from "@/components/Profile/DealsOffered";
 export default {
   name: "Profile.vue",
   middleware: [ 'auth'],
-  components:{PetProfile,Account,VetInfo,Business,SavedPetCare,SavedDeals,LovedPetPros,Reviews,DealsOffered},
+  components:{PetProfile,Account,VetInfo,Business,SavedDeals,LovedPetPros,Reviews},
   data(){
     return{
       userDetail:'',
-      showTab:2,
+      showTab:1,
       cards:[
         {
           icon:'mdi-percent-outline',
@@ -131,7 +117,7 @@ export default {
 }
 .profile-sidebar-section{
   min-width: 250px;
-  min-height: 485px;
+  min-height: 350px;
   background: $white;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;

@@ -267,7 +267,7 @@ export default () => {
 
 
 
-    //  Profile Dashboard Section profile/update-vet
+    //  Account Dashboard Section
       profileDetails() {
         return axios({
           method: 'POST',
@@ -281,6 +281,44 @@ export default () => {
           data
         })
       },
+
+      //Pet Profile Dashboard Section
+      breedList() {
+        return axios({
+          method: 'POST',
+          url: 'profile/get-breed-list',
+        })
+      },
+      addPetProfile({commit}, data) {
+        return axios({
+          method: 'POST',
+          url: 'profile/add-pets',
+          data
+        })
+      },
+      getUserPet() {
+        return axios({
+          method: 'POST',
+          url: 'profile/get-users-pets',
+        })
+      },
+      deleteUserPet({commit}, id) {
+        return axios({
+          method: 'POST',
+          url: 'profile/delete-my-pet/' + id,
+        })
+      },
+
+
+
+
+
+
+
+
+
+
+
       updateVet({commit}, data) {
         return axios({
           method: 'POST',

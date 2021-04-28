@@ -21,10 +21,10 @@
           <v-icon size="30"  color="#fff">mdi-plus</v-icon>
         </div>
       </div>
-      <div class="change-profile">
+      <div class="change-profile" @click="$refs.inputFile.click()">
         <h2>Change profile photo </h2>
         <div class="image-description">
-          <span>Acceptable formats: jbg, png </span>
+          <span>Acceptable formats: jbg, png </span> <br>
           <span>Max file size: 500 kb </span>
         </div>
       </div>
@@ -174,7 +174,14 @@ export default {
             console.log('after update user',this.userDetail)
           })
         .catch(e=>{
-          console.log(e)
+          let errors = e.response.data.data
+          this.$store.commit('SHOW_LOADER', false)
+          for (let item in errors){
+            if(errors.hasOwnProperty(item))
+              errors[item].forEach(err => {
+                this.$store.commit('SHOW_SNACKBAR',{  snackbar:true,color:'red',message:err})
+              })
+          }
         })
 
       }
@@ -262,6 +269,7 @@ export default {
     font-size: 14px;
     line-height: 21px;
     color: $blue_gem;
+    cursor: pointer;
   }
      .image-description{
         font-family: $font-family-secondary;
