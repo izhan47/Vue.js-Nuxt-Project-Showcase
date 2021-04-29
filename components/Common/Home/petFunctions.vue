@@ -17,7 +17,7 @@
               <h2 class="card-heading ">{{ $t('pet_professional') }}</h2>
             </div>
             <div class="card-arrow-icon green-section">
-              <v-btn  large icon color="white" class="circle"><v-icon>mdi-chevron-right</v-icon></v-btn>
+              <v-btn  large icon color="white" class="circle" @click="$router.push('/pet-category')"><v-icon>mdi-chevron-right</v-icon></v-btn>
             </div>
             <div class="card-img ">
               <img class="img-fluid img-height"
@@ -32,7 +32,7 @@
               <h2 class="card-heading ">{{ $t('pet_products') }}</h2>
             </div>
             <div class="card-arrow-icon purple-section">
-              <v-btn  large icon color="white" class="circle"><v-icon  >mdi-chevron-right</v-icon></v-btn>
+              <v-btn  large icon color="white" class="circle" @click="$router.push('/product-reviews')"><v-icon  >mdi-chevron-right</v-icon></v-btn>
             </div>
             <div class="card-img">
               <img  class="img-fluid img-height" src="/images/Column-Food-Dish.png" alt="logo">
@@ -46,7 +46,7 @@
               <h2 class="card-heading ">{{ $t('advice') }}</h2>
             </div>
             <div class="card-arrow-icon pink-section">
-              <v-btn  large icon color="white" class="circle"><v-icon>mdi-chevron-right</v-icon></v-btn>
+              <v-btn  large icon color="white" class="circle" @click="$router.push('/watch-learn')"><v-icon>mdi-chevron-right</v-icon></v-btn>
             </div>
             <div class="">
               <img class="img-fluid comment-img" src="/images/Column-Speech-Bubbles.png" alt="logo">
@@ -140,14 +140,14 @@ export default {
 }
 .comment-img{
   margin-top: 1rem;
-  max-height: 220px;
+  max-height: $img-max-height-220;
 }
 .search-img{
   margin-top:2rem;
 
   text-align: right;
   img{
-    max-height: 255px;
+    max-height: $img-max-height-255;
   }
 }
 </style>

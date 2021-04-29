@@ -4,12 +4,54 @@
   <v-row >
     <v-col cols="12" md="3" sm="12">
       <div class="profile-sidebar-section">
-
+        <v-list class="mt-4 mb-4">
+          <v-list-item @click="showTab=1">
+            <v-list-item-title >
+              {{$t('pet_profile')}}
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="showTab=2">
+            <v-list-item-title>
+              {{$t('account')}}
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="showTab=3">
+            <v-list-item-title>
+              {{$t('my_vet_info')}}
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="showTab=4">
+            <v-list-item-title>
+              {{$t('my_business')}}
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="showTab=5">
+            <v-list-item-title>
+              {{$t('save_deals')}}
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="showTab=6">
+            <v-list-item-title>
+              {{$t('loved_pet_pros')}}
+            </v-list-item-title>
+          </v-list-item>
+<!--          <v-list-item @click="showTab=7">-->
+<!--            <v-list-item-title>-->
+<!--              {{$t('my_reviews')}}-->
+<!--            </v-list-item-title>-->
+<!--          </v-list-item>-->
+        </v-list>
       </div>
     </v-col>
     <v-col  cols="12" md="9" sm="12">
       <div class="profile-right-section">
-
+        <pet-profile v-if="showTab===1"></pet-profile>
+        <account v-if="showTab===2"></account>
+        <vet-info v-if="showTab===3"></vet-info>
+        <business v-if="showTab===4"></business>
+        <saved-deals v-if="showTab===5"></saved-deals>
+        <loved-pet-pros v-if="showTab===6"></loved-pet-pros>
+<!--        <reviews v-if="showTab===7"></reviews>-->
       </div>
     </v-col>
   </v-row>
@@ -17,44 +59,40 @@
 </template>
 
 <script>
+import PetProfile from "@/components/Profile/PetProfile";
+import Account from "@/components/Profile/Account";
+import VetInfo from "@/components/Profile/VetInfo";
+import Business from "@/components/Profile/Business/Business";
+import SavedDeals from "@/components/Profile/SavedDeals";
+import LovedPetPros from "@/components/Profile/LovedPetPros";
+import Reviews from "@/components/Profile/Reviews";
 export default {
   name: "Profile.vue",
   middleware: [ 'auth'],
+  components:{PetProfile,Account,VetInfo,Business,SavedDeals,LovedPetPros,Reviews},
   data(){
     return{
       userDetail:'',
+      showTab:1,
       cards:[
         {
           icon:'mdi-percent-outline',
           parent_heading:this.$i18n.t('saved_deals'),
-          subtitle:'Available Through 2.20.2021',
-          title:'Free Dog Treats',
-          button_text:'claim',
-          path:''
         },
         {
           icon:'mdi-heart',
           parent_heading:'Loved Pet Pros',
-          subtitle:'May 22, 2021',
-          title:'Froyo Day',
-          button_text:this.$i18n.t('sign_up'),
-          path:''
+
         },
         {
           icon:'mdi-star',
           parent_heading:'Saved Pet Care Advice',
-          subtitle:this.$i18n.t('name'),
-          title:'Review',
-          button_text:this.$i18n.t('submit'),
-          path:''
+
         },
         {
           icon:'mdi-paw',
           parent_heading:'My Reviews',
-          subtitle:'Available Through 2.20.2021',
-          title:'Free Dog Treats',
-          button_text:'claim',
-          path:''
+
         },
       ],
     }
@@ -78,17 +116,17 @@ export default {
      font-family: $font-family-secondary;
 }
 .profile-sidebar-section{
-  width: 274.45px;
-  height: 493.07px;
-  background: #FFFFFF;
+  min-width: 250px;
+  min-height: 350px;
+  background: $white;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   border-radius: 19px;
 }
 .profile-right-section{
-  width: 804px;
+  min-width: 290px;
   height: 817.05px;
-  background: #FFFFFF;
+  background: $white;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   border-radius: 19px;

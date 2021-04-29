@@ -186,5 +186,24 @@
 
   "review_error": "Sign in to submit a review.",
   "reply": "Reply",
-  "comment": "Comment"
+  "comment": "Comment",
+
+  "account": "Account",
+  "save_deals": "Save Deals",
+  "loved_pet_pros": "Loved pet pros",
+  "saved_pet_care_advice": "Saved Pet Care Advice",
+  "my_reviews": "My Reviews",
+  "my_business": "My Business",
+  "my_vet_info": "My Vet Info",
+  "change_profile": "Change profile photo ",
+  "image_rules": "Acceptable formats: jbg, png Max file size: 500 kb ",
+  "phone_no": "Phone No",
+  "gender": "Gender",
+  "zipcode": "Zipcode",
+  "male": "Male",
+  "female": "Female",
+  "other": "Other",
+  "update": "Update",
+  "breed_name": "Breed Name"
+
 }

@@ -181,14 +181,14 @@ name: "Register.vue",
   }
 }
 .logo{
-  max-height: 70px;
+  max-height: $img-max-height-70;
   border-radius: 5px;
 }
 .heading{
   color: $white;
   font-size: $font-size-45;
   @media (max-width:767px) {
-    font-size: 51px;
+    font-size: $font-size-51;
   }
 }
 .description{

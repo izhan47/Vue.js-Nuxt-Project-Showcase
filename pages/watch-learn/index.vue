@@ -201,7 +201,7 @@ name: "index.vue",
 }
 
 .img-height{
-  max-height: 250px;
+  max-height: $img-max-height-250;
 }
 .cross-icon::v-deep .v-input__append-inner{
   margin-top: 0;

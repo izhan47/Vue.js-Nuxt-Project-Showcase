@@ -81,7 +81,7 @@ export default {
 @import "~/assets/sass/main.scss";
 .text-center{
   img{
-    max-height: 120px;
+    max-height: $img-max-height-120;
   }
   h2{
     margin-bottom: 3rem;

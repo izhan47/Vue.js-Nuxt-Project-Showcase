@@ -533,7 +533,7 @@ export default {
   width: 100%;
 }
 .img-height{
-  max-height: 580px;
+  max-height: $img-max-height-580;
   border-radius: 0 20px  20px 0;
 }
 .chip-title{
@@ -589,7 +589,7 @@ export default {
   }
 }
 .category-img{
-  max-height: 230px;
+  max-height: $img-max-height-230;
   border-radius: 10px;
 }
 .product-rating{

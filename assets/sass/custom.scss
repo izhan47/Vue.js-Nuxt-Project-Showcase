@@ -96,7 +96,7 @@
   height: auto;
 }
 .img-height{
-  max-height: 125px;
+  max-height: $img-max-height-125;
 }
 /*=========================================== =============
      Icons
@@ -281,7 +281,7 @@
   border-radius: 10px 10px 0 0;
 }
   .card-img {
-    max-height: 270px;
+    max-height: $img-max-height-270;
     border-radius: 10px 10px 0 0;
   }
 
@@ -349,7 +349,7 @@
 
 }
 .icon-img{
-  max-height: 40px;
+  max-height:$img-max-height-40;
 }
 //  google place css
 .search-location{

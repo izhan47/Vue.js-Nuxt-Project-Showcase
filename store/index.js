@@ -262,7 +262,68 @@ export default () => {
         return axios({
           method:'POST',
           url:'pet-pro/delete-review/' + data.slug +'/'+ data.id,
+        })
+      },
 
+
+
+    //  Account Dashboard Section
+      profileDetails() {
+        return axios({
+          method: 'POST',
+          url: 'profile/get-details',
+        })
+      },
+      updateProfile({commit}, data) {
+        return axios({
+          method: 'POST',
+          url: 'profile/update',
+          data
+        })
+      },
+
+      //Pet Profile Dashboard Section
+      breedList() {
+        return axios({
+          method: 'POST',
+          url: 'profile/get-breed-list',
+        })
+      },
+      addPetProfile({commit}, data) {
+        return axios({
+          method: 'POST',
+          url: 'profile/add-pets',
+          data
+        })
+      },
+      getUserPet() {
+        return axios({
+          method: 'POST',
+          url: 'profile/get-users-pets',
+        })
+      },
+      deleteUserPet({commit}, id) {
+        return axios({
+          method: 'POST',
+          url: 'profile/delete-my-pet/' + id,
+        })
+      },
+
+
+
+
+
+
+
+
+
+
+
+      updateVet({commit}, data) {
+        return axios({
+          method: 'POST',
+          url: 'profile/update-vet',
+          data
         })
       },
 

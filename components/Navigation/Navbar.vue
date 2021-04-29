@@ -26,7 +26,12 @@
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
-              <v-list-item link  to="/auth/Login">
+              <v-list-item v-if="$store.state.user.isAuthenticated" to="/auth/Profile" link>
+                  <v-list-item-title class="nav-title">
+                    {{$t('my_profile')}}
+                  </v-list-item-title>
+              </v-list-item>
+              <v-list-item link v-else  to="/auth/Login">
                 <v-list-item-content>
                   <v-list-item-title class="nav-title" >{{ $t('sign_in') }}</v-list-item-title>
                 </v-list-item-content>
