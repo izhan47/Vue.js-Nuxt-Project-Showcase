@@ -52,6 +52,8 @@
                   color="#332e80"
                   v-model="form.remember"
                   :label="$t('remember_me')"
+                  required
+                  :rules="[(v) => !!v || 'The remember is required']"
                 ></v-checkbox>
                 <div class=" text-center">
                   <v-btn large class="log-in-btn white-text" outlined rounded @click="Login"> {{ $t('log_in') }}</v-btn>

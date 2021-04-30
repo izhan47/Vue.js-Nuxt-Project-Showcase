@@ -278,7 +278,7 @@ export default {
   //border-top-right-radius: 50px;
 }
 .action-title{
-  font-family:$font-family-secondary;
+  font-family:$font-family-primary ;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -338,7 +338,7 @@ export default {
 }
 .change-profile{
   h2{
-    font-family: $font-family-secondary;
+    font-family: $font-family-primary ;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -347,7 +347,7 @@ export default {
     cursor: pointer;
   }
   .image-description{
-    font-family: $font-family-secondary;
+    font-family: $font-family-primary ;
     font-style: normal;
     font-weight: normal;
     font-size: 11px;
@@ -364,7 +364,7 @@ export default {
   box-shadow: unset !important;
   min-width: 500px;
   font-weight: $font-weight-bold;
-  font-family: $font-family-secondary;
+  font-family: $font-family-primary ;
   .v-text-field__slot{
     font-weight: $font-weight-bold;
   }
@@ -386,7 +386,7 @@ export default {
   margin-bottom: 4rem;
 }
 .search-btn{
-  font-family: $font-family-secondary;
+  font-family: $font-family-primary ;
   min-width: 110px;
   background-color: $blue_gem;
   color: $white;

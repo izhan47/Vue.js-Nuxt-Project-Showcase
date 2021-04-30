@@ -14,7 +14,7 @@
     />
     <div class="change-avatar space">
       <div class="avatar">
-        <div  class="bg-img-height" :style="`background-image: url(${userDetail.profile_image_full_path})`">
+        <div  class="bg-img-height" :style="`background-image: url(${userDetail.profile_image_thumb_full_path})`">
         </div>
 <!--        <img class=" img-fluid img-height" src="/images/pet-2.jpg" alt="">-->
         <div class="add-image" @click="$refs.inputFile.click()">
@@ -58,6 +58,8 @@
           rounded
           outlined
           clearable
+          required
+          :rules="rules.email"
         ></v-text-field>
       </div>
       <div class="search-form-field">
@@ -135,6 +137,8 @@ export default {
         email:'',
         zipcode:'',
       },
+      image:'',
+      imageURL:'',
       rules: {
         name: [val => (val || '').length > 0 || 'This name field is required'],
         email: [val => (val || '').length > 0 || 'This address field is required'],
@@ -142,36 +146,37 @@ export default {
       },
     }
   },
+
   created() {
-    this.userDetail=this.$store.state.user.user
-    // this.getProfileDetail()
+    this.getProfileDetail();
   },
   methods:{
-    getProfileFile(){
-      console.log('img')
+  async getProfileDetail(){
+      this.$store.commit('SHOW_LOADER', true)
+      await this.$store.dispatch('profileDetails')
+        .then(response => {
+          this.$store.commit('SHOW_LOADER', false)
+         this.userDetail=response.data.data.user_details
+        })
     },
-    //  getProfileDetail(){
-    //   this.$store.commit('SHOW_LOADER', true)
-    //
-    //    this.$store.dispatch('profileDetails')
-    //     .then(response => {
-    //       this.$store.commit('SHOW_LOADER', false)
-    //       console.log('res',response.data.data.user_details)
-    //       console.log('user',this.userDetail)
-    //
-    //     })
-    // },
+    getProfileFile(event){
+      this.image = event.target.files[0];
+      if (!this.image) return;
+      this.userDetail.profile_image_thumb_full_path = URL.createObjectURL(this.image);
+    },
    async updateProfile(){
       if(this.$refs.form.validate()) {
-        console.log('updateVet',this.userDetail)
+        let data = new FormData()
+        data.append('image',this.image)
+        data.append('name',this.userDetail.name)
+        data.append('email',this.userDetail.email)
+        data.append('zipcode',this.userDetail.zipcode)
+        console.log('data',data)
         this.$store.commit('SHOW_LOADER', true)
-        await this.$store.dispatch('updateProfile',this.userDetail)
+        await this.$store.dispatch('updateProfile',data)
           .then(response => {
             this.$store.commit('SHOW_LOADER', false)
             this.$store.commit('SHOW_SNACKBAR', {snackbar: true, color: 'green', message: response.data.message})
-
-            console.log('update',response)
-            console.log('after update user',this.userDetail)
           })
         .catch(e=>{
           let errors = e.response.data.data
@@ -183,20 +188,6 @@ export default {
               })
           }
         })
-
-      }
-    },
-   async updateAccount(){
-      if(this.$refs.form.validate()) {
-        console.log('updateVet',this.form)
-        this.$store.commit('SHOW_LOADER', true)
-        await this.$store.dispatch('updateVet',this.form)
-          .then(response => {
-            this.$store.commit('SHOW_LOADER', false)
-            console.log('res',response)
-            console.log('user',this.userDetail)
-
-          })
 
       }
     },
@@ -251,7 +242,7 @@ export default {
 }
 .change-profile{
   h2{
-    font-family: $font-family-secondary;
+    font-family: $font-family-primary ;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -260,7 +251,7 @@ export default {
     cursor: pointer;
   }
      .image-description{
-        font-family: $font-family-secondary;
+        font-family: $font-family-primary ;
         font-style: normal;
         font-weight: normal;
         font-size: 11px;
@@ -276,7 +267,7 @@ export default {
   box-shadow: unset !important;
   min-width: 380px;
   font-weight: $font-weight-bold;
-  font-family: $font-family-secondary;
+  font-family: $font-family-primary ;
   .v-text-field__slot{
     font-weight: $font-weight-bold;
   }
@@ -299,7 +290,7 @@ export default {
   border-radius: 28px !important;
 }
 .search-btn{
-  font-family: $font-family-secondary;
+  font-family: $font-family-primary ;
   min-width: 110px;
   //border: 0.5px solid #46259A;
   box-sizing: border-box;
