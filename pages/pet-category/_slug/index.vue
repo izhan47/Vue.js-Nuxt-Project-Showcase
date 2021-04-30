@@ -8,7 +8,7 @@
           <v-col cols="12" md="5" sm="12" class="bd-img-container">
             <div class="title-card">
                <span class="chip-title white-text" v-for="(cat,c) in petDetail.categories" :key="c"> {{cat.name}}
-                  <span v-if="i !== petDetail.categories.length-1"> | </span>
+                  <span v-if="c !== petDetail.categories.length-1"> | </span>
                </span>
               <div class="love-section">
                 <h2>{{petDetail.store_name}}</h2>
@@ -390,10 +390,10 @@ export default {
         return this.$router.push('/auth/Login')
         }
       else {
-          let loader = true
-          this.$store.commit('SHOW_LOADER', loader)
+
+          this.$store.commit('SHOW_LOADER', true)
           await this.$store.dispatch('like',this.URL).then(response => {
-            this.$store.commit('SHOW_LOADER', loader=false)
+            this.$store.commit('SHOW_LOADER', false)
             this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message})
             if(this.is_liked===0){
               this.is_liked=1

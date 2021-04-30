@@ -230,6 +230,7 @@ export default () => {
 
      //Like Dislike
        like({dispatch},slug){
+        console.log('slug',slug)
         return axios({
           method:'POST',
           url:'pet-pro/like-dislike/' + slug
@@ -308,6 +309,13 @@ export default () => {
           url: 'profile/delete-my-pet/' + id,
         })
       },
+      getLovedPet() {
+        return axios({
+          method: 'POST',
+          url: 'profile/get-loved-pet-pros',
+        })
+      },
+
 
 
 
