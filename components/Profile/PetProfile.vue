@@ -271,11 +271,11 @@ export default {
 .action-title{
   font-family:$font-family-primary ;
   font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
+  font-weight: $font-weight-normal;
+  font-size:$font-size-16;
   line-height: 24px;
   /* identical to box height */
-  color: rgba(30, 29, 31, 0.5);
+  color: $dark;
 }
 .dialog-section{
   background: $white;
@@ -297,7 +297,7 @@ export default {
   .avatar {
     width: 110px;
     position: relative;
-    border: 2.3804px solid #46259A;
+    border: 2.3804px solid $blue_gem;
     box-sizing: border-box;
     border-radius: 21.4236px;
     .bg-img-height{
@@ -323,7 +323,7 @@ export default {
     border-radius: 50%;
 
     cursor: pointer;
-    background: #46259A;
+    background: $blue_gem;
     box-shadow: 0px 5.53142px 5.53142px rgba(0, 0, 0, 0.08);
   }
 }
@@ -331,8 +331,8 @@ export default {
   h2{
     font-family: $font-family-primary ;
     font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
+    font-weight:$font-weight-500;
+    font-size: $font-size-14;
     line-height: 21px;
     color: $blue_gem;
     cursor: pointer;
@@ -340,11 +340,11 @@ export default {
   .image-description{
     font-family: $font-family-primary ;
     font-style: normal;
-    font-weight: normal;
-    font-size: 11px;
+    font-weight:$font-weight-normal;
+    font-size: $font-size-11;
     line-height: 147%;
     letter-spacing: -0.005em;
-    color: #000000;
+    color:$black;
     opacity: 0.5;
   }
 }
@@ -377,7 +377,7 @@ export default {
   min-width: 110px;
   background-color: $blue_gem;
   color: $white;
-  //border: 0.5px solid #46259A;
+  //border: 0.5px solid $blue_gem;
   box-sizing: border-box;
   border-radius: 50px;
 }
