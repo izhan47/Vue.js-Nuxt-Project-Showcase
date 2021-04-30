@@ -7,22 +7,22 @@
             <h1>{{categoryData.title }} </h1>
           </div>
             <div v-html="categoryData.description"></div>
-          <hr class="dot-line">
+<!--          <hr class="dot-line">-->
 
-          <div class="comment-section">
-            <h2 class="comment-section-heading text-center space">{{ $t('comments')}}</h2>
-            <h2 class="comment-section-heading text-center mb-5">{{ $t('leave_a_comment')}}</h2>
-            <v-textarea
-              outlined
-              name="input-7-4"
-              label="Message"
-              v-model="form.message"
-              required
-            ></v-textarea>
-            <div class="text-center">
-              <v-btn large class=" submit-btn" outlined rounded @click="submit"> {{ $t('submit') }}</v-btn>
-            </div>
-          </div>
+<!--          <div class="comment-section">-->
+<!--            <h2 class="comment-section-heading text-center space">{{ $t('comments')}}</h2>-->
+<!--            <h2 class="comment-section-heading text-center mb-5">{{ $t('leave_a_comment')}}</h2>-->
+<!--            <v-textarea-->
+<!--              outlined-->
+<!--              name="input-7-4"-->
+<!--              label="Message"-->
+<!--              v-model="form.message"-->
+<!--              required-->
+<!--            ></v-textarea>-->
+<!--            <div class="text-center">-->
+<!--              <v-btn large class=" submit-btn" outlined rounded @click="submit"> {{ $t('submit') }}</v-btn>-->
+<!--            </div>-->
+<!--          </div>-->
         </v-col>
       </v-row>
     </div>
@@ -99,6 +99,9 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
+.custom-container{
+  max-width: 940px;
+}
 .bg-img-watch-detail{
   background-color: transparent;
   background-image: linear-gradient( 180deg, $black 0%, rgba(0,0,0,0) 100%);
