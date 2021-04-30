@@ -156,7 +156,6 @@ export default {
           .then(response => {
             this.$store.commit('SHOW_LOADER', false)
             let arr = []
-            // console.log('b', response.data.data.breed_list)
 
             // response.data.data.breed_list.filter(data => data.value).forEach(function (data) {
             response.data.data.breed_list.forEach(function (data) {
@@ -178,7 +177,6 @@ export default {
               })
             })
             this.breedList=arr
-            // console.log('r',this.breedList)
           })
     },
    getProfileFile(event) {
@@ -254,13 +252,6 @@ export default {
   justify-content: space-between;
 
 }
-
-
-
-
-
-
-
 .pet-add-section{
   border: 0.325919px dashed rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
@@ -373,10 +364,6 @@ export default {
     min-width: 0;
   }
 }
-
-
-
-
 
 .action-section{
   display: flex;

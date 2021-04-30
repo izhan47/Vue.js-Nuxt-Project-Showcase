@@ -171,7 +171,6 @@ export default {
         data.append('name',this.userDetail.name)
         data.append('email',this.userDetail.email)
         data.append('zipcode',this.userDetail.zipcode)
-        console.log('data',data)
         this.$store.commit('SHOW_LOADER', true)
         await this.$store.dispatch('updateProfile',data)
           .then(response => {
