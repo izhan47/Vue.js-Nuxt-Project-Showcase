@@ -125,7 +125,7 @@ export default {
 }
 .profile-right-section{
   min-width: 290px;
-  height: 817.05px;
+  min-height: 817.05px;
   background: $white;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;

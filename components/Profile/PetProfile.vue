@@ -239,19 +239,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
-.profile-title{
-  padding-top: 25px;
-  padding-left: 2rem;
-  h2{
-    font-family:$font-family-secondary;
-    font-style: normal;
-    font-weight: $font-weight-500;
-    font-size: $font-size-14;
-    line-height: 21px;
-    letter-spacing: 0.04em;
-    color: $black_currant;
-  }
-}
 .custom-container{
   max-width: 1000px;
   padding: 0 1.5rem;

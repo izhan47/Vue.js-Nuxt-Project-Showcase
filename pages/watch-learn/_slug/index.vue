@@ -35,7 +35,10 @@
             <v-icon left dark>mdi-linkedin</v-icon>
             {{ $t('linkedin')}}
           </v-btn>
-        <div v-html="categoryData.description"></div>
+        <div class="wagdt-inner-paragraph">
+          <span class="content-builder-data" v-html="categoryData.description"></span>
+        </div>
+<!--        <div class="content-builder-data" v-html="categoryData.description"></div>-->
 <!--        <hr class="dot-line">-->
         <!-- Comment Section -->
         <div class="comment-section">
@@ -152,6 +155,9 @@ export default {
     },
     watchCategoryData(){
       return this.$store.state.category_list
+    },
+    createMarkup(text) {
+      return {__html: text};
     }
   },
   created() {
@@ -308,7 +314,6 @@ export default {
 .green-description{
   color: $green;
 }
-
 .comment-section{
   padding-top: 5rem;
 }
@@ -319,7 +324,6 @@ export default {
   font-weight:$font-weight-600;
   text-transform: $text-transform-capitalize;
 }
-
 .submit-btn::v-deep.v-btn{
   min-width: 140px;
   height: 52px;
@@ -340,7 +344,6 @@ export default {
 hr.dot-line {
   border-top: 1px dotted $black;
 }
-
 .card-section-title{
   font-family: $font-family-primary;
   font-size: $font-size-50;
@@ -375,7 +378,6 @@ hr.dot-line {
 .card-img {
   min-height: 285px;
 }
-
 .card-title-padding::v-deep.v-card__title{
   padding: 16px 0 0 16px;
 }
