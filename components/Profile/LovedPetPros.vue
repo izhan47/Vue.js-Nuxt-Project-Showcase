@@ -68,14 +68,11 @@ export default {
       .then(response => {
         this.$store.commit('SHOW_LOADER', false)
         this.petLoved=response.data.data.loved_pet_pros
-        console.log(  this.petLoved)
       })
     },
   async removeLove(slug){
-    console.log('id',slug)
     this.$store.commit('SHOW_LOADER', true)
     await this.$store.dispatch('like',slug).then(response => {
-      console.log(response)
       this.$store.commit('SHOW_LOADER', false)
       this.$store.commit('SHOW_SNACKBAR', {snackbar:true, color:'green', message:response.data.message})
       this.lovedPetPro();

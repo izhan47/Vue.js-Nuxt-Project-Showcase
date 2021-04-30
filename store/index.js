@@ -230,7 +230,7 @@ export default () => {
 
      //Like Dislike
        like({dispatch},slug){
-        console.log('slug',slug)
+
         return axios({
           method:'POST',
           url:'pet-pro/like-dislike/' + slug

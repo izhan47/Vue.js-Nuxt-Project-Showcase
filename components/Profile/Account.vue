@@ -171,7 +171,6 @@ export default {
         data.append('name',this.userDetail.name)
         data.append('email',this.userDetail.email)
         data.append('zipcode',this.userDetail.zipcode)
-        console.log('data',data)
         this.$store.commit('SHOW_LOADER', true)
         await this.$store.dispatch('updateProfile',data)
           .then(response => {
@@ -210,7 +209,7 @@ export default {
   .avatar {
     width: 110px;
     position: relative;
-    border: 2.3804px solid #46259A;
+    border: 2.3804px solid $blue_gem;
     box-sizing: border-box;
     border-radius: 21.4236px;
     .bg-img-height{
@@ -236,7 +235,7 @@ export default {
     border-radius: 50%;
 
     cursor: pointer;
-    background: #46259A;
+    background: $blue_gem;
     box-shadow: 0px 5.53142px 5.53142px rgba(0, 0, 0, 0.08);
   }
 }
@@ -244,8 +243,8 @@ export default {
   h2{
     font-family: $font-family-primary ;
     font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
+    font-weight: $font-weight-500;
+    font-size: $font-size-14;
     line-height: 21px;
     color: $blue_gem;
     cursor: pointer;
@@ -253,11 +252,11 @@ export default {
      .image-description{
         font-family: $font-family-primary ;
         font-style: normal;
-        font-weight: normal;
-        font-size: 11px;
+        font-weight:$font-weight-normal;
+        font-size: $font-size-11;
         line-height: 147%;
         letter-spacing: -0.005em;
-        color: #000000;
+        color:$black;
         opacity: 0.5;
      }
 }
