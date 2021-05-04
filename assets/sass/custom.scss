@@ -1,23 +1,24 @@
 /*=========================================== =============
       Custom
 =========================================================*/
-*
-{box-sizing: border-box}
+* {
+  box-sizing: border-box;
+}
 
-.custom-container{
+.custom-container {
   max-width: 1140px;
   margin: auto;
   padding: 0 1rem;
 }
-.custom-height{
+.custom-height {
   min-height: 700px;
 }
-.center-center{
+.center-center {
   display: grid;
   place-items: center;
 }
 
-.custom-padding{
+.custom-padding {
   padding-top: 5rem;
 }
 
@@ -25,36 +26,35 @@
        Section Color
 =========================================================*/
 
-.purple-section{
+.purple-section {
   background-color: $purple;
   color: $white;
 }
-.grey-section{
+.grey-section {
   background-color: $cultured;
 }
-.green-section{
+.green-section {
   background-color: $green;
 }
-.pink-section{
-  background-color:$pink;
+.pink-section {
+  background-color: $pink;
 }
 //.white-text{
 //  color:$white
 //}
 
-
 /*=========================================== =============
         Heading and Description
 =========================================================*/
-.heading{
-  color:$purple;
+.heading {
+  color: $purple;
   font-family: $font-family-primary;
   font-weight: $font-weight-600;
   font-size: $font-size-40;
-  text-shadow:-3px 2px 5px  $text-shadow-primary;
+  text-shadow: -3px 2px 5px $text-shadow-primary;
   text-transform: $text-transform-capitalize;
 }
-.description{
+.description {
   color: $black;
   font-family: $font-family-primary;
   font-weight: $font-weight-600;
@@ -65,10 +65,10 @@
 /*=========================================== =============
         Line Height
 =========================================================*/
-.line-height{
+.line-height {
   line-height: 2.5em;
 }
-.space{
+.space {
   margin-bottom: 3rem;
 }
 
@@ -76,14 +76,14 @@
        Alignment
 =========================================================*/
 
-.left-align{
+.left-align {
   text-align: left;
 }
-.section-align-center{
+.section-align-center {
   display: grid;
   place-items: center;
 }
-.section-align-baseline{
+.section-align-baseline {
   display: grid;
   place-items: baseline;
 }
@@ -91,20 +91,20 @@
 /*=========================================== =============
        Image
 =========================================================*/
-.img-fluid{
+.img-fluid {
   max-width: 100%;
   height: auto;
 }
-.img-height{
+.img-height {
   max-height: $img-max-height-125;
 }
 /*=========================================== =============
      Icons
 =========================================================*/
-.paw-icons-parent{
+.paw-icons-parent {
   position: relative;
 }
-.paw-icon{
+.paw-icon {
   display: flex;
   position: absolute;
   flex-wrap: wrap;
@@ -112,30 +112,30 @@
   top: 13px;
   z-index: 1;
 }
-.paw{
-  background-color:$white;
+.paw {
+  background-color: $white;
   border-radius: 50%;
   height: 33px;
   width: 33px;
 }
-.paw-purple{
-  color:$purple
+.paw-purple {
+  color: $purple;
 }
-.paw-pink{
-  color:$pink
+.paw-pink {
+  color: $pink;
 }
-.paw-green{
-  color:$green
+.paw-green {
+  color: $green;
 }
 
 /*=========================================== =============
        Button
 =========================================================*/
-.round-btn{
+.round-btn {
   font-family: $font-family-primary;
   font-weight: $font-weight-600;
   font-size: $font-size-16;
-  text-shadow: -3px 2px 5px  $text-shadow-primary;
+  text-shadow: -3px 2px 5px $text-shadow-primary;
   text-transform: $text-transform-capitalize;
   color: $purple;
   background-color: $white;
@@ -143,7 +143,7 @@
   border-width: 3px 3px 3px 3px;
   border-color: $purple;
 }
-.round-btn:hover{
+.round-btn:hover {
   color: $white;
   background-color: $purple;
 }
@@ -151,44 +151,41 @@
 /*=========================================== =============
       Card
 =========================================================*/
-.grey-section{
-  .card-radius{
+.grey-section {
+  .card-radius {
     border-radius: 15px;
     box-shadow: -5px 10px 10px 0px $text-shadow-primary;
   }
 }
 
-
-.list-height{
-  .v-list-item{
+.list-height {
+  .v-list-item {
     min-height: 32px;
   }
-  .v-list-item__content{
+  .v-list-item__content {
     padding: 0;
   }
 }
 
-
-
 /*=========================================== =============
      Location Search & cards
 =========================================================*/
-.search-form-filter{
+.search-form-filter {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
-.search-form-field{
+.search-form-field {
   margin-right: 1rem;
-  label{
+  label {
     font-family: $font-family-primary;
     font-size: $font-size-14;
     font-weight: $font-weight-400;
     color: $black;
   }
 }
-.search-form-label{
+.search-form-label {
   text-align: left;
 }
 
@@ -215,97 +212,95 @@
   }
 }
 
-  .search-btn {
-    background-color: $blue;
-    color: $white;
-    font-family: $font-family-primary;
-    font-size: $font-size-15;
-    font-weight: $font-weight-500;
-    text-transform: $text-transform-capitalize;
-    border-radius: 100px;
-    padding: 0 50px 0 50px;
-    letter-spacing: 0;
-  }
+.search-btn {
+  background-color: $blue;
+  color: $white;
+  font-family: $font-family-primary;
+  font-size: $font-size-15;
+  font-weight: $font-weight-500;
+  text-transform: $text-transform-capitalize;
+  border-radius: 100px;
+  padding: 0 50px 0 50px;
+  letter-spacing: 0;
+}
 
-  .custom-card-padding {
-    padding: 3rem 0 3rem 0;
-  }
+.custom-card-padding {
+  padding: 3rem 0 3rem 0;
+}
 
-  .card-flex {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
+.card-flex {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 
-  .card-flex-rating {
-    display: flex;
-    align-items: baseline;
-  }
-.card-custom-height{
+.card-flex-rating {
+  display: flex;
+  align-items: baseline;
+}
+.card-custom-height {
   min-height: 280px;
 }
-  .card-heading {
-    color: $dark-charcoal;
-    //font-size: $font-size-28;
-    //font-weight: $font-weight-600;
-    font-size: $font-size-22;
-    font-weight: normal;
-    line-height: 32px;
-    margin-bottom: 10px;
-    text-transform: $text-transform-capitalize;
-    font-style: normal;
-    word-break: break-word;
-    font-family: $font-family-primary;
-  }
+.card-heading {
+  color: $dark-charcoal;
+  //font-size: $font-size-28;
+  //font-weight: $font-weight-600;
+  font-size: $font-size-22;
+  font-weight: normal;
+  line-height: 32px;
+  margin-bottom: 10px;
+  text-transform: $text-transform-capitalize;
+  font-style: normal;
+  word-break: break-word;
+  font-family: $font-family-primary;
+}
 
-  .card-heading-point {
-    //padding-left: 2px;
-    margin-top: 3px;
-    color: $grey;
-    font-size: $font-size-15;
-  }
+.card-heading-point {
+  //padding-left: 2px;
+  margin-top: 3px;
+  color: $grey;
+  font-size: $font-size-15;
+}
 
-  .card-description {
-    //color: $matterhorn;
-    color: $light-charcoal;
-    font-size: $font-size-15;
-    font-weight: $font-weight-600;
-    line-height: 1.87;
-    font-family: $font-family-primary;
-  }
-.bg-img-height{
+.card-description {
+  //color: $matterhorn;
+  color: $light-charcoal;
+  font-size: $font-size-15;
+  font-weight: $font-weight-600;
+  line-height: 1.87;
+  font-family: $font-family-primary;
+}
+.bg-img-height {
   height: 270px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 10px 10px 0 0;
 }
-  .card-img {
-    max-height: $img-max-height-270;
-    border-radius: 10px 10px 0 0;
-  }
+.card-img {
+  max-height: $img-max-height-270;
+  border-radius: 10px 10px 0 0;
+}
 
-  .card-btn {
-    padding: 5px 15px 5px 15px;
-    color: $white;
-    text-transform: $text-transform-capitalize;
-    font-family: $font-family-primary;
-    font-size: $font-size-12;
-    letter-spacing: 0;
-  }
+.card-btn {
+  padding: 5px 15px 5px 15px;
+  color: $white;
+  text-transform: $text-transform-capitalize;
+  font-family: $font-family-primary;
+  font-size: $font-size-12;
+  letter-spacing: 0;
+}
 
-  .comment-color {
-    cursor: pointer;
-    color: $green;
-  }
-.pagination{
+.comment-color {
+  cursor: pointer;
+  color: $green;
+}
+.pagination {
   padding: 30px;
 }
 
-
-
 //new card
-.card-section{
+.card-section {
   //min-height: 412px;
   min-height: 440px;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
@@ -313,10 +308,10 @@
   border-radius: 19px;
   cursor: pointer;
 }
-.card-category{
+.card-category {
   padding: 16px;
 
-  h2{
+  h2 {
     font-family: $font-family-primary;
     font-style: normal;
     font-weight: bold;
@@ -324,10 +319,9 @@
     line-height: 25px;
     color: $black_currant;
   }
-
 }
-.category-title{
-  font-family:$font-family-primary;
+.category-title {
+  font-family: $font-family-primary;
   font-style: normal;
   //font-weight: normal;
   font-size: 14px;
@@ -335,7 +329,7 @@
   color: $primary_gray;
   font-weight: $font-weight-600;
 }
-.cat-btn{
+.cat-btn {
   //min-width: 130px;
   //min-height: 25px;
   font-family: $font-family-primary;
@@ -346,111 +340,108 @@
   color: $white;
   margin-right: 4px;
   text-transform: capitalize;
-
 }
-.icon-img{
-  max-height:$img-max-height-40;
+.icon-img {
+  max-height: $img-max-height-40;
 }
 //  google place css
-.search-location{
-  border: 1px solid  rgba(0, 0, 0, 0.38);
+.search-location {
+  border: 1px solid rgba(0, 0, 0, 0.38);
   border-radius: 30px;
   min-height: 48px;
   max-width: 273px;
-  box-shadow: unset ;
+  box-shadow: unset;
   font-weight: $font-weight-bold;
   font-family: $font-family-primary;
   background-color: $white;
   padding: 0 24px;
   margin-top: 8px;
-  &:focus{
+  &:focus {
     outline: none !important;
   }
 }
-.pac-container.pac-logo{
-  &:after{
+.pac-container.pac-logo {
+  &:after {
     content: unset;
   }
 }
 
-
 // Review List Section
-.reviews-details-block{
+.reviews-details-block {
   margin: 35px 0;
 }
-.reviews-details-list-main{
+.reviews-details-list-main {
   padding: 25px;
   background: $cultured;
   border-radius: 10px;
   margin-bottom: 25px;
 }
-.reviews-details-list{
+.reviews-details-list {
   display: flex;
 }
-.reviews-use-pic{
+.reviews-use-pic {
   width: 50px;
   height: 50px;
   overflow: hidden;
   border-radius: 1000px;
 }
-.reviews-details{
+.reviews-details {
   flex: 1;
   margin-left: 20px;
 }
-.reviews-star-details{
+.reviews-star-details {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   padding-top: 5px;
 }
-.delete-icon{
+.delete-icon {
   display: flex;
   justify-content: flex-end;
   cursor: pointer;
 }
-.rate-text{
+.rate-text {
   font-size: 36px;
   color: $dark-charcoal;
   font-family: $font-family-primary;
   font-weight: $font-weight-normal;
 }
-.date-text{
-  font-size:$font-size-14;
+.date-text {
+  font-size: $font-size-14;
   font-family: $font-family-primary;
   font-weight: $font-weight-normal;
-  color: rgba(51,51,51,0.5);
+  color: rgba(51, 51, 51, 0.5);
   line-height: 30px;
 }
-.comments-text{
+.comments-text {
   padding: 15px 0 20px;
-  font-size:$font-size-16;
+  font-size: $font-size-16;
   font-family: $font-family-primary;
   font-weight: $font-weight-normal;
-  color: rgba(51,51,51,0.5);
+  color: rgba(51, 51, 51, 0.5);
   line-height: 30px;
 }
-.user-name{
-  font-size:$font-size-16;
+.user-name {
+  font-size: $font-size-16;
   font-family: $font-family-primary;
   font-weight: $font-weight-normal;
   color: $dark-charcoal;
   display: inline-block;
 }
-.reply-comment{
+.reply-comment {
   cursor: pointer;
 }
-.custom-reply-ml{
+.custom-reply-ml {
   margin-left: 40px;
 }
 
-
 // Profile Dashboard
 
-.profile-title{
+.profile-title {
   padding-top: 30px;
   padding-left: 24px;
-  h2{
-    font-family:$font-family-secondary;
+  h2 {
+    font-family: $font-family-secondary;
     font-style: normal;
     font-weight: $font-weight-500;
     font-size: $font-size-14;
@@ -460,3 +451,50 @@
   }
 }
 
+// number component
+$number-com-height: 60px;
+.vue-phone-number-input {
+  .select-country-container {
+    .country-selector.lg {
+      height: $number-com-height;
+      min-height: $number-com-height;
+
+      &.has-value .country-selector__input {
+        height: $number-com-height;
+        min-height: $number-com-height;
+        padding-bottom: 10px;
+        border-color: #9e9e9e;
+      }
+
+      .country-selector__toggle {
+        top: calc(50% - 9px);
+      }
+
+      .country-selector__country-flag {
+        top: 28px;
+      }
+
+      &.has-value .country-selector__label {
+        top: 6px;
+      }
+    }
+  }
+
+  .input-tel.lg {
+    height: $number-com-height !important;
+    min-height: $number-com-height !important;
+
+    .input-tel__input {
+      height: $number-com-height !important;
+      min-height: $number-com-height !important;
+      border-color: #9e9e9e !important;
+    }
+  }
+}
+
+.w-100 {
+  width: 100%;
+}
+.bold {
+  font-weight: bold;
+}
