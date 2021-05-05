@@ -1,69 +1,116 @@
 <template>
-  <ContentContainer @cancel="cancel" @save="save">
-    <h1>business hour</h1>
-
-    <div class="week-day">
+  <ContentContainer
+    @cancel="cancel"
+    @save="save"
+    max-width="600px"
+    :disableSave="disableSave"
+  >
+    <div class="week-day" v-for="(key, day, index) in weeks" :key="index">
       <v-checkbox
-        v-model="monday.disabled"
-        label="Monday"
+        v-model="weeks[day].disabled"
+        :label="day"
         color="indigo"
-        value="monday"
+        :value="day"
         hide-details
-        class="mt-0"
+        class="mt-0 mr-5"
       ></v-checkbox>
 
-      <div class="times">
-        <v-select
-          :items="items"
-          chips
-          label="10:10"
-          rounded
-          outlined
-          :disabled="!monday.disabled"
-        ></v-select>
-
-        to
-
-        <v-select
-          :items="items"
-          chips
-          label="10:10"
-          rounded
-          outlined
-          :disabled="!monday.disabled"
-        ></v-select>
-      </div>
+      <time-range
+        @selected="time_range => timeSelected(time_range, day)"
+        :disabled="weeks[day].disabled"
+      />
     </div>
   </ContentContainer>
 </template>
 
 <script>
 import ContentContainer from "~/components/Profile/content-container";
-
+import TimeRange from "./component/time-range";
 export default {
   name: "services",
-  components: { ContentContainer },
+  components: { ContentContainer, TimeRange },
   data: () => ({
-    monday: {
-      disabled: false
+    weeks: {
+      monday: {
+        disabled: false,
+        time_range: {}
+      },
+      tuesday: {
+        disabled: false,
+        time_range: {}
+      },
+      wednesday: {
+        disabled: false,
+        time_range: {}
+      },
+      thursday: {
+        disabled: false,
+        time_range: {}
+      },
+      firday: {
+        disabled: false,
+        time_range: {}
+      },
+      saturday: {
+        disabled: false,
+        time_range: {}
+      },
+      sunday: {
+        disabled: false,
+        time_range: {}
+      }
     }
   }),
   computed: {
-    items() {
-      return [
-        { text: "01:11", value: "11:200" },
-        { text: "0s1:11", value: "11:20" },
-        { text: "0d1:11", value: "11:40" },
-        { text: "0f1:11", value: "11:500" },
-        { text: "0g1:11", value: "11:600" },
-        { text: "0a1:11", value: "11:700" }
-      ];
+    disableSave() {
+      let disabled = true;
+      for (const day in this.weeks) {
+        if (this.weeks[day].disabled) disabled = false;
+      }
+
+      return disabled;
     }
   },
   methods: {
-    save() {},
-    cancel() {}
-  }
+    save() {
+      const errors = this.isValid();
+
+      if (!errors.length) {
+        this.$emit("next-tab");
+      } else {
+        // errors.forEach(err => {
+        //   this.$store.commit("SHOW_SNACKBAR", {
+        //     snackbar: true,
+        //     color: "red",
+        //     message: err
+        //   });
+        // });
+      }
+    },
+    isValid() {
+      let errors = [];
+      for (const day in this.weeks) {
+        if (Object.hasOwnProperty.call(this.weeks, day)) {
+          const element = this.weeks[day];
+          if (!!element.disabled) {
+            const { time_range } = element;
+            if (!time_range.to || !time_range.from) {
+              errors.push(`Time in ${day} is either invalid or missing`);
+            }
+          }
+        }
+      }
+
+      return errors;
+    },
+    cancel() {
+      this.$emit("skip-step");
+    },
+    timeSelected(time, day) {
+      this.weeks[day].time_range = time;
+    }
+  },
+  watch: {}
 };
 </script>
 
@@ -73,9 +120,14 @@ export default {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 1.5rem;
 
   &::v-deep .v-text-field__details {
     display: none;
+  }
+
+  &::v-deep .v-input--selection-controls.v-input {
+    min-width: 130px;
   }
 
   .times {

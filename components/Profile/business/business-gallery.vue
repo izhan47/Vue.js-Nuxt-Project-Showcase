@@ -61,7 +61,9 @@ export default {
   }),
   methods: {
     save() {},
-    cancel() {},
+    cancel() {
+      this.$emit("skip-step");
+    },
     removeImage(id) {
       this.files = this.files.filter(file => file.id !== id);
       this.images = this.images.filter(image => image.id !== id);

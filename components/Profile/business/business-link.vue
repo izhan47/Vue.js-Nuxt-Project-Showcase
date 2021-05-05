@@ -1,5 +1,10 @@
 <template>
-  <ContentContainer @cancel="cancel" @save="save">
+  <ContentContainer
+    @cancel="cancel"
+    @save="save"
+    :disableSave="disableSave"
+    saveBtnText="save"
+  >
     <div class="d-flex align-items-center">
       <v-text-field
         label="Donation Link"
@@ -25,9 +30,17 @@ export default {
       link: ""
     }
   }),
+  computed: {
+    disableSave() {
+      if (!this.form.link) return true;
+      return false;
+    }
+  },
   methods: {
     save() {},
-    cancel() {}
+    cancel() {
+      this.$router.push("/auth/Profile");
+    }
   }
 };
 </script>

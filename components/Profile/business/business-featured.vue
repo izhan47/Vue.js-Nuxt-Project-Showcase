@@ -1,5 +1,9 @@
 <template>
-  <ContentContainer @cancel="cancel" @save="save">
+  <ContentContainer
+    @cancel="$emit('skip-step')"
+    @save="save"
+    :disableSave="disableSave"
+  >
     <v-text-field
       label="Feature Title"
       placeholder="Enter Store Name"
@@ -32,9 +36,17 @@ export default {
       description: ""
     }
   }),
+  computed: {
+    disableSave() {
+      const { title, description } = this.form;
+      if (!title || !description) return true;
+      return false;
+    }
+  },
   methods: {
-    save() {},
-    cancel() {}
+    save() {
+      this.$emit("next-tab");
+    }
   }
 };
 </script>

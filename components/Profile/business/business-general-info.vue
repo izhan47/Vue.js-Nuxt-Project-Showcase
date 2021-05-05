@@ -4,6 +4,7 @@
     @save="save"
     hide-cancel
     :disable-save="!hasError"
+    :loading="loading"
   >
     <v-text-field
       label="Store Name"
@@ -148,7 +149,8 @@ export default {
     states: [],
     cities: [],
     stateLoading: false,
-    cityLoading: false
+    cityLoading: false,
+    loading: false
   }),
   computed: {
     businessNatureList() {
@@ -199,8 +201,18 @@ export default {
     }
   },
   methods: {
-    save() {
-      console.log("create/save business");
+    async save() {
+      try {
+        // this.loading = true;
+        // const resp = await this.$axios.post("pet-pros/new-pet-pro", this.form);
+
+        // console.log(resp);
+        this.$emit("next-tab");
+        // this.loading = false;
+      } catch (error) {
+        console.log(error);
+        this.loading = false;
+      }
     },
     cancel() {},
     async fetchStates() {
@@ -232,6 +244,9 @@ export default {
         this.cityLoading = false;
         console.log(err);
       }
+    },
+    getValues() {
+      return this.form;
     }
   },
   async created() {
