@@ -1,0 +1,49 @@
+.custom-footer-padding{
+  padding-top: 2rem;
+}
+.footer-menu-heading{
+  color: $black;
+  font-family:  $font-family-primary;
+  font-weight: $font-weight-700;
+  font-size: $font-size-17;
+  text-align: left;
+
+}
+.footer-items{
+  font-family:  $font-family-primary;
+  font-weight:  $font-weight-600;
+  font-size: $font-size-16;
+  text-align: left;
+  color: $purple;
+  cursor: pointer;
+}
+
+.footer-color{
+  color: $green;
+  border: 5px solid $green;
+  width: 100%;
+}
+.footer-icon{
+  color: $purple;
+}
+.divider{
+  width:100%;
+  height:1px;
+  background:$purple;
+  margin:10px 0;
+}
+.copy-rights{
+  background-color:$cultured;
+}
+.copy-rights-text{
+  color: $black;
+  font-family:  $font-family-primary;
+  font-size: $font-size-13;
+  font-weight:  $font-weight-600;
+  text-transform: $text-transform-capitalize;
+  cursor: pointer;
+  max-width: 660px;
+  width: 100%;
+  text-align: end;
+  padding-top: 1.2rem;
+}
