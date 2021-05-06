@@ -13,7 +13,7 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-text-field
-          :label="`${day} Open`"
+          :label="`${day.charAt(0).toUpperCase() + day.substr(1)} Open`"
           readonly
           v-bind="attrs"
           v-on="on"
@@ -47,7 +47,7 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-text-field
-          :label="`${day} Close`"
+          :label="`${day.charAt(0).toUpperCase() + day.substr(1)} Close`"
           readonly
           v-bind="attrs"
           v-on="on"

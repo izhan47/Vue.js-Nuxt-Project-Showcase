@@ -1,5 +1,5 @@
 <template>
-  <div class="content-container">
+  <div class="content-container" :style="{ 'max-width': maxWidth }">
     <div class="content ">
       <slot />
     </div>
@@ -51,6 +51,10 @@ export default {
     saveBtnText: {
       type: String,
       default: "Save and Continue"
+    },
+    maxWidth: {
+      type: String,
+      default: "500px"
     }
   }
 };
