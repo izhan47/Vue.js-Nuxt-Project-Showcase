@@ -1,18 +1,14 @@
 <template>
-  <ContentContainer
-    @cancel="cancel"
-    @save="save"
-    max-width="600px"
-    :disableSave="disableSave"
-  >
+  <ContentContainer @cancel="cancel" @save="save">
+    <h1>business hour</h1>
+
     <div class="week-day" v-for="(key, day, index) in weeks" :key="index">
       <v-checkbox
         v-model="weeks[day].disabled"
         :label="day"
         color="indigo"
-        :value="day"
         hide-details
-        class="mt-0 mr-5"
+        class="mt-0"
       ></v-checkbox>
 
       <time-range
@@ -162,14 +158,9 @@ export default {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 1.5rem;
 
   &::v-deep .v-text-field__details {
     display: none;
-  }
-
-  &::v-deep .v-input--selection-controls.v-input {
-    min-width: 130px;
   }
 
   .times {

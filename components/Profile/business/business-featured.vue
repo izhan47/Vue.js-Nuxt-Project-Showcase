@@ -1,8 +1,8 @@
 <template>
   <ContentContainer
     @cancel="$emit('skip-step')"
+    :disable-save="disableSave"
     @save="save"
-    :disableSave="disableSave"
   >
     <v-text-field
       label="Feature Title"

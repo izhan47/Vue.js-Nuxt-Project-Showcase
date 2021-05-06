@@ -1,5 +1,5 @@
 <template>
-  <div class="content-container" :style="{ 'max-width': maxWidth }">
+  <div class="content-container">
     <div class="content ">
       <slot />
     </div>
@@ -12,21 +12,18 @@
         x-large
         @click="$emit('cancel')"
         v-if="!hideCancel"
-        :disabled="disableCancel || loading"
-        :loading="loading"
+        :disabled="disableCancel"
         >Skip</v-btn
       >
       <v-btn
         rounded
         color="#46259A"
-        :disabled="disableSave || loading"
+        :disabled="disableSave"
         x-large
-        :dark="!disableSave || loading"
+        :dark="!disableSave"
         @click="$emit('save')"
-        :loading="loading"
+        >{{ saveBtnText }}</v-btn
       >
-        {{ saveBtnText }}
-      </v-btn>
     </div>
   </div>
 </template>
@@ -51,17 +48,9 @@ export default {
       type: Boolean,
       default: false
     },
-    loading: {
-      type: Boolean,
-      default: false
-    },
-    maxWidth: {
-      type: String,
-      defyalt: "500px"
-    },
     saveBtnText: {
       type: String,
-      default: "save and continue"
+      default: "Save and Continue"
     }
   }
 };

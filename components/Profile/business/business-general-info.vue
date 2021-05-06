@@ -1,11 +1,5 @@
 <template>
-  <ContentContainer
-    @cancel="cancel"
-    @save="save"
-    hide-cancel
-    :disable-save="!hasError"
-    :loading="loading"
-  >
+  <ContentContainer @save="save" hide-cancel :disable-save="!hasError">
     <v-text-field
       label="Store Name"
       placeholder="Enter Store Name"
@@ -208,7 +202,6 @@ export default {
     save() {
       this.$emit("next-tab", this.form);
     },
-    cancel() {},
     async fetchStates() {
       try {
         this.form.state_id = [];

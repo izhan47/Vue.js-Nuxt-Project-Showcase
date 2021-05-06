@@ -1,9 +1,9 @@
 <template>
   <div class="main-container">
     <h3 class="mt-3">Add Business</h3>
-    <!-- <v-tabs center-active v-model="tab">
+    <v-tabs center-active v-model="tab">
       <v-tab v-for="item in items" :key="item.tab">{{ item.tab }}</v-tab>
-    </v-tabs> -->
+    </v-tabs>
 
     <v-stepper v-model="currentStep" vertical>
       <template v-for="item in items">
@@ -28,27 +28,9 @@
             @skip-step="skipStep"
             @save-business="addNewBusiness"
           />
-
-          <!-- <v-btn color="primary" @click="nextTab(item)">
-            Continue
-          </v-btn> -->
-          <!-- <v-btn color="primary" @click="nextTab(item)">
-            Continue
-          </v-btn>
-          <v-btn text>
-            Cancel
-          </v-btn> -->
         </v-stepper-content>
       </template>
     </v-stepper>
-
-    <!-- <v-tabs-items v-model="tab">
-      <v-tab-item v-for="item in items" :key="item.tab">
-        <div class="child-container">
-          <component :is="item.component" />
-        </div>
-      </v-tab-item>
-    </v-tabs-items> -->
   </div>
 </template>
 
@@ -195,7 +177,6 @@ export default {
 <style lang="scss" scoped>
 .main-container {
   padding: 0 2rem;
-  padding-bottom: 1rem;
 }
 
 .child-container {

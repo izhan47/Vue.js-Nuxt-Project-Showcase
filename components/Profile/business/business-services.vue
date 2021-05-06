@@ -2,7 +2,7 @@
   <ContentContainer
     @cancel="$emit('skip-step')"
     @save="save"
-    :disableSave="!services.length"
+    :disable-save="!services.length"
   >
     <h3>Services Offered</h3>
 

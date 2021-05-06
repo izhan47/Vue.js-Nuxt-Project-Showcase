@@ -1,5 +1,9 @@
 <template>
-  <ContentContainer @cancel="cancel" @save="save" :disable-save="disableSave">
+  <ContentContainer
+    @cancel="$emit('skip-step')"
+    @save="save"
+    :disable-save="disableSave"
+  >
     <input
       type="file"
       class="d-none"
@@ -82,9 +86,6 @@ export default {
           ...row
         ]
       });
-    },
-    cancel() {
-      this.$emit("skip-step");
     },
     removeImage(id) {
       this.files = this.files.filter(file => file.id !== id);
