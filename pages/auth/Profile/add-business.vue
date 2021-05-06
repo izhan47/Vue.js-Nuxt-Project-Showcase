@@ -5,13 +5,32 @@
       <v-tab v-for="item in items" :key="item.tab">{{ item.tab }}</v-tab>
     </v-tabs>
 
-    <v-tabs-items v-model="tab">
-      <v-tab-item v-for="item in items" :key="item.tab">
-        <div class="child-container">
-          <component :is="item.component" />
-        </div>
-      </v-tab-item>
-    </v-tabs-items>
+    <v-stepper v-model="currentStep" vertical>
+      <template v-for="item in items">
+        <v-stepper-step
+          :complete="currentStep > item.index"
+          :step="item.index"
+          :key="item.index"
+          :editable="currentStep > item.index"
+        >
+          {{ item.tab }}
+        </v-stepper-step>
+
+        <v-stepper-content
+          :step="item.index"
+          :key="item.index + item.component"
+        >
+          <!-- <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card> -->
+          <component
+            :is="item.component"
+            :ref="item.component"
+            @next-tab="nextTab"
+            @skip-step="skipStep"
+            @save-business="addNewBusiness"
+          />
+        </v-stepper-content>
+      </template>
+    </v-stepper>
   </div>
 </template>
 
@@ -35,18 +54,121 @@ export default {
   },
   middleware: ["auth"],
   data: () => ({
-    tab: "Gallery"
+    tab: "Gallery",
+    currentStep: 1,
+    form: {
+      store_name: "",
+      email: "",
+      website_url: "",
+      phone_number: "",
+      address_line_1: "",
+      category_id: [],
+      business_id: [],
+      country_id: [],
+      state_id: [],
+      city_id: [],
+      donation_link: "",
+      is_featured_pet_pro: 0,
+      featured_title: "",
+      featured_description: "",
+      services: [],
+      is_cover_image: 1
+      // monday_open: "",
+      // monday_close: "",
+      // tuesday_open: "",
+      // tuesday_close: "",
+      // wednesday_open: "",
+      // wednesday_close: "",
+      // thursday_open: "",
+      // thursday_close: "",
+      // friday_open: "",
+      // friday_close: "",
+      // saturday_open: "",
+      // saturday_close: "",
+      // sunday_open: "",
+      // sunday_close: ""
+    }
   }),
+
   computed: {
     items() {
       return [
-        { tab: "General Info", component: "generalInfo" },
-        { tab: "Gallery", component: "gallery" },
-        // { tab: "Hours of Operation", component: "hoursOfOperation" },
-        { tab: "Services", component: "services" },
-        { tab: "Featured", component: "featured" },
-        { tab: "Link", component: "businessLink" }
+        { tab: "General Info", component: "generalInfo", index: 1 },
+        { tab: "Gallery", component: "gallery", index: 2 },
+        { tab: "Hours of Operation", component: "hoursOfOperation", index: 3 },
+        { tab: "Services", component: "services", index: 4 },
+        { tab: "Featured", component: "featured", index: 5 },
+        { tab: "Link", component: "businessLink", index: 6 }
       ];
+    }
+  },
+  methods: {
+    nextTab(data) {
+      if (!!data) {
+        this.form = {
+          ...this.form,
+          ...data
+        };
+      }
+      this.currentStep++;
+      window.scrollTo(100, 0);
+
+      console.log("lolz", this.form);
+    },
+    skipStep() {
+      this.currentStep++;
+    },
+    saveTab(item) {
+      const component = this.$refs[item.component][0];
+      console.log("save tab", component.getValues());
+    },
+    async addNewBusiness(data) {
+      try {
+        this.$store.commit("SHOW_LOADER", true);
+        if (data) {
+          this.form = {
+            ...this.form,
+            ...data
+          };
+        }
+
+        const fd = new FormData();
+
+        for (const key in this.form) {
+          const element = this.form[key];
+
+          if (element) {
+            if (Array.isArray(element)) {
+              if (key === "row") {
+                element.forEach((e, index) => {
+                  fd.append(`${key}[${index}][image]`, e.image);
+                  fd.append(`${key}[${index}][cropped_image]`, e.cropped_image);
+                });
+              } else {
+                element.forEach((e, index) => {
+                  fd.append(`${key}[${index}]`, e);
+                });
+              }
+            } else {
+              fd.append(key, element);
+            }
+          }
+        }
+
+        const resp = await this.$axios.post("pet-pro/new-pet-pro", fd, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        });
+
+        console.log(resp);
+
+        this.$store.commit("SHOW_LOADER", false);
+        this.$router.push("/pet-category");
+      } catch (err) {
+        this.$store.commit("SHOW_LOADER", false);
+        console.log(err);
+      }
     }
   }
 };

@@ -1,5 +1,9 @@
 <template>
-  <ContentContainer @cancel="cancel" @save="save">
+  <ContentContainer
+    @cancel="$emit('skip-step')"
+    @save="save"
+    :disable-save="disableSave"
+  >
     <input
       type="file"
       class="d-none"
@@ -59,9 +63,30 @@ export default {
     files: [],
     images: []
   }),
+  computed: {
+    disableSave() {
+      return this.files.length === 0;
+    }
+  },
   methods: {
-    save() {},
-    cancel() {},
+    save() {
+      const row = this.files.map(f => {
+        return {
+          image: f.file,
+          cropped_image: ""
+        };
+      });
+
+      this.$emit("next-tab", {
+        row: [
+          {
+            image: "",
+            cropped_image: ""
+          },
+          ...row
+        ]
+      });
+    },
     removeImage(id) {
       this.files = this.files.filter(file => file.id !== id);
       this.images = this.images.filter(image => image.id !== id);
@@ -73,7 +98,7 @@ export default {
         let url = URL.createObjectURL(file);
         const id = Date.now() + Math.random();
         this.images.push({ url, id, name: file.name });
-        this.files.push({ files, id });
+        this.files.push({ file, id });
       }
 
       this.$refs.fileInput.value = null;

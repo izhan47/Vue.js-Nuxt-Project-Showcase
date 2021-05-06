@@ -1,5 +1,9 @@
 <template>
-  <ContentContainer hide-btns>
+  <ContentContainer
+    @cancel="$emit('skip-step')"
+    @save="save"
+    :disable-save="!services.length"
+  >
     <h3>Services Offered</h3>
 
     <div class="services mt-4">
@@ -98,6 +102,9 @@ export default {
     },
     deleteService(service) {
       this.services = this.services.filter(s => s !== service);
+    },
+    save() {
+      this.$emit("next-tab", { services: this.services });
     }
   }
 };
