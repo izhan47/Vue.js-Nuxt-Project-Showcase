@@ -17,6 +17,7 @@
 
       <time-range
         @selected="time_range => timeSelected(time_range, day)"
+        :day="day"
         :disabled="weeks[day].disabled"
       />
     </div>
@@ -33,31 +34,38 @@ export default {
     weeks: {
       monday: {
         disabled: false,
-        time_range: {}
+        open: "",
+        close: ""
       },
       tuesday: {
         disabled: false,
-        time_range: {}
+        open: "",
+        close: ""
       },
       wednesday: {
         disabled: false,
-        time_range: {}
+        open: "",
+        close: ""
       },
       thursday: {
         disabled: false,
-        time_range: {}
+        open: "",
+        close: ""
       },
       firday: {
         disabled: false,
-        time_range: {}
+        open: "",
+        close: ""
       },
       saturday: {
         disabled: false,
-        time_range: {}
+        open: "",
+        close: ""
       },
       sunday: {
         disabled: false,
-        time_range: {}
+        open: "",
+        close: ""
       }
     }
   }),
@@ -69,15 +77,45 @@ export default {
       }
 
       return disabled;
+    },
+    formatedPayload() {
+      let obj = {};
+      for (const key in this.weeks) {
+        const element = this.weeks[key];
+
+        if (!element.disabled) {
+          // obj[`${key}_open`] = false;
+          // obj[`${key}_close`] = false;
+        } else {
+          obj[`${key}_open`] = this.formatTime(element.open);
+          obj[`${key}_close`] = this.formatTime(element.close);
+          obj[key] = "on";
+        }
+      }
+      return obj;
     }
   },
   methods: {
+    formatTime(time) {
+      time = time
+        .toString()
+        .match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+      if (time.length > 1) {
+        // If time format correct
+        time = time.slice(1); // Remove full string match value
+        time[5] = +time[0] < 12 ? "AM" : "PM"; // Set AM/PM
+        time[0] = +time[0] % 12 || 12; // Adjust hours
+      }
+      return time.join("");
+    },
     save() {
       const errors = this.isValid();
 
       if (!errors.length) {
-        this.$emit("next-tab");
+        this.$emit("next-tab", this.formatedPayload);
       } else {
+        console.log(errors);
         // errors.forEach(err => {
         //   this.$store.commit("SHOW_SNACKBAR", {
         //     snackbar: true,
@@ -93,9 +131,13 @@ export default {
         if (Object.hasOwnProperty.call(this.weeks, day)) {
           const element = this.weeks[day];
           if (!!element.disabled) {
-            const { time_range } = element;
-            if (!time_range.to || !time_range.from) {
+            const { open, close } = element;
+            if (!open || !close) {
               errors.push(`Time in ${day} is either invalid or missing`);
+            }
+
+            if (close <= open) {
+              errors.push(`Close time should after the start time in ${day} `);
             }
           }
         }
@@ -107,7 +149,7 @@ export default {
       this.$emit("skip-step");
     },
     timeSelected(time, day) {
-      this.weeks[day].time_range = time;
+      this.weeks[day] = { ...this.weeks[day], ...time };
     }
   },
   watch: {}

@@ -2,7 +2,7 @@
   <ContentContainer
     @cancel="cancel"
     @save="save"
-    :disableSave="disableSave"
+    hide-cancel
     saveBtnText="save"
   >
     <div class="d-flex align-items-center">
@@ -12,7 +12,7 @@
         rounded
         outlined
         type="text"
-        v-model="form.link"
+        v-model="form.donation_link"
         clearable
       ></v-text-field>
     </div>
@@ -27,17 +27,16 @@ export default {
   components: { ContentContainer },
   data: () => ({
     form: {
-      link: ""
+      donation_link: ""
     }
   }),
   computed: {
-    disableSave() {
-      if (!this.form.link) return true;
-      return false;
-    }
+    disableSave() {}
   },
   methods: {
-    save() {},
+    save() {
+      this.$emit("save-business", this.form);
+    },
     cancel() {
       this.$router.push("/auth/Profile");
     }

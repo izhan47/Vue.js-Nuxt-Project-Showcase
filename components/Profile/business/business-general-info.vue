@@ -25,32 +25,33 @@
     ></v-text-field>
 
     <v-text-field
-      label="Website URL"
+      label="Website url"
       placeholder="Website url"
       rounded
       outlined
-      type="url"
-      v-model="form.url"
+      type="website_url"
+      v-model="form.website_url"
     ></v-text-field>
 
     <VuePhoneNumberInput
-      v-model="form.phone"
+      v-model="phone"
       default-country-code="US"
       :border-radius="28"
       class="mb-7"
       valid-color="green"
       error-color="red"
       size="lg"
+      @update="updatePhone"
     />
 
     <v-textarea
       rounded
       outlined
       auto-grow
-      label="Address"
+      label="Enter Address"
       rows="4"
       row-height="30"
-      v-model="form.address"
+      v-model="form.address_line_1"
     ></v-textarea>
 
     <v-select
@@ -58,7 +59,7 @@
       label="Countries"
       rounded
       outlined
-      v-model="form.country"
+      v-model="form.country_id[0]"
       @change="fetchStates"
     ></v-select>
 
@@ -69,8 +70,8 @@
           label="State"
           rounded
           outlined
-          :disabled="!form.country"
-          v-model="form.state"
+          :disabled="!form.country_id[0]"
+          v-model="form.state_id[0]"
           @change="fetchCities"
           :loading="stateLoading"
         ></v-select>
@@ -81,21 +82,21 @@
           label="City"
           rounded
           outlined
-          :disabled="!form.state"
-          v-model="form.city"
+          :disabled="!form.state_id[0]"
+          v-model="form.city_id[0]"
           :loading="cityLoading"
         ></v-select>
       </v-col>
     </v-row>
 
     <v-select
-      :items="businessNatureList"
+      :items="businessNature"
       multiple
       chips
       label="Nature of Business"
       rounded
       outlined
-      v-model="form.business"
+      v-model="form.business_id"
     ></v-select>
 
     <v-select
@@ -105,7 +106,7 @@
       label="Categories"
       rounded
       outlined
-      v-model="form.category"
+      v-model="form.category_id"
     ></v-select>
 
     <v-textarea
@@ -135,41 +136,39 @@ export default {
     form: {
       store_name: "",
       email: "",
-      url: "",
-      phone: "",
-      address: "",
-      country: "",
-      state: "",
-      city: "",
-      business: "",
-      category: "",
-      description: ""
+      website_url: "",
+      phone_number: "",
+      address_line_1: "",
+      country_id: [],
+      state_id: [],
+      city_id: [],
+      category_id: [],
+      business_id: []
     },
+    phone: "",
+    validPhone: false,
     countries: [],
     states: [],
     cities: [],
     stateLoading: false,
     cityLoading: false,
-    loading: false
+    loading: false,
+    businessNatureList: []
   }),
   computed: {
-    businessNatureList() {
-      return [
-        {
-          text: "Online",
-          value: "online"
-        },
-        {
-          text: "Virtual",
-          value: "virtual"
-        }
-      ];
+    businessNature() {
+      return this.businessNatureList.map(b => {
+        return {
+          text: b.label,
+          value: b.value
+        };
+      });
     },
     categoryList() {
       return this.$store.state.pet_category_list.map(category => {
         return {
           text: category.label,
-          value: category.label
+          value: category.value
         };
       });
     },
@@ -177,23 +176,28 @@ export default {
       const {
         store_name,
         email,
-        phone,
-        address,
-        country,
-        state,
-        city,
-        description
+        phone_number,
+        address_line_1,
+        country_id,
+        state_id,
+        city_id,
+        description,
+        category_id,
+        business_id
       } = this.form;
 
       if (
         !store_name ||
+        !address_line_1 ||
+        !phone_number ||
         !email ||
-        !phone ||
-        !address ||
-        !country ||
-        !state ||
-        !city ||
-        !description
+        !this.validPhone ||
+        !description ||
+        !country_id.length ||
+        !state_id.length ||
+        !city_id.length ||
+        !business_id.length ||
+        !category_id.length
       )
         return false;
 
@@ -201,25 +205,17 @@ export default {
     }
   },
   methods: {
-    async save() {
-      try {
-        // this.loading = true;
-        // const resp = await this.$axios.post("pet-pros/new-pet-pro", this.form);
-
-        // console.log(resp);
-        this.$emit("next-tab");
-        // this.loading = false;
-      } catch (error) {
-        console.log(error);
-        this.loading = false;
-      }
+    save() {
+      this.$emit("next-tab", this.form);
     },
     cancel() {},
     async fetchStates() {
       try {
-        this.form.state = "";
+        this.form.state_id = [];
         this.stateLoading = true;
-        const resp = await this.$axios.get(`get-states/${this.form.country}`);
+        const resp = await this.$axios.get(
+          `get-states/${this.form.country_id[0]}`
+        );
         const states = resp.data.data
           .filter(c => c.id)
           .map(c => ({ text: c.name, ...c, value: c.id }));
@@ -232,9 +228,11 @@ export default {
     },
     async fetchCities() {
       try {
-        this.form.city = "";
+        this.form.city_id = [];
         this.cityLoading = true;
-        const resp = await this.$axios.get(`get-cities/${this.form.state}`);
+        const resp = await this.$axios.get(
+          `get-cities/${this.form.state_id[0]}`
+        );
         const cities = resp.data.data
           .filter(c => c.id)
           .map(c => ({ text: c.name, ...c, value: c.id }));
@@ -245,19 +243,37 @@ export default {
         console.log(err);
       }
     },
+    async fetchBusinessNatureList() {
+      try {
+        const resp = await this.$axios.post(
+          "/pet-pro/get-business-nature-list"
+        );
+        this.businessNatureList = resp.data.data.business_nature_list;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     getValues() {
       return this.form;
+    },
+    updatePhone({ formattedNumber, isValid }) {
+      this.validPhone = isValid;
+      this.form.phone_number = formattedNumber;
     }
   },
   async created() {
     try {
+      this.loading = true;
       const resp = await this.$axios.post("get-country-list");
+      this.fetchBusinessNatureList();
       const countries = resp.data.data.country_list;
       this.countries = countries
         .filter(c => c.value)
         .map(c => ({ id: c.value, text: c.label, ...c }));
+      this.loading = false;
     } catch (error) {
       console.log(error);
+      this.loading = false;
     }
   },
   watch: {}

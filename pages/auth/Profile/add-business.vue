@@ -5,12 +5,13 @@
       <v-tab v-for="item in items" :key="item.tab">{{ item.tab }}</v-tab>
     </v-tabs> -->
 
-    <v-stepper v-model="e6" vertical>
+    <v-stepper v-model="currentStep" vertical>
       <template v-for="item in items">
         <v-stepper-step
-          :complete="e6 > item.index"
+          :complete="currentStep > item.index"
           :step="item.index"
           :key="item.index"
+          :editable="currentStep > item.index"
         >
           {{ item.tab }}
         </v-stepper-step>
@@ -25,6 +26,7 @@
             :ref="item.component"
             @next-tab="nextTab"
             @skip-step="skipStep"
+            @save-business="addNewBusiness"
           />
 
           <!-- <v-btn color="primary" @click="nextTab(item)">
@@ -71,8 +73,41 @@ export default {
   middleware: ["auth"],
   data: () => ({
     tab: "Gallery",
-    e6: 1
+    currentStep: 1,
+    form: {
+      store_name: "",
+      email: "",
+      website_url: "",
+      phone_number: "",
+      address_line_1: "",
+      category_id: [],
+      business_id: [],
+      country_id: [],
+      state_id: [],
+      city_id: [],
+      donation_link: "",
+      is_featured_pet_pro: 0,
+      featured_title: "",
+      featured_description: "",
+      services: [],
+      is_cover_image: 1
+      // monday_open: "",
+      // monday_close: "",
+      // tuesday_open: "",
+      // tuesday_close: "",
+      // wednesday_open: "",
+      // wednesday_close: "",
+      // thursday_open: "",
+      // thursday_close: "",
+      // friday_open: "",
+      // friday_close: "",
+      // saturday_open: "",
+      // saturday_close: "",
+      // sunday_open: "",
+      // sunday_close: ""
+    }
   }),
+
   computed: {
     items() {
       return [
@@ -87,16 +122,71 @@ export default {
   },
   methods: {
     nextTab(data) {
-      this.e6++;
-      console.log("NEXT TAB==>", data);
+      if (!!data) {
+        this.form = {
+          ...this.form,
+          ...data
+        };
+      }
+      this.currentStep++;
       window.scrollTo(100, 0);
+
+      console.log("lolz", this.form);
     },
     skipStep() {
-      this.e6++;
+      this.currentStep++;
     },
     saveTab(item) {
       const component = this.$refs[item.component][0];
       console.log("save tab", component.getValues());
+    },
+    async addNewBusiness(data) {
+      try {
+        this.$store.commit("SHOW_LOADER", true);
+        if (data) {
+          this.form = {
+            ...this.form,
+            ...data
+          };
+        }
+
+        const fd = new FormData();
+
+        for (const key in this.form) {
+          const element = this.form[key];
+
+          if (element) {
+            if (Array.isArray(element)) {
+              if (key === "row") {
+                element.forEach((e, index) => {
+                  fd.append(`${key}[${index}][image]`, e.image);
+                  fd.append(`${key}[${index}][cropped_image]`, e.cropped_image);
+                });
+              } else {
+                element.forEach((e, index) => {
+                  fd.append(`${key}[${index}]`, e);
+                });
+              }
+            } else {
+              fd.append(key, element);
+            }
+          }
+        }
+
+        const resp = await this.$axios.post("pet-pro/new-pet-pro", fd, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        });
+
+        console.log(resp);
+
+        this.$store.commit("SHOW_LOADER", false);
+        this.$router.push("/pet-category");
+      } catch (err) {
+        this.$store.commit("SHOW_LOADER", false);
+        console.log(err);
+      }
     }
   }
 };

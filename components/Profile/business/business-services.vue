@@ -104,7 +104,7 @@ export default {
       this.services = this.services.filter(s => s !== service);
     },
     save() {
-      this.$emit("next-tab");
+      this.$emit("next-tab", { services: this.services });
     }
   }
 };

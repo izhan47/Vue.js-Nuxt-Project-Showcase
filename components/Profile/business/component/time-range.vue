@@ -5,7 +5,7 @@
       v-model="showFrom"
       :close-on-content-click="false"
       :nudge-right="40"
-      :return-value.sync="from"
+      :return-value.sync="open"
       transition="scale-transition"
       offset-y
       max-width="290px"
@@ -13,19 +13,20 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-text-field
-          v-model="from"
-          label="Time from "
+          :label="`${day} Open`"
           readonly
           v-bind="attrs"
           v-on="on"
           :disabled="!disabled"
+          :value="formatTime(open)"
         ></v-text-field>
       </template>
       <v-time-picker
         v-if="showFrom"
-        v-model="from"
+        v-model="open"
         full-width
-        @click:minute="$refs.mondayFrom.save(from)"
+        scrollable
+        @click:minute="$refs.mondayFrom.save(open)"
       ></v-time-picker>
     </v-menu>
 
@@ -38,7 +39,7 @@
       v-model="showTo"
       :close-on-content-click="false"
       :nudge-right="40"
-      :return-value.sync="to"
+      :return-value.sync="close"
       transition="scale-transition"
       offset-y
       max-width="290px"
@@ -46,19 +47,21 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-text-field
-          v-model="to"
-          label="Time to"
+          :label="`${day} Close`"
           readonly
           v-bind="attrs"
           v-on="on"
           :disabled="!disabled"
+          :value="formatTime(close)"
         ></v-text-field>
       </template>
       <v-time-picker
         v-if="showTo"
-        v-model="to"
+        v-model="close"
+        a
         full-width
-        @click:minute="$refs.mondayTo.save(to)"
+        scrollable
+        @click:minute="$refs.mondayTo.save(close)"
       ></v-time-picker>
     </v-menu>
   </div>
@@ -70,22 +73,41 @@ export default {
     disabled: {
       type: [Boolean, String],
       default: false
+    },
+    day: {
+      type: String,
+      default: ""
     }
   },
   data() {
     return {
-      from: "",
-      to: "",
+      open: "",
+      close: "",
       showFrom: false,
       showTo: false
     };
   },
   watch: {
-    from(val) {
-      if (val) this.$emit("selected", { to: this.to, from: this.from });
+    open(val) {
+      if (val) this.$emit("selected", { open: this.open, close: this.close });
     },
-    to(val) {
-      if (val) this.$emit("selected", { to: this.to, from: this.from });
+    close(val) {
+      if (val) this.$emit("selected", { open: this.open, close: this.close });
+    }
+  },
+  methods: {
+    formatTime(time = "00:00") {
+      time = time
+        .toString()
+        .match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+      if (time.length > 1) {
+        // If time format correct
+        time = time.slice(1); // Remove full string match value
+        time[5] = +time[0] < 12 ? "AM" : "PM"; // Set AM/PM
+        time[0] = +time[0] % 12 || 12; // Adjust hours
+      }
+      return time.join("");
     }
   }
 };
