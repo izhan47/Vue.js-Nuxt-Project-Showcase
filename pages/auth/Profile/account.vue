@@ -6,7 +6,7 @@
 import Account from "@/components/Profile/Account";
 export default {
   name: "account",
-  computed: { Account },
+  components: { Account },
   middleware: ["auth"]
 };
 </script>

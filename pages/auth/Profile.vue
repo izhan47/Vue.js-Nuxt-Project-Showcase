@@ -64,6 +64,11 @@ export default {
           show: true
         },
         {
+          text: "my_business",
+          to: `${prefix}/my-business`,
+          show: true
+        },
+        {
           text: "save_deals",
           to: `${prefix}/save-deals`,
           show: true
