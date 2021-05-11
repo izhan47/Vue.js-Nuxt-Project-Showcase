@@ -6,6 +6,8 @@
       color="primary"
       indeterminate
     ></v-progress-circular>
+
+    <!-- <img src="loader.gif" alt="" /> -->
   </div>
 </template>
 
