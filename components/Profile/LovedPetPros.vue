@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <div class="profile-title space">
-      <h2>{{ $t("loved_pet_pros") }}</h2>
-    </div>
-    <div class="custom-container">
+  <div class="pa-5">
+    <h3 class="mb-3">{{ $t("loved_pet_pros") }}</h3>
+    <div>
       <v-row v-if="petLoved.length">
         <v-col cols="12" md="6" sm="12" v-for="item in petLoved" :key="item.id">
           <div class="card-section mb-3">

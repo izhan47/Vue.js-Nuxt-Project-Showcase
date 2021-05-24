@@ -83,12 +83,12 @@ export default () => {
     },
     actions: {
       //Pet Pro
-      petProList({ commit }, data) {
+      petProList({ commit }, { page, form }) {
         commit("SHOW_LOADER", true);
         axios({
           method: "POST",
-          url: "pet-pro/get-list/" + data.page,
-          data: data.form
+          url: "pet-pro/get-list/" + page,
+          data: form
         })
           .then(response => {
             commit("SET_PET_PRO_LIST", response.data.data.pet_pro_list);

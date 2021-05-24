@@ -163,7 +163,10 @@ export default {
       this.form.longitude = addressData.longitude;
     },
     filterData() {
-      this.$emit("filter-data", this.form, this.page);
+      this.$emit("filter-data", {
+        form: this.form,
+        page: this.page
+      });
     }
   }
 };

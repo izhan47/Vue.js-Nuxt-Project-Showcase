@@ -2,7 +2,7 @@
   <div>
     <pet-functions></pet-functions>
     <about></about>
-    <location-search @filter-data="filterData"></location-search>
+    <!-- <location-search @filter-data="filterData"></location-search> -->
     <care-advice></care-advice>
     <featured-product></featured-product>
     <banner-search></banner-search>
@@ -35,7 +35,7 @@ export default {
   },
   created() {
     let filters = {
-      data: {},
+      form: {},
       page: this.page
     };
     this.$store.dispatch("petProList", filters);
@@ -43,6 +43,7 @@ export default {
   },
   methods: {
     filterData(filters) {
+      console.log(filters);
       this.$store.dispatch("petProList", filters);
     }
   }

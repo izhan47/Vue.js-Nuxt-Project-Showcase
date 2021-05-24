@@ -1,6 +1,6 @@
 <template>
-  <div class="main-container">
-    <h3 class="mt-3">Add Business</h3>
+  <div class="pa-5">
+    <h3 class="mb-3">Add Business</h3>
     <v-tabs center-active v-model="tab">
       <v-tab v-for="item in items" :key="item.tab">{{ item.tab }}</v-tab>
     </v-tabs>
@@ -175,10 +175,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main-container {
-  padding: 0 2rem;
-}
-
 .child-container {
   margin-top: 1rem;
 }
