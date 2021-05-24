@@ -10,78 +10,25 @@
         <p>{{ $t("pet_functionality_description") }}</p>
       </div>
       <v-row justify="center">
-        <v-col cols="12" md="4" sm="12">
-          <v-card class="green-section card-radius pa-6">
+        <v-col
+          cols="12"
+          md="4"
+          sm="12"
+          v-for="card in petProCards"
+          :key="card.id"
+        >
+          <v-card class="card-radius pa-6" :class="card.class" :to="card.to">
             <div>
-              <h2 class="card-heading">{{ $t("find_a") }}</h2>
-              <h2 class="card-heading ">{{ $t("local_business") }}</h2>
+              <h2 class="card-heading">{{ $t(card.text1) }}</h2>
+              <h2 class="card-heading ">{{ $t(card.text2) }}</h2>
             </div>
-            <div class="card-arrow-icon green-section">
-              <v-btn
-                large
-                icon
-                color="white"
-                class="circle"
-                @click="$router.push('/pet-category')"
+            <div class="card-arrow-icon" :class="card.class">
+              <v-btn large icon color="white" class="circle"
                 ><v-icon>mdi-chevron-right</v-icon></v-btn
               >
             </div>
             <div class="card-img ">
-              <img
-                class="img-fluid img-height"
-                src="/images/Column-Bone.png"
-                alt="logo"
-              />
-            </div>
-          </v-card>
-        </v-col>
-        <v-col cols="12" md="4" sm="12">
-          <v-card class="purple-section card-radius pa-6">
-            <div>
-              <h2 class="card-heading">{{ $t("discover_best") }}</h2>
-              <h2 class="card-heading ">{{ $t("pet_products") }}</h2>
-            </div>
-            <div class="card-arrow-icon purple-section">
-              <v-btn
-                large
-                icon
-                color="white"
-                class="circle"
-                @click="$router.push('/product-reviews')"
-                ><v-icon>mdi-chevron-right</v-icon></v-btn
-              >
-            </div>
-            <div class="card-img">
-              <img
-                class="img-fluid img-height"
-                src="/images/Column-Food-Dish.png"
-                alt="logo"
-              />
-            </div>
-          </v-card>
-        </v-col>
-        <v-col cols="12" md="4" sm="12">
-          <v-card class="pink-section card-radius pa-6">
-            <div>
-              <h2 class="card-heading">{{ $t("explore_pet_care") }}</h2>
-              <h2 class="card-heading ">{{ $t("advice") }}</h2>
-            </div>
-            <div class="card-arrow-icon pink-section">
-              <v-btn
-                large
-                icon
-                color="white"
-                class="circle"
-                @click="$router.push('/watch-learn')"
-                ><v-icon>mdi-chevron-right</v-icon></v-btn
-              >
-            </div>
-            <div class="">
-              <img
-                class="img-fluid comment-img"
-                src="/images/Column-Speech-Bubbles.png"
-                alt="logo"
-              />
+              <img class="img-fluid img-height" :src="card.image" alt="logo" />
             </div>
           </v-card>
         </v-col>
@@ -100,37 +47,72 @@
 <script>
 export default {
   name: "petFunctions.vue",
+  computed: {
+    petProCards() {
+      return [
+        {
+          id: 1,
+          text1: "find_a",
+          text2: "local_business",
+          to: "/pet-category",
+          image: "/images/Column-Bone.png",
+          class: "green-section"
+        },
+        {
+          id: 2,
+          text1: "discover_best",
+          text2: "pet_products",
+          to: "/product-reviews",
+          image: "/images/Column-Food-Dish.png",
+          class: "purple-section "
+        },
+        {
+          id: 3,
+          text1: "explore_pet_care",
+          text2: "advice",
+          to: "/watch-learn",
+          image: "/images/Column-Speech-Bubbles.png",
+          class: "pink-section"
+        }
+      ];
+    }
+  },
   mounted() {
     if (process.browser) {
       let dog = document.getElementById("dog-movement");
-      (function() {
-        let throttle = function(type, name, obj) {
-          let object = obj || window;
-          let running = false;
-          let func = function() {
-            if (running) {
-              return;
-            }
-            running = true;
-            requestAnimationFrame(function() {
-              object.dispatchEvent(new CustomEvent(name));
-              running = false;
-            });
+      if (dog) {
+        (function() {
+          let throttle = function(type, name, obj) {
+            let object = obj || window;
+            let running = false;
+            let func = function() {
+              if (running) {
+                return;
+              }
+              running = true;
+              requestAnimationFrame(function() {
+                object.dispatchEvent(new CustomEvent(name));
+                running = false;
+              });
+            };
+            object.addEventListener(type, func);
           };
-          object.addEventListener(type, func);
-        };
-        throttle("scroll", "optimizedScroll");
-      })();
-      window.addEventListener("optimizedScroll", function() {
-        let offset =
-          window.pageYOffset - document.getElementById("animate").offsetTop;
-        if (offset < 350) {
-          dog.style.transform = "translate(-" + offset + "px,0px)";
-        }
-        if (window.screen.width < 769) {
-          dog.style.transform = "none";
-        }
-      });
+          throttle("scroll", "optimizedScroll");
+        })();
+
+        window.addEventListener("optimizedScroll", function() {
+          const animate = document.getElementById("animate");
+          if (animate) {
+            let offset = window.pageYOffset - animate.offsetTop;
+            if (offset < 350) {
+              dog.style.transform = "translate(-" + offset + "px,0px)";
+            }
+            if (window.screen.width < 769) {
+              dog.style.transform = "none";
+            }
+          }
+        });
+      }
     }
   }
 };

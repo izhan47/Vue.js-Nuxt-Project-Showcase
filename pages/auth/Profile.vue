@@ -56,7 +56,7 @@ export default {
         {
           text: "my_vet_info",
           to: `${prefix}/vet-info`,
-          show: true
+          show: false
         },
         {
           text: "add_business",

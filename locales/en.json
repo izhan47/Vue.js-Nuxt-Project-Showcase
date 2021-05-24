@@ -150,11 +150,11 @@
   "username": "Username or Email Address",
   "remember_me": "Remember Me",
   "password": "Password",
-  "log_in": "log in",
-  "logout": "logout",
+  "log_in": "Log in",
+  "logout": "Logout",
   "lost_password": "Lost your password?",
 
-  "pet_dashboard": "My Pet Dashboard",
+  "pet_dashboard": "My Dashboard",
   "welcome_profile": "Welcome to Wag Enabled! We’re so glad to have you apart of our waggy world.",
   "account_info": "Account Info",
   "address": "Address",
@@ -189,7 +189,7 @@
 
   "account": "Account",
   "save_deals": "Save Deals",
-  "loved_pet_pros": "Loved pet pros",
+  "loved_pet_pros": "Loved Pet Pros",
   "saved_pet_care_advice": "Saved Pet Care Advice",
   "my_reviews": "My Reviews",
   "my_business": "My Business",
