@@ -127,6 +127,10 @@ export default {
     }
   },
   created() {
+    if (this.$route.query.page) {
+      this.page = Number(this.$route.query.page);
+    }
+
     let filters = {
       form: {},
       page: this.page
@@ -156,6 +160,7 @@ export default {
       });
     },
     filterData() {
+      this.$router.push({ query: { page: this.page } });
       let filters = {
         form: this.form,
         page: this.page
