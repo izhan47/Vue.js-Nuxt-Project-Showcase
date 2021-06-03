@@ -33,6 +33,7 @@
                 @change="filterData()"
               ></v-select>
             </div>
+
             <div class="search-form-field">
               <label>{{ $t("keyword") }}</label>
               <v-text-field
@@ -111,6 +112,7 @@ export default {
       category: [],
       page: 1,
       sorting: ["Latest", "Popular"],
+
       form: {
         category_id: "",
         sort_by: "Latest",
@@ -126,41 +128,47 @@ export default {
       return this.$store.state.total_page;
     }
   },
-  created() {
-    if (this.$route.query.page) {
-      this.page = Number(this.$route.query.page);
-    }
+  async created() {
+    const { category, page } = this.$route.query;
+
+    if (page) this.page = Number(page);
 
     let filters = {
-      form: {},
+      form: this.form,
       page: this.page
     };
-
-    const { category } = this.$route.query;
 
     if (category) {
       filters.form.category_id = Number(category);
       this.form.category_id = Number(category);
     }
 
+    await this.watchCategory();
+
     this.$store.dispatch("categoryList", filters);
-    this.watchCategory();
   },
   methods: {
-    watchCategory() {
-      this.$store.dispatch("watchCategories").then(response => {
+    async watchCategory() {
+      try {
+        const resp = await this.$store.dispatch("watchCategories");
         let arr = [];
-        response.data.data.category_list.forEach(data => {
+        resp.data.data.category_list.forEach(data => {
           arr.push({
             value: data.value,
             text: data.label
           });
         });
+
         this.category = arr;
-      });
+        return;
+      } catch (error) {
+        console.log(error);
+        return;
+      }
     },
     filterData() {
       this.$router.push({ query: { page: this.page } });
+
       let filters = {
         form: this.form,
         page: this.page

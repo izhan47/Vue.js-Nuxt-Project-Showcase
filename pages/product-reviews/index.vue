@@ -49,31 +49,6 @@
           </div>
 
           <div class="search-form-field">
-            <label>Nature of Business</label>
-
-            <v-select
-              :placeholder="$t('all')"
-              class="search-field-category mt-2"
-              :items="businessList"
-              v-model="business"
-              outlined
-              rounded
-              multiple
-              small-chips
-              @change="filterData()"
-            >
-              <template v-slot:selection="{ item, index }">
-                <v-chip v-if="index === 0">
-                  <span>{{ item.text }}</span>
-                </v-chip>
-                <span v-if="index === 1" class="grey--text caption">
-                  (+{{ businessList.length - 1 }} others)
-                </span>
-              </template>
-            </v-select>
-          </div>
-
-          <div class="search-form-field">
             <label>{{ $t("keyword") }}</label>
             <v-text-field
               class="search-field cross-icon mt-2"
@@ -149,14 +124,13 @@ export default {
     return {
       page: 1,
       sorting: ["Latest", "Popular", "Deal offered"],
-      business_list: [],
+
       categories: [],
-      business: [],
+
       form: {
         category_id: [],
         sort_by: "Latest",
-        search: "",
-        business_id: []
+        search: ""
       }
     };
   },
@@ -179,14 +153,6 @@ export default {
         });
       });
       return arr;
-    },
-    businessList() {
-      return this.business_list.map(b => {
-        return {
-          value: b.value,
-          text: b.label
-        };
-      });
     }
   },
   created() {
@@ -198,7 +164,7 @@ export default {
       form: {},
       page: this.page
     };
-    this.fetchBusinessNature();
+
     this.$store.dispatch("reviewList", filters);
     this.$store.dispatch("reviewCategories");
   },
@@ -215,12 +181,6 @@ export default {
 
       this.form.category_id = JSON.stringify(Object.assign(arr)); // convert array to string
 
-      this.form.business_id = this.business.map(business => {
-        const exist = this.business_list.find(b => b.value == business);
-        exist.label = exist.label.toLowerCase();
-        return exist;
-      });
-
       this.$router.push({
         query: {
           page: this.page
@@ -232,15 +192,6 @@ export default {
       };
 
       this.$store.dispatch("reviewList", filters);
-    },
-    async fetchBusinessNature() {
-      try {
-        const resp = await this.$axios.post("pet-pro/get-business-nature-list");
-        const { business_nature_list } = resp.data.data;
-        this.business_list = business_nature_list;
-      } catch (error) {
-        console.log(error);
-      }
     }
   }
 };

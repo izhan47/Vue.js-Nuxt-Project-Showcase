@@ -37,6 +37,32 @@
               >
               </vue-google-autocomplete>
             </div>
+
+            <div class="search-form-field">
+              <label>Nature of Business</label>
+
+              <v-select
+                :placeholder="$t('all')"
+                class="search-field mt-2"
+                :items="businessList"
+                v-model="business"
+                outlined
+                rounded
+                multiple
+                small-chips
+                @change="filterData()"
+              >
+                <template v-slot:selection="{ item, index }">
+                  <v-chip v-if="index === 0">
+                    <span>{{ item.text }}</span>
+                  </v-chip>
+                  <span v-if="index === 1" class="grey--text caption">
+                    (+{{ businessList.length - 1 }} others)
+                  </span>
+                </template>
+              </v-select>
+            </div>
+
             <div class="search-form-field">
               <label>{{ $t("keyword") }}</label>
 
@@ -117,11 +143,14 @@ export default {
     return {
       page: 1,
       category: [],
+      business_list: [],
+      business: [],
       form: {
         category_id: "",
         latitude: "",
         longitude: "",
-        search: ""
+        search: "",
+        business_id: []
       },
       address: ""
     };
@@ -149,30 +178,69 @@ export default {
         },
         ...arr
       ];
+    },
+    businessList() {
+      return this.business_list.map(b => {
+        return {
+          value: b.value,
+          text: b.label
+        };
+      });
     }
   },
-  created() {
+  async created() {
+    if (this.$route.query.page) {
+      this.page = Number(this.$route.query.page);
+    }
+
     let search = this.$route.query.search ?? "";
     this.form.search = search;
+
     this.$store.dispatch("petProList", {
-      ...this.form,
-      search
+      form: {
+        ...this.form,
+        search
+      },
+      page: this.page
     });
+    await this.fetchBusinessNature();
     this.$store.dispatch("petCategories");
   },
   methods: {
     filterData() {
+      this.$router.push({ query: { page: this.page } });
+
+      this.form.business_id = this.business.map(business => {
+        const exist = this.business_list.find(b => b.value == business);
+        exist.label = exist.label;
+        return exist;
+      });
+
+      this.form.business_id = JSON.stringify(this.form.business_id);
+
       let filters = {
         form: this.form,
         page: this.page
       };
+
       this.$store.dispatch("petProList", filters);
-      this.$store.dispatch("petProList", this.form, this.page);
+      // this.$store.dispatch("petProList", this.form, this.page);
     },
     getAddressData(addressData, placeResultData, id) {
       this.address = addressData;
       this.form.latitude = addressData.latitude;
       this.form.longitude = addressData.longitude;
+    },
+    async fetchBusinessNature() {
+      try {
+        const resp = await this.$axios.post("pet-pro/get-business-nature-list");
+        const { business_nature_list } = resp.data.data;
+        this.business_list = business_nature_list;
+        return;
+      } catch (error) {
+        console.log(error);
+        return;
+      }
     }
   }
 };

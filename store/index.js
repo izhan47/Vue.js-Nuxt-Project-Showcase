@@ -85,10 +85,22 @@ export default () => {
       //Pet Pro
       petProList({ commit }, { page, form }) {
         commit("SHOW_LOADER", true);
+        const { business_id, category_id, latitude, longitude, search } = form;
+
+        const fd = new FormData();
+        fd.append("search", search);
+        fd.append("longitude", longitude);
+        fd.append("latitude", latitude);
+        fd.append("category_id", category_id);
+        fd.append("business_id", business_id);
+
         axios({
           method: "POST",
           url: "pet-pro/get-list/" + page,
-          data: form
+          data: fd,
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
         })
           .then(response => {
             commit("SET_PET_PRO_LIST", response.data.data.pet_pro_list);
