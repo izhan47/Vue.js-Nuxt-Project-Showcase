@@ -33,14 +33,14 @@
             </v-list>
             <v-list-item
               v-if="$store.state.user.isAuthenticated"
-              to="/auth/Profile"
+              to="/profile"
               link
             >
               <v-list-item-title class="nav-title">
                 {{ $t("my_profile") }}
               </v-list-item-title>
             </v-list-item>
-            <v-list-item link v-else to="/auth/Login">
+            <v-list-item link v-else to="/login">
               <v-list-item-content>
                 <v-list-item-title class="nav-title">{{
                   $t("sign_in")
@@ -93,12 +93,14 @@
               >
             </div>
             <div class="app-title">
-              <nuxt-link class="nav-title unset-underline ml-4" to="/about">{{
-                $t("about_us")
-              }}</nuxt-link>
               <nuxt-link
                 class="nav-title unset-underline ml-4"
-                to="/product-reviews"
+                to="/about-us"
+                >{{ $t("about_us") }}</nuxt-link
+              >
+              <nuxt-link
+                class="nav-title unset-underline ml-4"
+                to="/best-pet-products"
                 >{{ $t("best_pet_products") }}</nuxt-link
               >
               <div class=" nav-logo">
@@ -110,13 +112,13 @@
               </div>
               <nuxt-link
                 class="nav-title unset-underline ml-4"
-                to="/watch-learn"
+                to="/pet-care-advice"
                 >{{ $t("pet_care_advice") }}</nuxt-link
               >
 
               <nuxt-link
                 class="nav-title unset-underline ml-4"
-                to="/pet-category"
+                to="/find-a-pet-biz"
                 >{{ $t("find_a_pet_biz") }}</nuxt-link
               >
             </div>
@@ -136,7 +138,7 @@
                   </v-btn>
                 </template>
                 <v-list>
-                  <v-list-item to="/auth/Profile">
+                  <v-list-item to="/profile">
                     <v-list-item-title>
                       {{ $t("my_profile") }}
                     </v-list-item-title>
@@ -148,7 +150,7 @@
                   </v-list-item>
                 </v-list>
               </v-menu>
-              <nuxt-link v-else to="/auth/login" class="unset-underline">
+              <nuxt-link v-else to="/login" class="unset-underline">
                 <v-btn outlined rounded class="sign-in-btn">{{
                   $t("sign_in")
                 }}</v-btn>
@@ -171,14 +173,14 @@ export default {
       menuItems: [
         {
           title: this.$i18n.t("about_us"),
-          to: "/about"
+          to: "/about-us"
         },
         {
           title: this.$i18n.t("best_pet_products"),
-          to: "/product-reviews"
+          to: "/best-pet-products"
         },
-        { title: this.$i18n.t("pet_care_advice"), to: "/watch-learn" },
-        { title: this.$i18n.t("find_a_pet_biz"), to: "/pet-category" }
+        { title: this.$i18n.t("pet_care_advice"), to: "/pet-care-advice" },
+        { title: this.$i18n.t("find_a_pet_biz"), to: "/find-a-pet-biz" }
       ],
       icons: [
         {
@@ -214,7 +216,7 @@ export default {
   methods: {
     reset() {
       this.$store.dispatch("reset").then(response => {
-        this.$router.push("/auth/Login");
+        this.$router.push("/login");
       });
     }
   }

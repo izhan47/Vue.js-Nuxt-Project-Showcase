@@ -164,7 +164,7 @@ export default {
         console.log(resp);
 
         this.$store.commit("SHOW_LOADER", false);
-        this.$router.push("/pet-category");
+        this.$router.push("/find-a-pet-biz");
       } catch (err) {
         this.$store.commit("SHOW_LOADER", false);
         console.log(err);

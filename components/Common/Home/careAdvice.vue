@@ -17,7 +17,7 @@
           outlined
           rounded
           class="category-button"
-          :to="`/watch-learn?category=${item.value}`"
+          :to="`/pet-care-advice?category=${item.value}`"
         >
           {{ item.label }}
         </v-btn>
@@ -30,7 +30,7 @@
           outlined
           large
           rounded
-          to="/watch-learn"
+          to="/pet-care-advice"
         >
           {{ $t("browse_all") }}
         </v-btn>

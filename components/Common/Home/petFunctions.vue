@@ -54,7 +54,7 @@ export default {
           id: 1,
           text1: "find_a",
           text2: "local_business",
-          to: "/pet-category",
+          to: "/find-a-pet-biz",
           image: "/images/Column-Bone.png",
           class: "green-section"
         },
@@ -62,7 +62,7 @@ export default {
           id: 2,
           text1: "discover_best",
           text2: "pet_products",
-          to: "/product-reviews",
+          to: "/best-pet-products",
           image: "/images/Column-Food-Dish.png",
           class: "purple-section "
         },
@@ -70,7 +70,7 @@ export default {
           id: 3,
           text1: "explore_pet_care",
           text2: "advice",
-          to: "/watch-learn",
+          to: "/pet-care-advice",
           image: "/images/Column-Speech-Bubbles.png",
           class: "pink-section"
         }

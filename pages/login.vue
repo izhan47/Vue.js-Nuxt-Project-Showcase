@@ -83,14 +83,14 @@
                 <div class="mt-4 mb-2">
                   <span
                     class="forgot-pass"
-                    @click="$router.push('/auth/Forgot-Password')"
+                    @click="$router.push('/forgot-password')"
                     >{{ $t("lost_password") }}</span
                   >
                   <br />
                   <span class="forgot-pass">{{
                     $t("dont_have_an_account")
                   }}</span>
-                  <nuxt-link class="auth-link" to="/auth/Register">{{
+                  <nuxt-link class="auth-link" to="/register">{{
                     $t("sign_up")
                   }}</nuxt-link>
                 </div>
@@ -105,7 +105,8 @@
 
 <script>
 export default {
-  name: "Login.vue",
+  name: "login",
+  middleware: ["authenticated-user"],
   data() {
     return {
       form: {
@@ -139,7 +140,7 @@ export default {
             if (this.$store.state.current_path) {
               this.$router.push(this.$store.state.current_path);
             } else {
-              this.$router.push("/auth/Profile");
+              this.$router.push("/profile");
             }
           })
           .catch(e => {
@@ -188,8 +189,8 @@ export default {
 .custom-height {
   min-height: 500px;
   margin-top: 8rem;
-  @media (max-width: 1440px) {
-    margin-top: 0;
+  @media (max-width: 600px) {
+    margin-top: 3rem;
   }
 }
 .img-height {

@@ -6,7 +6,7 @@
         <v-col cols="12" md="6" sm="12" v-for="item in petLoved" :key="item.id">
           <div class="card-section mb-3">
             <div v-if="item.pet_pro.cover_image" class="rating-section">
-              <nuxt-link :to="`/pet-category/${item.pet_pro.slug}`">
+              <nuxt-link :to="`/find-a-pet-biz/${item.pet_pro.slug}`">
                 <div
                   class="bg-img-height"
                   :style="
@@ -37,13 +37,13 @@
               </div>
             </div>
             <div v-else>
-              <nuxt-link :to="`/pet-category/${item.pet_pro.slug}`">
+              <nuxt-link :to="`/find-a-pet-biz/${item.pet_pro.slug}`">
                 <div class="place-holder"></div>
               </nuxt-link>
             </div>
             <div
               class="card-category"
-              @click="$router.push(`/pet-category/${item.pet_pro.slug}`)"
+              @click="$router.push(`/find-a-pet-biz/${item.pet_pro.slug}`)"
             >
               <h2 class="mb-2 mt-2">{{ item.pet_pro.store_name }}</h2>
               <div class="mb-3">
