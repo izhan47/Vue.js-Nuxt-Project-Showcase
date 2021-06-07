@@ -103,10 +103,12 @@
 </template>
 
 <script>
-import WatchCategoryCard from "@/components/WatchCategoryCard";
+// import WatchCategoryCard from "@/components/WatchCategoryCard";
 export default {
   name: "index.vue",
-  components: { WatchCategoryCard },
+  components: {
+    WatchCategoryCard: () => import("@/components/WatchCategoryCard")
+  },
   data() {
     return {
       category: [],

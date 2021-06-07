@@ -197,7 +197,7 @@ export default {
         },
         {
           name: "mdi-youtube",
-          to: "https://www.youtube.com/channel/UCW3lViiZvDUBz5lWZYw93CA "
+          to: "https://www.youtube.com/channel/UCW3lViiZvDUBz5lWZYw93CA"
         }
       ],
       drawer: false,

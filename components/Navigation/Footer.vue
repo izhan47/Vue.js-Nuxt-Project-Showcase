@@ -64,7 +64,8 @@
                 <v-list-item
                   v-for="(item, i) in social_accounts"
                   :key="i"
-                  :to="item.to"
+                  :href="item.to"
+                  target="_blank"
                   router
                   exact
                 >
@@ -103,18 +104,23 @@ export default {
         { title: this.$i18n.t("product_reviews"), to: "/best-pet-products" },
         { title: this.$i18n.t("pet_care_advice"), to: "/pet-care-advice" }
       ],
-      company: [
-        { title: this.$i18n.t("about_us"), to: "/about-us" },
-        { title: this.$i18n.t("Contact"), to: "/Contact" }
-      ],
+      company: [{ title: this.$i18n.t("about_us"), to: "/about-us" }],
       social_accounts: [
-        { title: this.$i18n.t("blog"), to: "/blog" },
-        { title: this.$i18n.t("facebook"), to: "/blog" },
-        { title: this.$i18n.t("twitter"), to: "/blog" },
-        { title: this.$i18n.t("instagram"), to: "/blog" },
-        { title: this.$i18n.t("youtube"), to: "/blog" }
+        {
+          title: this.$i18n.t("facebook"),
+          to: "https://www.facebook.com/WagEnabled"
+        },
+        { title: this.$i18n.t("Email"), to: "mailto:pets@wagenabled.com" },
+        {
+          title: this.$i18n.t("instagram"),
+          to: "https://www.instagram.com/wagenabled/"
+        },
+        {
+          title: this.$i18n.t("youtube"),
+          to: "https://www.youtube.com/channel/UCW3lViiZvDUBz5lWZYw93CA"
+        }
       ],
-      icons: ["mdi-facebook", "mdi-twitter", "mdi-instagram", "mdi-youtube"]
+      icons: ["mdi-facebook", "mdi-email", "mdi-instagram", "mdi-youtube"]
     };
   }
 };
