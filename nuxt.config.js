@@ -16,13 +16,13 @@ export default {
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { hid: "description", name: "description", content: "" }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-    script: [
-      {
-        src:
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyBaxMfWKuh_m7up5CvIL-LF_EHJ_eWkRWI&libraries=places"
-      }
-    ]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    // script: [
+    //   {
+    //     src:
+    //       "https://maps.googleapis.com/maps/api/js?key=AIzaSyBaxMfWKuh_m7up5CvIL-LF_EHJ_eWkRWI&libraries=places"
+    //   }
+    // ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -60,7 +60,12 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/axios"],
+  modules: ["@nuxtjs/axios", "nuxt-webfontloader"],
+  webfontloader: {
+    google: {
+      families: ["Nunito+Sans:200,300,400,600,700,800,900&display=swap"]
+    }
+  },
   // env: {
   //   BASE_URL: config.API_URL,
   // },
@@ -79,10 +84,13 @@ export default {
           error: colors.deepOrange.accent4,
           success: colors.green.accent3
         }
-      }
+      },
+      defaultAssets: false
     }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {
+    // analyze: true
+  }
 };

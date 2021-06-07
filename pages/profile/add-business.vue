@@ -35,22 +35,25 @@
 </template>
 
 <script>
-import featured from "~/components/Profile/business/business-featured";
-import gallery from "~/components/Profile/business/business-gallery";
-import generalInfo from "~/components/Profile/business/business-general-info";
-import hoursOfOperation from "~/components/Profile/business/business-hours-of-operation";
-import services from "~/components/Profile/business/business-services";
-import businessLink from "~/components/Profile/business/business-link";
+// import featured from "~/components/Profile/business/business-featured";
+// import gallery from "~/components/Profile/business/business-gallery";
+// import generalInfo from "~/components/Profile/business/business-general-info";
+// import hoursOfOperation from "~/components/Profile/business/business-hours-of-operation";
+// import services from "~/components/Profile/business/business-services";
+// import businessLink from "~/components/Profile/business/business-link";
 
 export default {
   name: "my-business",
   components: {
-    featured,
-    gallery,
-    generalInfo,
-    hoursOfOperation,
-    businessLink,
-    services
+    featured: () => import("~/components/Profile/business/business-featured"),
+    gallery: () => import("~/components/Profile/business/business-gallery"),
+    generalInfo: () =>
+      import("~/components/Profile/business/business-general-info"),
+    hoursOfOperation: () =>
+      import("~/components/Profile/business/business-hours-of-operation"),
+    businessLink: () =>
+      import("~/components/Profile/business/business-services"),
+    services: () => import("~/components/Profile/business/business-link")
   },
   middleware: ["auth"],
   data: () => ({
@@ -112,15 +115,9 @@ export default {
       }
       this.currentStep++;
       window.scrollTo(100, 0);
-
-      console.log("lolz", this.form);
     },
     skipStep() {
       this.currentStep++;
-    },
-    saveTab(item) {
-      const component = this.$refs[item.component][0];
-      console.log("save tab", component.getValues());
     },
     async addNewBusiness(data) {
       try {

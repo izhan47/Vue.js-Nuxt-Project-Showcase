@@ -10,23 +10,23 @@
   </div>
 </template>
 <script>
-import BannerSearch from "@/components/Common/Home/bannerSearch";
-import PetFunctions from "@/components/Common/Home/petFunctions";
-import About from "@/components/Common/Home/about";
-import LocationSearch from "@/components/Common/Home/locationSearch";
-import CareAdvice from "@/components/Common/Home/careAdvice";
-import FeaturedProduct from "@/components/Common/Home/featuredProduct";
-import NewsLetter from "@/components/Common/Home/newsLetter";
+// import BannerSearch from "@/components/Common/Home/bannerSearch";
+// import PetFunctions from "@/components/Common/Home/petFunctions";
+// import About from "@/components/Common/Home/about";
+// import LocationSearch from "@/components/Common/Home/locationSearch";
+// import CareAdvice from "@/components/Common/Home/careAdvice";
+// import FeaturedProduct from "@/components/Common/Home/featuredProduct";
+// import NewsLetter from "@/components/Common/Home/newsLetter";
 export default {
   name: "index",
   components: {
-    BannerSearch,
-    PetFunctions,
-    About,
-    LocationSearch,
-    CareAdvice,
-    FeaturedProduct,
-    NewsLetter
+    BannerSearch: () => import("@/components/Common/Home/bannerSearch"),
+    PetFunctions: () => import("@/components/Common/Home/petFunctions"),
+    About: () => import("@/components/Common/Home/about"),
+    LocationSearch: () => import("@/components/Common/Home/locationSearch"),
+    CareAdvice: () => import("@/components/Common/Home/careAdvice"),
+    FeaturedProduct: () => import("@/components/Common/Home/featuredProduct"),
+    NewsLetter: () => import("@/components/Common/Home/newsLetter")
   },
   data() {
     return {

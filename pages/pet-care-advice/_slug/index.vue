@@ -25,15 +25,35 @@
           <div class="heading mt-2">
             <h1>{{ categoryData.title }}</h1>
           </div>
-          <v-btn color="#ff8189" class=" ma-2 white--text" rounded>
+          <v-btn
+            color="#ff8189"
+            :href="`https://www.facebook.com/sharer/sharer.php?u=${currentURL}`"
+            target="_blank"
+            class=" ma-2 white--text"
+            rounded
+          >
             <v-icon left dark>mdi-facebook</v-icon>
             {{ $t("facebook") }}
           </v-btn>
-          <v-btn color="#ff8189" class=" ma-2 white--text" rounded>
+          <v-btn
+            color="#ff8189"
+            :href="`https://twitter.com/intent/tweet?url=${currentURL}`"
+            target="_blank"
+            class=" ma-2 white--text"
+            rounded
+          >
             <v-icon left dark>mdi-twitter</v-icon>
             {{ $t("twitter") }}
           </v-btn>
-          <v-btn color="#ff8189" class="ma-2 white--text" rounded>
+          <v-btn
+            color="#ff8189"
+            :href="
+              `https://www.linkedin.com/shareArticle?mini=true&url=${currentURL}`
+            "
+            target="_blank"
+            class="ma-2 white--text"
+            rounded
+          >
             <v-icon left dark>mdi-linkedin</v-icon>
             {{ $t("linkedin") }}
           </v-btn>
@@ -244,6 +264,9 @@ export default {
     };
   },
   computed: {
+    currentURL() {
+      if (process.browser) return window.location.href;
+    },
     URL() {
       return this.$route.params.slug;
     },
