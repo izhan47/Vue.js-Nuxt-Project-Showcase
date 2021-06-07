@@ -47,9 +47,9 @@ export default {
     goToPage() {
       const { user } = this.$store.state.user;
       if (user) {
-        this.$router.push("/auth/Profile/add-business");
+        this.$router.push("/profile/add-business");
       } else {
-        this.$router.push("/auth/login");
+        this.$router.push("/login");
       }
     }
   }

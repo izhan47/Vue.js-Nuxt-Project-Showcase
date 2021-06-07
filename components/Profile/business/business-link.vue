@@ -38,7 +38,7 @@ export default {
       this.$emit("save-business", this.form);
     },
     cancel() {
-      this.$router.push("/auth/Profile");
+      this.$router.push("/profile");
     }
   }
 };

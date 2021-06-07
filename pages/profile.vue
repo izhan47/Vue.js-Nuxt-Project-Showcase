@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: "Profile.vue",
+  name: "profile",
   middleware: ["auth"],
   components: {},
   data() {
@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     routeLinks() {
-      let prefix = "/auth/Profile";
+      let prefix = "/profile";
       let arr = [
         {
           text: "pet_profile",

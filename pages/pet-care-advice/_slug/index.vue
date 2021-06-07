@@ -280,7 +280,7 @@ export default {
     async deleteComment(id) {
       if (!this.$store.state.user.isAuthenticated) {
         this.$store.commit("SET_CURRENT_PATH", this.$route.path);
-        return this.$router.push("/auth/Login");
+        return this.$router.push("/login");
       } else {
         let data = {
           slug: this.URL,
@@ -301,7 +301,7 @@ export default {
     async submit(id) {
       if (!this.$store.state.user.isAuthenticated) {
         this.$store.commit("SET_CURRENT_PATH", this.$route.path);
-        return this.$router.push("/auth/Login");
+        return this.$router.push("/login");
       } else {
         if (
           id === 0
