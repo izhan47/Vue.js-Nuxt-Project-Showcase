@@ -133,12 +133,13 @@
 </template>
 
 <script>
-import VueGoogleAutocomplete from "vue-google-autocomplete";
+// import VueGoogleAutocomplete from "vue-google-autocomplete";
 
 export default {
   name: "index.vue",
-  components: { VueGoogleAutocomplete },
-
+  components: {
+    VueGoogleAutocomplete: () => import("vue-google-autocomplete")
+  },
   data() {
     return {
       page: 1,
@@ -155,6 +156,7 @@ export default {
       address: ""
     };
   },
+
   computed: {
     colors() {
       return ["paw-purple", "paw-pink", "paw-green"];
