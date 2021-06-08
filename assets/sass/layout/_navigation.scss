@@ -1,34 +1,33 @@
 // large screen
-.nav-title{
+.nav-title {
   color: $purple;
   cursor: pointer;
-  font-family:  $font-family-primary;
+  font-family: $font-family-primary;
   font-weight: $font-weight-600;
   font-size: $font-size-16;
   text-transform: $text-transform-capitalize;
   letter-spacing: 0;
 }
-.nav-title:hover{
+.nav-title:hover {
   color: $pink;
   //Pulse Grow Effect
 }
-.unset-underline{
+.unset-underline {
   text-decoration: none;
 }
-.nav-logo{
-  padding:0 4rem;
-  img{
+.nav-logo {
+  padding: 0 4rem;
+  img {
     max-width: 100%;
     height: 90px;
     cursor: pointer;
   }
-  @media(max-width: 1024px){
-    padding:0 1rem;
+  @media (max-width: 1024px) {
+    padding: 0 1rem;
   }
-
 }
 
-.nav-container{
+.nav-container {
   max-width: 1200px;
   margin: auto;
   width: 100%;
@@ -36,49 +35,48 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .logo{
-        max-height: $img-max-height-60;
+    .logo {
+      max-height: $img-max-height-60;
     }
   }
 }
 .show_img {
-  @media (min-width: 769px)   {
+  @media (min-width: 769px) {
     display: none;
   }
-  img{
+  img {
     max-width: 100%;
     height: auto;
   }
 }
-.drawer-icon{
+.drawer-icon {
   flex: 1;
   display: flex;
   justify-content: flex-end;
-  @media (min-width: 769px)   {
+  @media (min-width: 769px) {
     display: none;
   }
-
 }
-.header-title{
+.header-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  @media (max-width: 768px)  {
+  @media (max-width: 768px) {
     display: none;
   }
 }
-.app-title{
+.app-title {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.sign-in-btn{
-  color: $purple;
+.sign-in-btn {
+  color: $purple !important;
   text-transform: inherit;
-  font-family:  $font-family-primary;
+  font-family: $font-family-primary;
   font-weight: $font-weight-600;
   font-size: $font-size-16;
   letter-spacing: 0;
@@ -88,26 +86,25 @@
   border-color: $purple;
   border-radius: 100px 100px 100px 100px;
 }
-.sign-in-btn:hover{
-  color: $white;
+.sign-in-btn:hover {
+  color: $white !important;
   background-color: $purple;
 }
 
-
 //Tab and Mobile
-.parent{
+.parent {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
-.list-child{
+.list-child {
   flex: 1;
 }
-.icon-child{
+.icon-child {
   text-align: center;
   padding-bottom: 1rem;
 }
-.show_img_mobile{
+.show_img_mobile {
   padding: 1rem;
   align-items: center;
 }

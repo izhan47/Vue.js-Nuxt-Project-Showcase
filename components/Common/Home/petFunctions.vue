@@ -100,20 +100,29 @@ export default {
           throttle("scroll", "optimizedScroll");
         })();
 
-        window.addEventListener("optimizedScroll", function() {
-          const animate = document.getElementById("animate");
-          if (animate) {
-            let offset = window.pageYOffset - animate.offsetTop;
-            if (offset < 350) {
-              dog.style.transform = "translate(-" + offset + "px,0px)";
-            }
-            if (window.screen.width < 769) {
-              dog.style.transform = "none";
-            }
-          }
-        });
+        window.addEventListener("optimizedScroll", this.makeScroll);
       }
     }
+  },
+  methods: {
+    makeScroll() {
+      let dog = document.getElementById("dog-movement");
+      if (dog) {
+        const animate = document.getElementById("animate");
+        if (animate) {
+          let offset = window.pageYOffset - animate.offsetTop;
+          if (offset < 350) {
+            dog.style.transform = "translate(-" + offset + "px,0px)";
+          }
+          if (window.screen.width < 769) {
+            dog.style.transform = "none";
+          }
+        }
+      }
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener("optimizedScroll", this.makeScroll);
   }
 };
 </script>
