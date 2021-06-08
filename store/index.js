@@ -83,19 +83,33 @@ export default () => {
     },
     actions: {
       //Pet Pro
-      petProList({ commit }, data) {
+      petProList({ commit }, { page, form }) {
         commit("SHOW_LOADER", true);
+        const { business_id, category_id, latitude, longitude, search } = form;
+
+        const fd = new FormData();
+        fd.append("search", search);
+        fd.append("longitude", longitude);
+        fd.append("latitude", latitude);
+        fd.append("category_id", category_id);
+        fd.append("business_id", business_id);
+
         axios({
           method: "POST",
-          url: "pet-pro/get-list/" + data.page,
-          data: data.form
+          url: "pet-pro/get-list/" + page,
+          data: fd,
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
         })
           .then(response => {
             commit("SET_PET_PRO_LIST", response.data.data.pet_pro_list);
             commit("SET_TOTAL_PAGE", response.data.data.total_page);
             commit("SHOW_LOADER", false);
           })
-          .catch(e => {});
+          .catch(e => {
+            commit("SHOW_LOADER", false);
+          });
       },
       singlePetDetail({ dispatch }, slug) {
         return axios({
@@ -118,11 +132,16 @@ export default () => {
           method: "POST",
           url: "watch-and-learn/get-list/" + data.page,
           data: data.form
-        }).then(response => {
-          commit("SET_CATEGORY_LIST", response.data.data.watch_and_learn_list);
-          commit("SET_TOTAL_PAGE", response.data.data.total_page);
-          commit("SHOW_LOADER", false);
-        });
+        })
+          .then(response => {
+            commit(
+              "SET_CATEGORY_LIST",
+              response.data.data.watch_and_learn_list
+            );
+            commit("SET_TOTAL_PAGE", response.data.data.total_page);
+            commit("SHOW_LOADER", false);
+          })
+          .catch(e => commit("SHOW_LOADER", false));
       },
       singleCategoryDetail({ commit }, slug) {
         commit("SHOW_LOADER", true);
@@ -168,25 +187,31 @@ export default () => {
           method: "POST",
           url: "product-reviews/get-list/" + data.page,
           data: data.form
-        }).then(response => {
-          commit(
-            "SET_PRODUCT_REVIEW_LIST",
-            response.data.data.watch_and_learn_list
-          );
-          commit("SET_TOTAL_PAGE", response.data.data.total_page);
-          commit("SHOW_LOADER", false);
-        });
+        })
+          .then(response => {
+            commit(
+              "SET_PRODUCT_REVIEW_LIST",
+              response.data.data.watch_and_learn_list
+            );
+            commit("SET_TOTAL_PAGE", response.data.data.total_page);
+            commit("SHOW_LOADER", false);
+          })
+          .catch(e => commit("SHOW_LOADER", false));
       },
       reviewCategories({ commit }) {
         axios({
           method: "POST",
           url: "product-reviews/get-category-list"
-        }).then(response => {
-          commit(
-            "SET_PRODUCT_REVIEW_CATEGORY_LIST",
-            response.data.data.category_list
-          );
-        });
+        })
+          .then(response => {
+            commit(
+              "SET_PRODUCT_REVIEW_CATEGORY_LIST",
+              response.data.data.category_list
+            );
+          })
+          .catch(e => {
+            commit("SHOW_LOADER", false);
+          });
       },
       //News Letter
       newsLetter({ commit }, data) {
@@ -228,10 +253,15 @@ export default () => {
           method: "POST",
           url: "register",
           data
-        }).then(response => {
-          dispatch("setCurrentUser", response.data);
-          return response.data;
-        });
+        })
+          .then(response => {
+            dispatch("setCurrentUser", response.data);
+            return response.data;
+          })
+          .catch(e => {
+            commit("SHOW_LOADER", false);
+            throw new Error(e);
+          });
       },
       //Forgot password
       forgotPassword({ commit }, data) {

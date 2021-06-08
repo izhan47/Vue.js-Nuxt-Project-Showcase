@@ -36,13 +36,13 @@
   "all_rights_reserved": "All Rights Reserved",
 
   "search_wag_enabled": "Search Wag Enabled",
-  "search_section_description": "Search our site for expert pet care advice,local pet care professionals, exclusive deals, and recommended products!",
+  "search_section_description": "Browse expert pet care advice, local professionals, exclusive deals, and Wag-approved products.",
 
   "coma": ",",
   "by": "By",
   "for": "For",
   "pet_people": "Pet People",
-  "pet_functionality_description": "Explore pet care professionals around you, scope out the best pet products, and get pet care advice.",
+  "pet_functionality_description": "We empower pet owners to take better care of their pets by sniffing out the best local pet resources and businesses.",
   "find_a": "Find a",
   "pet_professional": "Pet Professional",
   "discover_new": "Discover New",
@@ -54,12 +54,12 @@
   "wag_enabled": "Wag Enabled",
   "wag_enabled_description_first": "Because we want every pet to live their ",
   "wag_enabled_description_mid": "#bestlife",
-  "wag_enabled_description_last": ", we made a highly curated and vetted platform for pet owners to connect with local pet professional who share likeminded values.",
+  "wag_enabled_description_last": ". That’s why we created a highly curated and vetted platform to connect pet owners like you with local professionals who share the same values.",
   "about_wag": "About Wag",
 
-  "pet_pro_around_you": "Pet Pro's Around You",
+  "pet_pro_business_you": "Pet Businesses Around You",
   "only_the_best_for_your_pets": "Only the Best for Your Pets",
-  "search_database_description": "We empower pet owners to take better care of their pets by sniffing out the best local pet resources and businesses.",
+  "search_database_description": "Spend less time searching and more time playing! Our vetted database shows you local, top-rated pet professionals and pet friendly businesses.",
   "category": "Category",
   "select_category": "Select Category",
   "location": "Location (City, State, Zip)",
@@ -76,15 +76,15 @@
   "see_more": "See more",
   "browse_all": "Browse all",
 
-  "featured_product": "Feature Product",
+  "featured_product": "Featured Product",
   "ziwi_premium": "ZIWI Premium",
   "pet_food": "Pet Food",
   "featured_product_description": "Finding a healthy balance between a dog food that is healthy for your dog and one that tastes delicious can be difficult. While an all-natural raw diet is a new phase in the canine world, that doesn't work for every household",
-  "see_product_review": "See Product Review",
-  "browse_all_review": "Browse All Review",
+  "see_product_review": "Browse All Reviews",
+  "browse_all_review": "View Full Review",
 
   "newsletter": "Newsletter",
-  "newsletter_description": "Save with exclusive deals, learn about new products and receive expert advice for you and your pet delivered straight to your inbox.",
+  "newsletter_description": "Share your name and email to get special treats and expert advice delivered straight to your inbox.",
   "name": "Name",
   "your_zipcode": "Your Zipcode",
   "email": "Email",
@@ -119,9 +119,9 @@
 
   "sorting": "Sorting",
 
-  "pet_pro_description": "Search our database of wag-tastic, top-ranked, local pet care professionals for all of your pet needs.",
+  "pet_pro_description": "Spend less time searching and more time playing! Our vetted database shows you local, top-rated pet pros and pet friendly businesses. ",
 
-  "watch_learn_description": "Fetch written blogs and videos designed to improve your relationship with your pet and create a stronger bond based in mutual respect and understanding",
+  "watch_learn_description": "Fetch blogs and videos designed to strengthen your person/pet bond. All our resources are based in mutual respect, understanding, and lots of love.",
   "personal_website": "Personal Website",
   "comments": "Comments",
   "leave_a_comment": "Leave A Comment",
@@ -150,11 +150,11 @@
   "username": "Username or Email Address",
   "remember_me": "Remember Me",
   "password": "Password",
-  "log_in": "log in",
-  "logout": "logout",
+  "log_in": "Log in",
+  "logout": "Logout",
   "lost_password": "Lost your password?",
 
-  "pet_dashboard": "My Pet Dashboard",
+  "pet_dashboard": "My Dashboard",
   "welcome_profile": "Welcome to Wag Enabled! We’re so glad to have you apart of our waggy world.",
   "account_info": "Account Info",
   "address": "Address",
@@ -189,7 +189,7 @@
 
   "account": "Account",
   "save_deals": "Save Deals",
-  "loved_pet_pros": "Loved pet pros",
+  "loved_pet_pros": "Loved Pet Pros",
   "saved_pet_care_advice": "Saved Pet Care Advice",
   "my_reviews": "My Reviews",
   "my_business": "My Business",
@@ -204,5 +204,9 @@
   "other": "Other",
   "update": "Update",
   "breed_name": "Breed Name",
-  "add_business": "Add Business"
+  "add_business": "Add Business",
+  "only_best_for_pets": "Only the Best for Your Pets",
+  "local_business": "Local Business",
+  "discover_best": "Discover Best",
+  "breed": "Breed"
 }

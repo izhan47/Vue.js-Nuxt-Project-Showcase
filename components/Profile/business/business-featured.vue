@@ -1,8 +1,8 @@
 <template>
   <ContentContainer
     @cancel="$emit('skip-step')"
+    :disable-save="disableSave"
     @save="save"
-    :disableSave="disableSave"
   >
     <v-text-field
       label="Feature Title"
@@ -10,7 +10,7 @@
       rounded
       outlined
       type="text"
-      v-model="form.title"
+      v-model="form.featured_title"
     ></v-text-field>
 
     <v-textarea
@@ -20,7 +20,7 @@
       label="Description"
       rows="4"
       row-height="30"
-      v-model="form.description"
+      v-model="form.featured_description"
     ></v-textarea>
   </ContentContainer>
 </template>
@@ -32,20 +32,23 @@ export default {
   components: { ContentContainer },
   data: () => ({
     form: {
-      title: "",
-      description: ""
+      featured_title: "",
+      featured_description: ""
     }
   }),
   computed: {
     disableSave() {
-      const { title, description } = this.form;
-      if (!title || !description) return true;
+      const { featured_title, featured_description } = this.form;
+      if (!featured_title || !featured_description) return true;
       return false;
     }
   },
   methods: {
     save() {
-      this.$emit("next-tab");
+      this.$emit("next-tab", {
+        ...this.form,
+        is_featured_pet_pro: 1
+      });
     }
   }
 };

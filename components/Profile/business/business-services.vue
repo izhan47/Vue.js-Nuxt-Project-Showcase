@@ -2,7 +2,7 @@
   <ContentContainer
     @cancel="$emit('skip-step')"
     @save="save"
-    :disableSave="!services.length"
+    :disable-save="!services.length"
   >
     <h3>Services Offered</h3>
 
@@ -104,7 +104,7 @@ export default {
       this.services = this.services.filter(s => s !== service);
     },
     save() {
-      this.$emit("next-tab");
+      this.$emit("next-tab", { services: this.services });
     }
   }
 };

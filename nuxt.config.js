@@ -60,7 +60,12 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/axios"],
+  modules: ["@nuxtjs/axios", "nuxt-webfontloader"],
+  webfontloader: {
+    google: {
+      families: ["Nunito+Sans:200,300,400,600,700,800,900&display=swap"]
+    }
+  },
   // env: {
   //   BASE_URL: config.API_URL,
   // },
@@ -79,10 +84,13 @@ export default {
           error: colors.deepOrange.accent4,
           success: colors.green.accent3
         }
-      }
+      },
+      defaultAssets: false
     }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {
+    // analyze: true
+  }
 };

@@ -6,19 +6,20 @@
       color="primary"
       indeterminate
     ></v-progress-circular>
-  </div>
 
+    <!-- <img src="loader.gif" alt="" /> -->
+  </div>
 </template>
 
 <script>
 export default {
-name: "Loader.vue",
-  computed:{
-    loader(){
-      return this.$store.state.loader
+  name: "Loader.vue",
+  computed: {
+    loader() {
+      return this.$store.state.loader;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -35,7 +36,7 @@ name: "Loader.vue",
   right: 0;
   display: grid;
   place-items: center;
-  z-index: 111;
-  background-color: rgba(0,0,0,0.2);
+  z-index: 1111111111;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 </style>

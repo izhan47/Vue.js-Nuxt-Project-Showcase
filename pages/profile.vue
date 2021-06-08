@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: "Profile.vue",
+  name: "profile",
   middleware: ["auth"],
   components: {},
   data() {
@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     routeLinks() {
-      let prefix = "/auth/Profile";
+      let prefix = "/profile";
       let arr = [
         {
           text: "pet_profile",
@@ -56,11 +56,16 @@ export default {
         {
           text: "my_vet_info",
           to: `${prefix}/vet-info`,
-          show: true
+          show: false
         },
         {
           text: "add_business",
           to: `${prefix}/add-business`,
+          show: true
+        },
+        {
+          text: "my_business",
+          to: `${prefix}/my-business`,
           show: true
         },
         {

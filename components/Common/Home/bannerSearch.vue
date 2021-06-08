@@ -52,7 +52,7 @@ export default {
   methods: {
     filterData() {
       if (this.form.search) {
-        this.$router.push(`/pet-category?search=${this.form.search}`);
+        this.$router.push(`/find-a-pet-biz?search=${this.form.search}`);
       } else {
         this.$store.commit("SHOW_SNACKBAR", {
           snackbar: true,

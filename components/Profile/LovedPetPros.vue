@@ -1,14 +1,12 @@
 <template>
-  <div>
-    <div class="profile-title space">
-      <h2>{{ $t("loved_pet_pros") }}</h2>
-    </div>
-    <div class="custom-container">
+  <div class="pa-5">
+    <h3 class="mb-3">{{ $t("loved_pet_pros") }}</h3>
+    <div>
       <v-row v-if="petLoved.length">
         <v-col cols="12" md="6" sm="12" v-for="item in petLoved" :key="item.id">
           <div class="card-section mb-3">
             <div v-if="item.pet_pro.cover_image" class="rating-section">
-              <nuxt-link :to="`/pet-category/${item.pet_pro.slug}`">
+              <nuxt-link :to="`/find-a-pet-biz/${item.pet_pro.slug}`">
                 <div
                   class="bg-img-height"
                   :style="
@@ -39,13 +37,13 @@
               </div>
             </div>
             <div v-else>
-              <nuxt-link :to="`/pet-category/${item.pet_pro.slug}`">
+              <nuxt-link :to="`/find-a-pet-biz/${item.pet_pro.slug}`">
                 <div class="place-holder"></div>
               </nuxt-link>
             </div>
             <div
               class="card-category"
-              @click="$router.push(`/pet-category/${item.pet_pro.slug}`)"
+              @click="$router.push(`/find-a-pet-biz/${item.pet_pro.slug}`)"
             >
               <h2 class="mb-2 mt-2">{{ item.pet_pro.store_name }}</h2>
               <div class="mb-3">
