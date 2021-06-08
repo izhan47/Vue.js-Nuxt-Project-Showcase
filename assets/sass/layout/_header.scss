@@ -1,0 +1,23 @@
+.banner-heading{
+  color:$purple;
+  font-family:  $font-family-primary;
+  font-weight:  $font-weight-600;
+  font-size: $font-size-45;
+  text-shadow: -3px 2px 5px $text-shadow-primary;
+  text-transform: $text-transform-capitalize;
+}
+
+.about-banner-heading{
+  color:$purple;
+  font-family:  $font-family-primary;
+  font-weight: $font-weight-600;
+  font-size:  $font-size-50;
+  text-shadow: -3px 2px 5px $text-shadow-primary;
+  text-transform: $text-transform-capitalize;
+}
+.about-banner-description{
+  color: $black;
+  font-family:  $font-family-primary;
+  font-weight:$font-weight-400;
+  font-size: $font-size-16;
+}
