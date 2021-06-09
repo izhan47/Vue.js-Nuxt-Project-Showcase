@@ -34,7 +34,8 @@ export default {
     { src: "~/plugins/google-maps.js" },
     { src: "~/plugins/aos.js", mode: "client" },
     { src: "~/plugins/vuex-persist", ssr: false },
-    { src: "~/plugins/axios" }
+    { src: "~/plugins/axios" },
+    { src: "~/plugins/vue-awesome-swiper", mode: "client" }
   ],
 
   purgeCSS: {
