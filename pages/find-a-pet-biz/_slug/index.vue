@@ -224,11 +224,11 @@ export default {
       store.commit("SHOW_LOADER", true);
       const resp = await store.dispatch("singlePetDetail", params.slug);
       const { is_liked, per_pro } = resp.data.data;
-      console.log({ is_liked, pet_pro: per_pro });
+      // console.log({ is_liked, pet_pro: per_pro });
       store.commit("SHOW_LOADER", false);
       return { is_liked, pet_pro: per_pro, error: false };
     } catch (error) {
-      return { error: error, is_liked: false, pet_pro: false };
+      return { error: error, is_liked: false, pet_pro: false, reviews: [] };
     }
   },
   computed: {
@@ -484,6 +484,5 @@ h2.light {
 
 .left-side {
   min-height: 770px;
-  max-height: 770px;
 }
 </style>
