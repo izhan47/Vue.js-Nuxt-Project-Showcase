@@ -12,6 +12,7 @@
             <ImageGallery
               :coverImage="gallery.coverImage"
               :images="gallery.images"
+              @preview-image="openPopup = true"
             />
           </v-col>
 
@@ -192,13 +193,28 @@
             </div>
           </v-col>
         </v-row>
-
-        <!-- <pre>
-        {{ pet_pro }}
-    </pre
-        > -->
       </div>
     </template>
+
+    <!-- preview popup -->
+    <div class="preview-container" :class="openPopup ? 'active' : ''">
+      <div class="close-btn" @click="openPopup = false">
+        <!-- <vs-icon icon="close" size="small"></vs-icon> -->
+        <v-icon color="#6F787E">mdi-close</v-icon>
+      </div>
+      <div class="container relative">
+        <swiper :options="swiperOption">
+          <swiper-slide v-for="(imgSrc, i) in gallery.images" :key="i">
+            <div class="slider-container">
+              <img :src="imgSrc" class="img-preview" alt="" />
+            </div>
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+          <div class="swiper-button-next" slot="button-next"></div>
+          <div class="swiper-button-prev" slot="button-prev"></div>
+        </swiper>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -217,14 +233,15 @@ export default {
       { lat: -60.79249218273802, lng: 98.52131582979746 },
       { lat: -57.3633598628284, lng: -149.33024667020254 }
     ],
-    tab: null
+    tab: null,
+    openPopup: false
   }),
   async asyncData({ store, params }) {
     try {
       store.commit("SHOW_LOADER", true);
       const resp = await store.dispatch("singlePetDetail", params.slug);
       const { is_liked, per_pro } = resp.data.data;
-      // console.log({ is_liked, pet_pro: per_pro });
+      console.log({ is_liked, pet_pro: per_pro });
       store.commit("SHOW_LOADER", false);
       return { is_liked, pet_pro: per_pro, error: false };
     } catch (error) {
@@ -232,11 +249,29 @@ export default {
     }
   },
   computed: {
+    swiperOption() {
+      return {
+        centeredSlides: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        }
+      };
+    },
     gallery() {
       let { cover_image, images } = this.pet_pro;
       return {
-        coverImage: cover_image.image_full_path,
-        images: images.map(img => img.image_thumb_full_path)
+        coverImage: cover_image && cover_image.image_full_path,
+        images:
+          images.length > 0 ? images.map(img => img.image_thumb_full_path) : []
       };
     },
     services_offered() {
@@ -484,5 +519,75 @@ h2.light {
 
 .left-side {
   min-height: 770px;
+}
+
+.preview-container {
+  .close-btn {
+    position: absolute;
+    top: 2.5rem;
+    right: 2.5rem;
+    cursor: pointer;
+    background: #eaf1fa;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  opacity: 0;
+  backface-visibility: hidden;
+  visibility: hidden;
+  display: grid;
+  place-items: center;
+  background-color: #000b425c;
+  transform: scale(0);
+  transition: all 0.3s ease-in-out;
+  .img-preview {
+    max-width: 90%;
+    max-height: 60vh;
+    height: auto;
+    border-radius: 20px;
+    transform: scale(0);
+    transition: all 0.2s linear;
+  }
+
+  &.active {
+    z-index: 111111111111;
+    opacity: 1;
+    backface-visibility: unset;
+    visibility: visible;
+    transform: scale(1);
+    .img-preview {
+      transform: scale(1);
+    }
+  }
+}
+.container {
+  @media (max-width: 576px) {
+    max-width: 350px;
+  }
+
+  @media (max-width: 355px) {
+    max-width: 300px;
+  }
+}
+.slider-container {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+
+  @media (max-width: 800px) {
+    max-width: 500px;
+  }
+
+  .swiper-pagination {
+    bottom: -10px !important;
+  }
 }
 </style>
