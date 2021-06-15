@@ -3,7 +3,11 @@
     <div class="cover-main">
       <div
         class="cover-image"
-        :style="{ 'background-image': `url(${coverImage})` }"
+        :style="{
+          'background-image': `url(${
+            coverImage ? coverImage : '/images/Pink-Paw.png'
+          })`
+        }"
       ></div>
     </div>
 
@@ -11,7 +15,12 @@
       <client-only>
         <swiper class="swiper " ref="mySwiper" :options="swiperOptions">
           <swiper-slide v-for="(img, index) in images" :key="index">
-            <img :src="img" class="slider-image" alt="slider-image" />
+            <img
+              @click="$emit('preview-image', img)"
+              :src="img"
+              class="slider-image"
+              alt="slider-image"
+            />
           </swiper-slide>
           <div class="swiper-button-next" slot="button-next"></div>
           <div class="swiper-button-prev" slot="button-prev"></div>
@@ -22,14 +31,11 @@
 </template>
 
 <script>
-// import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-// import "swiper/swiper-bundle.css";
 export default {
   name: "image-gallery",
   props: {
     coverImage: {
-      type: String,
-      required: true
+      type: String
     },
     images: {
       type: Array,
@@ -37,8 +43,7 @@ export default {
     }
   },
   components: {
-    // Swiper,
-    // SwiperSlide
+    coverImage() {}
   },
   computed: {
     swiperOptions() {
@@ -55,11 +60,6 @@ export default {
             slidesPerView: 3,
             spaceBetween: 20
           }
-
-          // 700: {
-          //   slidesPerView: 3,
-          //   spaceBetween: 20
-          // }
         }
       };
     }
@@ -110,4 +110,13 @@ export default {
     margin: auto;
   }
 }
+
+// .place-holder {
+//   background-image: url("/images/Pink-Paw.png");
+//   height: 269px;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   border-radius: 19px 19px 0 0;
+// }
 </style>
