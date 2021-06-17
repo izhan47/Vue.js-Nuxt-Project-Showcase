@@ -51,9 +51,8 @@ export default {
       import("~/components/Profile/business/business-general-info"),
     hoursOfOperation: () =>
       import("~/components/Profile/business/business-hours-of-operation"),
-    businessLink: () =>
-      import("~/components/Profile/business/business-services"),
-    services: () => import("~/components/Profile/business/business-link")
+    businessLink: () => import("~/components/Profile/business/business-link"),
+    services: () => import("~/components/Profile/business/business-services")
   },
   middleware: ["auth"],
   data: () => ({
@@ -128,7 +127,6 @@ export default {
             ...data
           };
         }
-
         const fd = new FormData();
 
         for (const key in this.form) {

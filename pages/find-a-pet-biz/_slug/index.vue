@@ -62,11 +62,11 @@
             </p>
 
             <p class="donation_link" v-if="pet_pro.website_url">
-              <a :href="pet_pro.website_url">Website</a>
+              <a :href="pet_pro.website_url" target="_blank">Visit Website</a>
             </p>
 
             <p class="donation_link" v-if="pet_pro.donation_link">
-              <a :href="pet_pro.website_url">Donation Link</a>
+              <a :href="pet_pro.website_url" target="_blank">Donation Link</a>
             </p>
 
             <div class="service mt-5">
