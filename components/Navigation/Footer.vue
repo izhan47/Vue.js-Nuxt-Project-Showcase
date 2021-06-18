@@ -5,16 +5,27 @@
       <v-row class="custom-footer-padding">
         <v-col cols="12" md="2" sm="6">
           <v-row>
-            <img
-              class="mr-10 mt-5 img-fluid img-height"
-              src="/images/WagEnabledLogo.jpg"
-              alt="logo"
-            />
-            <v-col cols="2" class="mr-2 mt-5" v-for="icon in icons" :key="icon">
-              <v-btn icon color="#332e80">
-                <v-icon>{{ icon }}</v-icon></v-btn
-              ></v-col
-            >
+            <div>
+              <img
+                class="mr-10 mt-5 mb-3 img-fluid img-height"
+                src="/images/WagEnabledLogo.jpg"
+                alt="logo"
+              />
+            </div>
+
+            <div class="d-flex align-items-center justify-space-between">
+              <v-btn
+                v-for="(icon, i) in social_accounts"
+                :key="i"
+                icon
+                target="_blank"
+                :href="icon.to"
+                @mouseleave="hoverIcon = ''"
+                @mouseover="hoverIcon = i"
+                :color="hoverIcon === i ? '#ff8189' : '#332e80'"
+                ><v-icon>{{ icon.icon }}</v-icon></v-btn
+              >
+            </div>
           </v-row>
         </v-col>
         <v-col cols="12" md="4" sm="6"></v-col>
@@ -98,6 +109,7 @@ export default {
   name: "Footer.vue",
   data() {
     return {
+      hoverIcon: "",
       products: [
         // { title: 'Home', path: '/home', icon: 'home' },
         { title: this.$i18n.t("find_a_pet_biz"), to: "/find-a-pet-biz" },
@@ -108,16 +120,23 @@ export default {
       social_accounts: [
         {
           title: this.$i18n.t("facebook"),
-          to: "https://www.facebook.com/WagEnabled"
+          to: "https://www.facebook.com/WagEnabled",
+          icon: "mdi-facebook"
         },
-        { title: this.$i18n.t("Email"), to: "mailto:pets@wagenabled.com" },
+        {
+          title: this.$i18n.t("Email"),
+          to: "mailto:pets@wagenabled.com",
+          icon: "mdi-email"
+        },
         {
           title: this.$i18n.t("instagram"),
-          to: "https://www.instagram.com/wagenabled/"
+          to: "https://www.instagram.com/wagenabled/",
+          icon: "mdi-instagram"
         },
         {
           title: this.$i18n.t("youtube"),
-          to: "https://www.youtube.com/channel/UCW3lViiZvDUBz5lWZYw93CA"
+          to: "https://www.youtube.com/channel/UCW3lViiZvDUBz5lWZYw93CA",
+          icon: "mdi-youtube"
         }
       ],
       icons: ["mdi-facebook", "mdi-email", "mdi-instagram", "mdi-youtube"]
@@ -137,5 +156,16 @@ export default {
 }
 .custom-padding {
   padding-bottom: 6rem;
+}
+
+.d-flex {
+  display: flex;
+  width: 100%;
+}
+.align-items-center {
+  align-items: center;
+}
+.justify-space-between {
+  justify-content: space-between;
 }
 </style>
