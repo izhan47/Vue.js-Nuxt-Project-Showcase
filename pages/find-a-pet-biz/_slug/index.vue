@@ -61,6 +61,14 @@
               {{ pet_pro.description }}
             </p>
 
+            <p class="donation_link" v-if="pet_pro.website_url">
+              <a :href="pet_pro.website_url" target="_blank">Visit Website</a>
+            </p>
+
+            <p class="donation_link" v-if="pet_pro.donation_link">
+              <a :href="pet_pro.website_url" target="_blank">Donation Link</a>
+            </p>
+
             <div class="service mt-5">
               <div class="title">
                 <v-icon color="#46259A">mdi-check</v-icon>
@@ -165,18 +173,25 @@
                 <div class="address">
                   <template v-if="address">
                     <p class="label">Address</p>
-                    <div class="custom-card p-2 light">
-                      <p class="light">{{ address }}</p>
-                      <v-icon color="#1e1d1f4d">mdi-home</v-icon>
-                    </div>
+                    <a
+                      :href="'http://maps.google.com/?q=' + address"
+                      class="open-phone"
+                      target="_blank"
+                      ><div class="custom-card p-2 light">
+                        <p class="light">{{ address }}</p>
+                        <v-icon color="#1e1d1f4d">mdi-home</v-icon>
+                      </div></a
+                    >
                   </template>
 
                   <template v-if="pet_pro.phone_number">
                     <p class="label">Phone</p>
-                    <div class="custom-card p-2 light">
-                      <p class="light">{{ pet_pro.phone_number }}</p>
-                      <v-icon color="#1e1d1f4d">mdi-phone</v-icon>
-                    </div>
+                    <a :href="'tel:' + pet_pro.phone_number" class="open-phone">
+                      <div class="custom-card p-2 light">
+                        <p class="light">{{ pet_pro.phone_number }}</p>
+                        <v-icon color="#1e1d1f4d">mdi-phone</v-icon>
+                      </div></a
+                    >
                   </template>
                 </div>
 
@@ -409,7 +424,18 @@ p.description {
   font-weight: normal;
   font-size: 16px;
   line-height: 24px;
-  color: rgba(0, 11, 66, 0.8);
+  color: rgba(0, 0, 0, 0.8);
+}
+
+p.donation_link {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 0.8);
+  margin-top: 10px;
+  a {
+    text-decoration: none;
+  }
 }
 
 .service {
@@ -568,6 +594,11 @@ h2.light {
     }
   }
 }
+
+.open-phone {
+  text-decoration: none;
+}
+
 .container {
   @media (max-width: 576px) {
     max-width: 350px;
