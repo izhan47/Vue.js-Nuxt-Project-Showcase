@@ -134,7 +134,6 @@
 
 <script>
 // import VueGoogleAutocomplete from "vue-google-autocomplete";
-
 export default {
   name: "index.vue",
   components: {

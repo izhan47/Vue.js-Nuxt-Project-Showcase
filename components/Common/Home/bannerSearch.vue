@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-container custom-height custom-padding">
+  <div class="custom-container custom-padding">
     <v-row justify="center">
       <v-col cols="12" md="8" sm="12" id="animate">
         <div>
@@ -113,5 +113,9 @@ export default {
   img {
     max-height: $img-max-height-255;
   }
+}
+
+.custom-container {
+  margin-bottom: 100px;
 }
 </style>
