@@ -128,34 +128,36 @@ export default {
     this.$store.commit("SHOW_LOADER", false);
   },
   methods: {
-    Register() {
-      if (this.$refs.form.validate()) {
-        this.$store.commit("SHOW_LOADER", true);
-        this.$store
-          .dispatch("register", this.form)
-          .then(response => {
-            this.$store.commit("SHOW_LOADER", false);
-            this.$store.commit("SHOW_SNACKBAR", {
-              snackbar: true,
-              color: "green",
-              message: response.data.message
-            });
-            this.$router.push("/profile");
-          })
-          .catch(e => {
-            this.$store.commit("SHOW_LOADER", false);
-            let errors = e.response.data.data;
-            for (let item in errors) {
-              if (errors.hasOwnProperty(item))
-                errors[item].forEach(err => {
-                  this.$store.commit("SHOW_SNACKBAR", {
-                    snackbar: true,
-                    color: "red",
-                    message: err
-                  });
-                });
-            }
+    async Register() {
+      try {
+        if (this.$refs.form.validate()) {
+          this.$store.commit("SHOW_LOADER", true);
+          const regResp = await this.$store.dispatch("register", this.form);
+          const mail_form = this.form;
+          mail_form.address = this.form.email;
+          const mailResp = await this.$axios.post("/mail/send-mail", mail_form);
+          this.$store.commit("SHOW_LOADER", false);
+          this.$store.commit("SHOW_SNACKBAR", {
+            snackbar: true,
+            color: "green",
+            message: regResp.data.message
           });
+          this.$router.push("/profile");
+        }
+      } catch (error) {
+        console.log({ error });
+        this.$store.commit("SHOW_LOADER", false);
+        let errors = error.response.data.data;
+        for (let item in errors) {
+          if (errors.hasOwnProperty(item))
+            errors[item].forEach(err => {
+              this.$store.commit("SHOW_SNACKBAR", {
+                snackbar: true,
+                color: "red",
+                message: err
+              });
+            });
+        }
       }
     }
   }
