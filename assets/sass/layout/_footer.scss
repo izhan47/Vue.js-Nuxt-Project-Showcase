@@ -36,14 +36,19 @@
   background-color:$cultured;
 }
 .copy-rights-text{
+  display: flex;
   color: $black;
   font-family:  $font-family-primary;
   font-size: $font-size-13;
   font-weight:  $font-weight-600;
   text-transform: $text-transform-capitalize;
-  cursor: pointer;
   max-width: 660px;
   width: 100%;
   text-align: end;
   padding-top: 1.2rem;
+}
+
+.copy-rights-text a{
+  text-decoration: none;
+  color: $black;
 }

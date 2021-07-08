@@ -95,9 +95,15 @@
     </v-footer>
     <div class="copy-rights  ">
       <div class="custom-container">
-        <p class="copy-rights-text">
-          {{ $t("copy_right") }} | {{ $t("terms") }} | {{ $t("privacy") }}
-        </p>
+        <div class="copy-rights-text">
+          <p>
+            {{ $t("copy_right") }}
+          </p>
+          <p>&nbsp;|&nbsp;</p>
+          <a href="/terms-and-policy" target="_blank">
+            {{ $t("terms") }} &amp; {{ $t("privacy") }}
+          </a>
+        </div>
       </div>
       <div class="footer-color"></div>
     </div>
