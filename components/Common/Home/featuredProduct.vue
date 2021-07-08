@@ -33,7 +33,7 @@
                 outlined
                 large
                 rounded
-                @click="$router.push('/reviews')"
+                to="/best-pet-products/ziwi-premium-pet-food"
               >
                 {{ $t("browse_all_review") }}
               </v-btn>

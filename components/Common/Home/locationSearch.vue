@@ -106,7 +106,7 @@
         </v-col>
       </v-row>
     </div>
-    <div v-else class="text-center">
+    <div v-else class="text-center nothing-container">
       <img
         class="img-height img-fluid"
         src="/images/Auth/Column-3-Dog.png"
@@ -217,5 +217,8 @@ export default {
 }
 .cross-icon::v-deep .v-input__append-inner {
   margin-top: 0;
+}
+.nothing-container {
+  padding-bottom: 100px;
 }
 </style>
