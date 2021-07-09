@@ -95,7 +95,6 @@ export default {
   box-sizing: border-box;
   height: 80px;
   width: 80px;
-  cursor: pointer;
 }
 // .card-icon-parent:hover {
 //   border: 3px solid $purple;
