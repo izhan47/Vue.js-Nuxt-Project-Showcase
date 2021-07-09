@@ -26,6 +26,30 @@
         </v-col>
       </v-row>
     </div>
+
+    <!-- Deals -->
+    <v-container>
+      <v-row>
+        <v-col cols="12" class="p-0">
+          <div class="custom-card left-side">
+            <v-tabs v-model="tab" color="deep-purple accent-4">
+              <v-tabs-slider></v-tabs-slider>
+
+              <v-tab href="#tab-1">
+                Deals Offered
+              </v-tab>
+            </v-tabs>
+
+            <v-tabs-items v-model="tab">
+              <v-tab-item value="tab-1">
+                <Deals :deals="[]" @claim-deal="claimDeal" />
+              </v-tab-item>
+            </v-tabs-items>
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
+
     <!--  card-section-start   -->
     <div class="custom-container  space" v-if="reviewData.length">
       <v-row>
@@ -55,11 +79,15 @@
 </template>
 
 <script>
-import ProductReviewCard from "@/components/ProductReviewCard";
+// import ProductReviewCard from "@/components/ProductReviewCard";
 
 export default {
   name: "index.vue",
-  components: { ProductReviewCard },
+  components: {
+    ProductReviewCard: () => import("~/components/ProductReviewCard"),
+    Deals: () => import("~/components/pet-biz/pet-pro-deals")
+  },
+  // components: { ProductReviewCard },
   data() {
     return {
       form: {
@@ -67,7 +95,8 @@ export default {
         parent_comment_id: 0,
         slug: ""
       },
-      categoryData: ""
+      categoryData: "",
+      tab: null
     };
   },
   computed: {
@@ -105,7 +134,8 @@ export default {
           });
         });
       }
-    }
+    },
+    async claimDeal(deal) {}
   }
 };
 </script>

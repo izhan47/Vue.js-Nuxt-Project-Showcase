@@ -108,6 +108,7 @@ export default {
     border-radius: 20px;
     display: block;
     margin: auto;
+    cursor: pointer;
   }
 }
 

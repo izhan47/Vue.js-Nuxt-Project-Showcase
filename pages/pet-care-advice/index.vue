@@ -169,12 +169,13 @@ export default {
       }
     },
     filterData() {
-      this.$router.push({ query: { page: this.page } });
-
       let filters = {
         form: this.form,
         page: this.page
       };
+
+      this.$router.push({ query: { page: this.page } });
+
       this.$store.dispatch("categoryList", filters);
     }
   }
