@@ -123,7 +123,7 @@ export default {
   data() {
     return {
       page: 1,
-      sorting: ["Latest", "Popular", "Deal offered"],
+      sorting: ["Latest", "Deal Offered"],
 
       categories: [],
 
@@ -192,6 +192,18 @@ export default {
       };
 
       this.$store.dispatch("reviewList", filters);
+
+      this.scrollToBottom();
+    },
+    scrollToBottom() {
+      this.$nextTick(() => {
+        setTimeout(() => {
+          window.scrollTo({
+            top: 100,
+            behavior: "smooth"
+          });
+        }, 500);
+      });
     }
   }
 };

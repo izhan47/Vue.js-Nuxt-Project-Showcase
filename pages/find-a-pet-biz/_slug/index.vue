@@ -66,7 +66,7 @@
             </p>
 
             <p class="donation_link" v-if="pet_pro.donation_link">
-              <a :href="pet_pro.website_url" target="_blank">Donation Link</a>
+              <a :href="pet_pro.website_url" target="_blank">Donate</a>
             </p>
 
             <div class="service mt-5">
@@ -144,69 +144,76 @@
               </v-tabs-items>
             </div>
           </v-col>
-          <v-col md="4" cols="12">
-            <div class="custom-card">
-              <!-- {{ pet_pro.longitude }}
+          <template v-if="address || pet_pro.phone_number || hours">
+            <v-col md="4" cols="12">
+              <div class="custom-card">
+                <!-- {{ pet_pro.longitude }}
               {{ pet_pro.latitude }} -->
-              <div class="g-map">
-                <GmapMap
-                  :center="{
-                    lat: 10,
-                    lng: 10
-                  }"
-                  :zoom="7"
-                  map-type-id="terrain"
-                  class="map-location"
-                >
-                  <GmapMarker
-                    :key="index"
-                    v-for="(m, index) in markers"
-                    :position="m"
-                    :clickable="true"
-                    :draggable="true"
-                    @click="center = m"
-                  />
-                </GmapMap>
-              </div>
-
-              <div class="inner">
-                <div class="address">
-                  <template v-if="address">
-                    <p class="label">Address</p>
-                    <a
-                      :href="'http://maps.google.com/?q=' + address"
-                      class="open-phone"
-                      target="_blank"
-                      ><div class="custom-card p-2 light">
-                        <p class="light">{{ address }}</p>
-                        <v-icon color="#1e1d1f4d">mdi-home</v-icon>
-                      </div></a
-                    >
-                  </template>
-
-                  <template v-if="pet_pro.phone_number">
-                    <p class="label">Phone</p>
-                    <a :href="'tel:' + pet_pro.phone_number" class="open-phone">
-                      <div class="custom-card p-2 light">
-                        <p class="light">{{ pet_pro.phone_number }}</p>
-                        <v-icon color="#1e1d1f4d">mdi-phone</v-icon>
-                      </div></a
-                    >
-                  </template>
+                <div class="g-map">
+                  <GmapMap
+                    :center="{
+                      lat: 10,
+                      lng: 10
+                    }"
+                    :zoom="7"
+                    map-type-id="terrain"
+                    class="map-location"
+                  >
+                    <GmapMarker
+                      :key="index"
+                      v-for="(m, index) in markers"
+                      :position="m"
+                      :clickable="true"
+                      :draggable="true"
+                      @click="center = m"
+                    />
+                  </GmapMap>
                 </div>
 
-                <!-- hours of operation -->
-                <h2 class="light mb-3">Hours Of Operation</h2>
+                <div class="inner">
+                  <div class="address">
+                    <template v-if="address">
+                      <p class="label">Address</p>
+                      <a
+                        :href="'http://maps.google.com/?q=' + address"
+                        class="open-phone"
+                        target="_blank"
+                        ><div class="custom-card p-2 light">
+                          <p class="light">{{ address }}</p>
+                          <v-icon color="#1e1d1f4d">mdi-home</v-icon>
+                        </div></a
+                      >
+                    </template>
 
-                <ul class="timetable">
-                  <li v-for="time in formatedTimetable" :key="time.day">
-                    <p class="label">{{ time.day }}</p>
-                    <p class="time">{{ time.open }} - {{ time.close }}</p>
-                  </li>
-                </ul>
+                    <template v-if="pet_pro.phone_number">
+                      <p class="label">Phone</p>
+                      <a
+                        :href="'tel:' + pet_pro.phone_number"
+                        class="open-phone"
+                      >
+                        <div class="custom-card p-2 light">
+                          <p class="light">{{ pet_pro.phone_number }}</p>
+                          <v-icon color="#1e1d1f4d">mdi-phone</v-icon>
+                        </div></a
+                      >
+                    </template>
+                  </div>
+
+                  <!-- hours of operation -->
+                  <template v-if="hours">
+                    <h2 class="light mb-3">Hours Of Operation</h2>
+
+                    <ul class="timetable">
+                      <li v-for="time in formatedTimetable" :key="time.day">
+                        <p class="label">{{ time.day }}</p>
+                        <p class="time">{{ time.open }} - {{ time.close }}</p>
+                      </li>
+                    </ul>
+                  </template>
+                </div>
               </div>
-            </div>
-          </v-col>
+            </v-col>
+          </template>
         </v-row>
       </div>
     </template>
@@ -249,7 +256,8 @@ export default {
       { lat: -57.3633598628284, lng: -149.33024667020254 }
     ],
     tab: null,
-    openPopup: false
+    openPopup: false,
+    hours: false
   }),
   async asyncData({ store, params }) {
     try {
@@ -313,6 +321,9 @@ export default {
       return timetable.map(time => {
         const open = formatted_timetable[`${time.day}_open`];
         const close = formatted_timetable[`${time.day}_close`];
+        if (!open || !close) {
+          this.hours = false;
+        }
         return {
           day: time.day.substr(0, 3),
           open: open || "N/A",
