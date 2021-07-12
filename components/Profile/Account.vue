@@ -84,6 +84,22 @@
             :rules="rules.zipcode"
           ></v-text-field>
         </div>
+        <div class="search-form-field">
+          <div class="search-filter-label">
+            <label>{{ $t("password") }}</label>
+          </div>
+          <v-text-field
+            v-model="userDetail.password"
+            class="search-field cross-icon mt-2"
+            color="#46259A"
+            solo
+            rounded
+            outlined
+            clearable
+            required
+            :rules="rules.password"
+          ></v-text-field>
+        </div>
 
         <!--      <div class="search-form-field">-->
         <!--        <div class="search-filter-label">-->
@@ -141,7 +157,8 @@ export default {
       form: {
         name: "",
         email: "",
-        zipcode: ""
+        zipcode: "",
+        password: ""
       },
       image: "",
       imageURL: "",
@@ -152,6 +169,9 @@ export default {
         ],
         zipcode: [
           val => (val || "").length > 0 || "This address field is required"
+        ],
+        password: [
+          val => (val || "").length > 0 || "This password field is required"
         ]
       }
     };

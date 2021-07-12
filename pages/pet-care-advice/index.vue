@@ -177,6 +177,17 @@ export default {
       this.$router.push({ query: { page: this.page } });
 
       this.$store.dispatch("categoryList", filters);
+      this.scrollToBottom();
+    },
+    scrollToBottom() {
+      this.$nextTick(() => {
+        setTimeout(() => {
+          window.scrollTo({
+            top: 100,
+            behavior: "smooth"
+          });
+        }, 500);
+      });
     }
   }
 };

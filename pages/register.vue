@@ -75,15 +75,14 @@
                     {{ $t("sign_up") }}</v-btn
                   >
                 </div>
-                <p class="mt-5 mb-5 or-divider">
+                <!-- <p class="mt-5 mb-5 or-divider">
                   <span>{{ $t("or") }}</span>
                 </p>
-
                 <div class="text-center">
                   <v-btn large class="log-in-btn white-text" outlined rounded>
                     {{ $t("sign_up_with_google") }}</v-btn
                   >
-                </div>
+                </div> -->
               </v-form>
               <div class="mt-4 mb-2 ">
                 <span class="forgot-pass">{{ $t("have_an_account") }}</span>
