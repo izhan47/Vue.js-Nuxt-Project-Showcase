@@ -58,16 +58,16 @@ export default {
           to: `${prefix}/vet-info`,
           show: false
         },
-        {
-          text: "add_business",
-          to: `${prefix}/add-business`,
-          show: true
-        },
-        {
-          text: "my_business",
-          to: `${prefix}/my-business`,
-          show: true
-        },
+        // {
+        //   text: "add_business",
+        //   to: `${prefix}/add-business`,
+        //   show: true
+        // },
+        // {
+        //   text: "my_business",
+        //   to: `${prefix}/my-business`,
+        //   show: true
+        // },
         {
           text: "save_deals",
           to: `${prefix}/save-deals`,
