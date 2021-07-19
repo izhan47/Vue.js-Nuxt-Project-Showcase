@@ -271,6 +271,14 @@ export default () => {
           data
         });
       },
+      // Reset password
+      resetPassword({ commit }, data) {
+        return axios({
+          method: "POST",
+          url: "reset-password",
+          data
+        });
+      },
 
       //Like Dislike
       like({ dispatch }, slug) {
@@ -285,6 +293,13 @@ export default () => {
         return axios({
           method: "POST",
           url: "pet-pro/deal/claim/" + data.slug + "/" + data.pet_deal_id
+        });
+      },
+
+      productReviewclaim({ dispatch }, data) {
+        return axios({
+          method: "POST",
+          url: "product-reviews/deal/claim/" + data.slug + "/" + data.pet_deal_id
         });
       },
 

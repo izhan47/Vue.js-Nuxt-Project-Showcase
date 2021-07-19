@@ -29,25 +29,27 @@
 
     <!-- Deals -->
     <v-container>
-      <v-row>
-        <v-col cols="12" class="p-0">
-          <div class="custom-card left-side">
-            <v-tabs v-model="tab" color="deep-purple accent-4">
-              <v-tabs-slider></v-tabs-slider>
+      <div class="custom-container custom-card mt-8">
+        <v-row>
+          <v-col cols="12" class="p-0">
+            <div>
+              <v-tabs v-model="tab" color="deep-purple accent-4">
+                <v-tabs-slider></v-tabs-slider>
 
-              <v-tab href="#tab-1">
-                Deals Offered
-              </v-tab>
-            </v-tabs>
+                <v-tab href="#tab-1">
+                  Deals Offered
+                </v-tab>
+              </v-tabs>
 
-            <v-tabs-items v-model="tab">
-              <v-tab-item value="tab-1">
-                <Deals :deals="[]" @claim-deal="claimDeal" />
-              </v-tab-item>
-            </v-tabs-items>
-          </div>
-        </v-col>
-      </v-row>
+              <v-tabs-items v-model="tab">
+                <v-tab-item value="tab-1">
+                  <Deals :deals="categoryData.deals" @claim-deal="claimDeal" />
+                </v-tab-item>
+              </v-tabs-items>
+            </div>
+          </v-col>
+        </v-row>
+      </div>
     </v-container>
 
     <!--  card-section-start   -->
@@ -135,13 +137,49 @@ export default {
         });
       }
     },
-    async claimDeal(deal) {}
+    async claimDeal(deal) {
+      if (!this.$store.state.user.isAuthenticated) {
+        this.$store.commit("SET_CURRENT_PATH", this.$route.path);
+        return this.$router.push("/login");
+      } else {
+        try {
+          let data = {
+            slug: this.$route.params.slug,
+            pet_deal_id: deal.id
+          };
+
+          this.$store.commit("SHOW_LOADER", true);
+          const response = await this.$store.dispatch(
+            "productReviewclaim",
+            data
+          );
+          const index = this.categoryData.deals.findIndex(
+            d => d.id === deal.id
+          );
+          if (index !== -1) this.categoryData.deals[index].is_claimed = 1;
+          this.$store.commit("SHOW_LOADER", false);
+          this.$store.commit("SHOW_SNACKBAR", {
+            snackbar: true,
+            color: "green",
+            message: response.data.message
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
+.custom-card {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 19px;
+  background: #ffffff;
+  overflow: hidden;
+}
 .custom-container {
   max-width: 940px;
 }
