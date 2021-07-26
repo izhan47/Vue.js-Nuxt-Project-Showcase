@@ -16,6 +16,8 @@
               <v-select
                 class="search-field mt-2"
                 :items="sorting"
+                item-text="name"
+                item-value="value"
                 v-model="form.sort_by"
                 outlined
                 rounded
@@ -113,8 +115,16 @@ export default {
     return {
       category: [],
       page: 1,
-      sorting: ["Latest", "Popular"],
-
+      sorting: [
+        {
+          name: "Latest",
+          value: "Latest"
+        },
+        {
+          name: "Popular",
+          value: "popular"
+        }
+      ],
       form: {
         category_id: "",
         sort_by: "Latest",

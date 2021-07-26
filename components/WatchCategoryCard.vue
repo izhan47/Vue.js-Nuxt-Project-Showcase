@@ -3,7 +3,7 @@
     <nuxt-link :to="`/pet-care-advice/${item.slug}`">
       <div
         class="bg-img-height"
-        :style="`background-image: url(${item.thumbnail_full_path})`"
+        v-lazy:background-image="item.thumbnail_full_path"
       ></div>
     </nuxt-link>
     <div

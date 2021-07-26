@@ -2,19 +2,23 @@
   <div>
     <pet-functions></pet-functions>
     <about></about>
-    <location-search @filter-data="filterData"></location-search>
+    <client-only>
+      <location-search @filter-data="filterData"></location-search>
+    </client-only>
     <care-advice></care-advice>
     <featured-product></featured-product>
     <!-- <banner-search></banner-search> -->
-    <news-letter></news-letter>
 
-    <div id="fd-form-60d48b4dbcd89609fbf3e11d"></div>
-    <script>
-      window.fd("form", {
-        formId: "60d48b4dbcd89609fbf3e11d",
-        containerEl: "#fd-form-60d48b4dbcd89609fbf3e11d"
-      });
-    </script>
+    <client-only>
+      <news-letter></news-letter>
+      <div id="fd-form-60d48b4dbcd89609fbf3e11d"></div>
+      <script>
+        window.fd("form", {
+          formId: "60d48b4dbcd89609fbf3e11d",
+          containerEl: "#fd-form-60d48b4dbcd89609fbf3e11d"
+        });
+      </script>
+    </client-only>
   </div>
 </template>
 <script>

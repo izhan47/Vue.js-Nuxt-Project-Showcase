@@ -246,6 +246,19 @@ import WatchCategoryCard from "@/components/WatchCategoryCard";
 export default {
   name: "index.vue",
   components: { WatchCategoryCard },
+  // head() {
+  //   return {
+  //     title: this.categoryData ? this.categoryData.title : "No title",
+  //     meta: [
+  //       {
+  //         hid: "Description " + this.categoryData.title,
+  //         name: "og:description",
+  //         content: this.categoryData.title
+  //       }
+  //     ]
+  //   };
+  // },
+
   data() {
     return {
       form: {
@@ -280,6 +293,23 @@ export default {
       return this.$store.state.user.isAuthenticated;
     }
   },
+  // async fetch() {
+  // await this.$store
+  //   .dispatch("singleCategoryDetail", this.URL)
+  //   .then(response => {
+  //     this.categoryData = response.data.data.watch_and_learn;
+  //     this.$store.commit("SHOW_LOADER", false);
+  //   });
+
+  // await this.$store.dispatch("getComment", this.URL).then(response => {
+  //   this.commentData = response.data.data.comments;
+  //   this.$store.commit("SHOW_LOADER", false);
+  // });
+
+  // this.userDetail = this.$store.state.user.user;
+
+  // return true;
+  // },
   created() {
     this.getCategoryDetail();
     this.getComments();

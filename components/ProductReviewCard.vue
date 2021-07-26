@@ -3,8 +3,10 @@
     <nuxt-link :to="`/best-pet-products/${item.slug}`">
       <div
         class="bg-img-height"
-        :style="`background-image: url(${item.thumbnail_full_path})`"
-      ></div>
+        v-lazy:background-image="item.thumbnail_full_path"
+      >
+        <!-- <img :src="`${item.thumbnail_full_path}`" /> -->
+      </div>
     </nuxt-link>
     <div
       class="card-category"
