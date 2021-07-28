@@ -1,82 +1,71 @@
 <template>
-  <div class="watch-learn-detail-section" v-if="categoryData">
-    <div class="custom-container custom-margin">
-      <v-row>
-        <v-col cols="12" md="12" sm="12">
-          <div class="heading mt-2">
-            <h1>{{ categoryData.title }}</h1>
-          </div>
-          <div v-html="categoryData.description"></div>
-          <!--          <hr class="dot-line">-->
-
-          <!--          <div class="comment-section">-->
-          <!--            <h2 class="comment-section-heading text-center space">{{ $t('comments')}}</h2>-->
-          <!--            <h2 class="comment-section-heading text-center mb-5">{{ $t('leave_a_comment')}}</h2>-->
-          <!--            <v-textarea-->
-          <!--              outlined-->
-          <!--              name="input-7-4"-->
-          <!--              label="Message"-->
-          <!--              v-model="form.message"-->
-          <!--              required-->
-          <!--            ></v-textarea>-->
-          <!--            <div class="text-center">-->
-          <!--              <v-btn large class=" submit-btn" outlined rounded @click="submit"> {{ $t('submit') }}</v-btn>-->
-          <!--            </div>-->
-          <!--          </div>-->
-        </v-col>
-      </v-row>
-    </div>
-
-    <!-- Deals -->
-    <v-container>
-      <div class="custom-container custom-card mt-8">
+  <div>
+    <div class="watch-learn-detail-section" v-if="categoryData">
+      <div class="custom-container custom-margin">
         <v-row>
-          <v-col cols="12" class="p-0">
-            <div>
-              <v-tabs v-model="tab" color="deep-purple accent-4">
-                <v-tabs-slider></v-tabs-slider>
-
-                <v-tab href="#tab-1">
-                  Deals Offered
-                </v-tab>
-              </v-tabs>
-
-              <v-tabs-items v-model="tab">
-                <v-tab-item value="tab-1">
-                  <Deals :deals="categoryData.deals" @claim-deal="claimDeal" />
-                </v-tab-item>
-              </v-tabs-items>
+          <v-col cols="12" md="12" sm="12">
+            <div class="heading mt-2">
+              <h1>{{ categoryData.title }}</h1>
             </div>
+            <div v-html="categoryData.description"></div>
           </v-col>
         </v-row>
       </div>
-    </v-container>
 
-    <!--  card-section-start   -->
-    <div class="custom-container  space" v-if="reviewData.length">
-      <v-row>
-        <v-col
-          cols="12"
-          md="4"
-          sm="12"
-          v-for="(data, i) in reviewData.slice(0, 3)"
-          :key="i"
-          class="mt-8"
-        >
-          <product-review-card :item="data"></product-review-card>
-        </v-col>
-      </v-row>
-    </div>
-    <div v-else class="text-center">
-      <img
-        class="img-height img-fluid"
-        src="/images/Auth/Column-3-Dog.png"
-        alt="logo"
-      />
-      <h2 class="heading">{{ $t("nothing_here") }}</h2>
-    </div>
+      <!-- Deals -->
+      <v-container>
+        <div class="custom-container custom-card mt-8">
+          <v-row>
+            <v-col cols="12" class="p-0">
+              <div>
+                <v-tabs v-model="tab" color="deep-purple accent-4">
+                  <v-tabs-slider></v-tabs-slider>
 
-    <!--  card-section-end   -->
+                  <v-tab href="#tab-1">
+                    Deals Offered
+                  </v-tab>
+                </v-tabs>
+
+                <v-tabs-items v-model="tab">
+                  <v-tab-item value="tab-1">
+                    <Deals
+                      :deals="categoryData.deals"
+                      @claim-deal="claimDeal"
+                    />
+                  </v-tab-item>
+                </v-tabs-items>
+              </div>
+            </v-col>
+          </v-row>
+        </div>
+      </v-container>
+
+      <!--  card-section-start   -->
+      <div class="custom-container  space" v-if="reviewData.length">
+        <v-row>
+          <v-col
+            cols="12"
+            md="4"
+            sm="12"
+            v-for="(data, i) in reviewData.slice(0, 3)"
+            :key="i"
+            class="mt-8"
+          >
+            <product-review-card :item="data"></product-review-card>
+          </v-col>
+        </v-row>
+      </div>
+      <div v-else class="text-center">
+        <img
+          class="img-height img-fluid"
+          src="/images/Auth/Column-3-Dog.png"
+          alt="logo"
+        />
+        <h2 class="heading">{{ $t("nothing_here") }}</h2>
+      </div>
+
+      <!--  card-section-end   -->
+    </div>
   </div>
 </template>
 

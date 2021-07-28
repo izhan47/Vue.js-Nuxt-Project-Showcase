@@ -1,462 +1,467 @@
 <template>
-  <div v-if="petDetail">
-    <div class="pet-category-container ">
-      <v-row>
-        <v-col cols="12" md="7" sm="12" v-if="petDetail.cover_image">
-          <img
-            class="img-fluid img-height"
-            :src="petDetail.cover_image.image_thumb_full_path"
-            alt=""
-          />
-        </v-col>
-        <v-col cols="12" md="5" sm="12" class="bd-img-container">
-          <div class="title-card">
-            <span
-              class="chip-title white-text"
-              v-for="(cat, c) in petDetail.categories"
-              :key="c"
-            >
-              {{ cat.name }}
-              <span v-if="c !== petDetail.categories.length - 1"> | </span>
-            </span>
-            <div class="love-section">
-              <h2>{{ petDetail.store_name }}</h2>
-              <div class="mt-8">
+  <div>
+    <div v-if="petDetail">
+      <div class="pet-category-container ">
+        <v-row>
+          <v-col cols="12" md="7" sm="12" v-if="petDetail.cover_image">
+            <img
+              class="img-fluid img-height"
+              :src="petDetail.cover_image.image_thumb_full_path"
+              alt=""
+            />
+          </v-col>
+          <v-col cols="12" md="5" sm="12" class="bd-img-container">
+            <div class="title-card">
+              <span
+                class="chip-title white-text"
+                v-for="(cat, c) in petDetail.categories"
+                :key="c"
+              >
+                {{ cat.name }}
+                <span v-if="c !== petDetail.categories.length - 1"> | </span>
+              </span>
+              <div class="love-section">
+                <h2>{{ petDetail.store_name }}</h2>
+                <div class="mt-8">
+                  <img
+                    v-if="is_liked === 0"
+                    class="heart-img"
+                    src="/images/gray-love.svg"
+                    alt=""
+                    @click="like"
+                  />
+                  <img
+                    v-else
+                    class="heart-img"
+                    src="/images/pink-love.svg"
+                    alt=""
+                    @click="like"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="bg-img-section"></div>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12" md="9" sm="12">
+            <div class="category-left-section ">
+              <div class="bg-category-img"></div>
+              <div class="bg-category-section">
                 <img
-                  v-if="is_liked === 0"
-                  class="heart-img"
-                  src="/images/gray-love.svg"
+                  v-for="(img, i) in petDetail.images"
+                  :key="i"
+                  class="img-fluid category-img ml-3"
+                  :src="img.image_small_thumb_full_path"
                   alt=""
-                  @click="like"
                 />
-                <img
-                  v-else
-                  class="heart-img"
-                  src="/images/pink-love.svg"
-                  alt=""
-                  @click="like"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="bg-img-section"></div>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" md="9" sm="12">
-          <div class="category-left-section ">
-            <div class="bg-category-img"></div>
-            <div class="bg-category-section">
-              <img
-                v-for="(img, i) in petDetail.images"
-                :key="i"
-                class="img-fluid category-img ml-3"
-                :src="img.image_small_thumb_full_path"
-                alt=""
-              />
-              <div class="product-rating">
-                <v-rating
-                  class="mt-5 mb-5 "
-                  :value="4"
-                  length="1"
-                  background-color="#00afaa"
-                  color="#00afaa"
-                  dense
-                  readonly
-                  size="30"
-                ></v-rating>
-                <span class="product-rating-child">{{
-                  petDetail.avg_rating
-                }}</span>
-              </div>
+                <div class="product-rating">
+                  <v-rating
+                    class="mt-5 mb-5 "
+                    :value="4"
+                    length="1"
+                    background-color="#00afaa"
+                    color="#00afaa"
+                    dense
+                    readonly
+                    size="30"
+                  ></v-rating>
+                  <span class="product-rating-child">{{
+                    petDetail.avg_rating
+                  }}</span>
+                </div>
 
-              <div class="category-section-container">
-                <p class="description  space">{{ petDetail.description }}</p>
+                <div class="category-section-container">
+                  <p class="description  space">{{ petDetail.description }}</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="social-category-section mt-10">
-            <hr class="dot-line space" />
-            <div class="space display-section">
-              <p class="share-tag">{{ $t("share") }} :</p>
-              <div v-for="(item, i) in social" :key="i" class="social ml-2">
-                <v-icon color="#332e80" size="15" class="ml-2">{{
-                  item.icon
-                }}</v-icon>
-                <span> {{ item.title }}</span>
-              </div>
-            </div>
-
-            <!--  Deals Offerd  -->
-            <div class="category-section">
-              <div class="space heading">
-                <v-icon color="#332e80" size="30">mdi-percent-outline</v-icon>
-                <h2 class="pl-1">{{ $t("deals_offered") }}</h2>
-              </div>
+            <div class="social-category-section mt-10">
               <hr class="dot-line space" />
-              <div v-if="petDetail.deals.length">
-                <v-card
-                  class="card-radius space"
-                  v-for="(deal, d) in petDetail.deals"
-                  :key="d"
-                >
-                  <div class="custom-card-align">
-                    <v-btn icon class="card-inner-icon">
-                      <v-icon color="#332e80" size="50"
-                        >mdi-percent-outline</v-icon
-                      >
-                    </v-btn>
-                    <div>
-                      <!--                      <v-card-subtitle class="card-sub-heading">{{card.subtitle}}</v-card-subtitle>-->
-                      <v-card-title class="card-title mt-6">{{
-                        deal.deal
-                      }}</v-card-title>
-                    </div>
-                    <v-card-actions class="custom-card-padding">
-                      <!--                      <v-dialog-->
-                      <!--                        v-model="dialog"-->
-                      <!--                        persistent-->
-                      <!--                        max-width="490"-->
-                      <!--                      >-->
-                      <!--                        <template v-slot:activator="{ on, attrs }">-->
-                      <!--                          <v-btn color="#1B3659" dark rounded x-large v-bind="attrs" v-on="on"> {{$t('claim')}}</v-btn>-->
-                      <!--                        </template>-->
-                      <!--                        <v-card>-->
+              <div class="space display-section">
+                <p class="share-tag">{{ $t("share") }} :</p>
+                <div v-for="(item, i) in social" :key="i" class="social ml-2">
+                  <v-icon color="#332e80" size="15" class="ml-2">{{
+                    item.icon
+                  }}</v-icon>
+                  <span> {{ item.title }}</span>
+                </div>
+              </div>
 
-                      <!--                          <v-card-subtitle class="headline">-->
-                      <!--                            To use, show this at the store.-->
-                      <!--                          </v-card-subtitle>-->
-                      <!--                          <span class="ml-5 mt-2">Deal</span>-->
-                      <!--                          <v-card-title>{{deal.deal}}</v-card-title>-->
-                      <!--                          <hr class="dot-line space">-->
-                      <!--                          <v-card-text>Fine Print</v-card-text>-->
-                      <!--                          <v-card-text>{{deal.fine_print}}</v-card-text>-->
-                      <!--                          <v-card-actions>-->
-                      <!--                            <v-spacer></v-spacer>-->
-                      <!--                            <v-btn-->
-                      <!--                              color="#1B3659"-->
-                      <!--                              text-->
-                      <!--                              @click="dialog = false"-->
-                      <!--                            >-->
-                      <!--                              {{$t('cancel')}}-->
-                      <!--                            </v-btn>-->
-                      <!--                            <v-btn-->
-                      <!--                              color="#1B3659" dark class=" white-text"-->
-                      <!--                              rounded x-large-->
-                      <!--                              @click="dialog = false"-->
-                      <!--                            >-->
-                      <!--                              {{$t('claimed_deal')}}-->
-                      <!--                            </v-btn>-->
-                      <!--                          </v-card-actions>-->
-                      <!--                        </v-card>-->
-                      <!--                      </v-dialog>-->
-                      <v-btn
-                        v-if="is_claimed === 0"
-                        large
-                        class=" card-btn white-text"
-                        outlined
-                        rounded
-                        @click="claim(deal)"
-                      >
-                        {{ $t("claim") }}</v-btn
-                      >
-                      <v-btn
-                        v-else
-                        large
-                        class=" card-btn white-text"
-                        outlined
-                        rounded
-                        readonly
-                      >
-                        {{ $t("claimed") }}</v-btn
-                      >
-                    </v-card-actions>
-                  </div>
-                </v-card>
-              </div>
-              <div class="not-found space" v-else>
-                {{ $t("no_deals_found") }}
-              </div>
-            </div>
-            <!--  Event -->
-            <div class="category-section">
-              <div class="space heading">
-                <v-icon color="#332e80" size="30">mdi-percent-outline</v-icon>
-                <h2 class="pl-1">{{ $t("events") }}</h2>
-              </div>
-              <hr class="dot-line space" />
-              <div v-if="petDetail.events.length">
-                <v-card class="card-radius space">
-                  <div
-                    class="custom-card-align"
-                    v-for="(event, e) in petDetail.events"
-                    :key="e"
+              <!--  Deals Offerd  -->
+              <div class="category-section">
+                <div class="space heading">
+                  <v-icon color="#332e80" size="30">mdi-percent-outline</v-icon>
+                  <h2 class="pl-1">{{ $t("deals_offered") }}</h2>
+                </div>
+                <hr class="dot-line space" />
+                <div v-if="petDetail.deals.length">
+                  <v-card
+                    class="card-radius space"
+                    v-for="(deal, d) in petDetail.deals"
+                    :key="d"
                   >
-                    <v-btn icon class="card-inner-icon">
-                      <v-icon color="#332e80" size="50"
-                        >mdi-percent-outline</v-icon
-                      >
-                    </v-btn>
-                    <div>
-                      <v-card-title class="card-title mb-2">{{
-                        event.name
-                      }}</v-card-title>
-                      <v-card-subtitle class="card-sub-heading mb-1"
-                        >{{ event.formated_event_start_date }} -
-                        {{ event.formated_event_end_date }}
-                      </v-card-subtitle>
-                      <span class="card-description"
-                        >{{ event.formated_event_start_time }} -
-                        {{ event.formated_event_end_time }} at
-                        {{ event.address }}
-                      </span>
-                    </div>
-                    <v-card-actions class="custom-card-padding">
-                      <v-btn
-                        large
-                        class=" card-btn white-text"
-                        outlined
-                        rounded
-                        @click="getInfo(event.url)"
-                      >
-                        {{ $t("info") }}</v-btn
-                      >
-                    </v-card-actions>
-                  </div>
-                </v-card>
-              </div>
-              <div v-else class="not-found space">
-                {{ $t("no_events_found") }}
-              </div>
-            </div>
-
-            <!-- Reviews     -->
-            <div class="category-section">
-              <div class="space heading">
-                <v-icon color="#332e80" size="30">mdi-star</v-icon>
-                <h2 class="pl-1">{{ $t("reviews") }}</h2>
-              </div>
-              <hr class="dot-line space" />
-              <v-row class="reviews-block">
-                <v-col cols="12" md="3" sm="12" class="">
-                  <div class="reviews-section">
-                    <v-icon color="white" size="40">mdi-star</v-icon>
-                    <span class="rating">{{ petDetail.avg_rating }}</span>
-                    <p class="count-review">{{ reviews_count }}</p>
-                  </div>
-                </v-col>
-                <v-col
-                  cols="12"
-                  md="9"
-                  sm="12"
-                  class="reviews-comment-section"
-                  v-if="$store.state.user.isAuthenticated"
-                >
-                  <v-form ref="form">
-                    <div class="mb-4">
-                      <div class=" reviews-icon">
-                        <div class="name-title" v-if="userDetail">
-                          <input
-                            name="name"
-                            v-model="userDetail.name"
-                            placeholder="Name"
-                            disabled=""
-                            type="text"
-                            autocomplete="off"
-                            class="review-message"
-                            value=""
-                          />
-                        </div>
-                        <div class="review-rating">
-                          <v-rating
-                            v-model="form.rate"
-                            color="#332e80"
-                            background-color="#332e80 lighten-3"
-                            half-increments
-                            hover
-                            large
-                            required
-                          ></v-rating>
-                        </div>
+                    <div class="custom-card-align">
+                      <v-btn icon class="card-inner-icon">
+                        <v-icon color="#332e80" size="50"
+                          >mdi-percent-outline</v-icon
+                        >
+                      </v-btn>
+                      <div>
+                        <!--                      <v-card-subtitle class="card-sub-heading">{{card.subtitle}}</v-card-subtitle>-->
+                        <v-card-title class="card-title mt-6">{{
+                          deal.deal
+                        }}</v-card-title>
                       </div>
-                    </div>
-                    <div class="mb-4">
-                      <div class="">
-                        <v-textarea
+                      <v-card-actions class="custom-card-padding">
+                        <!--                      <v-dialog-->
+                        <!--                        v-model="dialog"-->
+                        <!--                        persistent-->
+                        <!--                        max-width="490"-->
+                        <!--                      >-->
+                        <!--                        <template v-slot:activator="{ on, attrs }">-->
+                        <!--                          <v-btn color="#1B3659" dark rounded x-large v-bind="attrs" v-on="on"> {{$t('claim')}}</v-btn>-->
+                        <!--                        </template>-->
+                        <!--                        <v-card>-->
+
+                        <!--                          <v-card-subtitle class="headline">-->
+                        <!--                            To use, show this at the store.-->
+                        <!--                          </v-card-subtitle>-->
+                        <!--                          <span class="ml-5 mt-2">Deal</span>-->
+                        <!--                          <v-card-title>{{deal.deal}}</v-card-title>-->
+                        <!--                          <hr class="dot-line space">-->
+                        <!--                          <v-card-text>Fine Print</v-card-text>-->
+                        <!--                          <v-card-text>{{deal.fine_print}}</v-card-text>-->
+                        <!--                          <v-card-actions>-->
+                        <!--                            <v-spacer></v-spacer>-->
+                        <!--                            <v-btn-->
+                        <!--                              color="#1B3659"-->
+                        <!--                              text-->
+                        <!--                              @click="dialog = false"-->
+                        <!--                            >-->
+                        <!--                              {{$t('cancel')}}-->
+                        <!--                            </v-btn>-->
+                        <!--                            <v-btn-->
+                        <!--                              color="#1B3659" dark class=" white-text"-->
+                        <!--                              rounded x-large-->
+                        <!--                              @click="dialog = false"-->
+                        <!--                            >-->
+                        <!--                              {{$t('claimed_deal')}}-->
+                        <!--                            </v-btn>-->
+                        <!--                          </v-card-actions>-->
+                        <!--                        </v-card>-->
+                        <!--                      </v-dialog>-->
+                        <v-btn
+                          v-if="is_claimed === 0"
+                          large
+                          class=" card-btn white-text"
                           outlined
-                          name="input-7-4"
-                          :label="$t('review')"
-                          v-model="form.description"
-                          required
-                          :rules="rules.description"
-                          rows="3"
-                          row-height="20"
-                        ></v-textarea>
+                          rounded
+                          @click="claim(deal)"
+                        >
+                          {{ $t("claim") }}</v-btn
+                        >
+                        <v-btn
+                          v-else
+                          large
+                          class=" card-btn white-text"
+                          outlined
+                          rounded
+                          readonly
+                        >
+                          {{ $t("claimed") }}</v-btn
+                        >
+                      </v-card-actions>
+                    </div>
+                  </v-card>
+                </div>
+                <div class="not-found space" v-else>
+                  {{ $t("no_deals_found") }}
+                </div>
+              </div>
+              <!--  Event -->
+              <div class="category-section">
+                <div class="space heading">
+                  <v-icon color="#332e80" size="30">mdi-percent-outline</v-icon>
+                  <h2 class="pl-1">{{ $t("events") }}</h2>
+                </div>
+                <hr class="dot-line space" />
+                <div v-if="petDetail.events.length">
+                  <v-card class="card-radius space">
+                    <div
+                      class="custom-card-align"
+                      v-for="(event, e) in petDetail.events"
+                      :key="e"
+                    >
+                      <v-btn icon class="card-inner-icon">
+                        <v-icon color="#332e80" size="50"
+                          >mdi-percent-outline</v-icon
+                        >
+                      </v-btn>
+                      <div>
+                        <v-card-title class="card-title mb-2">{{
+                          event.name
+                        }}</v-card-title>
+                        <v-card-subtitle class="card-sub-heading mb-1"
+                          >{{ event.formated_event_start_date }} -
+                          {{ event.formated_event_end_date }}
+                        </v-card-subtitle>
+                        <span class="card-description"
+                          >{{ event.formated_event_start_time }} -
+                          {{ event.formated_event_end_time }} at
+                          {{ event.address }}
+                        </span>
                       </div>
+                      <v-card-actions class="custom-card-padding">
+                        <v-btn
+                          large
+                          class=" card-btn white-text"
+                          outlined
+                          rounded
+                          @click="getInfo(event.url)"
+                        >
+                          {{ $t("info") }}</v-btn
+                        >
+                      </v-card-actions>
                     </div>
-                    <div class="review-submit">
-                      <v-btn
-                        rounded
-                        x-large
-                        color="#332e80"
-                        class="review-submit-btn"
-                        @click="submitReview"
-                        >{{ $t("submit") }}</v-btn
-                      >
-                    </div>
-                  </v-form>
-                </v-col>
-                <nuxt-link
-                  v-else
-                  to="/login"
-                  class="unset-underline custom-container"
-                >
-                  <v-btn rounded class=" card-btn white-text">
-                    {{ $t("review_error") }}</v-btn
-                  >
-                </nuxt-link>
-              </v-row>
-            </div>
+                  </v-card>
+                </div>
+                <div v-else class="not-found space">
+                  {{ $t("no_events_found") }}
+                </div>
+              </div>
 
-            <!-- Review List  -->
-            <div class="reviews-details-block" v-if="reviewDetail.length">
-              <div
-                class="reviews-details-list-main"
-                v-for="(review, index) in reviewDetail"
-                :key="index"
-              >
-                <div class="clearfix">
-                  <div class="reviews-use-pic">
-                    <v-img
-                      v-if="
-                        review.user && review.user.profile_image_thumb_full_path
-                      "
-                      :src="review.user.profile_image_thumb_full_path"
-                    ></v-img>
-                    <img v-else src="/images/placeholder.png" alt="" />
-                  </div>
+              <!-- Reviews     -->
+              <div class="category-section">
+                <div class="space heading">
+                  <v-icon color="#332e80" size="30">mdi-star</v-icon>
+                  <h2 class="pl-1">{{ $t("reviews") }}</h2>
                 </div>
-                <div class="reviews-details">
-                  <div
-                    v-if="userDetail && userDetail.id === review.user.id"
-                    class="delete-icon"
-                    @click="deleteReview(review.id)"
+                <hr class="dot-line space" />
+                <v-row class="reviews-block">
+                  <v-col cols="12" md="3" sm="12" class="">
+                    <div class="reviews-section">
+                      <v-icon color="white" size="40">mdi-star</v-icon>
+                      <span class="rating">{{ petDetail.avg_rating }}</span>
+                      <p class="count-review">{{ reviews_count }}</p>
+                    </div>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    md="9"
+                    sm="12"
+                    class="reviews-comment-section"
+                    v-if="$store.state.user.isAuthenticated"
                   >
-                    <v-icon>mdi-delete</v-icon>
+                    <v-form ref="form">
+                      <div class="mb-4">
+                        <div class=" reviews-icon">
+                          <div class="name-title" v-if="userDetail">
+                            <input
+                              name="name"
+                              v-model="userDetail.name"
+                              placeholder="Name"
+                              disabled=""
+                              type="text"
+                              autocomplete="off"
+                              class="review-message"
+                              value=""
+                            />
+                          </div>
+                          <div class="review-rating">
+                            <v-rating
+                              v-model="form.rate"
+                              color="#332e80"
+                              background-color="#332e80 lighten-3"
+                              half-increments
+                              hover
+                              large
+                              required
+                            ></v-rating>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mb-4">
+                        <div class="">
+                          <v-textarea
+                            outlined
+                            name="input-7-4"
+                            :label="$t('review')"
+                            v-model="form.description"
+                            required
+                            :rules="rules.description"
+                            rows="3"
+                            row-height="20"
+                          ></v-textarea>
+                        </div>
+                      </div>
+                      <div class="review-submit">
+                        <v-btn
+                          rounded
+                          x-large
+                          color="#332e80"
+                          class="review-submit-btn"
+                          @click="submitReview"
+                          >{{ $t("submit") }}</v-btn
+                        >
+                      </div>
+                    </v-form>
+                  </v-col>
+                  <nuxt-link
+                    v-else
+                    to="/login"
+                    class="unset-underline custom-container"
+                  >
+                    <v-btn rounded class=" card-btn white-text">
+                      {{ $t("review_error") }}</v-btn
+                    >
+                  </nuxt-link>
+                </v-row>
+              </div>
+
+              <!-- Review List  -->
+              <div class="reviews-details-block" v-if="reviewDetail.length">
+                <div
+                  class="reviews-details-list-main"
+                  v-for="(review, index) in reviewDetail"
+                  :key="index"
+                >
+                  <div class="clearfix">
+                    <div class="reviews-use-pic">
+                      <v-img
+                        v-if="
+                          review.user &&
+                            review.user.profile_image_thumb_full_path
+                        "
+                        :src="review.user.profile_image_thumb_full_path"
+                      ></v-img>
+                      <img v-else src="/images/placeholder.png" alt="" />
+                    </div>
                   </div>
-                  <div class="reviews-star-details">
-                    <h4 class="rate-text">{{ review.rate }}<span>/5</span></h4>
-                    <p class="date-text">{{ review.formated_created_at }}</p>
+                  <div class="reviews-details">
+                    <div
+                      v-if="userDetail && userDetail.id === review.user.id"
+                      class="delete-icon"
+                      @click="deleteReview(review.id)"
+                    >
+                      <v-icon>mdi-delete</v-icon>
+                    </div>
+                    <div class="reviews-star-details">
+                      <h4 class="rate-text">
+                        {{ review.rate }}<span>/5</span>
+                      </h4>
+                      <p class="date-text">{{ review.formated_created_at }}</p>
+                    </div>
+                    <p class="comments-text">{{ review.description }}</p>
+                    <p class="user-name">{{ review.name }}</p>
                   </div>
-                  <p class="comments-text">{{ review.description }}</p>
-                  <p class="user-name">{{ review.name }}</p>
+                </div>
+              </div>
+              <div
+                v-else
+                class="reviews-details-block custom-container text-center"
+              >
+                {{ $t("no_reviews_found") }}
+              </div>
+            </div>
+          </v-col>
+          <v-col cols="12" md="3" sm="12">
+            <div class="category-right-section">
+              <div class="text-center space">
+                <v-btn large class=" visit-btn white-text" outlined rounded>
+                  {{ $t("visit_website") }}</v-btn
+                >
+              </div>
+              <div class="card-location mt-10 mb-10">
+                <div class="bg-img-section-height">
+                  <h2>{{ petDetail.email }}</h2>
+                  <v-icon>mdi-logout</v-icon>
+                </div>
+                <v-divider class="divider-section"></v-divider>
+                <div class="bg-img-section-height">
+                  <h2 class="phone-section">{{ petDetail.phone_number }}</h2>
+                  <v-icon>mdi-phone</v-icon>
+                </div>
+                <v-divider class="divider-section"></v-divider>
+                <div class="bg-img-section-height">
+                  <h2>
+                    Get Directions <br />
+                    <h3>{{ petDetail.address_line_1 }}</h3>
+                  </h2>
+                  <!--              <h3></h3>-->
+                  <v-icon>mdi-directions</v-icon>
+                </div>
+                <v-divider class="divider-section"></v-divider>
+              </div>
+              <div
+                class="service-section mb-10"
+                v-if="petDetail.services_offered.length"
+              >
+                <h2 class="mb-6">{{ $t("services_offered") }}</h2>
+                <ul
+                  class="service-list"
+                  v-for="(service, s) in petDetail.services_offered"
+                  :key="s"
+                >
+                  <li>{{ service.service }}</li>
+                </ul>
+              </div>
+              <div class="mb-10">
+                <GmapMap
+                  :center="markers.length ? markers[0] : { lat: 10, lng: 10 }"
+                  :zoom="7"
+                  map-type-id="terrain"
+                  class="map-location"
+                >
+                  <GmapMarker
+                    :key="index"
+                    v-for="(m, index) in markers"
+                    :position="m"
+                    :clickable="true"
+                    :draggable="true"
+                    @click="center = m"
+                  />
+                </GmapMap>
+              </div>
+              <div class="operation-section">
+                <h2>{{ $t("hours_of_operation") }}</h2>
+                <div
+                  v-for="(time, t) in petDetail.timetable"
+                  :key="t"
+                  class="mb-2"
+                >
+                  <span>{{ time.day }}</span>
+                  <span class="separator"></span>
+                  <span v-if="time.open || time.close"
+                    >{{ time.open }}-{{ time.close }}</span
+                  >
+                  <span v-else>00:00:00 - 00:00:00 </span>
                 </div>
               </div>
             </div>
-            <div
-              v-else
-              class="reviews-details-block custom-container text-center"
-            >
-              {{ $t("no_reviews_found") }}
-            </div>
-          </div>
-        </v-col>
-        <v-col cols="12" md="3" sm="12">
-          <div class="category-right-section">
-            <div class="text-center space">
-              <v-btn large class=" visit-btn white-text" outlined rounded>
-                {{ $t("visit_website") }}</v-btn
-              >
-            </div>
-            <div class="card-location mt-10 mb-10">
-              <div class="bg-img-section-height">
-                <h2>{{ petDetail.email }}</h2>
-                <v-icon>mdi-logout</v-icon>
-              </div>
-              <v-divider class="divider-section"></v-divider>
-              <div class="bg-img-section-height">
-                <h2 class="phone-section">{{ petDetail.phone_number }}</h2>
-                <v-icon>mdi-phone</v-icon>
-              </div>
-              <v-divider class="divider-section"></v-divider>
-              <div class="bg-img-section-height">
-                <h2>
-                  Get Directions <br />
-                  <h3>{{ petDetail.address_line_1 }}</h3>
-                </h2>
-                <!--              <h3></h3>-->
-                <v-icon>mdi-directions</v-icon>
-              </div>
-              <v-divider class="divider-section"></v-divider>
-            </div>
-            <div
-              class="service-section mb-10"
-              v-if="petDetail.services_offered.length"
-            >
-              <h2 class="mb-6">{{ $t("services_offered") }}</h2>
-              <ul
-                class="service-list"
-                v-for="(service, s) in petDetail.services_offered"
-                :key="s"
-              >
-                <li>{{ service.service }}</li>
-              </ul>
-            </div>
-            <div class="mb-10">
-              <GmapMap
-                :center="markers.length ? markers[0] : { lat: 10, lng: 10 }"
-                :zoom="7"
-                map-type-id="terrain"
-                class="map-location"
-              >
-                <GmapMarker
-                  :key="index"
-                  v-for="(m, index) in markers"
-                  :position="m"
-                  :clickable="true"
-                  :draggable="true"
-                  @click="center = m"
-                />
-              </GmapMap>
-            </div>
-            <div class="operation-section">
-              <h2>{{ $t("hours_of_operation") }}</h2>
-              <div
-                v-for="(time, t) in petDetail.timetable"
-                :key="t"
-                class="mb-2"
-              >
-                <span>{{ time.day }}</span>
-                <span class="separator"></span>
-                <span v-if="time.open || time.close"
-                  >{{ time.open }}-{{ time.close }}</span
-                >
-                <span v-else>00:00:00 - 00:00:00 </span>
-              </div>
-            </div>
-          </div>
-        </v-col>
-      </v-row>
+          </v-col>
+        </v-row>
+      </div>
+      <!--  card-section-start   -->
+      <div class="find-pet-section-heading text-center">
+        <h2 class="mb-8">{{ $t("find_more_pet_pros") }}</h2>
+      </div>
+      <div class="custom-height custom-container">
+        <v-row>
+          <v-col
+            cols="12"
+            md="4"
+            sm="12"
+            v-for="(data, i) in petProData.slice(0, 3)"
+            :key="i"
+            class="custom-margin"
+          >
+            <pet-category-card :item="data"></pet-category-card>
+          </v-col>
+        </v-row>
+      </div>
+      <!--  card-section-end   -->
     </div>
-    <!--  card-section-start   -->
-    <div class="find-pet-section-heading text-center">
-      <h2 class="mb-8">{{ $t("find_more_pet_pros") }}</h2>
-    </div>
-    <div class="custom-height custom-container">
-      <v-row>
-        <v-col
-          cols="12"
-          md="4"
-          sm="12"
-          v-for="(data, i) in petProData.slice(0, 3)"
-          :key="i"
-          class="custom-margin"
-        >
-          <pet-category-card :item="data"></pet-category-card>
-        </v-col>
-      </v-row>
-    </div>
-    <!--  card-section-end   -->
   </div>
 </template>
 
