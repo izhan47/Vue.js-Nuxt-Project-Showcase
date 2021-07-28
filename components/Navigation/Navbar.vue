@@ -2,65 +2,67 @@
   <div>
     <v-app id="inspire">
       <!--Side Bar Code Start-->
-      <v-navigation-drawer v-model="drawer" v-if="drawer" app>
-        <div class="parent">
-          <div class="show_img_mobile">
-            <v-img
-              max-width="250"
-              max-height="250"
-              @click="$router.push('/')"
-              src="/images/WagEnabledLogo.jpg"
-              alt="logo"
-            ></v-img>
-          </div>
-          <div class="list-child">
-            <v-list dense flat>
+      <template v-if="drawer">
+        <v-navigation-drawer v-model="drawer" app>
+          <div class="parent">
+            <div class="show_img_mobile">
+              <v-img
+                max-width="250"
+                max-height="250"
+                @click="$router.push('/')"
+                src="/images/WagEnabledLogo.jpg"
+                alt="logo"
+              ></v-img>
+            </div>
+            <div class="list-child">
+              <v-list dense flat>
+                <v-list-item
+                  link
+                  v-for="(item, i) in menuItems"
+                  :key="i"
+                  :to="item.to"
+                  router
+                  exact
+                >
+                  <v-list-item-content>
+                    <v-list-item-title
+                      class="nav-title"
+                      v-text="item.title"
+                    ></v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
               <v-list-item
+                v-if="$store.state.user.isAuthenticated"
+                to="/profile"
                 link
-                v-for="(item, i) in menuItems"
-                :key="i"
-                :to="item.to"
-                router
-                exact
               >
+                <v-list-item-title class="nav-title">
+                  {{ $t("my_profile") }}
+                </v-list-item-title>
+              </v-list-item>
+              <v-list-item link v-else to="/login">
                 <v-list-item-content>
-                  <v-list-item-title
-                    class="nav-title"
-                    v-text="item.title"
-                  ></v-list-item-title>
+                  <v-list-item-title class="nav-title">{{
+                    $t("sign_in")
+                  }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-            </v-list>
-            <v-list-item
-              v-if="$store.state.user.isAuthenticated"
-              to="/profile"
-              link
-            >
-              <v-list-item-title class="nav-title">
-                {{ $t("my_profile") }}
-              </v-list-item-title>
-            </v-list-item>
-            <v-list-item link v-else to="/login">
-              <v-list-item-content>
-                <v-list-item-title class="nav-title">{{
-                  $t("sign_in")
-                }}</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
+            </div>
+            <div class="icon-child">
+              <v-btn
+                v-for="(icon, i) in icons"
+                :key="i"
+                icon
+                @mouseleave="index = ''"
+                @mouseover="index = i"
+                :color="index === i ? '#ff8189' : '#332e80'"
+                ><v-icon>{{ icon.name }}</v-icon></v-btn
+              >
+            </div>
           </div>
-          <div class="icon-child">
-            <v-btn
-              v-for="(icon, i) in icons"
-              :key="i"
-              icon
-              @mouseleave="index = ''"
-              @mouseover="index = i"
-              :color="index === i ? '#ff8189' : '#332e80'"
-              ><v-icon>{{ icon.name }}</v-icon></v-btn
-            >
-          </div>
-        </div>
-      </v-navigation-drawer>
+        </v-navigation-drawer>
+      </template>
       <!--Side Bar Code End-->
 
       <!--Nav Bar Code STart-->
@@ -150,6 +152,10 @@
                   </v-list-item>
                 </v-list>
               </v-menu>
+
+              <!-- <nuxt-link v-else to="/login" class="unset-underline">
+                {{ $t("sign_in") }}
+              </nuxt-link> -->
               <nuxt-link v-else to="/login" class="unset-underline">
                 <v-btn outlined rounded class="sign-in-btn">{{
                   $t("sign_in")

@@ -2,8 +2,8 @@ import colors from "vuetify/es5/util/colors";
 // const config = require('./configs/config')
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
-  // ssr: true,
+  // ssr: false,
+  ssr: true,
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -30,22 +30,14 @@ export default {
   css: ["~assets/sass/main.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  // plugins: [
-  //   { src: "~/plugins/i18n.js" ,  ssr: true },
-  //   { src: "~/plugins/google-maps.js" ,mode:'client' , ssr: false},
-  //   { src: "~/plugins/aos.js", mode:'client' , ssr: false },
-  //   { src: "~/plugins/vuex-persist", mode:'client' , ssr: false },
-  //   { src: "~/plugins/axios",mode:'client' , ssr: false },
-  //   { src: "~/plugins/vue-awesome-swiper", mode:'client' , ssr: false }
-  // ],
   plugins: [
-    { src: "~/plugins/i18n.js" },
-    { src: "~/plugins/google-maps.js" },
-    { src: "~/plugins/aos.js", mode: "client" },
+    { src: "~/plugins/i18n.js" ,  ssr: true},
+    { src: "~/plugins/google-maps.js" ,ssr: false},
+    { src: "~/plugins/aos.js", mode: "client" ,ssr: false },
     { src: "~/plugins/vuex-persist", ssr: false },
     { src: "~/plugins/axios" },
-    { src: "~/plugins/lazy-load.js" },
-    { src: "~/plugins/vue-awesome-swiper", mode: "client" }
+    { src: "~/plugins/lazy-load.js" ,ssr: false},
+    { src: "~/plugins/vue-awesome-swiper", mode: "client",ssr: false }
   ],
 
   purgeCSS: {

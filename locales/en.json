@@ -88,6 +88,7 @@
   "name": "Name",
   "your_zipcode": "Your Zipcode",
   "email": "Email",
+  "Email": "Email",
   "submit": "Submit",
 
   "from": "From",
@@ -209,5 +210,6 @@
   "only_best_for_pets": "Only the Best for Your Pets",
   "local_business": "Local Business",
   "discover_best": "Discover Best",
-  "breed": "Breed"
+  "breed": "Breed",
+  "please_login_to_add_a_comment" : "Please login to add a comment"
 }

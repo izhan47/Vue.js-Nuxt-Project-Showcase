@@ -17,8 +17,6 @@
         <div class=" banner-description">
           <p class="space">{{ $t("search_database_description") }}</p>
         </div>
-
-        <!--   Filter Section Start     -->
         <v-form class="search-form-filter" @submit.prevent="filterData">
           <div class="search-form-field">
             <label>{{ $t("category") }}</label>
@@ -36,24 +34,15 @@
             <div class="search-filter-label">
               <label class="ml-4 ">{{ $t("location") }}</label>
             </div>
-            <!--            <v-text-field-->
-            <!--              class="search-field cross-icon mt-2"-->
-            <!--              :placeholder="$t('all')"-->
-            <!--              v-model="form.location"-->
-            <!--              solo-->
-            <!--              rounded-->
-            <!--              clearable-->
-            <!--              color="#00afaa"-->
-            <!--              outlined-->
-            <!--              @input="debounceSearch"-->
-            <!--            ></v-text-field>-->
-            <vue-google-autocomplete
-              id="map"
-              class="search-location"
-              :placeholder="$t('all')"
-              v-on:placechanged="getAddressData"
-            >
-            </vue-google-autocomplete>
+            <client-only>
+              <vue-google-autocomplete
+                id="map"
+                class="search-location"
+                :placeholder="$t('all')"
+                v-on:placechanged="getAddressData"
+              >
+              </vue-google-autocomplete>
+            </client-only>
           </div>
           <div class="search-form-field">
             <div class="search-filter-label">
@@ -87,11 +76,8 @@
             {{ $t("sort_by") }} <strong>{{ $t("latest_v") }}</strong>
           </h5>
         </div>
-
-        <!--   Filter Section End     -->
       </div>
     </div>
-    <!--  card-section-start   -->
     <div class="custom-height custom-container" v-if="petProData.length">
       <v-row>
         <v-col
@@ -114,16 +100,17 @@
       />
       <h2 class="heading">{{ $t("nothing_here") }}</h2>
     </div>
-    <!--  card-section-end   -->
   </div>
 </template>
 
 <script>
 import PetCategoryCard from "@/components/PetCategoryCard";
-import VueGoogleAutocomplete from "vue-google-autocomplete";
 export default {
-  name: "locationSearch.vue",
-  components: { PetCategoryCard, VueGoogleAutocomplete },
+  name: "locationSearch",
+  components: {
+    PetCategoryCard,
+    VueGoogleAutocomplete: () => import("vue-google-autocomplete")
+  },
   data() {
     return {
       form: {

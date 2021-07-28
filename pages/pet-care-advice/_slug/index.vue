@@ -1,263 +1,271 @@
 <template>
-  <div class="watch-learn-detail-section" v-if="categoryData">
-    <!--  <div class="bg-img-watch-detail">-->
-    <!--    <div class="custom-container align-center">-->
-    <!--      <img class="img-fluid img-height" :src="categoryData.thumbnail_thumb_full_path" alt="">-->
-    <!--    </div>-->
-    <!--  </div>-->
-    <div class="watch-detail-custom-container custom-margin">
-      <v-row>
-        <v-col cols="12" md="3" sm="12">
-          <div class="watch-card" v-if="categoryData.author">
-            <img :src="categoryData.author.image_thumb_full_path" alt="" />
-            <h2>{{ categoryData.author.name }}</h2>
-            <p>{{ categoryData.author.about }}</p>
-            <v-btn large class="round-btn" outlined rounded>
-              {{ $t("personal_website") }}</v-btn
+  <div>
+    <div class="watch-learn-detail-section" v-if="categoryData">
+      <div class="watch-detail-custom-container custom-margin">
+        <v-row>
+          <v-col cols="12" md="3" sm="12">
+            <div class="watch-card" v-if="categoryData.author">
+              <img :src="categoryData.author.image_thumb_full_path" alt="" />
+              <h2>{{ categoryData.author.name }}</h2>
+              <p>{{ categoryData.author.about }}</p>
+              <v-btn large class="round-btn" outlined rounded>
+                {{ $t("personal_website") }}</v-btn
+              >
+            </div>
+          </v-col>
+          <v-col cols="12" md="9" sm="12">
+            <div class="heading mt-2">
+              <h1>{{ categoryData.title }}</h1>
+            </div>
+            <v-btn
+              color="#ff8189"
+              :href="
+                `https://www.facebook.com/sharer/sharer.php?u=${currentURL}`
+              "
+              target="_blank"
+              class=" ma-2 white--text"
+              rounded
             >
-          </div>
-        </v-col>
-        <v-col cols="12" md="9" sm="12">
-          <!--        <div class="tag">-->
-          <!--          <v-icon color="#00afaa">mdi-tag</v-icon>-->
-          <!--          <span>Play Time and Enrichment</span>-->
-          <!--        </div>-->
-          <div class="heading mt-2">
-            <h1>{{ categoryData.title }}</h1>
-          </div>
-          <v-btn
-            color="#ff8189"
-            :href="`https://www.facebook.com/sharer/sharer.php?u=${currentURL}`"
-            target="_blank"
-            class=" ma-2 white--text"
-            rounded
-          >
-            <v-icon left dark>mdi-facebook</v-icon>
-            {{ $t("facebook") }}
-          </v-btn>
-          <v-btn
-            color="#ff8189"
-            :href="`https://twitter.com/intent/tweet?url=${currentURL}`"
-            target="_blank"
-            class=" ma-2 white--text"
-            rounded
-          >
-            <v-icon left dark>mdi-twitter</v-icon>
-            {{ $t("twitter") }}
-          </v-btn>
-          <v-btn
-            color="#ff8189"
-            :href="
-              `https://www.linkedin.com/shareArticle?mini=true&url=${currentURL}`
-            "
-            target="_blank"
-            class="ma-2 white--text"
-            rounded
-          >
-            <v-icon left dark>mdi-linkedin</v-icon>
-            {{ $t("linkedin") }}
-          </v-btn>
-          <div class="wagdt-inner-paragraph">
-            <span
-              class="content-builder-data"
-              v-html="categoryData.description"
-            ></span>
-          </div>
-          <!--        <div class="content-builder-data" v-html="categoryData.description"></div>-->
-          <!--        <hr class="dot-line">-->
-          <!-- Comment Section -->
-          <div class="comment-section">
-            <!-- Comments List -->
-            <h2 class="comment-section-heading text-center space">
-              {{ $t("comments") }}
-            </h2>
-            <div class="reviews-details-block" v-if="commentData.length">
-              <div v-for="(comment, index) in commentData" :key="index">
-                <div class="reviews-details-list-main">
-                  <div class="reviews-details-list">
-                    <div class="clearfix">
-                      <div class="reviews-use-pic space">
-                        <v-img
-                          v-if="
-                            comment.user &&
-                              comment.user.profile_image_thumb_full_path
-                          "
-                          :src="comment.user.profile_image_thumb_full_path"
-                        ></v-img>
-                        <img v-else src="/images/placeholder.png" alt="" />
-                      </div>
-                    </div>
-                    <div class="reviews-details">
-                      <div
-                        v-if="userDetail && userDetail.id === comment.user.id"
-                        class="delete-icon"
-                        @click="deleteComment(comment.id)"
-                      >
-                        <v-icon>mdi-delete</v-icon>
-                      </div>
-                      <div class="reviews-star-details">
-                        <p class=" rate-text user-name">{{ comment.name }}</p>
-                        <p class="date-text">
-                          {{ comment.formated_created_at }}
-                        </p>
-                      </div>
-                      <p class="comments-text">{{ comment.message }}</p>
-                    </div>
-                  </div>
-                  <!-- add a reply comment  -->
-                  <span
-                    class="reply-comment "
-                    @click="
-                      activeReply === -1
-                        ? (activeReply = index)
-                        : (activeReply = -1)
-                    "
-                    >{{ $t("reply") }}</span
-                  >
-                  <v-form
-                    ref="replyForm"
-                    class="mt-4"
-                    v-if="activeReply === index"
-                  >
-                    <v-textarea
-                      outlined
-                      :label="$t('comment')"
-                      v-model="form.message"
-                      required
-                      :rules="rules.message"
-                    ></v-textarea>
-                    <div class="text-center">
-                      <v-btn
-                        large
-                        class="  submit-btn"
-                        outlined
-                        rounded
-                        @click="submit(comment.id)"
-                      >
-                        {{ $t("reply") }}</v-btn
-                      >
-                    </div>
-                  </v-form>
-                </div>
-                <!--  reply comment List -->
-                <div v-if="comment.children && comment.children.length">
-                  <div
-                    class="reviews-details-list-main custom-reply-ml"
-                    v-for="(item, index) in comment.children"
-                    :key="index"
-                  >
-                    <div class="reviews-details-list ">
+              <v-icon left dark>mdi-facebook</v-icon>
+              {{ $t("facebook") }}
+            </v-btn>
+            <v-btn
+              color="#ff8189"
+              :href="`https://twitter.com/intent/tweet?url=${currentURL}`"
+              target="_blank"
+              class=" ma-2 white--text"
+              rounded
+            >
+              <v-icon left dark>mdi-twitter</v-icon>
+              {{ $t("twitter") }}
+            </v-btn>
+            <v-btn
+              color="#ff8189"
+              :href="
+                `https://www.linkedin.com/shareArticle?mini=true&url=${currentURL}`
+              "
+              target="_blank"
+              class="ma-2 white--text"
+              rounded
+            >
+              <v-icon left dark>mdi-linkedin</v-icon>
+              {{ $t("linkedin") }}
+            </v-btn>
+            <div class="wagdt-inner-paragraph">
+              <span
+                class="content-builder-data"
+                v-html="categoryData.description"
+              ></span>
+            </div>
+            <!-- Comment Section -->
+            <div class="comment-section">
+              <!-- Comments List -->
+              <h2 class="comment-section-heading text-center space">
+                {{ $t("comments") }}
+              </h2>
+              <div class="reviews-details-block" v-if="commentData.length">
+                <div v-for="(comment, index) in commentData" :key="index">
+                  <div class="reviews-details-list-main">
+                    <div class="reviews-details-list">
                       <div class="clearfix">
                         <div class="reviews-use-pic space">
                           <v-img
                             v-if="
-                              item.user &&
-                                item.user.profile_image_thumb_full_path
+                              comment.user &&
+                                comment.user.profile_image_thumb_full_path
                             "
-                            :src="item.user.profile_image_thumb_full_path"
+                            :src="comment.user.profile_image_thumb_full_path"
                           ></v-img>
                           <img v-else src="/images/placeholder.png" alt="" />
                         </div>
                       </div>
                       <div class="reviews-details">
+                        <div
+                          v-if="userDetail && userDetail.id === comment.user.id"
+                          class="delete-icon"
+                          @click="deleteComment(comment.id)"
+                        >
+                          <v-icon>mdi-delete</v-icon>
+                        </div>
                         <div class="reviews-star-details">
-                          <p class=" rate-text user-name">{{ item.name }}</p>
+                          <p class=" rate-text user-name">{{ comment.name }}</p>
                           <p class="date-text">
-                            {{ item.formated_created_at }}
+                            {{ comment.formated_created_at }}
                           </p>
                         </div>
-                        <p class="comments-text">{{ item.message }}</p>
+                        <p class="comments-text">{{ comment.message }}</p>
+                      </div>
+                    </div>
+                    <!-- add a reply comment  -->
+                    <span
+                      class="reply-comment "
+                      @click="
+                        activeReply === -1
+                          ? (activeReply = index)
+                          : (activeReply = -1)
+                      "
+                      >{{ $t("reply") }}</span
+                    >
+                    <v-form
+                      ref="replyForm"
+                      class="mt-4"
+                      v-if="activeReply === index"
+                    >
+                      <v-textarea
+                        outlined
+                        :label="$t('comment')"
+                        v-model="form.message"
+                        required
+                        :rules="rules.message"
+                      ></v-textarea>
+                      <div class="text-center">
+                        <v-btn
+                          large
+                          class="  submit-btn"
+                          outlined
+                          rounded
+                          @click="submit(comment.id)"
+                        >
+                          {{ $t("reply") }}</v-btn
+                        >
+                      </div>
+                    </v-form>
+                  </div>
+                  <!--  reply comment List -->
+                  <div v-if="comment.children && comment.children.length">
+                    <div
+                      class="reviews-details-list-main custom-reply-ml"
+                      v-for="(item, index) in comment.children"
+                      :key="index"
+                    >
+                      <div class="reviews-details-list ">
+                        <div class="clearfix">
+                          <div class="reviews-use-pic space">
+                            <v-img
+                              v-if="
+                                item.user &&
+                                  item.user.profile_image_thumb_full_path
+                              "
+                              :src="item.user.profile_image_thumb_full_path"
+                            ></v-img>
+                            <img v-else src="/images/placeholder.png" alt="" />
+                          </div>
+                        </div>
+                        <div class="reviews-details">
+                          <div class="reviews-star-details">
+                            <p class=" rate-text user-name">{{ item.name }}</p>
+                            <p class="date-text">
+                              {{ item.formated_created_at }}
+                            </p>
+                          </div>
+                          <p class="comments-text">{{ item.message }}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div
-              v-else
-              class="reviews-details-block custom-container text-center"
-            >
-              {{ $t("no_comments_found") }}
-            </div>
-            <!-- Add a Comment Section -->
-            <h2 class="comment-section-heading text-center mb-5">
-              {{ $t("leave_a_comment") }}
-            </h2>
-            <v-form ref="form">
-              <v-textarea
-                outlined
-                :label="
-                  $t(
-                    !isAuthenticated
-                      ? 'Please login to add a comment'
-                      : 'comment'
-                  )
-                "
-                v-model="form.message"
-                :rules="rules.message"
-                required
-                :disabled="!isAuthenticated"
-              ></v-textarea>
-              <div class="text-center">
-                <v-btn
-                  large
-                  class=" submit-btn"
-                  outlined
-                  rounded
-                  :dark="!isAuthenticated"
-                  @click="submit(form.parent_comment_id)"
-                  :disabled="!isAuthenticated"
-                >
-                  {{ $t("submit") }}</v-btn
-                >
+              <div
+                v-else
+                class="reviews-details-block custom-container text-center"
+              >
+                {{ $t("no_comments_found") }}
               </div>
-            </v-form>
-          </div>
-          <!-- End Comment Section -->
-        </v-col>
-      </v-row>
-    </div>
-    <!--  card-section-start   -->
-    <div class="custom-container  space">
-      <div class="text-center">
-        <h1 class="card-section-title">{{ $t("related_topics") }}</h1>
+              <!-- Add a Comment Section -->
+              <h2 class="comment-section-heading text-center mb-5">
+                {{ $t("leave_a_comment") }}
+              </h2>
+              <v-form ref="form">
+                <v-textarea
+                  outlined
+                  :label="
+                    $t(
+                      !isAuthenticated
+                        ? 'please_login_to_add_a_comment'
+                        : 'comment'
+                    )
+                  "
+                  v-model="form.message"
+                  :rules="rules.message"
+                  required
+                  :disabled="!isAuthenticated"
+                ></v-textarea>
+                <div class="text-center">
+                  <v-btn
+                    large
+                    class=" submit-btn"
+                    outlined
+                    rounded
+                    :dark="!isAuthenticated"
+                    @click="submit(form.parent_comment_id)"
+                    :disabled="!isAuthenticated"
+                  >
+                    {{ $t("submit") }}</v-btn
+                  >
+                </div>
+              </v-form>
+            </div>
+            <!-- End Comment Section -->
+          </v-col>
+        </v-row>
       </div>
+      <!--  card-section-start   -->
+      <div class="custom-container  space">
+        <div class="text-center">
+          <h1 class="card-section-title">{{ $t("related_topics") }}</h1>
+        </div>
 
-      <v-row>
-        <v-col
-          cols="12"
-          md="4"
-          sm="12"
-          v-for="(data, i) in watchCategoryData.slice(0, 3)"
-          :key="i"
-          class="custom-margin"
-        >
-          <watch-category-card :item="data"></watch-category-card>
-        </v-col>
-      </v-row>
+        <v-row>
+          <v-col
+            cols="12"
+            md="4"
+            sm="12"
+            v-for="(data, i) in watchCategoryData.slice(0, 3)"
+            :key="i"
+            class="custom-margin"
+          >
+            <watch-category-card :item="data"></watch-category-card>
+          </v-col>
+        </v-row>
+      </div>
+      <!--  card-section-end   -->
     </div>
-    <!--  card-section-end   -->
   </div>
 </template>
 
 <script>
 import WatchCategoryCard from "@/components/WatchCategoryCard";
-
+import { APP_URL } from "@/configs/urls";
 export default {
   name: "index.vue",
   components: { WatchCategoryCard },
-  // head() {
-  //   return {
-  //     title: this.categoryData ? this.categoryData.title : "No title",
-  //     meta: [
-  //       {
-  //         hid: "Description " + this.categoryData.title,
-  //         name: "og:description",
-  //         content: this.categoryData.title
-  //       }
-  //     ]
-  //   };
-  // },
+  head() {
+    return {
+      title: this.categoryData.title ? this.categoryData.title : "No title",
+      meta: [
+        {
+          hid: "og:title",
+          name: "og:title",
+          content: this.categoryData.title
+        },
+        {
+          hid: "og:image",
+          property: "og:image",
+          content: `${this.categoryData.author.image_thumb_full_path}`
+        },
+        {
+          hid: "og:description",
+          property: "og:description",
+          content: this.categoryData.title
+        },
+        {
+          hid: "og:url",
+          property: "og:url",
+          content: `${APP_URL}pet-care-advice/${this.categoryData.slug}`
+        }
+      ]
+    };
+  },
 
   data() {
     return {
@@ -293,28 +301,32 @@ export default {
       return this.$store.state.user.isAuthenticated;
     }
   },
-  // async fetch() {
-  // await this.$store
-  //   .dispatch("singleCategoryDetail", this.URL)
-  //   .then(response => {
-  //     this.categoryData = response.data.data.watch_and_learn;
-  //     this.$store.commit("SHOW_LOADER", false);
-  //   });
+  async asyncData({ store, params }) {
+    let categoryData;
+    let commentData;
+    await store.dispatch("singleCategoryDetail", params.slug).then(response => {
+      categoryData = response.data.data.watch_and_learn;
+      store.commit("SHOW_LOADER", false);
+    });
 
-  // await this.$store.dispatch("getComment", this.URL).then(response => {
-  //   this.commentData = response.data.data.comments;
-  //   this.$store.commit("SHOW_LOADER", false);
-  // });
+    await store.dispatch("getComment", params.slug).then(response => {
+      commentData = response.data.data.comments;
+      store.commit("SHOW_LOADER", false);
+    });
 
-  // this.userDetail = this.$store.state.user.user;
+    const userDetail = store.state.user.user;
 
-  // return true;
-  // },
-  created() {
-    this.getCategoryDetail();
-    this.getComments();
-    this.userDetail = this.$store.state.user.user;
+    return {
+      categoryData,
+      commentData,
+      userDetail
+    };
   },
+  // created() {
+  //   this.getCategoryDetail();
+  //   this.getComments();
+  //   this.userDetail = this.$store.state.user.user;
+  // },
   methods: {
     async getCategoryDetail() {
       await this.$store
