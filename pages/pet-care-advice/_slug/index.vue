@@ -256,7 +256,7 @@ export default {
         {
           hid: "og:description",
           property: "og:description",
-          content: this.categoryData.title
+          content: this.categoryData.blog_meta_description
         },
         {
           hid: "og:url",

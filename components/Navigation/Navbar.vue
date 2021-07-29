@@ -153,9 +153,6 @@
                 </v-list>
               </v-menu>
 
-              <!-- <nuxt-link v-else to="/login" class="unset-underline">
-                {{ $t("sign_in") }}
-              </nuxt-link> -->
               <nuxt-link v-else to="/login" class="unset-underline">
                 <v-btn outlined rounded class="sign-in-btn">{{
                   $t("sign_in")
