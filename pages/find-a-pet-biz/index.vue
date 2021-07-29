@@ -29,13 +29,15 @@
               <div class="search-filter-label">
                 <label class="ml-4 ">{{ $t("location") }}</label>
               </div>
-              <vue-google-autocomplete
-                id="map"
-                class="search-location"
-                :placeholder="$t('all')"
-                v-on:placechanged="getAddressData"
-              >
-              </vue-google-autocomplete>
+              <client-only>
+                <vue-google-autocomplete
+                  id="map"
+                  class="search-location"
+                  :placeholder="$t('all')"
+                  v-on:placechanged="getAddressData"
+                >
+                </vue-google-autocomplete>
+              </client-only>
             </div>
 
             <div class="search-form-field">

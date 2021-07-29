@@ -38,7 +38,7 @@
       </v-col>
     </v-row>
     <v-row justify="center">
-      <v-dialog v-model="dialog">
+      <v-dialog v-model="dialog" max-width="600px">
         <v-card>
           <v-container>
             <v-card-title class="p-0">
@@ -47,26 +47,43 @@
           </v-container>
           <v-card-text>
             <v-container>
-              <v-row>
-                <v-col cols="12">
-                  <v-text-field label="Name*" required></v-text-field>
-                </v-col>
-                <v-col cols="12">
-                  <v-text-field label="Business Name*" required></v-text-field>
-                </v-col>
-                <v-col cols="12">
-                  <v-text-field label="Contact Email*" required></v-text-field>
-                </v-col>
-                <v-col cols="12">
-                  <p>
-                    Wag Enable strongly believes in positive reinforcement and
-                    animal behavioral science. We do not promote brands or
-                    businesses that encourage the use of dominance/alpha
-                    training techniques, the use of e-collars, prongs, or other
-                    similar methods.
-                  </p>
-                </v-col>
-              </v-row>
+              <v-form ref="form" @submit.prevent="submit">
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field
+                      v-model="form.name"
+                      label="Name*"
+                      required
+                      :rules="[v => !!v || 'Name is required']"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-text-field
+                      v-model="form.business_name"
+                      label="Business Name*"
+                      required
+                      :rules="[v => !!v || 'Business Name is required']"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-text-field
+                      v-model="form.email"
+                      label="Contact Email*"
+                      required
+                      :rules="rules.email"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12">
+                    <p>
+                      Wag Enable strongly believes in positive reinforcement and
+                      animal behavioral science. We do not promote brands or
+                      businesses that encourage the use of dominance/alpha
+                      training techniques, the use of e-collars, prongs, or
+                      other similar methods.
+                    </p>
+                  </v-col>
+                </v-row>
+              </v-form>
             </v-container>
           </v-card-text>
           <v-card-actions>
@@ -74,8 +91,8 @@
             <v-btn color="blue darken-1" text @click="dialog = false">
               Close
             </v-btn>
-            <v-btn color="blue darken-1" text @click="saveContactDetails">
-              Save
+            <v-btn color="blue darken-1" text @click="submit">
+              Submit
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -89,7 +106,21 @@ export default {
   name: "ShakeTogether.vue",
   data() {
     return {
-      dialog: false
+      dialog: false,
+      form: {
+        name: "",
+        business_name: "",
+        email: ""
+      },
+      rules: {
+        // zipcode: [val => (val || '').length > 0 || 'This Zipcode is required'],
+        email: [
+          val => (val || "").length > 0 || "This email field is required",
+          val =>
+            /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(val) ||
+            "E-mail must be valid"
+        ]
+      }
     };
   },
   methods: {
@@ -102,7 +133,28 @@ export default {
       //   this.$router.push("/login");
       // }
     },
-    saveContactDetails() {}
+    async submit() {
+      if (this.$refs.form.validate()) {
+        this.$store.commit("SHOW_LOADER", true);
+        const mail_form = this.form;
+        mail_form.address = this.form.email;
+        const mailResp = await this.$axios.post(
+          "/mail/contact-us-form",
+          mail_form
+        );
+        this.$store.commit("SHOW_LOADER", false);
+        this.$store.commit("SHOW_SNACKBAR", {
+          snackbar: true,
+          color: "green",
+          message: "Thanks. We will contact you soon!"
+        });
+        this.dialog = false;
+        // for (const key in this.form) {
+        //   this.form[key] = "";
+        // }
+        this.$refs.form.reset();
+      }
+    }
   }
 };
 </script>
