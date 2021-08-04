@@ -68,6 +68,22 @@
             :rules="rules.email"
           ></v-text-field>
         </div>
+
+        <div class="search-form-field mb-8">
+          <div class="search-filter-label">
+            <label>{{ $t("address") }}</label>
+          </div>
+          <client-only>
+            <vue-google-autocomplete
+              id="map"
+              class="search-location"
+              :placeholder="$t('all')"
+              v-on:placechanged="getAddressData"
+            >
+            </vue-google-autocomplete>
+          </client-only>
+        </div>
+
         <div class="search-form-field">
           <div class="search-filter-label">
             <label>{{ $t("zipcode") }}</label>
@@ -149,7 +165,10 @@ import "vue-phone-number-input/dist/vue-phone-number-input.css";
 
 export default {
   name: "Account.vue",
-  components: { VuePhoneNumberInput: () => import("vue-phone-number-input") },
+  components: {
+    VuePhoneNumberInput: () => import("vue-phone-number-input"),
+    VueGoogleAutocomplete: () => import("vue-google-autocomplete")
+  },
 
   data() {
     return {
@@ -228,6 +247,11 @@ export default {
             }
           });
       }
+    },
+    getAddressData(addressData, placeResultData, id) {
+      // this.address = addressData;
+      // this.form.latitude = addressData.latitude;
+      // this.form.longitude = addressData.longitude;
     }
   }
 };
@@ -298,11 +322,15 @@ export default {
     opacity: 0.5;
   }
 }
+
+.search-form-field {
+  width: 100%;
+}
 .search-field::v-deep .v-input__slot {
   background: $white;
   min-height: 60px;
   box-shadow: unset !important;
-  min-width: 380px;
+  width: 100%;
   font-weight: $font-weight-bold;
   font-family: $font-family-primary;
   .v-text-field__slot {
@@ -312,6 +340,11 @@ export default {
     max-width: 273px;
     min-width: 0;
   }
+}
+.search-location {
+  width: 100%;
+  max-width: 100%;
+  min-height: 60px;
 }
 .radio-field {
   margin-top: 0;

@@ -198,6 +198,7 @@
   "my_vet_info": "My Vet Info",
   "change_profile": "Change profile photo ",
   "image_rules": "Acceptable formats: jbg, png Max file size: 500 kb ",
+  "adoption_date":"Adoption Date",
   "phone_no": "Phone No",
   "gender": "Gender",
   "zipcode": "Zipcode",
