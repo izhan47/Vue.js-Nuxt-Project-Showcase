@@ -98,6 +98,7 @@
                       :rules="[v => !!v || 'Name is required']"
                     ></v-text-field>
                   </div>
+
                   <div class="search-form-field">
                     <div class="search-filter-label">
                       <label>{{ $t("breed") }}</label>
@@ -114,6 +115,46 @@
                       required
                     ></v-select>
                   </div>
+
+                  <div class="search-form-field w-full">
+                    <div class="search-filter-label mb-2">
+                      <label>{{ $t("adoption_date") }}</label>
+                    </div>
+                    <v-menu
+                      ref="menu"
+                      v-model="menu"
+                      :close-on-content-click="false"
+                      :return-value.sync="date"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="auto"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="date"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                          outlined
+                          rounded
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker v-model="date" no-title scrollable>
+                        <v-spacer></v-spacer>
+                        <v-btn text color="primary" @click="menu = false">
+                          Cancel
+                        </v-btn>
+                        <v-btn
+                          text
+                          color="primary"
+                          @click="$refs.menu.save(date)"
+                        >
+                          OK
+                        </v-btn>
+                      </v-date-picker>
+                    </v-menu>
+                  </div>
+
                   <div class="action-section">
                     <v-btn text @click="dialog = false">
                       {{ $t("cancel") }}</v-btn
@@ -151,7 +192,11 @@ export default {
         breed_ids: "",
         pet_image: ""
       },
-      imageURL: ""
+      imageURL: "",
+      date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10),
+      menu: false
     };
   },
   created() {
@@ -315,7 +360,7 @@ export default {
   max-width: 700px;
 }
 .dialog-custom-container {
-  max-height: 560px;
+  max-height: 660px;
   max-width: 585px;
   padding: 0 1rem;
   margin: 0 auto;
@@ -378,11 +423,14 @@ export default {
   }
 }
 
+.search-form-field {
+  width: 100%;
+}
 .search-field::v-deep .v-input__slot {
   background: $white;
   min-height: 50px;
   box-shadow: unset !important;
-  min-width: 500px;
+  width: 100%;
   font-weight: $font-weight-bold;
   font-family: $font-family-primary;
   .v-text-field__slot {
@@ -398,7 +446,7 @@ export default {
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  margin-top: 4rem;
+  margin-top: 2rem;
   margin-bottom: 4rem;
 }
 .search-btn {
@@ -409,5 +457,8 @@ export default {
   //border: 0.5px solid $blue_gem;
   box-sizing: border-box;
   border-radius: 50px;
+}
+.w-full {
+  width: 100%;
 }
 </style>
