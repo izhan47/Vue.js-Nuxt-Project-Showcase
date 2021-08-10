@@ -190,14 +190,6 @@
   text-align: left;
 }
 
-//.text-center{
-//  img{
-//    max-height: 200px;
-//  }
-//  h2{
-//    margin-bottom: 2rem;
-//  }
-//}
 .banner-description {
   max-width: 650px;
   margin: auto;
@@ -244,8 +236,6 @@
 }
 .card-heading {
   color: $dark-charcoal;
-  //font-size: $font-size-28;
-  //font-weight: $font-weight-600;
   font-size: $font-size-22;
   font-weight: normal;
   line-height: 32px;
@@ -257,20 +247,19 @@
 }
 
 .card-heading-point {
-  //padding-left: 2px;
   margin-top: 3px;
   color: $grey;
   font-size: $font-size-15;
 }
 
 .card-description {
-  //color: $matterhorn;
   color: $light-charcoal;
   font-size: $font-size-15;
   font-weight: $font-weight-600;
   line-height: 1.87;
   font-family: $font-family-primary;
 }
+
 .bg-img-height {
   height: 270px;
   background-position: center;
@@ -278,6 +267,7 @@
   background-size: cover;
   border-radius: 10px 10px 0 0;
 }
+
 .card-img {
   max-height: $img-max-height-270;
   border-radius: 10px 10px 0 0;
@@ -296,13 +286,12 @@
   cursor: pointer;
   color: $green;
 }
+
 .pagination {
   padding: 30px;
 }
 
-//new card
 .card-section {
-  //min-height: 412px;
   min-height: 440px;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
@@ -324,15 +313,12 @@
 .category-title {
   font-family: $font-family-primary;
   font-style: normal;
-  //font-weight: normal;
   font-size: 14px;
   line-height: 19px;
   color: $primary_gray;
   font-weight: $font-weight-600;
 }
 .cat-btn {
-  //min-width: 130px;
-  //min-height: 25px;
   font-family: $font-family-primary;
   font-style: normal;
   font-weight: normal;
@@ -342,10 +328,11 @@
   margin-right: 4px;
   text-transform: capitalize;
 }
+
 .icon-img {
   max-height: $img-max-height-40;
 }
-//  google place css
+
 .search-location {
   border: 1px solid rgba(0, 0, 0, 0.38);
   border-radius: 30px;
@@ -361,13 +348,13 @@
     outline: none !important;
   }
 }
+
 .pac-container.pac-logo {
   &:after {
     content: unset;
   }
 }
 
-// Review List Section
 .reviews-details-block {
   margin: 35px 0;
 }
@@ -436,8 +423,6 @@
   margin-left: 40px;
 }
 
-// Profile Dashboard
-
 .profile-title {
   padding-top: 30px;
   padding-left: 24px;
@@ -452,7 +437,6 @@
   }
 }
 
-// number component
 $number-com-height: 60px;
 .vue-phone-number-input {
   .select-country-container {

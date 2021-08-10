@@ -16,32 +16,42 @@
             <div class="search-form-field">
               <label>{{ $t("category") }}</label>
               <v-select
-                class="search-field mt-2"
                 :placeholder="$t('all')"
+                class="search-field mt-2"
                 :items="categoryList"
-                v-model="form.category_id"
+                v-model="category"
                 outlined
                 rounded
+                multiple
+                small-chips
                 @change="filterData()"
-              ></v-select>
+              >
+                <template v-slot:selection="{ item, index }">
+                  <v-chip v-if="index === 0">
+                    <span>{{ item.text }}</span>
+                  </v-chip>
+                  <span v-if="index === 1" class="grey--text caption">
+                    (+{{ categoryList.length - 1 }} others)
+                  </span>
+                </template>
+              </v-select>
             </div>
+            <!--  -->
             <div class="search-form-field mb-8">
               <div class="search-filter-label">
                 <label class="ml-4 ">{{ $t("location") }}</label>
               </div>
-              <client-only>
-                <vue-google-autocomplete
-                  id="map"
-                  class="search-location"
-                  :placeholder="$t('all')"
-                  v-on:placechanged="getAddressData"
-                >
-                </vue-google-autocomplete>
-              </client-only>
+              <GmapAutocomplete
+                class="search-location"
+                :placeholder="$t('all')"
+                @input="inputLocation($event)"
+                @place_changed="getAddressData"
+              >
+              </GmapAutocomplete>
             </div>
 
             <div class="search-form-field">
-              <label>Nature of Business</label>
+              <label>{{ $t("nature_of_business") }}</label>
 
               <v-select
                 :placeholder="$t('all')"
@@ -135,20 +145,18 @@
 </template>
 
 <script>
-// import VueGoogleAutocomplete from "vue-google-autocomplete";
 export default {
   name: "index.vue",
-  components: {
-    VueGoogleAutocomplete: () => import("vue-google-autocomplete")
-  },
+
   data() {
     return {
       page: 1,
+      category_list: [],
       category: [],
       business_list: [],
       business: [],
       form: {
-        category_id: "",
+        category_id: [],
         latitude: "",
         longitude: "",
         search: "",
@@ -169,18 +177,12 @@ export default {
       return this.$store.state.total_page;
     },
     categoryList() {
-      let categories = this.$store.state.pet_category_list;
-      let arr = categories.map(category => ({
+      this.category_list = this.$store.state.pet_category_list;
+      let arr = this.category_list.map(category => ({
         value: category.value,
         text: category.label
       }));
-      return [
-        {
-          value: "",
-          text: "All"
-        },
-        ...arr
-      ];
+      return [...arr];
     },
     businessList() {
       return this.business_list.map(b => {
@@ -219,20 +221,36 @@ export default {
         return exist;
       });
 
-      this.form.business_id = JSON.stringify(this.form.business_id);
+      this.form.category_id = this.category.map(category => {
+        const exist = this.category_list.find(b => b.value == category);
+        exist.label = exist.label;
+        return exist;
+      });
 
+      this.form.business_id = JSON.stringify(this.form.business_id);
+      this.form.category_id = JSON.stringify(this.form.category_id);
+
+      if (this.form.search == null) {
+        this.form.search = "";
+      }
+
+      if (this.address == "") {
+        this.form.latitude = "";
+        this.form.longitude = "";
+      }
       let filters = {
         form: this.form,
         page: this.page
       };
 
       this.$store.dispatch("petProList", filters);
-      // this.$store.dispatch("petProList", this.form, this.page);
     },
-    getAddressData(addressData, placeResultData, id) {
-      this.address = addressData;
-      this.form.latitude = addressData.latitude;
-      this.form.longitude = addressData.longitude;
+    getAddressData(addressData) {
+      this.form.latitude = addressData.geometry.location.lat();
+      this.form.longitude = addressData.geometry.location.lng();
+    },
+    inputLocation(event) {
+      this.address = event.target.value;
     },
     async fetchBusinessNature() {
       try {

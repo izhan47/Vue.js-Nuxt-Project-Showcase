@@ -8,7 +8,14 @@
               <img :src="categoryData.author.image_thumb_full_path" alt="" />
               <h2>{{ categoryData.author.name }}</h2>
               <p>{{ categoryData.author.about }}</p>
-              <v-btn large class="round-btn" outlined rounded>
+              <v-btn
+                large
+                class="round-btn"
+                outlined
+                rounded
+                :href="categoryData.author.website_link"
+                target="_blank"
+              >
                 {{ $t("personal_website") }}</v-btn
               >
             </div>
