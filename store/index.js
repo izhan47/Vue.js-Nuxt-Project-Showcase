@@ -64,7 +64,9 @@ export default () => {
       SET_CURRENT_PATH(state, data) {
         state.current_path = data;
       },
-
+      SET_USER_ONLY(state, user) {
+        state.user.user = user
+      },
       SET_USER(state, data) {
         state.user = {
           bearerToken: data.token,
@@ -332,12 +334,42 @@ export default () => {
           url: "profile/get-details"
         });
       },
-      updateProfile({ commit }, data) {
-        return axios({
-          method: "POST",
-          url: "profile/update",
-          data
-        });
+      
+      // Update Profile - Done
+      async updateProfile({ commit }, data) {
+        try {
+          commit("SHOW_LOADER", true);
+          const resp = await axios({
+            method: "POST",
+            url: "profile/update",
+            data,
+            headers:{
+              "Content-Type": "multipart/form-data"
+            }
+          });
+          commit("SET_USER_ONLY", resp.data.data.user_details);
+          commit("SHOW_LOADER", false);
+          commit("SHOW_SNACKBAR", {
+            snackbar: true,
+            color: "green",
+            message: resp.data.message
+          });
+        } catch (error) {
+          commit("SHOW_LOADER", false);
+          let errors = error.response.data.data;
+          for (let item in errors) {
+            if (errors.hasOwnProperty(item)){
+              errors[item].forEach(err => {
+                commit("SHOW_SNACKBAR", {
+                  snackbar: true,
+                  color: "red",
+                  message: err
+                });
+              });
+            }
+          }
+          throw new Error(error);
+        }
       },
 
       //Pet Profile Dashboard Section

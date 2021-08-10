@@ -38,63 +38,19 @@
       </v-col>
     </v-row>
     <v-row justify="center">
-      <v-dialog v-model="dialog" max-width="600px">
+      <v-dialog v-model="dialog" max-width="660px">
         <v-card>
-          <v-container>
-            <v-card-title class="p-0">
-              <span class="text-h5">Contact Detail</span>
-            </v-card-title>
-          </v-container>
-          <v-card-text>
-            <v-container>
-              <v-form ref="form" @submit.prevent="submit">
-                <v-row>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model="form.name"
-                      label="Name*"
-                      required
-                      :rules="[v => !!v || 'Name is required']"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model="form.business_name"
-                      label="Business Name*"
-                      required
-                      :rules="[v => !!v || 'Business Name is required']"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model="form.email"
-                      label="Contact Email*"
-                      required
-                      :rules="rules.email"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <p>
-                      Wag Enable strongly believes in positive reinforcement and
-                      animal behavioral science. We do not promote brands or
-                      businesses that encourage the use of dominance/alpha
-                      training techniques, the use of e-collars, prongs, or
-                      other similar methods.
-                    </p>
-                  </v-col>
-                </v-row>
-              </v-form>
-            </v-container>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false">
-              Close
-            </v-btn>
-            <v-btn color="blue darken-1" text @click="submit">
-              Submit
-            </v-btn>
-          </v-card-actions>
+          <div class="flex items-center justify-center">
+            <iframe
+              src="https://docs.google.com/forms/d/e/1FAIpQLSfVyw-8iiMska4iMmQ8dtcB1OE7NBr3fEBp2jqjOAqh_97f8w/viewform?embedded=true"
+              height="1200"
+              frameborder="0"
+              marginheight="0"
+              marginwidth="0"
+              scrolling="no"
+              >Loading…</iframe
+            >
+          </div>
         </v-card>
       </v-dialog>
     </v-row>
@@ -213,5 +169,9 @@ export default {
 
 .p-0 {
   padding: 16px 0 !important;
+}
+
+iframe {
+  width: 100%;
 }
 </style>

@@ -208,11 +208,9 @@ export default {
     };
   },
   created() {
-    // window.addEventListener("resize", this.handleWindowResize);
     if (process.browser) {
       window.addEventListener("resize", function(event) {
         const newWidth = window.innerWidth;
-        // const newHeight = window.innerHeight;
         this.drawer = newWidth < 768;
       });
       this.userDetail = this.$store.state.user.user;

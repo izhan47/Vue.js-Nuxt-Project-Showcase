@@ -56,7 +56,6 @@
               >
             </div>
 
-            <!-- description -->
             <p class="description">
               {{ pet_pro.description }}
             </p>
@@ -108,8 +107,6 @@
           </v-col>
         </v-row>
 
-        <!-- additional details -->
-
         <v-row>
           <v-col md="8" cols="12">
             <div class="custom-card left-side">
@@ -147,13 +144,11 @@
           <template v-if="address || pet_pro.phone_number || hours">
             <v-col md="4" cols="12">
               <div class="custom-card">
-                <!-- {{ pet_pro.longitude }}
-              {{ pet_pro.latitude }} -->
                 <div class="g-map">
                   <GmapMap
                     :center="{
-                      lat: 10,
-                      lng: 10
+                      lat: Number(pet_pro.latitude),
+                      lng: Number(pet_pro.longitude)
                     }"
                     :zoom="7"
                     map-type-id="terrain"
@@ -161,7 +156,12 @@
                   >
                     <GmapMarker
                       :key="index"
-                      v-for="(m, index) in markers"
+                      v-for="(m, index) in [
+                        {
+                          lat: Number(pet_pro.latitude),
+                          lng: Number(pet_pro.longitude)
+                        }
+                      ]"
                       :position="m"
                       :clickable="true"
                       :draggable="true"
@@ -199,7 +199,6 @@
                     </template>
                   </div>
 
-                  <!-- hours of operation -->
                   <template v-if="hours">
                     <h2 class="light mb-3">Hours Of Operation</h2>
 
@@ -218,10 +217,8 @@
       </div>
     </template>
 
-    <!-- preview popup -->
     <div class="preview-container" :class="openPopup ? 'active' : ''">
       <div class="close-btn" @click="openPopup = false">
-        <!-- <vs-icon icon="close" size="small"></vs-icon> -->
         <v-icon color="#6F787E">mdi-close</v-icon>
       </div>
       <div class="container relative">
@@ -250,11 +247,6 @@ export default {
     Reviews: () => import("~/components/pet-biz/reviews")
   },
   data: () => ({
-    markers: [
-      { lat: -37.8265057, lng: 144.7464312 },
-      { lat: -60.79249218273802, lng: 98.52131582979746 },
-      { lat: -57.3633598628284, lng: -149.33024667020254 }
-    ],
     tab: null,
     openPopup: false,
     hours: false
@@ -264,7 +256,7 @@ export default {
       store.commit("SHOW_LOADER", true);
       const resp = await store.dispatch("singlePetDetail", params.slug);
       const { is_liked, per_pro } = resp.data.data;
-      console.log({ is_liked, pet_pro: per_pro });
+
       store.commit("SHOW_LOADER", false);
       return { is_liked, pet_pro: per_pro, error: false };
     } catch (error) {
@@ -383,9 +375,7 @@ export default {
         }
       }
     }
-  },
-
-  created() {}
+  }
 };
 </script>
 
@@ -403,9 +393,6 @@ p {
     line-height: 48px;
     color: #000b42;
   }
-
-  //   .like-btn {
-  //   }
 }
 
 .product-rating {

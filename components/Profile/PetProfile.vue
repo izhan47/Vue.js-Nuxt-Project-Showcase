@@ -6,13 +6,10 @@
       <v-row>
         <v-col cols="12" md="4" sm="12" v-for="(pet, p) in petUser" :key="p">
           <div class="card-section mb-3">
-            <!--            <nuxt-link :to="`/pet-category/${item.slug}`" >-->
             <div
               class="bg-img-height"
               :style="`background-image: url(${pet.pet_image_thumb_full_path})`"
             ></div>
-
-            <!--            </nuxt-link>-->
             <div class="card-category">
               <h2 class="mb-2 mt-2">{{ pet.name }}</h2>
               <div class="delete-action" v-if="pet.breed">
@@ -31,148 +28,148 @@
           </div>
         </v-col>
         <v-col cols="12" md="4" sm="12">
-          <v-card class="pet-add-section card-section center-center">
-            <v-dialog v-model="dialog" persistent max-width="700">
-              <template v-slot:activator="{ on, attrs }">
-                <v-icon
-                  class="plus-icon"
-                  color="#fff"
-                  size="50"
-                  v-bind="attrs"
-                  v-on="on"
+          <v-dialog v-model="dialog" persistent max-width="700">
+            <template v-slot:activator="{ on, attrs }">
+              <v-card
+                class="pet-add-section card-section center-center"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon class="plus-icon" color="#fff" size="50"
                   >mdi-plus</v-icon
                 >
-              </template>
+                <v-card-title class="action-title"> Add More</v-card-title>
+              </v-card>
+            </template>
 
-              <div class=" dialog-section">
-                <v-form
-                  ref="form"
-                  class="dialog-custom-container search-form-filter"
-                  @submit.prevent="addPet"
-                >
-                  <input
-                    type="file"
-                    accept="image/*"
-                    id="file"
-                    class="d-none"
-                    @change="getProfileFile"
-                    ref="inputFile"
-                    required
-                    :rules="[v => !!v || 'The Pet Image is required']"
-                  />
-                  <div class="change-avatar ">
-                    <div class="avatar mt-8 mr-5">
-                      <div
-                        class="bg-img-height"
-                        :style="`background-image: url(${imageURL})`"
-                      ></div>
-                      <div class="add-image" @click="$refs.inputFile.click()">
-                        <v-icon size="30" color="#fff">mdi-plus</v-icon>
-                      </div>
-                    </div>
+            <div class=" dialog-section">
+              <v-form
+                ref="form"
+                class="dialog-custom-container search-form-filter"
+                @submit.prevent="addPet"
+              >
+                <input
+                  type="file"
+                  accept="image/*"
+                  id="file"
+                  class="d-none"
+                  @change="getProfileFile"
+                  ref="inputFile"
+                  required
+                  :rules="[v => !!v || 'The Pet Image is required']"
+                />
+                <div class="change-avatar ">
+                  <div class="avatar mt-8 mr-5">
                     <div
-                      class="change-profile"
-                      @click="$refs.inputFile.click()"
-                    >
-                      <h2>Change profile photo</h2>
-                      <div class="image-description">
-                        <span>Acceptable formats: jbg, png </span> <br />
-                        <span>Max file size: 500 kb </span>
-                      </div>
+                      class="bg-img-height"
+                      :style="`background-image: url(${imageURL})`"
+                    ></div>
+                    <div class="add-image" @click="$refs.inputFile.click()">
+                      <v-icon size="30" color="#fff">mdi-plus</v-icon>
                     </div>
                   </div>
-                  <div class="search-form-field">
-                    <div class="search-filter-label">
-                      <label>{{ $t("name") }}</label>
+                  <div class="change-profile" @click="$refs.inputFile.click()">
+                    <h2>Change profile photo</h2>
+                    <div class="image-description">
+                      <span>Acceptable formats: jbg, png </span> <br />
+                      <span>Max file size: 500 kb </span>
                     </div>
-                    <v-text-field
-                      v-model="form.name"
-                      :placeholder="$t('name')"
-                      class="search-field cross-icon mt-2"
-                      color="#46259A"
-                      solo
-                      rounded
-                      outlined
-                      clearable
-                      required
-                      :rules="[v => !!v || 'Name is required']"
-                    ></v-text-field>
                   </div>
+                </div>
+                <div class="search-form-field">
+                  <div class="search-filter-label">
+                    <label>{{ $t("name") }}</label>
+                  </div>
+                  <v-text-field
+                    v-model="form.name"
+                    :placeholder="$t('name')"
+                    class="search-field cross-icon mt-2"
+                    color="#46259A"
+                    solo
+                    rounded
+                    outlined
+                    clearable
+                    required
+                    :rules="[v => !!v || 'Name is required']"
+                  ></v-text-field>
+                </div>
 
-                  <div class="search-form-field">
-                    <div class="search-filter-label">
-                      <label>{{ $t("breed") }}</label>
-                    </div>
-                    <v-select
-                      class="search-field mt-2"
-                      :placeholder="$t('all')"
-                      :items="breedList"
-                      v-model="form.breed_ids"
-                      outlined
-                      color="#46259A"
-                      rounded
-                      :rules="[v => !!v || 'Breed is required']"
-                      required
-                    ></v-select>
+                <div class="search-form-field">
+                  <div class="search-filter-label">
+                    <label>{{ $t("breed") }}</label>
                   </div>
+                  <v-select
+                    class="search-field mt-2"
+                    :placeholder="$t('all')"
+                    :items="breedList"
+                    v-model="form.breed_ids"
+                    outlined
+                    color="#46259A"
+                    rounded
+                    :rules="[v => !!v || 'Breed is required']"
+                    required
+                  ></v-select>
+                </div>
 
-                  <div class="search-form-field w-full">
-                    <div class="search-filter-label mb-2">
-                      <label>{{ $t("adoption_date") }}</label>
-                    </div>
-                    <v-menu
-                      ref="menu"
-                      v-model="menu"
-                      :close-on-content-click="false"
-                      :return-value.sync="date"
-                      transition="scale-transition"
-                      offset-y
-                      min-width="auto"
-                    >
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-text-field
-                          v-model="date"
-                          readonly
-                          v-bind="attrs"
-                          v-on="on"
-                          outlined
-                          rounded
-                        ></v-text-field>
-                      </template>
-                      <v-date-picker v-model="date" no-title scrollable>
-                        <v-spacer></v-spacer>
-                        <v-btn text color="primary" @click="menu = false">
-                          Cancel
-                        </v-btn>
-                        <v-btn
-                          text
-                          color="primary"
-                          @click="$refs.menu.save(date)"
-                        >
-                          OK
-                        </v-btn>
-                      </v-date-picker>
-                    </v-menu>
+                <div class="search-form-field w-full">
+                  <div class="search-filter-label mb-2">
+                    <label>{{ $t("adoption_date") }}</label>
                   </div>
+                  <v-menu
+                    ref="menu"
+                    v-model="menu"
+                    :close-on-content-click="false"
+                    :return-value.sync="form.adoption_date"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                        v-model="form.adoption_date"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
+                        outlined
+                        rounded
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      v-model="form.adoption_date"
+                      no-title
+                      scrollable
+                    >
+                      <v-spacer></v-spacer>
+                      <v-btn text color="primary" @click="menu = false">
+                        Cancel
+                      </v-btn>
+                      <v-btn
+                        text
+                        color="primary"
+                        @click="$refs.menu.save(form.adoption_date)"
+                      >
+                        OK
+                      </v-btn>
+                    </v-date-picker>
+                  </v-menu>
+                </div>
 
-                  <div class="action-section">
-                    <v-btn text @click="dialog = false">
-                      {{ $t("cancel") }}</v-btn
-                    >
-                    <v-btn
-                      class="purple-section  search-btn"
-                      outlined
-                      large
-                      @click="addPet"
-                    >
-                      {{ $t("update") }}
-                    </v-btn>
-                  </div>
-                </v-form>
-              </div>
-            </v-dialog>
-            <v-card-title class="action-title"> Add More</v-card-title>
-          </v-card>
+                <div class="action-section">
+                  <v-btn text @click="dialog = false">
+                    {{ $t("cancel") }}</v-btn
+                  >
+                  <v-btn
+                    class="purple-section  search-btn"
+                    outlined
+                    large
+                    @click="addPet"
+                  >
+                    {{ $t("update") }}
+                  </v-btn>
+                </div>
+              </v-form>
+            </div>
+          </v-dialog>
         </v-col>
       </v-row>
     </div>
@@ -181,21 +178,23 @@
 
 <script>
 export default {
-  name: "PetProfile.vue",
+  name: "PetProfile",
   data() {
     return {
       dialog: false,
       breedList: [],
       petUser: [],
       form: {
+        adoption_date: new Date(
+          Date.now() - new Date().getTimezoneOffset() * 60000
+        )
+          .toISOString()
+          .substr(0, 10),
         name: "",
         breed_ids: "",
         pet_image: ""
       },
       imageURL: "",
-      date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-        .toISOString()
-        .substr(0, 10),
       menu: false
     };
   },
@@ -216,22 +215,7 @@ export default {
       this.$store.dispatch("breedList").then(response => {
         this.$store.commit("SHOW_LOADER", false);
         let arr = [];
-
-        // response.data.data.breed_list.filter(data => data.value).forEach(function (data) {
-
         response.data.data.breed_list.forEach(function(data) {
-          // if(data.value === ''){
-          //   this.form.breed_ids = data.value
-          //   arr.push({
-          //     'value': data.value,
-          //     'text': data.label,
-          //   })
-          // } else {
-          //   arr.push({
-          //     'value': data.value,
-          //     'text': data.label,
-          //   })
-          // }
           arr.push({
             value: data.value,
             text: data.label
@@ -251,6 +235,7 @@ export default {
         data.append("pet_image", this.form.pet_image);
         data.append("breed_ids", this.form.breed_ids);
         data.append("name", this.form.name);
+        data.append("adoption_date", this.form.adoption_date);
         this.$store.commit("SHOW_LOADER", true);
         await this.$store
           .dispatch("addPetProfile", data)

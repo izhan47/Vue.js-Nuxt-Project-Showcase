@@ -18,12 +18,6 @@ export default {
       { hid: "description", name: "description", content: "" }
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.png" }],
-    script: [
-      {
-        src:
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyBaxMfWKuh_m7up5CvIL-LF_EHJ_eWkRWI&libraries=places"
-      }
-    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

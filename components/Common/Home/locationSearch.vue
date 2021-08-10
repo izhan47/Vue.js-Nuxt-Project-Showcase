@@ -34,15 +34,13 @@
             <div class="search-filter-label">
               <label class="ml-4 ">{{ $t("location") }}</label>
             </div>
-            <client-only>
-              <vue-google-autocomplete
-                id="map"
-                class="search-location"
-                :placeholder="$t('all')"
-                v-on:placechanged="getAddressData"
-              >
-              </vue-google-autocomplete>
-            </client-only>
+            <GmapAutocomplete
+              id="map"
+              class="search-location"
+              :placeholder="$t('all')"
+              @place_changed="getAddressData"
+            >
+            </GmapAutocomplete>
           </div>
           <div class="search-form-field">
             <div class="search-filter-label">
@@ -108,8 +106,7 @@ import PetCategoryCard from "@/components/PetCategoryCard";
 export default {
   name: "locationSearch",
   components: {
-    PetCategoryCard,
-    VueGoogleAutocomplete: () => import("vue-google-autocomplete")
+    PetCategoryCard
   },
   data() {
     return {
@@ -144,10 +141,10 @@ export default {
     }
   },
   methods: {
-    getAddressData(addressData, placeResultData, id) {
-      this.address = addressData;
-      this.form.latitude = addressData.latitude;
-      this.form.longitude = addressData.longitude;
+    getAddressData(addressData) {
+      this.address = addressData.formatted_address;
+      this.form.latitude = addressData.geometry.location.lat();
+      this.form.longitude = addressData.geometry.location.lng();
     },
     filterData() {
       this.$emit("filter-data", {

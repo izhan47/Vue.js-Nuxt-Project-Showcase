@@ -54,20 +54,25 @@ export default {
           show: true
         },
         {
+          text: "password",
+          to: `${prefix}/update-password`,
+          show: true
+        },
+        {
           text: "my_vet_info",
           to: `${prefix}/vet-info`,
           show: false
         },
-        // {
-        //   text: "add_business",
-        //   to: `${prefix}/add-business`,
-        //   show: true
-        // },
-        // {
-        //   text: "my_business",
-        //   to: `${prefix}/my-business`,
-        //   show: true
-        // },
+        {
+          text: "add_business",
+          to: `${prefix}/add-business`,
+          show: false
+        },
+        {
+          text: "my_business",
+          to: `${prefix}/my-business`,
+          show: false
+        },
         {
           text: "save_deals",
           to: `${prefix}/save-deals`,
