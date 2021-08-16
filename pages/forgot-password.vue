@@ -18,7 +18,7 @@
           class="log-in-btn white-text"
           outlined
           rounded
-          @click="Login()"
+          @click="forgotPassword()"
         >
           {{ $t("reset_password") }}</v-btn
         >
@@ -32,8 +32,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
-  name: "forgot-password",
   middleware: ["authenticated-user"],
   data() {
     return {
@@ -51,32 +51,10 @@ export default {
     };
   },
   methods: {
-    Login() {
-      this.$store.commit("SHOW_LOADER", true);
-      this.$store
-        .dispatch("forgotPassword", this.form)
-        .then(response => {
-          this.$store.commit("SHOW_LOADER", false);
-          this.$store.commit("SHOW_SNACKBAR", {
-            snackbar: true,
-            color: "green",
-            message: response.data.message
-          });
-        })
-        .catch(e => {
-          this.$store.commit("SHOW_LOADER", false);
-          let errors = e.response.data.data;
-          for (let item in errors) {
-            if (errors.hasOwnProperty(item))
-              errors[item].forEach(err => {
-                this.$store.commit("SHOW_SNACKBAR", {
-                  snackbar: true,
-                  color: "red",
-                  message: err
-                });
-              });
-          }
-        });
+    ...mapActions(["FORGOT_PASSWORD"]),
+
+    forgotPassword() {
+      this.FORGOT_PASSWORD(this.form);
     }
   }
 };

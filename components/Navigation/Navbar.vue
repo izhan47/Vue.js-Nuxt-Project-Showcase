@@ -33,7 +33,7 @@
                 </v-list-item>
               </v-list>
               <v-list-item
-                v-if="$store.state.user.isAuthenticated"
+                v-if="$store.state.USER.isAuthenticated"
                 to="/profile"
                 link
               >
@@ -125,7 +125,7 @@
               >
             </div>
             <div>
-              <v-menu offset-y v-if="$store.state.user.isAuthenticated">
+              <v-menu offset-y v-if="$store.state.USER.isAuthenticated">
                 <template v-slot:activator="{ on }">
                   <v-btn icon large v-on="on">
                     <v-avatar size="35px" item>
@@ -168,6 +168,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "Navbar.vue",
   data() {
@@ -213,14 +214,15 @@ export default {
         const newWidth = window.innerWidth;
         this.drawer = newWidth < 768;
       });
-      this.userDetail = this.$store.state.user.user;
+      this.userDetail = this.$store.state.USER.user;
     }
   },
   methods: {
-    reset() {
-      this.$store.dispatch("reset").then(response => {
-        this.$router.push("/login");
-      });
+    ...mapActions(["RESET"]),
+
+    async reset() {
+      await this.RESET();
+      this.$router.push("/login");
     }
   }
 };

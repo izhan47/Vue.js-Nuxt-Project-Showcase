@@ -106,13 +106,16 @@
       </div>
     </div>
     <!--  card-section-start   -->
-    <div class="custom-height custom-container space" v-if="petProData.length">
+    <div
+      class="custom-height custom-container space"
+      v-if="PET_PRO_LIST.length"
+    >
       <v-row>
         <v-col
           cols="12"
           md="4"
           sm="12"
-          v-for="(data, i) in petProData"
+          v-for="(data, i) in PET_PRO_LIST"
           :key="i"
           class="custom-margin"
         >
@@ -124,7 +127,7 @@
         <v-pagination
           class="pagination"
           v-model="page"
-          :length="totalPage"
+          :length="PET_PRO_LIST_TOTAL_PAGE"
           prev-icon="mdi-menu-left"
           next-icon="mdi-menu-right"
           circle
@@ -145,9 +148,9 @@
 </template>
 
 <script>
-export default {
-  name: "index.vue",
+import { mapState, mapActions } from "vuex";
 
+export default {
   data() {
     return {
       page: 1,
@@ -167,17 +170,13 @@ export default {
   },
 
   computed: {
+    ...mapState(["PET_PRO_LIST", "PET_PRO_LIST_TOTAL_PAGE"]),
+
     colors() {
       return ["paw-purple", "paw-pink", "paw-green"];
     },
-    petProData() {
-      return this.$store.state.pet_pro_list;
-    },
-    totalPage() {
-      return this.$store.state.total_page;
-    },
     categoryList() {
-      this.category_list = this.$store.state.pet_category_list;
+      this.category_list = this.$store.state.PET_PRO_CATEGORY_LIST;
       let arr = this.category_list.map(category => ({
         value: category.value,
         text: category.label
@@ -201,17 +200,19 @@ export default {
     let search = this.$route.query.search ?? "";
     this.form.search = search;
 
-    this.$store.dispatch("petProList", {
-      form: {
-        ...this.form,
-        search
-      },
+    let filters = {
+      form: this.form,
       page: this.page
-    });
+    };
+
+    this.POST_PET_PRO_LIST(filters);
+
     await this.fetchBusinessNature();
-    this.$store.dispatch("petCategories");
+    this.FETCH_PET_PRO_CATEGORY_LIST();
   },
   methods: {
+    ...mapActions(["POST_PET_PRO_LIST", "FETCH_PET_PRO_CATEGORY_LIST"]),
+
     filterData() {
       this.$router.push({ query: { page: this.page } });
 
@@ -243,7 +244,7 @@ export default {
         page: this.page
       };
 
-      this.$store.dispatch("petProList", filters);
+      this.POST_PET_PRO_LIST(filters);
     },
     getAddressData(addressData) {
       this.form.latitude = addressData.geometry.location.lat();

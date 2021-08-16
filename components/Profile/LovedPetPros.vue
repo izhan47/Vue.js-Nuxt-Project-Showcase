@@ -78,8 +78,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
-  name: "LovedPetPros.vue",
   data() {
     return {
       petLoved: []
@@ -88,25 +88,18 @@ export default {
   created() {
     this.lovedPetPro();
   },
+  computed: {
+    ...mapState(["LOVED_PETS"])
+  },
   methods: {
+    ...mapActions(["FETCH_GET_LOVED_PETS", "POST_REMOVE_LOVED_PET"]),
     async lovedPetPro() {
-      this.$store.commit("SHOW_LOADER", true);
-      await this.$store.dispatch("getLovedPet").then(response => {
-        this.$store.commit("SHOW_LOADER", false);
-        this.petLoved = response.data.data.loved_pet_pros;
-      });
+      await this.FETCH_GET_LOVED_PETS();
+      this.petLoved = this.LOVED_PETS;
     },
     async removeLove(slug) {
-      this.$store.commit("SHOW_LOADER", true);
-      await this.$store.dispatch("like", slug).then(response => {
-        this.$store.commit("SHOW_LOADER", false);
-        this.$store.commit("SHOW_SNACKBAR", {
-          snackbar: true,
-          color: "green",
-          message: response.data.message
-        });
-        this.lovedPetPro();
-      });
+      await this.POST_REMOVE_LOVED_PET(slug);
+      this.lovedPetPro();
     }
   }
 };

@@ -13,6 +13,21 @@
               <label>{{ $t("password") }}</label>
             </div>
             <v-text-field
+              v-model="form.old_password"
+              class="search-field cross-icon mt-2"
+              color="#46259A"
+              solo
+              rounded
+              outlined
+              clearable
+              :rules="rules.old_password"
+            ></v-text-field>
+          </div>
+          <div class="search-form-field">
+            <div class="search-filter-label">
+              <label>{{ $t("new_password") }}</label>
+            </div>
+            <v-text-field
               v-model="form.password"
               class="search-field cross-icon mt-2"
               color="#46259A"
@@ -25,32 +40,17 @@
           </div>
           <div class="search-form-field">
             <div class="search-filter-label">
-              <label>{{ $t("new_password") }}</label>
-            </div>
-            <v-text-field
-              v-model="form.new_password"
-              class="search-field cross-icon mt-2"
-              color="#46259A"
-              solo
-              rounded
-              outlined
-              clearable
-              :rules="rules.new_password"
-            ></v-text-field>
-          </div>
-          <div class="search-form-field">
-            <div class="search-filter-label">
               <label>{{ $t("confirm_password") }}</label>
             </div>
             <v-text-field
-              v-model="form.confirm_password"
+              v-model="form.password_confirmation"
               class="search-field cross-icon mt-2"
               color="#46259A"
               solo
               rounded
               outlined
               clearable
-              :rules="rules.confirm_password"
+              :rules="rules.password_confirmation"
             ></v-text-field>
           </div>
           <div class="action-section">
@@ -71,22 +71,23 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
       form: {
+        old_password: "",
         password: "",
-        new_password: "",
-        confirm_password: ""
+        password_confirmation: ""
       },
       rules: {
-        password: [
+        old_password: [
           val => (val || "").length > 0 || "This password field is required"
         ],
-        new_password: [
+        password: [
           val => (val || "").length > 0 || "This new password field is required"
         ],
-        confirm_password: [
+        password_confirmation: [
           val =>
             (val || "").length > 0 || "This confirm password field is required"
         ]
@@ -94,9 +95,11 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["POST_UPDATE_USER_PASSWORD"]),
+
     updatePassword() {
       if (this.$refs.form.validate()) {
-        this.$store.dispatch("updatePassword", this.form);
+        this.POST_UPDATE_USER_PASSWORD(this.form);
       }
     }
   }

@@ -20,7 +20,6 @@
 
 <script>
 export default {
-  name: "WatchCategoryCard.vue",
   props: {
     item: {
       type: Object,

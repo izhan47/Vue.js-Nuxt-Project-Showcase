@@ -1,18 +1,17 @@
 <template>
   <div>
-    <div class="watch-learn-detail-section" v-if="categoryData">
+    <div class="watch-learn-detail-section" v-if="WAL">
       <div class="custom-container custom-margin">
         <v-row>
           <v-col cols="12" md="12" sm="12">
             <div class="heading mt-2">
-              <h1>{{ categoryData.title }}</h1>
+              <h1>{{ WAL.title }}</h1>
             </div>
-            <div v-html="categoryData.description"></div>
+            <div v-html="WAL.description"></div>
           </v-col>
         </v-row>
       </div>
 
-      <!-- Deals -->
       <v-container>
         <div class="custom-container custom-card mt-8">
           <v-row>
@@ -28,10 +27,7 @@
 
                 <v-tabs-items v-model="tab">
                   <v-tab-item value="tab-1">
-                    <Deals
-                      :deals="categoryData.deals"
-                      @claim-deal="claimDeal"
-                    />
+                    <Deals :deals="WAL.deals" @claim-deal="claimDeal" />
                   </v-tab-item>
                 </v-tabs-items>
               </div>
@@ -40,7 +36,6 @@
         </div>
       </v-container>
 
-      <!--  card-section-start   -->
       <div class="custom-container  space" v-if="reviewData.length">
         <v-row>
           <v-col
@@ -63,22 +58,18 @@
         />
         <h2 class="heading">{{ $t("nothing_here") }}</h2>
       </div>
-
-      <!--  card-section-end   -->
     </div>
   </div>
 </template>
 
 <script>
-// import ProductReviewCard from "@/components/ProductReviewCard";
+import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "index.vue",
   components: {
     ProductReviewCard: () => import("~/components/ProductReviewCard"),
     Deals: () => import("~/components/pet-biz/pet-pro-deals")
   },
-  // components: { ProductReviewCard },
   data() {
     return {
       form: {
@@ -86,48 +77,44 @@ export default {
         parent_comment_id: 0,
         slug: ""
       },
-      categoryData: "",
       tab: null
     };
   },
   computed: {
+    ...mapState(["WAL"]),
+
     URL() {
       return this.$route.params.slug;
     },
     reviewData() {
-      return this.$store.state.review_list;
+      return this.$store.state.PRODUCT_REVIEW_LIST;
     }
   },
-  created() {
-    this.getCategoryDetail();
+  async created() {
+    await this.POST_WAL_DETAIL(this.URL);
   },
   methods: {
-    getCategoryDetail() {
-      this.$store.dispatch("singleCategoryDetail", this.URL).then(response => {
-        this.categoryData = response.data.data.watch_and_learn;
-        this.$store.commit("SHOW_LOADER", false);
-      });
-    },
-    submit() {
-      if (!this.$store.state.user.isAuthenticated) {
-        return this.$router.push("/login");
-      } else {
-        let loader = true;
-        this.$store.commit("SHOW_LOADER", loader);
-        this.form.slug = this.categoryData.slug;
-        // this.form.parent_comment_id=this.categoryData.id
-        this.$store.dispatch("comment", this.form).then(response => {
-          this.$store.commit("SHOW_LOADER", (loader = false));
-          this.$store.commit("SHOW_SNACKBAR", {
-            snackbar: true,
-            color: "green",
-            message: response.data.message
-          });
-        });
-      }
-    },
+    ...mapActions(["POST_WAL_DETAIL", "POST_CLAIM_PRODUCT_REVIEW"]),
+
+    // submit() {
+    //   if (!this.$store.state.USER.isAuthenticated) {
+    //     return this.$router.push("/login");
+    //   } else {
+    //     let loader = true;
+    //     this.$store.commit("SHOW_LOADER", loader);
+    //     this.form.slug = this.WAL.slug;
+    //     this.$store.dispatch("comment", this.form).then(response => {
+    //       this.$store.commit("SHOW_LOADER", (loader = false));
+    //       this.$store.commit("SHOW_SNACKBAR", {
+    //         snackbar: true,
+    //         color: "green",
+    //         message: response.data.message
+    //       });
+    //     });
+    //   }
+    // },
     async claimDeal(deal) {
-      if (!this.$store.state.user.isAuthenticated) {
+      if (!this.$store.state.USER.isAuthenticated) {
         this.$store.commit("SET_CURRENT_PATH", this.$route.path);
         return this.$router.push("/login");
       } else {
@@ -137,21 +124,8 @@ export default {
             pet_deal_id: deal.id
           };
 
-          this.$store.commit("SHOW_LOADER", true);
-          const response = await this.$store.dispatch(
-            "productReviewclaim",
-            data
-          );
-          const index = this.categoryData.deals.findIndex(
-            d => d.id === deal.id
-          );
-          if (index !== -1) this.categoryData.deals[index].is_claimed = 1;
-          this.$store.commit("SHOW_LOADER", false);
-          this.$store.commit("SHOW_SNACKBAR", {
-            snackbar: true,
-            color: "green",
-            message: response.data.message
-          });
+          await this.POST_CLAIM_PRODUCT_REVIEW(data);
+          await this.POST_WAL_DETAIL(this.URL);
         } catch (error) {
           console.log(error);
         }

@@ -82,7 +82,7 @@ export default {
   methods: {
     goToPage() {
       this.dialog = true;
-      // const { user } = this.$store.state.user;
+      // const { user } = this.$store.state.USER;
       // if (user) {
       //   this.$router.push("/profile/add-business");
       // } else {
