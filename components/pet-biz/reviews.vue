@@ -42,133 +42,139 @@
         <div class="no-reviews" v-else>
           <h1 class="text-center mt-10">Be the first person to add a review</h1>
         </div>
+
+        <!-- <v-btn
+          class="mb-10 mt-10 w-100"
+          color="primary"
+          tile
+          @click="loadMoreReviews"
+        >
+          {{ $t("see_more_reviews") }}
+        </v-btn> -->
       </div>
 
       <h2 class="mb-3">Add a review</h2>
       <v-divider></v-divider>
-      <div class="add-reviews">
-        <v-row>
-          <v-col cols="4">
-            <v-text-field
-              label="Name"
-              outlined
-              v-model="name"
-              disabled
-            ></v-text-field>
-          </v-col>
-          <v-col cols="4">
-            <v-rating
-              background-color="#1BC0C0"
-              color="#1BC0C0"
-              v-model="form.rate"
-              half-increments
-              hover
-              large
-              required
-              size="20"
-            ></v-rating>
-          </v-col>
-        </v-row>
+      <v-form @submit.prevent="submitReview" ref="form">
+        <div class="add-reviews">
+          <v-row>
+            <v-col cols="4">
+              <v-text-field
+                label="Name"
+                outlined
+                v-model="name"
+                disabled
+              ></v-text-field>
+            </v-col>
+            <v-col cols="4">
+              <v-rating
+                background-color="#1BC0C0"
+                color="#1BC0C0"
+                v-model="form.rate"
+                half-increments
+                hover
+                large
+                required
+                size="20"
+              ></v-rating>
+            </v-col>
+          </v-row>
 
-        <v-textarea
-          name="input-7-1"
-          outlined
-          label="Review"
-          auto-grow
-          v-model="form.description"
-        ></v-textarea>
-      </div>
+          <v-textarea
+            name="input-7-1"
+            outlined
+            label="Review"
+            auto-grow
+            v-model="form.description"
+            :rules="rules.description"
+          ></v-textarea>
+        </div>
 
-      <div class="action text-right">
-        <v-btn rounded color="#46259A" dark x-large @click="submitReview">
-          {{ name ? "Submit" : "Login" }}
-        </v-btn>
-      </div>
+        <div class="action text-right">
+          <v-btn rounded color="#46259A" dark x-large @click="submitReview">
+            {{ name ? "Submit" : "Login" }}
+          </v-btn>
+        </div>
+      </v-form>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   name: "pet-biz-events",
   data: () => ({
     reviews: [],
     reviews_count: 0,
-    // add new review
     name: "",
     form: {
       description: "",
       rate: 0
+    },
+    rules: {
+      description: [
+        val => (val || "").length > 0 || "This description field is required"
+      ]
     }
   }),
+  computed: {
+    ...mapState(["PET_PRO_REVIEW"])
+  },
   methods: {
-    async getReviews() {
-      this.$store.commit("SHOW_LOADER", true);
-      const response = await this.$store.dispatch(
-        "getReview",
-        this.$route.params.slug
-      );
+    ...mapActions([
+      "POST_PET_PRO_REVIEW",
+      "POST_GET_REVIEWS",
+      "POST_GET_MORE_REVIEWS"
+    ]),
 
+    async getReviews() {
+      await this.POST_GET_REVIEWS(this.$route.params.slug);
       const {
         reviews_count,
         pet_pro_reviews,
         total_records,
         is_more_review
-      } = response.data.data;
+      } = this.PET_PRO_REVIEW;
       this.reviews_count = reviews_count;
       this.reviews = pet_pro_reviews;
-
-      // console.log({
-      //   reviews_count,
-      //   pet_pro_reviews,
-      //   total_records,
-      //   is_more_review
-      // });
-      this.$store.commit("SHOW_LOADER", false);
     },
     async submitReview() {
-      if (!this.$store.state.user.isAuthenticated) {
+      if (!this.$store.state.USER.isAuthenticated) {
         this.$store.commit("SET_CURRENT_PATH", this.$route.path);
         return this.$router.push("/login");
       } else {
-        if (!this.form.description) {
-          this.$store.commit("SHOW_SNACKBAR", {
-            snackbar: true,
-            color: "error",
-            message: "Description cannot be empty."
-          });
-
-          return;
-        }
-
         let data = {
           slug: this.$route.params.slug,
           form: this.form
         };
-
-        try {
-          this.$store.commit("SHOW_LOADER", true);
-          let response = await this.$store.dispatch("review", data);
-
-          this.$store.commit("SHOW_LOADER", false);
-          this.$store.commit("SHOW_SNACKBAR", {
-            snackbar: true,
-            color: "green",
-            message: response.data.message
-          });
+        if (this.$refs.form.validate()) {
+          await this.POST_PET_PRO_REVIEW(data);
           this.form.rate = 0;
           this.form.description = "";
           this.getReviews();
-        } catch (error) {
-          this.$store.commit("SHOW_LOADER", false);
-          console.log(error);
         }
       }
     }
+    // async loadMoreReviews() {
+    //   let data = {
+    //     slug: this.$route.params.slug,
+    //     id: this.reviews[this.reviews.length - 1].id
+    //   };
+    //   await this.POST_GET_MORE_REVIEWS(data);
+    //   const {
+    //     reviews_count,
+    //     pet_pro_reviews,
+    //     total_records,
+    //     is_more_review
+    //   } = this.PET_PRO_REVIEW;
+    //   this.reviews_count = reviews_count;
+    //   this.reviews = pet_pro_reviews;
+    // }
   },
   created() {
     this.getReviews();
-    const { user } = this.$store.state.user;
+    const { user } = this.$store.state.USER;
     if (user) {
       this.name = user.name;
     }

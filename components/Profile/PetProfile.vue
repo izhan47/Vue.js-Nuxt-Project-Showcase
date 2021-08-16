@@ -58,13 +58,13 @@
                   required
                   :rules="[v => !!v || 'The Pet Image is required']"
                 />
-                <div class="change-avatar ">
+                <div class="change-avatar " @click="$refs.inputFile.click()">
                   <div class="avatar mt-8 mr-5">
                     <div
                       class="bg-img-height"
                       :style="`background-image: url(${imageURL})`"
                     ></div>
-                    <div class="add-image" @click="$refs.inputFile.click()">
+                    <div class="add-image">
                       <v-icon size="30" color="#fff">mdi-plus</v-icon>
                     </div>
                   </div>
@@ -177,8 +177,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
-  name: "PetProfile",
   data() {
     return {
       dialog: false,
@@ -201,28 +201,26 @@ export default {
   created() {
     this.getPetProfile();
     this.getBreedList();
+    console.log(this.form);
+  },
+  computed: {
+    ...mapState(["USER_PETS", "PET_BREED_LIST"])
   },
   methods: {
+    ...mapActions([
+      "FETCH_USER_PET_PROFILE",
+      "POST_ADD_USER_PET_PROFILE",
+      "POST_DELETE_USER_PET_PROFILE",
+      "FETCH_PET_BREED_LIST"
+    ]),
+
     async getPetProfile() {
-      this.$store.commit("SHOW_LOADER", true);
-      await this.$store.dispatch("getUserPet").then(response => {
-        this.$store.commit("SHOW_LOADER", false);
-        this.petUser = response.data.data.users_pets;
-      });
+      await this.FETCH_USER_PET_PROFILE();
+      this.petUser = this.USER_PETS;
     },
     async getBreedList() {
-      await this.$store.commit("SHOW_LOADER", true);
-      this.$store.dispatch("breedList").then(response => {
-        this.$store.commit("SHOW_LOADER", false);
-        let arr = [];
-        response.data.data.breed_list.forEach(function(data) {
-          arr.push({
-            value: data.value,
-            text: data.label
-          });
-        });
-        this.breedList = arr;
-      });
+      await this.FETCH_PET_BREED_LIST();
+      this.breedList = this.PET_BREED_LIST;
     },
     getProfileFile(event) {
       this.form.pet_image = event.target.files[0];
@@ -232,65 +230,19 @@ export default {
     async addPet() {
       if (this.$refs.form.validate()) {
         let data = new FormData();
-        data.append("pet_image", this.form.pet_image);
-        data.append("breed_ids", this.form.breed_ids);
-        data.append("name", this.form.name);
-        data.append("adoption_date", this.form.adoption_date);
-        this.$store.commit("SHOW_LOADER", true);
-        await this.$store
-          .dispatch("addPetProfile", data)
-          .then(response => {
-            this.$store.commit("SHOW_LOADER", false);
-            this.$store.commit("SHOW_SNACKBAR", {
-              snackbar: true,
-              color: "green",
-              message: response.data.message
-            });
-            this.dialog = false;
-          })
-          .catch(e => {
-            let errors = e.response.data.data;
-            this.$store.commit("SHOW_LOADER", false);
-            for (let item in errors) {
-              if (errors.hasOwnProperty(item))
-                errors[item].forEach(err => {
-                  this.$store.commit("SHOW_SNACKBAR", {
-                    snackbar: true,
-                    color: "red",
-                    message: err
-                  });
-                });
-            }
-          });
+        for (var key in this.form) {
+          if (this.form.hasOwnProperty(key)) {
+            data.append(key, this.form[key]);
+          }
+        }
+        await this.POST_ADD_USER_PET_PROFILE(data);
+        await this.getPetProfile();
+        this.dialog = false;
       }
     },
     async deletePetUser(id) {
-      this.$store.commit("SHOW_LOADER", true);
-      await this.$store
-        .dispatch("deleteUserPet", id)
-        .then(response => {
-          this.getPetProfile();
-          this.$store.commit("SHOW_LOADER", false);
-          this.$store.commit("SHOW_SNACKBAR", {
-            snackbar: true,
-            color: "green",
-            message: response.data.message
-          });
-        })
-        .catch(e => {
-          let errors = e.response.data.data;
-          this.$store.commit("SHOW_LOADER", false);
-          for (let item in errors) {
-            if (errors.hasOwnProperty(item))
-              errors[item].forEach(err => {
-                this.$store.commit("SHOW_SNACKBAR", {
-                  snackbar: true,
-                  color: "red",
-                  message: err
-                });
-              });
-          }
-        });
+      await this.POST_DELETE_USER_PET_PROFILE(id);
+      await this.getPetProfile();
     }
   }
 };
@@ -354,6 +306,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  cursor: pointer;
   .avatar {
     width: 110px;
     position: relative;

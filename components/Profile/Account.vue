@@ -112,9 +112,9 @@
 
 <script>
 import "vue-phone-number-input/dist/vue-phone-number-input.css";
+import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "Account.vue",
   components: {
     VuePhoneNumberInput: () => import("vue-phone-number-input")
   },
@@ -138,19 +138,20 @@ export default {
   created() {
     this.getProfileDetail();
   },
+  computed: {
+    ...mapState(["USER"])
+  },
+
   methods: {
+    ...mapActions(["POST_UPDATE_USER_PROFILE"]),
+
     async getProfileDetail() {
-      this.$store.commit("SHOW_LOADER", true);
-      await this.$store.dispatch("profileDetails").then(response => {
-        this.$store.commit("SHOW_LOADER", false);
-        const resp = response.data.data.user_details;
-        for (var key in resp) {
-          if (this.form.hasOwnProperty(key)) {
-            this.form[key] = resp[key];
-          }
+      for (var key in this.USER.user) {
+        if (this.form.hasOwnProperty(key)) {
+          this.form[key] = this.USER.user[key];
         }
-        this.imageURL = resp.profile_image_thumb_full_path;
-      });
+      }
+      this.imageURL = this.USER.user.profile_image_thumb_full_path;
     },
     getProfileFile(event) {
       let file = event.target.files[0];
@@ -167,7 +168,7 @@ export default {
             data.append(key, this.form[key]);
           }
         }
-        this.$store.dispatch("updateProfile", data);
+        this.POST_UPDATE_USER_PROFILE(data);
       }
     },
     inputLocation(event) {

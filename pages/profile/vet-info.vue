@@ -199,7 +199,7 @@ export default {
       vet_address,
       vet_phone_number,
       vet_place_name
-    } = this.$store.state.user.user;
+    } = this.$store.state.USER.user;
     this.phone = vet_phone_number;
     this.form = {
       vet_address,

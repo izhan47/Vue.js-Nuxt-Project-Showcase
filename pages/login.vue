@@ -103,8 +103,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
-  name: "login",
   middleware: ["authenticated-user"],
   data() {
     return {
@@ -129,33 +129,16 @@ export default {
   },
 
   methods: {
+    ...mapActions(["VALIDATE_LOGIN"]),
+
     async Login() {
       if (this.$refs.form.validate()) {
-        this.$store.commit("SHOW_LOADER", true);
-        await this.$store
-          .dispatch("login", this.form)
-          .then(response => {
-            this.$store.commit("SHOW_LOADER", false);
-            if (this.$store.state.current_path) {
-              this.$router.push(this.$store.state.current_path);
-            } else {
-              this.$router.push("/profile");
-            }
-          })
-          .catch(e => {
-            let errors = e.response.data.data;
-            this.$store.commit("SHOW_LOADER", false);
-            for (let item in errors) {
-              if (errors.hasOwnProperty(item))
-                errors[item].forEach(err => {
-                  this.$store.commit("SHOW_SNACKBAR", {
-                    snackbar: true,
-                    color: "red",
-                    message: err
-                  });
-                });
-            }
-          });
+        await this.VALIDATE_LOGIN(this.form);
+        if (this.$store.state.current_path) {
+          this.$router.push(this.$store.state.current_path);
+        } else {
+          this.$router.push("/profile");
+        }
       }
     }
   }

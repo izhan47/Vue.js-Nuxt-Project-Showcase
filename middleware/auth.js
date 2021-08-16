@@ -1,5 +1,5 @@
 export default async ({ store, redirect }) => {
-  if (!store.state.user.isAuthenticated) {
+  if (!store.state.USER.isAuthenticated) {
     return redirect("/login");
   }
 };

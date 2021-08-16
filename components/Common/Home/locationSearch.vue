@@ -123,10 +123,10 @@ export default {
 
   computed: {
     petProData() {
-      return this.$store.state.pet_pro_list;
+      return this.$store.state.PET_PRO_LIST;
     },
     categoryList() {
-      let categories = this.$store.state.pet_category_list;
+      let categories = this.$store.state.PET_PRO_CATEGORY_LIST;
       let arr = categories.map(category => ({
         value: category.value,
         text: category.label

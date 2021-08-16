@@ -90,8 +90,8 @@
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
 export default {
-  name: "register",
   middleware: ["authenticated-user"],
   data() {
     return {
@@ -115,40 +115,16 @@ export default {
       }
     };
   },
-  created() {
-    this.$store.commit("SHOW_LOADER", false);
-  },
   methods: {
+    ...mapActions(["REGISTER_USER", "SEND_MAIL_AFTER_REGISTER"]),
+
     async Register() {
-      try {
-        if (this.$refs.form.validate()) {
-          this.$store.commit("SHOW_LOADER", true);
-          const regResp = await this.$store.dispatch("register", this.form);
-          const mail_form = this.form;
-          mail_form.address = this.form.email;
-          const mailResp = await this.$axios.post("/mail/send-mail", mail_form);
-          this.$store.commit("SHOW_LOADER", false);
-          this.$store.commit("SHOW_SNACKBAR", {
-            snackbar: true,
-            color: "green",
-            message: regResp.data.message
-          });
-          this.$router.push("/profile");
-        }
-      } catch (error) {
-        console.log({ error });
-        this.$store.commit("SHOW_LOADER", false);
-        let errors = error.response.data.data;
-        for (let item in errors) {
-          if (errors.hasOwnProperty(item))
-            errors[item].forEach(err => {
-              this.$store.commit("SHOW_SNACKBAR", {
-                snackbar: true,
-                color: "red",
-                message: err
-              });
-            });
-        }
+      if (this.$refs.form.validate()) {
+        await this.REGISTER_USER(this.form);
+        const mail_form = this.form;
+        mail_form.address = this.form.email;
+        await this.SEND_MAIL_AFTER_REGISTER(mail_form);
+        this.$router.push("/profile");
       }
     }
   }

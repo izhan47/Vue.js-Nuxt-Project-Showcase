@@ -95,7 +95,7 @@ export default {
   },
   methods: {},
   created() {
-    this.userDetail = this.$store.state.user.user;
+    this.userDetail = this.$store.state.USER.user;
   }
 };
 </script>

@@ -1,72 +1,52 @@
 <template>
-  <div class="grey-section">
-    <div class="custom-container custom-height">
-      <div class="text-center">
-        <img
-          class="img-fluid img-height"
-          src="/images/Pink-Paw.png"
-          alt="logo"
-        />
-        <h2 class="heading mt-5">{{ $t("top_pet_care_advice") }}</h2>
-      </div>
-      <div class="categories-buttons ">
-        <v-btn
-          v-for="(item, i) in categories.slice(0, end)"
-          :key="i"
-          large
-          outlined
-          rounded
-          class="category-button"
-          :to="`/pet-care-advice?category=${item.value}`"
-        >
-          {{ item.label }}
-        </v-btn>
-      </div>
+  <div>
+    <div class="grey-section">
+      <div class="custom-container custom-height">
+        <div class="text-center">
+          <img
+            class="img-fluid img-height"
+            src="/images/Pink-Paw.png"
+            alt="logo"
+          />
+          <h2 class="heading mt-5">{{ $t("top_pet_care_advice") }}</h2>
+        </div>
+        <div class="categories-buttons ">
+          <v-btn
+            v-for="(item, i) in WAL_CATEGORY_LIST.slice(0, end)"
+            :key="i"
+            large
+            outlined
+            rounded
+            class="category-button"
+            :to="`/pet-care-advice?category=${item.value}`"
+          >
+            {{ item.text }}
+          </v-btn>
+        </div>
 
-      <div class="text-center">
-        <v-btn
-          v-if="end !== items.length"
-          class=" mt-4 mb-4 round-btn"
-          outlined
-          large
-          rounded
-          to="/pet-care-advice"
-        >
-          {{ $t("browse_all") }}
-        </v-btn>
+        <div class="text-center">
+          <v-btn
+            v-if="end < WAL_CATEGORY_LIST.length"
+            class=" mt-4 mb-4 round-btn"
+            outlined
+            large
+            rounded
+            to="/pet-care-advice"
+          >
+            {{ $t("browse_all") }}
+          </v-btn>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
-  name: "careAdvice",
   data() {
     return {
-      items: [
-        "Dog Behavior",
-        "Pet Adoption",
-        "Kids & Dogs",
-        "Pet Wellness",
-        "Dog Parks",
-        "Nutrition",
-        "Training Basics",
-        "Buzz",
-        "Pet Toys",
-        "Cat Training",
-        "First Aid",
-        "Nutrition",
-        "Pet Toys",
-        "Pet Wellness",
-        "Pet Food",
-        "Foo",
-        "Bar",
-        "Fizz",
-        "Photography"
-      ],
-      end: 9,
-      categories: []
+      end: 9
     };
   },
   mounted() {
@@ -84,26 +64,14 @@ export default {
       }
     }
   },
-  methods: {
-    seeMore() {
-      this.end += 5;
-      this.end = this.end < this.items.length ? this.end : this.items.length;
-    },
-    browse() {
-      this.end = this.items.length;
-    },
-    async fetchCategories() {
-      try {
-        const resp = await this.$store.dispatch("watchCategories");
-        const { category_list } = resp.data.data;
-        this.categories = category_list.filter(cat => cat.value);
-      } catch (error) {
-        console.log(error);
-      }
-    }
+  computed: {
+    ...mapState(["WAL_CATEGORY_LIST"])
   },
-  created() {
-    this.fetchCategories();
+  methods: {
+    ...mapActions(["FETCH_WAL_CATEGORY_LIST"])
+  },
+  async created() {
+    this.FETCH_WAL_CATEGORY_LIST();
   }
 };
 </script>

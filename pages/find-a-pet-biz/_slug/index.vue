@@ -1,11 +1,11 @@
 <template>
   <div>
-    <template v-if="error">
+    <!-- <template v-if="error">
       Has Error
       <pre>{{ error }}</pre>
-    </template>
+    </template> -->
 
-    <template v-if="pet_pro">
+    <template v-if="PET_PRO.per_pro">
       <div class="mt-10 custom-container">
         <v-row>
           <v-col md="6" cols="12">
@@ -26,14 +26,14 @@
 
             <div class="store-detail">
               <h1 class="store-name">
-                {{ pet_pro.store_name }}
+                {{ PET_PRO.per_pro.store_name }}
               </h1>
 
               <div class="like-btn">
                 <v-btn
                   text
                   icon
-                  :color="is_liked ? 'red lighten-1' : 'grey lighten-1'"
+                  :color="PET_PRO.is_liked ? 'red lighten-1' : 'grey lighten-1'"
                   @click="toggleLike"
                 >
                   <v-icon>mdi-heart</v-icon>
@@ -44,7 +44,7 @@
             <div class="product-rating">
               <p>Rating</p>
               <v-rating
-                :value="pet_pro.avg_rating"
+                :value="PET_PRO.per_pro.avg_rating"
                 background-color="#FEC156"
                 color="#FEC156"
                 dense
@@ -52,20 +52,22 @@
                 size="30"
               ></v-rating>
               <span class="product-rating-child"
-                >{{ pet_pro.avg_rating }} / 5</span
+                >{{ PET_PRO.per_pro.avg_rating }} / 5</span
               >
             </div>
 
             <p class="description">
-              {{ pet_pro.description }}
+              {{ PET_PRO.per_pro.description }}
             </p>
 
-            <p class="donation_link" v-if="pet_pro.website_url">
-              <a :href="pet_pro.website_url" target="_blank">Visit Website</a>
+            <p class="donation_link" v-if="PET_PRO.per_pro.website_url">
+              <a :href="PET_PRO.per_pro.website_url" target="_blank"
+                >Visit Website</a
+              >
             </p>
 
-            <p class="donation_link" v-if="pet_pro.donation_link">
-              <a :href="pet_pro.website_url" target="_blank">Donate</a>
+            <p class="donation_link" v-if="PET_PRO.per_pro.donation_link">
+              <a :href="PET_PRO.per_pro.website_url" target="_blank">Donate</a>
             </p>
 
             <div class="service mt-5">
@@ -128,11 +130,14 @@
 
               <v-tabs-items v-model="tab">
                 <v-tab-item value="tab-1">
-                  <Deals :deals="pet_pro.deals" @claim-deal="claimDeal" />
+                  <Deals
+                    :deals="PET_PRO.per_pro.deals"
+                    @claim-deal="claimDeal"
+                  />
                 </v-tab-item>
 
                 <v-tab-item value="tab-2">
-                  <Events :events="pet_pro.events" />
+                  <Events :events="PET_PRO.per_pro.events" />
                 </v-tab-item>
 
                 <v-tab-item value="tab-3">
@@ -141,14 +146,14 @@
               </v-tabs-items>
             </div>
           </v-col>
-          <template v-if="address || pet_pro.phone_number || hours">
+          <template v-if="address || PET_PRO.per_pro.phone_number || hours">
             <v-col md="4" cols="12">
               <div class="custom-card">
                 <div class="g-map">
                   <GmapMap
                     :center="{
-                      lat: Number(pet_pro.latitude),
-                      lng: Number(pet_pro.longitude)
+                      lat: Number(PET_PRO.per_pro.latitude),
+                      lng: Number(PET_PRO.per_pro.longitude)
                     }"
                     :zoom="7"
                     map-type-id="terrain"
@@ -158,8 +163,8 @@
                       :key="index"
                       v-for="(m, index) in [
                         {
-                          lat: Number(pet_pro.latitude),
-                          lng: Number(pet_pro.longitude)
+                          lat: Number(PET_PRO.per_pro.latitude),
+                          lng: Number(PET_PRO.per_pro.longitude)
                         }
                       ]"
                       :position="m"
@@ -185,14 +190,16 @@
                       >
                     </template>
 
-                    <template v-if="pet_pro.phone_number">
+                    <template v-if="PET_PRO.per_pro.phone_number">
                       <p class="label">Phone</p>
                       <a
-                        :href="'tel:' + pet_pro.phone_number"
+                        :href="'tel:' + PET_PRO.per_pro.phone_number"
                         class="open-phone"
                       >
                         <div class="custom-card p-2 light">
-                          <p class="light">{{ pet_pro.phone_number }}</p>
+                          <p class="light">
+                            {{ PET_PRO.per_pro.phone_number }}
+                          </p>
                           <v-icon color="#1e1d1f4d">mdi-phone</v-icon>
                         </div></a
                       >
@@ -238,8 +245,9 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
-  name: "pet-biz-detail",
   components: {
     ImageGallery: () => import("~/components/image-gallery/image-gallery"),
     Deals: () => import("~/components/pet-biz/pet-pro-deals"),
@@ -251,19 +259,15 @@ export default {
     openPopup: false,
     hours: false
   }),
+  created() {
+    console.log(this.PET_PRO);
+  },
   async asyncData({ store, params }) {
-    try {
-      store.commit("SHOW_LOADER", true);
-      const resp = await store.dispatch("singlePetDetail", params.slug);
-      const { is_liked, per_pro } = resp.data.data;
-
-      store.commit("SHOW_LOADER", false);
-      return { is_liked, pet_pro: per_pro, error: false };
-    } catch (error) {
-      return { error: error, is_liked: false, pet_pro: false, reviews: [] };
-    }
+    await store.dispatch("POST_PET_PRO_DETAIL", params.slug);
   },
   computed: {
+    ...mapState(["PET_PRO"]),
+
     swiperOption() {
       return {
         centeredSlides: true,
@@ -282,7 +286,7 @@ export default {
       };
     },
     gallery() {
-      let { cover_image, images } = this.pet_pro;
+      let { cover_image, images } = this.PET_PRO.per_pro;
       return {
         coverImage: cover_image && cover_image.image_full_path,
         images:
@@ -290,7 +294,7 @@ export default {
       };
     },
     services_offered() {
-      const { services_offered } = this.pet_pro;
+      const { services_offered } = this.PET_PRO.per_pro;
       let totalLength = services_offered.length;
       let arr1 = Math.ceil(totalLength / 2);
       return {
@@ -299,17 +303,17 @@ export default {
       };
     },
     categories() {
-      const { categories } = this.pet_pro;
+      const { categories } = this.PET_PRO.per_pro;
       return categories.map(cat => cat.name);
     },
     address() {
-      const { address_line_1, address_line_2 } = this.pet_pro;
+      const { address_line_1, address_line_2 } = this.PET_PRO.per_pro;
       if (address_line_1) return address_line_1;
       else if (address_line_2) return address_line_2;
       else return false;
     },
     formatedTimetable() {
-      const { timetable, formatted_timetable } = this.pet_pro;
+      const { timetable, formatted_timetable } = this.PET_PRO.pet_pro;
       return timetable.map(time => {
         const open = formatted_timetable[`${time.day}_open`];
         const close = formatted_timetable[`${time.day}_close`];
@@ -325,8 +329,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["POST_PET_PRO_DETAIL", "POST_CLAIM_DEAL"]),
+
     async toggleLike() {
-      if (!this.$store.state.user.isAuthenticated) {
+      if (!this.$store.state.USER.isAuthenticated) {
         this.$store.commit("SET_CURRENT_PATH", this.$route.path);
         return this.$router.push("/login");
       } else {
@@ -337,7 +343,7 @@ export default {
             this.$route.params.slug
           );
           this.$store.commit("SHOW_LOADER", false);
-          this.is_liked = !this.is_liked;
+          this.PET_PRO.is_liked = !this.PET_PRO.is_liked;
           this.$store.commit("SHOW_SNACKBAR", {
             snackbar: true,
             color: "green",
@@ -350,7 +356,7 @@ export default {
       }
     },
     async claimDeal(deal) {
-      if (!this.$store.state.user.isAuthenticated) {
+      if (!this.$store.state.USER.isAuthenticated) {
         this.$store.commit("SET_CURRENT_PATH", this.$route.path);
         return this.$router.push("/login");
       } else {
@@ -359,17 +365,8 @@ export default {
             slug: this.$route.params.slug,
             pet_deal_id: deal.id
           };
-
-          this.$store.commit("SHOW_LOADER", true);
-          const response = await this.$store.dispatch("claim", data);
-          const index = this.pet_pro.deals.findIndex(d => d.id === deal.id);
-          if (index !== -1) this.pet_pro.deals[index].is_claimed = 1;
-          this.$store.commit("SHOW_LOADER", false);
-          this.$store.commit("SHOW_SNACKBAR", {
-            snackbar: true,
-            color: "green",
-            message: response.data.message
-          });
+          await this.POST_CLAIM_DEAL(data);
+          await this.POST_PET_PRO_DETAIL(this.PET_PRO.per_pro.slug);
         } catch (error) {
           console.log(error);
         }

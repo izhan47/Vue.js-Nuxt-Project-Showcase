@@ -10,7 +10,7 @@
         v-model="form.password"
         :rules="rules.password"
         color="teal"
-        :label="$t('Password')"
+        :label="$t('password')"
         required
       ></v-text-field>
       <v-text-field
@@ -19,7 +19,7 @@
         v-model="form.password_confirmation"
         :rules="rules.password_confirmation"
         color="teal"
-        :label="$t('Confirmation Password')"
+        :label="$t('confirm_password')"
         required
       ></v-text-field>
       <div class="text-center">
@@ -38,8 +38,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
-  name: "reset-password",
   middleware: ["authenticated-user", "reset-password"],
   data() {
     return {
@@ -61,36 +61,14 @@ export default {
     };
   },
   methods: {
-    ResetPassword() {
-      this.$store.commit("SHOW_LOADER", true);
-      this.$store
-        .dispatch("resetPassword", {
-          ...this.form,
-          token: this.$route.query.token
-        })
-        .then(response => {
-          this.$store.commit("SHOW_LOADER", false);
-          this.$store.commit("SHOW_SNACKBAR", {
-            snackbar: true,
-            color: "green",
-            message: response.data.message
-          });
-          this.$router.push("/login");
-        })
-        .catch(e => {
-          this.$store.commit("SHOW_LOADER", false);
-          let errors = e.response.data.data;
-          for (let item in errors) {
-            if (errors.hasOwnProperty(item))
-              errors[item].forEach(err => {
-                this.$store.commit("SHOW_SNACKBAR", {
-                  snackbar: true,
-                  color: "red",
-                  message: err
-                });
-              });
-          }
-        });
+    ...mapActions(["RESET_PASSWORD"]),
+
+    async ResetPassword() {
+      await this.RESET_PASSWORD({
+        ...this.form,
+        token: this.$route.query.token
+      });
+      this.$router.push("/login");
     }
   }
 };

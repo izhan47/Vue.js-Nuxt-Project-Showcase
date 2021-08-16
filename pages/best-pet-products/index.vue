@@ -10,7 +10,6 @@
         <div class="space banner-description">
           <p>{{ $t("best_pet_products_description") }}</p>
         </div>
-        <!--   Filter Section Start     -->
         <v-form class="search-form-filter" @submit.prevent="filterData">
           <div class="search-form-field">
             <label>{{ $t("sort_by") }}</label>
@@ -31,7 +30,7 @@
             <v-select
               :placeholder="$t('all')"
               class="search-field-category mt-2"
-              :items="categoryList"
+              :items="PRODUCT_REVIEW_CATEGORY_LIST"
               v-model="categories"
               outlined
               rounded
@@ -74,10 +73,8 @@
             </v-btn>
           </div>
         </v-form>
-        <!--   Filter Section End     -->
       </div>
     </div>
-    <!--  card-section-start   -->
 
     <div class="custom-container  space" v-if="reviewData.length">
       <v-row>
@@ -112,14 +109,12 @@
       />
       <h2 class="heading">{{ $t("nothing_here") }}</h2>
     </div>
-
-    <!--  card-section-end   -->
   </div>
 </template>
 
 <script>
 import ProductReviewCard from "@/components/ProductReviewCard";
-
+import { mapState, mapActions } from "vuex";
 export default {
   name: "index.vue",
   data() {
@@ -146,23 +141,13 @@ export default {
   },
   components: { ProductReviewCard },
   computed: {
+    ...mapState(["PRODUCT_REVIEW_CATEGORY_LIST"]),
+
     reviewData() {
-      return this.$store.state.review_list;
+      return this.$store.state.PRODUCT_REVIEW_LIST;
     },
     totalPage() {
-      return this.$store.state.total_page;
-    },
-
-    categoryList() {
-      let categories = this.$store.state.product_review_category_list;
-      let arr = [];
-      categories.forEach(function(data) {
-        arr.push({
-          value: data.value,
-          text: data.label
-        });
-      });
-      return arr;
+      return this.$store.state.PRODUCT_REVIEW_TOTAL_PAGE;
     }
   },
   created() {
@@ -175,14 +160,19 @@ export default {
       page: this.page
     };
 
-    this.$store.dispatch("reviewList", filters);
-    this.$store.dispatch("reviewCategories");
+    this.POST_PRODUCT_REVIEW_LIST(filters);
+    this.FETCH_PRODUCT_REVIEW_CATEGORIES();
   },
   methods: {
+    ...mapActions([
+      "FETCH_PRODUCT_REVIEW_CATEGORIES",
+      "POST_PRODUCT_REVIEW_LIST"
+    ]),
+
     filterData() {
       let arr = [];
       this.categories.forEach(id => {
-        let x = this.categoryList.find(e => e.value === id);
+        let x = this.PRODUCT_REVIEW_CATEGORY_LIST.find(e => e.value === id);
         arr.push({
           value: x.value,
           label: x.text
@@ -201,8 +191,7 @@ export default {
         page: this.page
       };
 
-      this.$store.dispatch("reviewList", filters);
-
+      this.POST_PRODUCT_REVIEW_LIST(filters);
       this.scrollToBottom();
     },
     scrollToBottom() {
