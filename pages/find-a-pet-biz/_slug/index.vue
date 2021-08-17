@@ -245,8 +245,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-
+import { createNamespacedHelpers } from "vuex";
+const petproModule = createNamespacedHelpers("petpro");
 export default {
   components: {
     ImageGallery: () => import("~/components/image-gallery/image-gallery"),
@@ -259,14 +259,12 @@ export default {
     openPopup: false,
     hours: false
   }),
-  created() {
-    console.log(this.PET_PRO);
-  },
+
   async asyncData({ store, params }) {
-    await store.dispatch("POST_PET_PRO_DETAIL", params.slug);
+    await store.dispatch("petpro/POST_PET_PRO_DETAIL", params.slug);
   },
   computed: {
-    ...mapState(["PET_PRO"]),
+    ...petproModule.mapState(["PET_PRO"]),
 
     swiperOption() {
       return {
@@ -329,10 +327,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["POST_PET_PRO_DETAIL", "POST_CLAIM_DEAL"]),
+    ...petproModule.mapActions(["POST_PET_PRO_DETAIL", "POST_CLAIM_DEAL"]),
 
     async toggleLike() {
-      if (!this.$store.state.USER.isAuthenticated) {
+      if (!this.$auth.loggedIn) {
         this.$store.commit("SET_CURRENT_PATH", this.$route.path);
         return this.$router.push("/login");
       } else {
@@ -356,7 +354,7 @@ export default {
       }
     },
     async claimDeal(deal) {
-      if (!this.$store.state.USER.isAuthenticated) {
+      if (!this.$auth.loggedIn) {
         this.$store.commit("SET_CURRENT_PATH", this.$route.path);
         return this.$router.push("/login");
       } else {

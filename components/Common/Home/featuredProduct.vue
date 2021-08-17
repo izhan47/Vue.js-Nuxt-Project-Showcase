@@ -46,9 +46,7 @@
 </template>
 
 <script>
-export default {
-  name: "featuredProduct.vue"
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>

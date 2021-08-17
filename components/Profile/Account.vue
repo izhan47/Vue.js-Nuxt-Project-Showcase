@@ -112,7 +112,8 @@
 
 <script>
 import "vue-phone-number-input/dist/vue-phone-number-input.css";
-import { mapState, mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const dashboardModule = createNamespacedHelpers("dashboard");
 
 export default {
   components: {
@@ -138,20 +139,17 @@ export default {
   created() {
     this.getProfileDetail();
   },
-  computed: {
-    ...mapState(["USER"])
-  },
 
   methods: {
-    ...mapActions(["POST_UPDATE_USER_PROFILE"]),
+    ...dashboardModule.mapActions(["POST_UPDATE_USER_PROFILE"]),
 
     async getProfileDetail() {
-      for (var key in this.USER.user) {
+      for (var key in this.$auth.user) {
         if (this.form.hasOwnProperty(key)) {
-          this.form[key] = this.USER.user[key];
+          this.form[key] = this.$auth.user[key];
         }
       }
-      this.imageURL = this.USER.user.profile_image_thumb_full_path;
+      this.imageURL = this.$auth.user.profile_image_thumb_full_path;
     },
     getProfileFile(event) {
       let file = event.target.files[0];

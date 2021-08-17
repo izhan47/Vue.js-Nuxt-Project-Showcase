@@ -71,7 +71,8 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const dashboardModule = createNamespacedHelpers("dashboard");
 export default {
   data() {
     return {
@@ -95,7 +96,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["POST_UPDATE_USER_PASSWORD"]),
+    ...dashboardModule.mapActions(["POST_UPDATE_USER_PASSWORD"]),
 
     updatePassword() {
       if (this.$refs.form.validate()) {

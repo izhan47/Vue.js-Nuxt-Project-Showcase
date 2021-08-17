@@ -70,7 +70,7 @@
                     class="log-in-btn white-text"
                     outlined
                     rounded
-                    @click="Register"
+                    @click="register"
                   >
                     {{ $t("sign_up") }}</v-btn
                   >
@@ -90,9 +90,10 @@
   </div>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const userModule = createNamespacedHelpers("user");
 export default {
-  middleware: ["authenticated-user"],
+  layout: "auth-layout",
   data() {
     return {
       form: {
@@ -116,15 +117,11 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["REGISTER_USER", "SEND_MAIL_AFTER_REGISTER"]),
+    ...userModule.mapActions(["REGISTER_USER", "SEND_MAIL_AFTER_REGISTER"]),
 
-    async Register() {
+    register() {
       if (this.$refs.form.validate()) {
-        await this.REGISTER_USER(this.form);
-        const mail_form = this.form;
-        mail_form.address = this.form.email;
-        await this.SEND_MAIL_AFTER_REGISTER(mail_form);
-        this.$router.push("/profile");
+        this.REGISTER_USER(this.form);
       }
     }
   }

@@ -177,7 +177,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const dashboardModule = createNamespacedHelpers("dashboard");
 export default {
   data() {
     return {
@@ -204,10 +205,10 @@ export default {
     console.log(this.form);
   },
   computed: {
-    ...mapState(["USER_PETS", "PET_BREED_LIST"])
+    ...dashboardModule.mapState(["USER_PETS", "PET_BREED_LIST"])
   },
   methods: {
-    ...mapActions([
+    ...dashboardModule.mapActions([
       "FETCH_USER_PET_PROFILE",
       "POST_ADD_USER_PET_PROFILE",
       "POST_DELETE_USER_PET_PROFILE",

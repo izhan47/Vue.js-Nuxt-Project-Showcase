@@ -32,11 +32,7 @@
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
-              <v-list-item
-                v-if="$store.state.USER.isAuthenticated"
-                to="/profile"
-                link
-              >
+              <v-list-item v-if="$auth.user" to="/profile" link>
                 <v-list-item-title class="nav-title">
                   {{ $t("my_profile") }}
                 </v-list-item-title>
@@ -125,15 +121,15 @@
               >
             </div>
             <div>
-              <v-menu offset-y v-if="$store.state.USER.isAuthenticated">
+              <v-menu offset-y v-if="$auth.user">
                 <template v-slot:activator="{ on }">
                   <v-btn icon large v-on="on">
                     <v-avatar size="35px" item>
                       <v-img
                         v-if="
-                          userDetail && userDetail.profile_image_thumb_full_path
+                          $auth.user && $auth.user.profile_image_thumb_full_path
                         "
-                        :src="userDetail.profile_image_thumb_full_path"
+                        :src="$auth.user.profile_image_thumb_full_path"
                       ></v-img>
                       <v-img v-else src="/images/avatar.jpg"></v-img>
                     </v-avatar>
@@ -145,7 +141,7 @@
                       {{ $t("my_profile") }}
                     </v-list-item-title>
                   </v-list-item>
-                  <v-list-item @click="reset">
+                  <v-list-item @click="logout">
                     <v-list-item-title>
                       {{ $t("logout") }}
                     </v-list-item-title>
@@ -168,9 +164,10 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const userModule = createNamespacedHelpers("user");
 export default {
-  name: "Navbar.vue",
+  name: "Navbar",
   data() {
     return {
       index: "",
@@ -204,8 +201,7 @@ export default {
           to: "https://www.youtube.com/channel/UCW3lViiZvDUBz5lWZYw93CA"
         }
       ],
-      drawer: false,
-      userDetail: {}
+      drawer: false
     };
   },
   created() {
@@ -214,15 +210,13 @@ export default {
         const newWidth = window.innerWidth;
         this.drawer = newWidth < 768;
       });
-      this.userDetail = this.$store.state.USER.user;
     }
   },
   methods: {
-    ...mapActions(["RESET"]),
+    ...userModule.mapActions(["LOGOUT"]),
 
-    async reset() {
-      await this.RESET();
-      this.$router.push("/login");
+    logout() {
+      this.LOGOUT();
     }
   }
 };

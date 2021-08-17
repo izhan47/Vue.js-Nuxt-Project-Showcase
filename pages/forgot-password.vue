@@ -32,7 +32,8 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const userModule = createNamespacedHelpers("user");
 export default {
   middleware: ["authenticated-user"],
   data() {
@@ -51,7 +52,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["FORGOT_PASSWORD"]),
+    ...userModule.mapActions(["FORGOT_PASSWORD"]),
 
     forgotPassword() {
       this.FORGOT_PASSWORD(this.form);
