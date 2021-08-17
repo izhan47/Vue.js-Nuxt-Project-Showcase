@@ -16,13 +16,7 @@ export default {
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { hid: "description", name: "description", content: "" }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-    script: [
-      {
-        src:
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyBaxMfWKuh_m7up5CvIL-LF_EHJ_eWkRWI&libraries=places"
-      }
-    ]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.png" }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -30,12 +24,12 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: "~/plugins/i18n.js" },
-    { src: "~/plugins/google-maps.js" },
-    { src: "~/plugins/aos.js", mode: "client" },
-    { src: "~/plugins/vuex-persist", ssr: false },
+    { src: "~/plugins/i18n.js" ,  ssr: true},
+    { src: "~/plugins/google-maps.js" ,ssr: false},
+    { src: "~/plugins/aos.js", mode: "client" ,ssr: false },
     { src: "~/plugins/axios" },
-    { src: "~/plugins/vue-awesome-swiper", mode: "client" }
+    { src: "~/plugins/lazy-load.js" ,ssr: false},
+    { src: "~/plugins/vue-awesome-swiper", mode: "client",ssr: false }
   ],
 
   purgeCSS: {
@@ -61,7 +55,27 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/axios", "nuxt-webfontloader"],
+  modules: ["@nuxtjs/axios", "nuxt-webfontloader" , '@nuxtjs/auth-next'],
+  auth:{
+    strategies:{
+      local:{
+        token:{
+          property:'token',
+          type:'Bearer',
+          maxAge:60*60*24*30
+        },
+        user:{
+          property:'data.user_details',
+          autoFetch:true
+        },
+        endpoints: {
+          login: { url: '/login', method: 'post' },
+          logout: { url: '/profile/logout', method: 'post' },
+          user: { url: '/profile/get-details', method: 'post' },
+        },
+      }
+    }
+  },
   webfontloader: {
     google: {
       families: ["Nunito+Sans:200,300,400,600,700,800,900&display=swap"]

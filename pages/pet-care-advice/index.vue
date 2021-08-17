@@ -8,7 +8,6 @@
         <div class=" banner-description">
           <p>{{ $t("watch_learn_description") }}</p>
         </div>
-        <!--   Filter Section Start     -->
         <v-form class="mt-8" @submit.prevent="filterData">
           <div class="search-form-filter">
             <div class="search-form-field">
@@ -16,6 +15,8 @@
               <v-select
                 class="search-field mt-2"
                 :items="sorting"
+                item-text="name"
+                item-value="value"
                 v-model="form.sort_by"
                 outlined
                 rounded
@@ -26,7 +27,7 @@
               <label>{{ $t("category") }}</label>
               <v-select
                 class="search-field mt-2"
-                :items="category"
+                :items="GET_WAL_CATEGORY_LIST"
                 v-model="form.category_id"
                 outlined
                 rounded
@@ -59,17 +60,16 @@
             </div>
           </div>
         </v-form>
-        <!--   Filter Section End     -->
       </div>
     </div>
-    <!--  card-section-start   -->
-    <div class="custom-container  space" v-if="watchData.length">
+
+    <div class="custom-container  space" v-if="WAL_LIST.length">
       <v-row>
         <v-col
           cols="12"
           md="4"
           sm="12"
-          v-for="(data, i) in watchData"
+          v-for="(data, i) in WAL_LIST"
           :key="i"
           class="mt-8"
         >
@@ -80,7 +80,7 @@
         <v-pagination
           class="pagination"
           v-model="page"
-          :length="totalPage"
+          :length="WAL_LIST_TOTAL_PAGE"
           :total-visible="6"
           prev-icon="mdi-menu-left"
           next-icon="mdi-menu-right"
@@ -97,24 +97,29 @@
       />
       <h2 class="heading">{{ $t("nothing_here") }}</h2>
     </div>
-
-    <!--  card-section-end   -->
   </div>
 </template>
 
 <script>
-// import WatchCategoryCard from "@/components/WatchCategoryCard";
+import { createNamespacedHelpers } from "vuex";
+const watchandlearnModule = createNamespacedHelpers("watchandlearn");
 export default {
-  name: "index.vue",
   components: {
     WatchCategoryCard: () => import("@/components/WatchCategoryCard")
   },
   data() {
     return {
-      category: [],
       page: 1,
-      sorting: ["Latest", "Popular"],
-
+      sorting: [
+        {
+          name: "Latest",
+          value: "Latest"
+        },
+        {
+          name: "Popular",
+          value: "popular"
+        }
+      ],
       form: {
         category_id: "",
         sort_by: "Latest",
@@ -123,59 +128,56 @@ export default {
     };
   },
   computed: {
-    watchData() {
-      return this.$store.state.category_list;
-    },
-    totalPage() {
-      return this.$store.state.total_page;
-    }
+    ...watchandlearnModule.mapState([
+      "WAL_CATEGORY_LIST",
+      "WAL_LIST",
+      "WAL_LIST_TOTAL_PAGE"
+    ]),
+    ...watchandlearnModule.mapGetters([
+      "GET_WAL_CATEGORY_LIST",
+    ]),
+
   },
+
   async created() {
+    this.FETCH_WAL_CATEGORY_LIST();
     const { category, page } = this.$route.query;
-
     if (page) this.page = Number(page);
-
+    if (category) {
+      this.form.category_id = Number(category);
+    }
     let filters = {
       form: this.form,
       page: this.page
     };
-
-    if (category) {
-      filters.form.category_id = Number(category);
-      this.form.category_id = Number(category);
-    }
-
-    await this.watchCategory();
-
-    this.$store.dispatch("categoryList", filters);
+    this.POST_WAL_LIST(filters);
   },
+
   methods: {
-    async watchCategory() {
-      try {
-        const resp = await this.$store.dispatch("watchCategories");
-        let arr = [];
-        resp.data.data.category_list.forEach(data => {
-          arr.push({
-            value: data.value,
-            text: data.label
-          });
-        });
+    ...watchandlearnModule.mapActions([
+      "FETCH_WAL_CATEGORY_LIST",
+      "POST_WAL_LIST",
+    ]),
 
-        this.category = arr;
-        return;
-      } catch (error) {
-        console.log(error);
-        return;
-      }
-    },
     filterData() {
-      this.$router.push({ query: { page: this.page } });
-
       let filters = {
         form: this.form,
         page: this.page
       };
-      this.$store.dispatch("categoryList", filters);
+      this.$router.push({ query: { page: this.page } });
+      this.POST_WAL_LIST(filters);
+      this.scrollToBottom();
+    },
+
+    scrollToBottom() {
+      this.$nextTick(() => {
+        setTimeout(() => {
+          window.scrollTo({
+            top: 100,
+            behavior: "smooth"
+          });
+        }, 500);
+      });
     }
   }
 };
@@ -185,7 +187,6 @@ export default {
 @import "~/assets/sass/main.scss";
 .bg-review-img {
   background-image: url("/images/WatchLearn/Pink-Dog-Running-Banner-1.png");
-  //background-position:10% 33%;
   background-position: bottom -51px left 29px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -210,7 +211,6 @@ export default {
     font-weight: $font-weight-bold;
   }
 }
-
 .search-field::v-deep .v-label {
   top: 14px;
 }
@@ -221,7 +221,6 @@ export default {
   min-width: 140px;
   height: 52px;
 }
-
 .img-height {
   max-height: $img-max-height-250;
 }

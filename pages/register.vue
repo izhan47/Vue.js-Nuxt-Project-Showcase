@@ -70,18 +70,9 @@
                     class="log-in-btn white-text"
                     outlined
                     rounded
-                    @click="Register"
+                    @click="register"
                   >
                     {{ $t("sign_up") }}</v-btn
-                  >
-                </div>
-                <p class="mt-5 mb-5 or-divider">
-                  <span>{{ $t("or") }}</span>
-                </p>
-
-                <div class="text-center">
-                  <v-btn large class="log-in-btn white-text" outlined rounded>
-                    {{ $t("sign_up_with_google") }}</v-btn
                   >
                 </div>
               </v-form>
@@ -99,9 +90,10 @@
   </div>
 </template>
 <script>
+import { createNamespacedHelpers } from "vuex";
+const userModule = createNamespacedHelpers("user");
 export default {
-  name: "register",
-  middleware: ["authenticated-user"],
+  layout: "auth-layout",
   data() {
     return {
       form: {
@@ -124,38 +116,12 @@ export default {
       }
     };
   },
-  created() {
-    this.$store.commit("SHOW_LOADER", false);
-  },
   methods: {
-    Register() {
+    ...userModule.mapActions(["REGISTER_USER", "SEND_MAIL_AFTER_REGISTER"]),
+
+    register() {
       if (this.$refs.form.validate()) {
-        this.$store.commit("SHOW_LOADER", true);
-        this.$store
-          .dispatch("register", this.form)
-          .then(response => {
-            this.$store.commit("SHOW_LOADER", false);
-            this.$store.commit("SHOW_SNACKBAR", {
-              snackbar: true,
-              color: "green",
-              message: response.data.message
-            });
-            this.$router.push("/profile");
-          })
-          .catch(e => {
-            this.$store.commit("SHOW_LOADER", false);
-            let errors = e.response.data.data;
-            for (let item in errors) {
-              if (errors.hasOwnProperty(item))
-                errors[item].forEach(err => {
-                  this.$store.commit("SHOW_SNACKBAR", {
-                    snackbar: true,
-                    color: "red",
-                    message: err
-                  });
-                });
-            }
-          });
+        this.REGISTER_USER(this.form);
       }
     }
   }

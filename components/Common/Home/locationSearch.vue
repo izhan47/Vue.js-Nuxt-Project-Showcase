@@ -17,8 +17,6 @@
         <div class=" banner-description">
           <p class="space">{{ $t("search_database_description") }}</p>
         </div>
-
-        <!--   Filter Section Start     -->
         <v-form class="search-form-filter" @submit.prevent="filterData">
           <div class="search-form-field">
             <label>{{ $t("category") }}</label>
@@ -36,24 +34,13 @@
             <div class="search-filter-label">
               <label class="ml-4 ">{{ $t("location") }}</label>
             </div>
-            <!--            <v-text-field-->
-            <!--              class="search-field cross-icon mt-2"-->
-            <!--              :placeholder="$t('all')"-->
-            <!--              v-model="form.location"-->
-            <!--              solo-->
-            <!--              rounded-->
-            <!--              clearable-->
-            <!--              color="#00afaa"-->
-            <!--              outlined-->
-            <!--              @input="debounceSearch"-->
-            <!--            ></v-text-field>-->
-            <vue-google-autocomplete
+            <GmapAutocomplete
               id="map"
               class="search-location"
               :placeholder="$t('all')"
-              v-on:placechanged="getAddressData"
+              @place_changed="getAddressData"
             >
-            </vue-google-autocomplete>
+            </GmapAutocomplete>
           </div>
           <div class="search-form-field">
             <div class="search-filter-label">
@@ -87,11 +74,8 @@
             {{ $t("sort_by") }} <strong>{{ $t("latest_v") }}</strong>
           </h5>
         </div>
-
-        <!--   Filter Section End     -->
       </div>
     </div>
-    <!--  card-section-start   -->
     <div class="custom-height custom-container" v-if="petProData.length">
       <v-row>
         <v-col
@@ -106,7 +90,7 @@
         </v-col>
       </v-row>
     </div>
-    <div v-else class="text-center">
+    <div v-else class="text-center nothing-container">
       <img
         class="img-height img-fluid"
         src="/images/Auth/Column-3-Dog.png"
@@ -114,16 +98,18 @@
       />
       <h2 class="heading">{{ $t("nothing_here") }}</h2>
     </div>
-    <!--  card-section-end   -->
   </div>
 </template>
 
 <script>
+import { createNamespacedHelpers } from "vuex";
+const petproModule = createNamespacedHelpers("petpro");
 import PetCategoryCard from "@/components/PetCategoryCard";
-import VueGoogleAutocomplete from "vue-google-autocomplete";
 export default {
-  name: "locationSearch.vue",
-  components: { PetCategoryCard, VueGoogleAutocomplete },
+  name: "locationSearch",
+  components: {
+    PetCategoryCard
+  },
   data() {
     return {
       form: {
@@ -138,11 +124,12 @@ export default {
   },
 
   computed: {
+    ...petproModule.mapState(["PET_PRO_CATEGORY_LIST", "PET_PRO_LIST"]),
     petProData() {
-      return this.$store.state.pet_pro_list;
+      return this.PET_PRO_LIST;
     },
     categoryList() {
-      let categories = this.$store.state.pet_category_list;
+      let categories = this.PET_PRO_CATEGORY_LIST;
       let arr = categories.map(category => ({
         value: category.value,
         text: category.label
@@ -157,10 +144,10 @@ export default {
     }
   },
   methods: {
-    getAddressData(addressData, placeResultData, id) {
-      this.address = addressData;
-      this.form.latitude = addressData.latitude;
-      this.form.longitude = addressData.longitude;
+    getAddressData(addressData) {
+      this.address = addressData.formatted_address;
+      this.form.latitude = addressData.geometry.location.lat();
+      this.form.longitude = addressData.geometry.location.lng();
     },
     filterData() {
       this.$emit("filter-data", {
@@ -217,5 +204,8 @@ export default {
 }
 .cross-icon::v-deep .v-input__append-inner {
   margin-top: 0;
+}
+.nothing-container {
+  padding-bottom: 100px;
 }
 </style>

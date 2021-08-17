@@ -2,65 +2,63 @@
   <div>
     <v-app id="inspire">
       <!--Side Bar Code Start-->
-      <v-navigation-drawer v-model="drawer" v-if="drawer" app>
-        <div class="parent">
-          <div class="show_img_mobile">
-            <v-img
-              max-width="250"
-              max-height="250"
-              @click="$router.push('/')"
-              src="/images/WagEnabledLogo.jpg"
-              alt="logo"
-            ></v-img>
-          </div>
-          <div class="list-child">
-            <v-list dense flat>
-              <v-list-item
-                link
-                v-for="(item, i) in menuItems"
-                :key="i"
-                :to="item.to"
-                router
-                exact
-              >
+      <template v-if="drawer">
+        <v-navigation-drawer v-model="drawer" app>
+          <div class="parent">
+            <div class="show_img_mobile">
+              <v-img
+                max-width="250"
+                max-height="250"
+                @click="$router.push('/')"
+                src="/images/WagEnabledLogo.jpg"
+                alt="logo"
+              ></v-img>
+            </div>
+            <div class="list-child">
+              <v-list dense flat>
+                <v-list-item
+                  link
+                  v-for="(item, i) in menuItems"
+                  :key="i"
+                  :to="item.to"
+                  router
+                  exact
+                >
+                  <v-list-item-content>
+                    <v-list-item-title
+                      class="nav-title"
+                      v-text="item.title"
+                    ></v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+              <v-list-item v-if="$auth.user" to="/profile" link>
+                <v-list-item-title class="nav-title">
+                  {{ $t("my_profile") }}
+                </v-list-item-title>
+              </v-list-item>
+              <v-list-item link v-else to="/login">
                 <v-list-item-content>
-                  <v-list-item-title
-                    class="nav-title"
-                    v-text="item.title"
-                  ></v-list-item-title>
+                  <v-list-item-title class="nav-title">{{
+                    $t("sign_in")
+                  }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-            </v-list>
-            <v-list-item
-              v-if="$store.state.user.isAuthenticated"
-              to="/profile"
-              link
-            >
-              <v-list-item-title class="nav-title">
-                {{ $t("my_profile") }}
-              </v-list-item-title>
-            </v-list-item>
-            <v-list-item link v-else to="/login">
-              <v-list-item-content>
-                <v-list-item-title class="nav-title">{{
-                  $t("sign_in")
-                }}</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
+            </div>
+            <div class="icon-child">
+              <v-btn
+                v-for="(icon, i) in icons"
+                :key="i"
+                icon
+                @mouseleave="index = ''"
+                @mouseover="index = i"
+                :color="index === i ? '#ff8189' : '#332e80'"
+                ><v-icon>{{ icon.name }}</v-icon></v-btn
+              >
+            </div>
           </div>
-          <div class="icon-child">
-            <v-btn
-              v-for="(icon, i) in icons"
-              :key="i"
-              icon
-              @mouseleave="index = ''"
-              @mouseover="index = i"
-              :color="index === i ? '#ff8189' : '#332e80'"
-              ><v-icon>{{ icon.name }}</v-icon></v-btn
-            >
-          </div>
-        </div>
-      </v-navigation-drawer>
+        </v-navigation-drawer>
+      </template>
       <!--Side Bar Code End-->
 
       <!--Nav Bar Code STart-->
@@ -123,15 +121,15 @@
               >
             </div>
             <div>
-              <v-menu offset-y v-if="$store.state.user.isAuthenticated">
+              <v-menu offset-y v-if="$auth.user">
                 <template v-slot:activator="{ on }">
                   <v-btn icon large v-on="on">
                     <v-avatar size="35px" item>
                       <v-img
                         v-if="
-                          userDetail && userDetail.profile_image_thumb_full_path
+                          $auth.user && $auth.user.profile_image_thumb_full_path
                         "
-                        :src="userDetail.profile_image_thumb_full_path"
+                        :src="$auth.user.profile_image_thumb_full_path"
                       ></v-img>
                       <v-img v-else src="/images/avatar.jpg"></v-img>
                     </v-avatar>
@@ -143,13 +141,14 @@
                       {{ $t("my_profile") }}
                     </v-list-item-title>
                   </v-list-item>
-                  <v-list-item @click="reset">
+                  <v-list-item @click="logout">
                     <v-list-item-title>
                       {{ $t("logout") }}
                     </v-list-item-title>
                   </v-list-item>
                 </v-list>
               </v-menu>
+
               <nuxt-link v-else to="/login" class="unset-underline">
                 <v-btn outlined rounded class="sign-in-btn">{{
                   $t("sign_in")
@@ -165,8 +164,10 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from "vuex";
+const userModule = createNamespacedHelpers("user");
 export default {
-  name: "Navbar.vue",
+  name: "Navbar",
   data() {
     return {
       index: "",
@@ -200,24 +201,22 @@ export default {
           to: "https://www.youtube.com/channel/UCW3lViiZvDUBz5lWZYw93CA"
         }
       ],
-      drawer: false,
-      userDetail: {}
+      drawer: false
     };
   },
   created() {
-    // window.addEventListener("resize", this.handleWindowResize);
-    window.addEventListener("resize", function(event) {
-      const newWidth = window.innerWidth;
-      // const newHeight = window.innerHeight;
-      this.drawer = newWidth < 768;
-    });
-    this.userDetail = this.$store.state.user.user;
+    if (process.browser) {
+      window.addEventListener("resize", function(event) {
+        const newWidth = window.innerWidth;
+        this.drawer = newWidth < 768;
+      });
+    }
   },
   methods: {
-    reset() {
-      this.$store.dispatch("reset").then(response => {
-        this.$router.push("/login");
-      });
+    ...userModule.mapActions(["LOGOUT"]),
+
+    logout() {
+      this.LOGOUT();
     }
   }
 };

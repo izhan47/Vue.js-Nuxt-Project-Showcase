@@ -6,13 +6,10 @@
       <v-row>
         <v-col cols="12" md="4" sm="12" v-for="(pet, p) in petUser" :key="p">
           <div class="card-section mb-3">
-            <!--            <nuxt-link :to="`/pet-category/${item.slug}`" >-->
             <div
               class="bg-img-height"
               :style="`background-image: url(${pet.pet_image_thumb_full_path})`"
             ></div>
-
-            <!--            </nuxt-link>-->
             <div class="card-category">
               <h2 class="mb-2 mt-2">{{ pet.name }}</h2>
               <div class="delete-action" v-if="pet.breed">
@@ -31,107 +28,148 @@
           </div>
         </v-col>
         <v-col cols="12" md="4" sm="12">
-          <v-card class="pet-add-section card-section center-center">
-            <v-dialog v-model="dialog" persistent max-width="700">
-              <template v-slot:activator="{ on, attrs }">
-                <v-icon
-                  class="plus-icon"
-                  color="#fff"
-                  size="50"
-                  v-bind="attrs"
-                  v-on="on"
+          <v-dialog v-model="dialog" persistent max-width="700">
+            <template v-slot:activator="{ on, attrs }">
+              <v-card
+                class="pet-add-section card-section center-center"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon class="plus-icon" color="#fff" size="50"
                   >mdi-plus</v-icon
                 >
-              </template>
+                <v-card-title class="action-title"> Add More</v-card-title>
+              </v-card>
+            </template>
 
-              <div class=" dialog-section">
-                <v-form
-                  ref="form"
-                  class="dialog-custom-container search-form-filter"
-                  @submit.prevent="addPet"
-                >
-                  <input
-                    type="file"
-                    accept="image/*"
-                    id="file"
-                    class="d-none"
-                    @change="getProfileFile"
-                    ref="inputFile"
-                    required
-                    :rules="[v => !!v || 'The Pet Image is required']"
-                  />
-                  <div class="change-avatar ">
-                    <div class="avatar mt-8 mr-5">
-                      <div
-                        class="bg-img-height"
-                        :style="`background-image: url(${imageURL})`"
-                      ></div>
-                      <div class="add-image" @click="$refs.inputFile.click()">
-                        <v-icon size="30" color="#fff">mdi-plus</v-icon>
-                      </div>
-                    </div>
+            <div class=" dialog-section">
+              <v-form
+                ref="form"
+                class="dialog-custom-container search-form-filter"
+                @submit.prevent="addPet"
+              >
+                <input
+                  type="file"
+                  accept="image/*"
+                  id="file"
+                  class="d-none"
+                  @change="getProfileFile"
+                  ref="inputFile"
+                  required
+                  :rules="[v => !!v || 'The Pet Image is required']"
+                />
+                <div class="change-avatar " @click="$refs.inputFile.click()">
+                  <div class="avatar mt-8 mr-5">
                     <div
-                      class="change-profile"
-                      @click="$refs.inputFile.click()"
-                    >
-                      <h2>Change profile photo</h2>
-                      <div class="image-description">
-                        <span>Acceptable formats: jbg, png </span> <br />
-                        <span>Max file size: 500 kb </span>
-                      </div>
+                      class="bg-img-height"
+                      :style="`background-image: url(${imageURL})`"
+                    ></div>
+                    <div class="add-image">
+                      <v-icon size="30" color="#fff">mdi-plus</v-icon>
                     </div>
                   </div>
-                  <div class="search-form-field">
-                    <div class="search-filter-label">
-                      <label>{{ $t("name") }}</label>
+                  <div class="change-profile" @click="$refs.inputFile.click()">
+                    <h2>Change profile photo</h2>
+                    <div class="image-description">
+                      <span>Acceptable formats: jbg, png </span> <br />
+                      <span>Max file size: 500 kb </span>
                     </div>
-                    <v-text-field
-                      v-model="form.name"
-                      :placeholder="$t('name')"
-                      class="search-field cross-icon mt-2"
-                      color="#46259A"
-                      solo
-                      rounded
-                      outlined
-                      clearable
-                      required
-                      :rules="[v => !!v || 'Name is required']"
-                    ></v-text-field>
                   </div>
-                  <div class="search-form-field">
-                    <div class="search-filter-label">
-                      <label>{{ $t("breed") }}</label>
-                    </div>
-                    <v-select
-                      class="search-field mt-2"
-                      :placeholder="$t('all')"
-                      :items="breedList"
-                      v-model="form.breed_ids"
-                      outlined
-                      color="#46259A"
-                      rounded
-                      :rules="[v => !!v || 'Breed is required']"
-                      required
-                    ></v-select>
+                </div>
+                <div class="search-form-field">
+                  <div class="search-filter-label">
+                    <label>{{ $t("name") }}</label>
                   </div>
-                  <div class="action-section">
-                    <v-btn text @click="dialog = false">
-                      {{ $t("cancel") }}</v-btn
+                  <v-text-field
+                    v-model="form.name"
+                    :placeholder="$t('name')"
+                    class="search-field cross-icon mt-2"
+                    color="#46259A"
+                    solo
+                    rounded
+                    outlined
+                    clearable
+                    required
+                    :rules="[v => !!v || 'Name is required']"
+                  ></v-text-field>
+                </div>
+
+                <div class="search-form-field">
+                  <div class="search-filter-label">
+                    <label>{{ $t("breed") }}</label>
+                  </div>
+                  <v-select
+                    class="search-field mt-2"
+                    :placeholder="$t('all')"
+                    :items="breedList"
+                    v-model="form.breed_ids"
+                    outlined
+                    color="#46259A"
+                    rounded
+                    :rules="[v => !!v || 'Breed is required']"
+                    required
+                  ></v-select>
+                </div>
+
+                <div class="search-form-field w-full">
+                  <div class="search-filter-label mb-2">
+                    <label>{{ $t("adoption_date") }}</label>
+                  </div>
+                  <v-menu
+                    ref="menu"
+                    v-model="menu"
+                    :close-on-content-click="false"
+                    :return-value.sync="form.adoption_date"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                        v-model="form.adoption_date"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
+                        outlined
+                        rounded
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      v-model="form.adoption_date"
+                      no-title
+                      scrollable
                     >
-                    <v-btn
-                      class="purple-section  search-btn"
-                      outlined
-                      large
-                      @click="addPet"
-                    >
-                      {{ $t("update") }}
-                    </v-btn>
-                  </div>
-                </v-form>
-              </div>
-            </v-dialog>
-            <v-card-title class="action-title"> Add More</v-card-title>
-          </v-card>
+                      <v-spacer></v-spacer>
+                      <v-btn text color="primary" @click="menu = false">
+                        Cancel
+                      </v-btn>
+                      <v-btn
+                        text
+                        color="primary"
+                        @click="$refs.menu.save(form.adoption_date)"
+                      >
+                        OK
+                      </v-btn>
+                    </v-date-picker>
+                  </v-menu>
+                </div>
+
+                <div class="action-section">
+                  <v-btn text @click="dialog = false">
+                    {{ $t("cancel") }}</v-btn
+                  >
+                  <v-btn
+                    class="purple-section  search-btn"
+                    outlined
+                    large
+                    @click="addPet"
+                  >
+                    {{ $t("update") }}
+                  </v-btn>
+                </div>
+              </v-form>
+            </div>
+          </v-dialog>
         </v-col>
       </v-row>
     </div>
@@ -139,61 +177,51 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from "vuex";
+const dashboardModule = createNamespacedHelpers("dashboard");
 export default {
-  name: "PetProfile.vue",
   data() {
     return {
       dialog: false,
       breedList: [],
       petUser: [],
       form: {
+        adoption_date: new Date(
+          Date.now() - new Date().getTimezoneOffset() * 60000
+        )
+          .toISOString()
+          .substr(0, 10),
         name: "",
         breed_ids: "",
         pet_image: ""
       },
-      imageURL: ""
+      imageURL: "",
+      menu: false
     };
   },
   created() {
     this.getPetProfile();
     this.getBreedList();
+    console.log(this.form);
+  },
+  computed: {
+    ...dashboardModule.mapState(["USER_PETS", "PET_BREED_LIST"])
   },
   methods: {
+    ...dashboardModule.mapActions([
+      "FETCH_USER_PET_PROFILE",
+      "POST_ADD_USER_PET_PROFILE",
+      "POST_DELETE_USER_PET_PROFILE",
+      "FETCH_PET_BREED_LIST"
+    ]),
+
     async getPetProfile() {
-      this.$store.commit("SHOW_LOADER", true);
-      await this.$store.dispatch("getUserPet").then(response => {
-        this.$store.commit("SHOW_LOADER", false);
-        this.petUser = response.data.data.users_pets;
-      });
+      await this.FETCH_USER_PET_PROFILE();
+      this.petUser = this.USER_PETS;
     },
     async getBreedList() {
-      await this.$store.commit("SHOW_LOADER", true);
-      this.$store.dispatch("breedList").then(response => {
-        this.$store.commit("SHOW_LOADER", false);
-        let arr = [];
-
-        // response.data.data.breed_list.filter(data => data.value).forEach(function (data) {
-
-        response.data.data.breed_list.forEach(function(data) {
-          // if(data.value === ''){
-          //   this.form.breed_ids = data.value
-          //   arr.push({
-          //     'value': data.value,
-          //     'text': data.label,
-          //   })
-          // } else {
-          //   arr.push({
-          //     'value': data.value,
-          //     'text': data.label,
-          //   })
-          // }
-          arr.push({
-            value: data.value,
-            text: data.label
-          });
-        });
-        this.breedList = arr;
-      });
+      await this.FETCH_PET_BREED_LIST();
+      this.breedList = this.PET_BREED_LIST;
     },
     getProfileFile(event) {
       this.form.pet_image = event.target.files[0];
@@ -203,64 +231,19 @@ export default {
     async addPet() {
       if (this.$refs.form.validate()) {
         let data = new FormData();
-        data.append("pet_image", this.form.pet_image);
-        data.append("breed_ids", this.form.breed_ids);
-        data.append("name", this.form.name);
-        this.$store.commit("SHOW_LOADER", true);
-        await this.$store
-          .dispatch("addPetProfile", data)
-          .then(response => {
-            this.$store.commit("SHOW_LOADER", false);
-            this.$store.commit("SHOW_SNACKBAR", {
-              snackbar: true,
-              color: "green",
-              message: response.data.message
-            });
-            this.dialog = false;
-          })
-          .catch(e => {
-            let errors = e.response.data.data;
-            this.$store.commit("SHOW_LOADER", false);
-            for (let item in errors) {
-              if (errors.hasOwnProperty(item))
-                errors[item].forEach(err => {
-                  this.$store.commit("SHOW_SNACKBAR", {
-                    snackbar: true,
-                    color: "red",
-                    message: err
-                  });
-                });
-            }
-          });
+        for (var key in this.form) {
+          if (this.form.hasOwnProperty(key)) {
+            data.append(key, this.form[key]);
+          }
+        }
+        await this.POST_ADD_USER_PET_PROFILE(data);
+        await this.getPetProfile();
+        this.dialog = false;
       }
     },
     async deletePetUser(id) {
-      this.$store.commit("SHOW_LOADER", true);
-      await this.$store
-        .dispatch("deleteUserPet", id)
-        .then(response => {
-          this.getPetProfile();
-          this.$store.commit("SHOW_LOADER", false);
-          this.$store.commit("SHOW_SNACKBAR", {
-            snackbar: true,
-            color: "green",
-            message: response.data.message
-          });
-        })
-        .catch(e => {
-          let errors = e.response.data.data;
-          this.$store.commit("SHOW_LOADER", false);
-          for (let item in errors) {
-            if (errors.hasOwnProperty(item))
-              errors[item].forEach(err => {
-                this.$store.commit("SHOW_SNACKBAR", {
-                  snackbar: true,
-                  color: "red",
-                  message: err
-                });
-              });
-          }
-        });
+      await this.POST_DELETE_USER_PET_PROFILE(id);
+      await this.getPetProfile();
     }
   }
 };
@@ -315,7 +298,7 @@ export default {
   max-width: 700px;
 }
 .dialog-custom-container {
-  max-height: 560px;
+  max-height: 660px;
   max-width: 585px;
   padding: 0 1rem;
   margin: 0 auto;
@@ -324,6 +307,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  cursor: pointer;
   .avatar {
     width: 110px;
     position: relative;
@@ -378,11 +362,14 @@ export default {
   }
 }
 
+.search-form-field {
+  width: 100%;
+}
 .search-field::v-deep .v-input__slot {
   background: $white;
   min-height: 50px;
   box-shadow: unset !important;
-  min-width: 500px;
+  width: 100%;
   font-weight: $font-weight-bold;
   font-family: $font-family-primary;
   .v-text-field__slot {
@@ -398,7 +385,7 @@ export default {
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  margin-top: 4rem;
+  margin-top: 2rem;
   margin-bottom: 4rem;
 }
 .search-btn {
@@ -409,5 +396,8 @@ export default {
   //border: 0.5px solid $blue_gem;
   box-sizing: border-box;
   border-radius: 50px;
+}
+.w-full {
+  width: 100%;
 }
 </style>

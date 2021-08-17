@@ -2,31 +2,27 @@
   <div>
     <pet-functions></pet-functions>
     <about></about>
-    <!-- <location-search @filter-data="filterData"></location-search> -->
+    <client-only>
+      <location-search @filter-data="filterData"></location-search>
+    </client-only>
     <care-advice></care-advice>
     <featured-product></featured-product>
-    <banner-search></banner-search>
-    <news-letter></news-letter>
-
-    <div id="fd-form-60d48b4dbcd89609fbf3e11d"></div>
-    <script>
-      window.fd("form", {
-        formId: "60d48b4dbcd89609fbf3e11d",
-        containerEl: "#fd-form-60d48b4dbcd89609fbf3e11d"
-      });
-    </script>
+    <client-only>
+      <news-letter></news-letter>
+      <div id="fd-form-60d48b4dbcd89609fbf3e11d"></div>
+      <script>
+        window.fd("form", {
+          formId: "60d48b4dbcd89609fbf3e11d",
+          containerEl: "#fd-form-60d48b4dbcd89609fbf3e11d"
+        });
+      </script>
+    </client-only>
   </div>
 </template>
 <script>
-// import BannerSearch from "@/components/Common/Home/bannerSearch";
-// import PetFunctions from "@/components/Common/Home/petFunctions";
-// import About from "@/components/Common/Home/about";
-// import LocationSearch from "@/components/Common/Home/locationSearch";
-// import CareAdvice from "@/components/Common/Home/careAdvice";
-// import FeaturedProduct from "@/components/Common/Home/featuredProduct";
-// import NewsLetter from "@/components/Common/Home/newsLetter";
+import { createNamespacedHelpers } from "vuex";
+const petproModule = createNamespacedHelpers("petpro");
 export default {
-  name: "index",
   components: {
     BannerSearch: () => import("@/components/Common/Home/bannerSearch"),
     PetFunctions: () => import("@/components/Common/Home/petFunctions"),
@@ -45,7 +41,6 @@ export default {
   created() {
     if (process.browser) {
       let script = document.createElement("script");
-      console.log(script);
       script.innerHTML = `(function(w, d, t, s, n) {
     w.FlodeskObject = n;
     var fn = function() {
@@ -61,18 +56,22 @@ export default {
   })(window, document, 'script', 'https://assets.flodesk.com/universal.js', 'fd');`;
       document.body.appendChild(script);
     }
-
     let filters = {
       form: {},
       page: this.page
     };
-    this.$store.dispatch("petProList", filters);
-    this.$store.dispatch("petCategories");
+    this.POST_PET_PRO_LIST(filters);
+    this.FETCH_PET_PRO_CATEGORY_LIST();
   },
+
   methods: {
+    ...petproModule.mapActions([
+      "POST_PET_PRO_LIST",
+      "FETCH_PET_PRO_CATEGORY_LIST"
+    ]),
+
     filterData(filters) {
-      console.log(filters);
-      this.$store.dispatch("petProList", filters);
+      this.POST_PET_PRO_LIST(filters);
     }
   }
 };

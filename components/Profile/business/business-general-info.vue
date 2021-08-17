@@ -159,7 +159,7 @@ export default {
       });
     },
     categoryList() {
-      return this.$store.state.pet_category_list.map(category => {
+      return this.$store.state.PET_PRO_CATEGORY_LIST.map(category => {
         return {
           text: category.label,
           value: category.value

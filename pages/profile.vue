@@ -35,7 +35,6 @@ export default {
   components: {},
   data() {
     return {
-      userDetail: "",
       showTab: 1
     };
   },
@@ -54,6 +53,11 @@ export default {
           show: true
         },
         {
+          text: "password",
+          to: `${prefix}/update-password`,
+          show: true
+        },
+        {
           text: "my_vet_info",
           to: `${prefix}/vet-info`,
           show: false
@@ -61,12 +65,12 @@ export default {
         {
           text: "add_business",
           to: `${prefix}/add-business`,
-          show: true
+          show: false
         },
         {
           text: "my_business",
           to: `${prefix}/my-business`,
-          show: true
+          show: false
         },
         {
           text: "save_deals",
@@ -89,9 +93,7 @@ export default {
     }
   },
   methods: {},
-  created() {
-    this.userDetail = this.$store.state.user.user;
-  }
+  created() {}
 };
 </script>
 

@@ -33,7 +33,7 @@
                 outlined
                 large
                 rounded
-                @click="$router.push('/reviews')"
+                to="/best-pet-products/ziwi-premium-pet-food"
               >
                 {{ $t("browse_all_review") }}
               </v-btn>
@@ -46,9 +46,7 @@
 </template>
 
 <script>
-export default {
-  name: "featuredProduct.vue"
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>

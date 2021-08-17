@@ -195,11 +195,7 @@ export default {
     }
   },
   created() {
-    const {
-      vet_address,
-      vet_phone_number,
-      vet_place_name
-    } = this.$store.state.user.user;
+    const { vet_address, vet_phone_number, vet_place_name } = this.$auth.user;
     this.phone = vet_phone_number;
     this.form = {
       vet_address,

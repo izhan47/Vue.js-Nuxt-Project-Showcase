@@ -1,65 +1,77 @@
 <template>
-  <div class="watch-learn-detail-section" v-if="categoryData">
-    <div class="custom-container custom-margin">
-      <v-row>
-        <v-col cols="12" md="12" sm="12">
-          <div class="heading mt-2">
-            <h1>{{ categoryData.title }}</h1>
-          </div>
-          <div v-html="categoryData.description"></div>
-          <!--          <hr class="dot-line">-->
+  <div>
+    <div class="watch-learn-detail-section" v-if="WAL">
+      <div class="custom-container custom-margin">
+        <v-row>
+          <v-col cols="12" md="12" sm="12">
+            <div class="heading mt-2">
+              <h1>{{ WAL.title }}</h1>
+            </div>
+            <div v-html="WAL.description"></div>
+          </v-col>
+        </v-row>
+      </div>
 
-          <!--          <div class="comment-section">-->
-          <!--            <h2 class="comment-section-heading text-center space">{{ $t('comments')}}</h2>-->
-          <!--            <h2 class="comment-section-heading text-center mb-5">{{ $t('leave_a_comment')}}</h2>-->
-          <!--            <v-textarea-->
-          <!--              outlined-->
-          <!--              name="input-7-4"-->
-          <!--              label="Message"-->
-          <!--              v-model="form.message"-->
-          <!--              required-->
-          <!--            ></v-textarea>-->
-          <!--            <div class="text-center">-->
-          <!--              <v-btn large class=" submit-btn" outlined rounded @click="submit"> {{ $t('submit') }}</v-btn>-->
-          <!--            </div>-->
-          <!--          </div>-->
-        </v-col>
-      </v-row>
-    </div>
-    <!--  card-section-start   -->
-    <div class="custom-container  space" v-if="reviewData.length">
-      <v-row>
-        <v-col
-          cols="12"
-          md="4"
-          sm="12"
-          v-for="(data, i) in reviewData.slice(0, 3)"
-          :key="i"
-          class="mt-8"
-        >
-          <product-review-card :item="data"></product-review-card>
-        </v-col>
-      </v-row>
-    </div>
-    <div v-else class="text-center">
-      <img
-        class="img-height img-fluid"
-        src="/images/Auth/Column-3-Dog.png"
-        alt="logo"
-      />
-      <h2 class="heading">{{ $t("nothing_here") }}</h2>
-    </div>
+      <v-container>
+        <div class="custom-container custom-card mt-8">
+          <v-row>
+            <v-col cols="12" class="p-0">
+              <div>
+                <v-tabs v-model="tab" color="deep-purple accent-4">
+                  <v-tabs-slider></v-tabs-slider>
 
-    <!--  card-section-end   -->
+                  <v-tab href="#tab-1">
+                    Deals Offered
+                  </v-tab>
+                </v-tabs>
+
+                <v-tabs-items v-model="tab">
+                  <v-tab-item value="tab-1">
+                    <Deals :deals="WAL.deals" @claim-deal="claimDeal" />
+                  </v-tab-item>
+                </v-tabs-items>
+              </div>
+            </v-col>
+          </v-row>
+        </div>
+      </v-container>
+
+      <div class="custom-container  space" v-if="reviewData.length">
+        <v-row>
+          <v-col
+            cols="12"
+            md="4"
+            sm="12"
+            v-for="(data, i) in reviewData.slice(0, 3)"
+            :key="i"
+            class="mt-8"
+          >
+            <product-review-card :item="data"></product-review-card>
+          </v-col>
+        </v-row>
+      </div>
+      <div v-else class="text-center">
+        <img
+          class="img-height img-fluid"
+          src="/images/Auth/Column-3-Dog.png"
+          alt="logo"
+        />
+        <h2 class="heading">{{ $t("nothing_here") }}</h2>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import ProductReviewCard from "@/components/ProductReviewCard";
+import { createNamespacedHelpers } from "vuex";
+const bestpetproductsModule = createNamespacedHelpers("bestpetproducts");
+const watchandlearnModule = createNamespacedHelpers("watchandlearn");
 
 export default {
-  name: "index.vue",
-  components: { ProductReviewCard },
+  components: {
+    ProductReviewCard: () => import("~/components/ProductReviewCard"),
+    Deals: () => import("~/components/pet-biz/pet-pro-deals")
+  },
   data() {
     return {
       form: {
@@ -67,43 +79,46 @@ export default {
         parent_comment_id: 0,
         slug: ""
       },
-      categoryData: ""
+      tab: null
     };
   },
   computed: {
+    // ...watchandlearnModule.mapState(["WAL"]),
+    // ...bestpetproductsModule.mapState(["PRODUCT_REVIEW_LIST"]),
+    ...mapState({
+      watchandlearnModule: state => state.watchandlearn.WAL,
+      bestpetproductsModule: state => state.bestpetproducts.PRODUCT_REVIEW_LIST
+    }),
     URL() {
       return this.$route.params.slug;
     },
     reviewData() {
-      return this.$store.state.review_list;
+      return this.PRODUCT_REVIEW_LIST;
     }
   },
-  created() {
-    this.getCategoryDetail();
+  async created() {
+    await this.POST_WAL_DETAIL(this.URL);
   },
   methods: {
-    getCategoryDetail() {
-      this.$store.dispatch("singleCategoryDetail", this.URL).then(response => {
-        this.categoryData = response.data.data.watch_and_learn;
-        this.$store.commit("SHOW_LOADER", false);
-      });
-    },
-    submit() {
-      if (!this.$store.state.user.isAuthenticated) {
+    ...watchandlearnModule.mapActions(["POST_WAL_DETAIL"]),
+    ...bestpetproductsModule.mapActions(["POST_CLAIM_PRODUCT_REVIEW"]),
+
+    async claimDeal(deal) {
+      if (!this.$auth.loggedIn) {
+        this.$store.commit("SET_CURRENT_PATH", this.$route.path);
         return this.$router.push("/login");
       } else {
-        let loader = true;
-        this.$store.commit("SHOW_LOADER", loader);
-        this.form.slug = this.categoryData.slug;
-        // this.form.parent_comment_id=this.categoryData.id
-        this.$store.dispatch("comment", this.form).then(response => {
-          this.$store.commit("SHOW_LOADER", (loader = false));
-          this.$store.commit("SHOW_SNACKBAR", {
-            snackbar: true,
-            color: "green",
-            message: response.data.message
-          });
-        });
+        try {
+          let data = {
+            slug: this.$route.params.slug,
+            pet_deal_id: deal.id
+          };
+
+          await this.POST_CLAIM_PRODUCT_REVIEW(data);
+          await this.POST_WAL_DETAIL(this.URL);
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
   }
@@ -112,6 +127,12 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/assets/sass/main.scss";
+.custom-card {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 19px;
+  background: #ffffff;
+  overflow: hidden;
+}
 .custom-container {
   max-width: 940px;
 }

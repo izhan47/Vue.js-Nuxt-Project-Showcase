@@ -55,7 +55,7 @@
   "wag_enabled_description_first": "Because we want every pet to live their ",
   "wag_enabled_description_mid": "#bestlife",
   "wag_enabled_description_last": ". That’s why we created a highly curated and vetted platform to connect pet owners like you with local professionals who share the same values.",
-  "about_wag": "About Wag",
+  "about_wag": "About Wag Enabled",
 
   "pet_pro_business_you": "Pet Businesses Around You",
   "only_the_best_for_your_pets": "Only the Best for Your Pets",
@@ -88,6 +88,7 @@
   "name": "Name",
   "your_zipcode": "Your Zipcode",
   "email": "Email",
+  "Email": "Email",
   "submit": "Submit",
 
   "from": "From",
@@ -110,7 +111,7 @@
   "our_purpose": "Our Purpose",
   "purpose_description": "We help pet parents raise happy, well-balanced pups by doing the digging for them. We fetch the best in local products, services, and professionals that share our commitment to constructive care and loads of love.",
 
-  "better_together": "Better Together",
+  "better_together": "Are you a local pet business",
   "join": "Join",
   "shake_description": "We’re always looking for local pet businesses and brands to join our wag-tastic family. All we ask is that your business or brand shares our pain-free values. Only love and trust here!",
   "lets_shake": "Let's Shake!",
@@ -170,6 +171,7 @@
   "nothing_here": "Nothing Here ...!",
   "enter_location": "Enter Location ...",
   "forgot_description": "Enter your email and we'll send you a new password.",
+  "reset_description": "Please enter your new password.",
   "or": "or",
   "read_more": "Read More",
 
@@ -188,7 +190,7 @@
   "comment": "Comment",
 
   "account": "Account",
-  "save_deals": "Save Deals",
+  "save_deals": "Saved Deals",
   "loved_pet_pros": "Loved Pet Pros",
   "saved_pet_care_advice": "Saved Pet Care Advice",
   "my_reviews": "My Reviews",
@@ -196,6 +198,7 @@
   "my_vet_info": "My Vet Info",
   "change_profile": "Change profile photo ",
   "image_rules": "Acceptable formats: jbg, png Max file size: 500 kb ",
+  "adoption_date":"Adoption Date",
   "phone_no": "Phone No",
   "gender": "Gender",
   "zipcode": "Zipcode",
@@ -208,5 +211,12 @@
   "only_best_for_pets": "Only the Best for Your Pets",
   "local_business": "Local Business",
   "discover_best": "Discover Best",
-  "breed": "Breed"
+  "breed": "Breed",
+  "please_login_to_add_a_comment" : "Please login to add a comment",
+  "nature_of_business": "Nature of Business",
+  "update_password": "Update Password",
+  "new_password": "New Password",
+  "confirm_password": "Confirm Password",
+  "see_more_reviews": "See more reviews"
+
 }

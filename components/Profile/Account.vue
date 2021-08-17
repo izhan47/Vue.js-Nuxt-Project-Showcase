@@ -10,16 +10,13 @@
         @change="getProfileFile"
         ref="inputFile"
       />
-      <div class="change-avatar space">
+      <div class="change-avatar space" @click="$refs.inputFile.click()">
         <div class="avatar">
           <div
             class="bg-img-height"
-            :style="
-              `background-image: url(${userDetail.profile_image_thumb_full_path})`
-            "
+            :style="`background-image: url(${imageURL})`"
           ></div>
-          <!--        <img class=" img-fluid img-height" src="/images/pet-2.jpg" alt="">-->
-          <div class="add-image" @click="$refs.inputFile.click()">
+          <div class="add-image">
             <v-icon size="30" color="#fff">mdi-plus</v-icon>
           </div>
         </div>
@@ -41,7 +38,7 @@
             <label>{{ $t("name") }}</label>
           </div>
           <v-text-field
-            v-model="userDetail.name"
+            v-model="form.name"
             class="search-field cross-icon mt-2"
             color="#46259A"
             solo
@@ -57,7 +54,7 @@
             <label>{{ $t("email") }}</label>
           </div>
           <v-text-field
-            v-model="userDetail.email"
+            v-model="form.email"
             class="search-field cross-icon mt-2"
             color="#46259A"
             solo
@@ -68,12 +65,25 @@
             :rules="rules.email"
           ></v-text-field>
         </div>
+
+        <div class="search-form-field mb-8">
+          <div class="search-filter-label">
+            <label>{{ $t("address") }}</label>
+          </div>
+          <GmapAutocomplete
+            class="search-location"
+            :placeholder="$t('all')"
+            @input="inputLocation($event)"
+          >
+          </GmapAutocomplete>
+        </div>
+
         <div class="search-form-field">
           <div class="search-filter-label">
             <label>{{ $t("zipcode") }}</label>
           </div>
           <v-text-field
-            v-model="userDetail.zipcode"
+            v-model="form.zipcode"
             class="search-field cross-icon mt-2"
             color="#46259A"
             solo
@@ -84,33 +94,6 @@
             :rules="rules.zipcode"
           ></v-text-field>
         </div>
-
-        <!--      <div class="search-form-field">-->
-        <!--        <div class="search-filter-label">-->
-        <!--          <label >{{ $t('gender') }}</label>-->
-        <!--        </div>-->
-        <!--        <v-radio-group class="radio-field search-field" v-model="form.gender" row>-->
-        <!--          <v-radio :label="$t('male')" value="0" color="#46259A"></v-radio>-->
-        <!--          <v-radio :label="$t('female')" value="1" color="#46259A"></v-radio>-->
-        <!--          <v-radio  :label="$t('other')"  value="2" color="#46259A"></v-radio>-->
-        <!--        </v-radio-group>-->
-
-        <!--      </div>-->
-        <!--      <div class="search-form-field mb-5">-->
-        <!--        <div class="search-filter-label">-->
-        <!--          <label>{{ $t('phone_no') }}</label>-->
-        <!--        </div>-->
-        <!--        <div class="search-field">-->
-        <!--          <VuePhoneNumberInput-->
-        <!--            color="#46259A"-->
-        <!--            border-radius-28-->
-        <!--            default-country-code="US"-->
-        <!--            required-->
-        <!--            :rules="rules.phone_no"-->
-
-        <!--          class="phone" v-model="form.phone_no" />-->
-        <!--        </div>-->
-        <!--      </div>-->
         <div class="action-section">
           <v-btn text>{{ $t("cancel") }}</v-btn>
           <v-btn
@@ -128,31 +111,27 @@
 </template>
 
 <script>
-// import VuePhoneNumberInput from "vue-phone-number-input";
 import "vue-phone-number-input/dist/vue-phone-number-input.css";
+import { createNamespacedHelpers } from "vuex";
+const dashboardModule = createNamespacedHelpers("dashboard");
 
 export default {
-  name: "Account.vue",
-  components: { VuePhoneNumberInput: () => import("vue-phone-number-input") },
-
+  components: {
+    VuePhoneNumberInput: () => import("vue-phone-number-input")
+  },
   data() {
     return {
-      userDetail: "",
       form: {
         name: "",
         email: "",
-        zipcode: ""
+        zipcode: "",
+        address: ""
       },
       image: "",
       imageURL: "",
       rules: {
         name: [val => (val || "").length > 0 || "This name field is required"],
-        email: [
-          val => (val || "").length > 0 || "This address field is required"
-        ],
-        zipcode: [
-          val => (val || "").length > 0 || "This address field is required"
-        ]
+        email: [val => (val || "").length > 0 || "This email field is required"]
       }
     };
   },
@@ -160,54 +139,38 @@ export default {
   created() {
     this.getProfileDetail();
   },
+
   methods: {
+    ...dashboardModule.mapActions(["POST_UPDATE_USER_PROFILE"]),
+
     async getProfileDetail() {
-      this.$store.commit("SHOW_LOADER", true);
-      await this.$store.dispatch("profileDetails").then(response => {
-        this.$store.commit("SHOW_LOADER", false);
-        this.userDetail = response.data.data.user_details;
-      });
+      for (var key in this.$auth.user) {
+        if (this.form.hasOwnProperty(key)) {
+          this.form[key] = this.$auth.user[key];
+        }
+      }
+      this.imageURL = this.$auth.user.profile_image_thumb_full_path;
     },
     getProfileFile(event) {
-      this.image = event.target.files[0];
-      if (!this.image) return;
-      this.userDetail.profile_image_thumb_full_path = URL.createObjectURL(
-        this.image
-      );
+      let file = event.target.files[0];
+      if (!file) return;
+      this.image = file;
+      this.form.image = file;
+      this.imageURL = URL.createObjectURL(this.image);
     },
-    async updateProfile() {
+    updateProfile() {
       if (this.$refs.form.validate()) {
         let data = new FormData();
-        data.append("image", this.image);
-        data.append("name", this.userDetail.name);
-        data.append("email", this.userDetail.email);
-        data.append("zipcode", this.userDetail.zipcode);
-        this.$store.commit("SHOW_LOADER", true);
-        await this.$store
-          .dispatch("updateProfile", data)
-          .then(response => {
-            this.$store.commit("SHOW_LOADER", false);
-            this.$store.commit("SHOW_SNACKBAR", {
-              snackbar: true,
-              color: "green",
-              message: response.data.message
-            });
-          })
-          .catch(e => {
-            let errors = e.response.data.data;
-            this.$store.commit("SHOW_LOADER", false);
-            for (let item in errors) {
-              if (errors.hasOwnProperty(item))
-                errors[item].forEach(err => {
-                  this.$store.commit("SHOW_SNACKBAR", {
-                    snackbar: true,
-                    color: "red",
-                    message: err
-                  });
-                });
-            }
-          });
+        for (var key in this.form) {
+          if (this.form.hasOwnProperty(key)) {
+            data.append(key, this.form[key]);
+          }
+        }
+        this.POST_UPDATE_USER_PROFILE(data);
       }
+    },
+    inputLocation(event) {
+      this.form.address = event.target.value;
     }
   }
 };
@@ -225,18 +188,19 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  cursor: pointer;
   .avatar {
     width: 110px;
     position: relative;
-    border: 2.3804px solid $blue_gem;
+    border: 2px solid $blue_gem;
     box-sizing: border-box;
-    border-radius: 21.4236px;
+    border-radius: 22px;
     .bg-img-height {
       height: 102px;
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
-      border-radius: 19px;
+      border-radius: 20px;
     }
   }
   .add-image {
@@ -278,11 +242,15 @@ export default {
     opacity: 0.5;
   }
 }
+
+.search-form-field {
+  width: 100%;
+}
 .search-field::v-deep .v-input__slot {
   background: $white;
   min-height: 60px;
   box-shadow: unset !important;
-  min-width: 380px;
+  width: 100%;
   font-weight: $font-weight-bold;
   font-family: $font-family-primary;
   .v-text-field__slot {
@@ -292,6 +260,11 @@ export default {
     max-width: 273px;
     min-width: 0;
   }
+}
+.search-location {
+  width: 100%;
+  max-width: 100%;
+  min-height: 60px;
 }
 .radio-field {
   margin-top: 0;

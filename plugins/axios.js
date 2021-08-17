@@ -13,7 +13,18 @@ export default app => {
   });
 
   $axios.onError(err => {
-    //    TODO:: will create the global error message
-    return err;
+    let errors = err.response.data.data;
+    for (let item in errors) {
+      if (errors.hasOwnProperty(item)){
+        errors[item].forEach(err => {
+          app.store.commit("SHOW_SNACKBAR", {
+            snackbar: true,
+            color: "red",
+            message: err
+          });
+        });
+      }
+    }
+    throw new Error(err);
   });
 };
