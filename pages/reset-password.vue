@@ -38,7 +38,8 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const userModule = createNamespacedHelpers("user");
 export default {
   middleware: ["authenticated-user", "reset-password"],
   data() {
@@ -61,7 +62,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["RESET_PASSWORD"]),
+    ...userModule.mapActions(["RESET_PASSWORD"]),
 
     async ResetPassword() {
       await this.RESET_PASSWORD({

@@ -20,7 +20,8 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const petproModule = createNamespacedHelpers("petpro");
 export default {
   components: {
     BannerSearch: () => import("@/components/Common/Home/bannerSearch"),
@@ -40,7 +41,6 @@ export default {
   created() {
     if (process.browser) {
       let script = document.createElement("script");
-      console.log(script);
       script.innerHTML = `(function(w, d, t, s, n) {
     w.FlodeskObject = n;
     var fn = function() {
@@ -63,8 +63,12 @@ export default {
     this.POST_PET_PRO_LIST(filters);
     this.FETCH_PET_PRO_CATEGORY_LIST();
   },
+
   methods: {
-    ...mapActions(["POST_PET_PRO_LIST", "FETCH_PET_PRO_CATEGORY_LIST"]),
+    ...petproModule.mapActions([
+      "POST_PET_PRO_LIST",
+      "FETCH_PET_PRO_CATEGORY_LIST"
+    ]),
 
     filterData(filters) {
       this.POST_PET_PRO_LIST(filters);

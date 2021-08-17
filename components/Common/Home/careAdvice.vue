@@ -12,7 +12,7 @@
         </div>
         <div class="categories-buttons ">
           <v-btn
-            v-for="(item, i) in WAL_CATEGORY_LIST.slice(0, end)"
+            v-for="(item, i) in GET_WAL_CATEGORY_LIST.slice(0, end)"
             :key="i"
             large
             outlined
@@ -26,7 +26,7 @@
 
         <div class="text-center">
           <v-btn
-            v-if="end < WAL_CATEGORY_LIST.length"
+            v-if="end < GET_WAL_CATEGORY_LIST.length"
             class=" mt-4 mb-4 round-btn"
             outlined
             large
@@ -42,7 +42,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const watchandlearnModule = createNamespacedHelpers("watchandlearn");
 export default {
   data() {
     return {
@@ -65,13 +66,13 @@ export default {
     }
   },
   computed: {
-    ...mapState(["WAL_CATEGORY_LIST"])
+    ...watchandlearnModule.mapGetters(["GET_WAL_CATEGORY_LIST"])
   },
   methods: {
-    ...mapActions(["FETCH_WAL_CATEGORY_LIST"])
+    ...watchandlearnModule.mapActions(["FETCH_WAL_CATEGORY_LIST"])
   },
   async created() {
-    this.FETCH_WAL_CATEGORY_LIST();
+    await this.FETCH_WAL_CATEGORY_LIST();
   }
 };
 </script>

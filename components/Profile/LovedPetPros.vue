@@ -78,7 +78,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const dashboardModule = createNamespacedHelpers("dashboard");
 export default {
   data() {
     return {
@@ -89,10 +90,10 @@ export default {
     this.lovedPetPro();
   },
   computed: {
-    ...mapState(["LOVED_PETS"])
+    ...dashboardModule.mapState(["LOVED_PETS"])
   },
   methods: {
-    ...mapActions(["FETCH_GET_LOVED_PETS", "POST_REMOVE_LOVED_PET"]),
+    ...dashboardModule.mapActions(["FETCH_GET_LOVED_PETS", "POST_REMOVE_LOVED_PET"]),
     async lovedPetPro() {
       await this.FETCH_GET_LOVED_PETS();
       this.petLoved = this.LOVED_PETS;

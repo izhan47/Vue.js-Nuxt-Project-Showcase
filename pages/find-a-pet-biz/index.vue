@@ -148,7 +148,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const petproModule = createNamespacedHelpers("petpro");
 
 export default {
   data() {
@@ -170,13 +171,17 @@ export default {
   },
 
   computed: {
-    ...mapState(["PET_PRO_LIST", "PET_PRO_LIST_TOTAL_PAGE"]),
+    ...petproModule.mapState([
+      "PET_PRO_CATEGORY_LIST",
+      "PET_PRO_LIST",
+      "PET_PRO_LIST_TOTAL_PAGE"
+    ]),
 
     colors() {
       return ["paw-purple", "paw-pink", "paw-green"];
     },
     categoryList() {
-      this.category_list = this.$store.state.PET_PRO_CATEGORY_LIST;
+      this.category_list = this.PET_PRO_CATEGORY_LIST;
       let arr = this.category_list.map(category => ({
         value: category.value,
         text: category.label
@@ -211,8 +216,10 @@ export default {
     this.FETCH_PET_PRO_CATEGORY_LIST();
   },
   methods: {
-    ...mapActions(["POST_PET_PRO_LIST", "FETCH_PET_PRO_CATEGORY_LIST"]),
-
+    ...petproModule.mapActions([
+      "POST_PET_PRO_LIST",
+      "FETCH_PET_PRO_CATEGORY_LIST"
+    ]),
     filterData() {
       this.$router.push({ query: { page: this.page } });
 

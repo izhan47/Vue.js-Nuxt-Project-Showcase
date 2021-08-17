@@ -101,7 +101,8 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const watchandlearnModule = createNamespacedHelpers("watchandlearn");
 export default {
   components: {
     WatchCategoryCard: () => import("@/components/WatchCategoryCard")
@@ -127,8 +128,15 @@ export default {
     };
   },
   computed: {
-    ...mapState(["WAL_CATEGORY_LIST", "WAL_LIST", "WAL_LIST_TOTAL_PAGE"]),
-    ...mapGetters(["GET_WAL_CATEGORY_LIST"])
+    ...watchandlearnModule.mapState([
+      "WAL_CATEGORY_LIST",
+      "WAL_LIST",
+      "WAL_LIST_TOTAL_PAGE"
+    ]),
+    ...watchandlearnModule.mapGetters([
+      "GET_WAL_CATEGORY_LIST",
+    ]),
+
   },
 
   async created() {
@@ -146,7 +154,10 @@ export default {
   },
 
   methods: {
-    ...mapActions(["FETCH_WAL_CATEGORY_LIST", "POST_WAL_LIST"]),
+    ...watchandlearnModule.mapActions([
+      "FETCH_WAL_CATEGORY_LIST",
+      "POST_WAL_LIST",
+    ]),
 
     filterData() {
       let filters = {

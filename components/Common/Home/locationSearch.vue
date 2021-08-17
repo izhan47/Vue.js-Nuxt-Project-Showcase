@@ -102,6 +102,8 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from "vuex";
+const petproModule = createNamespacedHelpers("petpro");
 import PetCategoryCard from "@/components/PetCategoryCard";
 export default {
   name: "locationSearch",
@@ -122,11 +124,12 @@ export default {
   },
 
   computed: {
+    ...petproModule.mapState(["PET_PRO_CATEGORY_LIST", "PET_PRO_LIST"]),
     petProData() {
-      return this.$store.state.PET_PRO_LIST;
+      return this.PET_PRO_LIST;
     },
     categoryList() {
-      let categories = this.$store.state.PET_PRO_CATEGORY_LIST;
+      let categories = this.PET_PRO_CATEGORY_LIST;
       let arr = categories.map(category => ({
         value: category.value,
         text: category.label

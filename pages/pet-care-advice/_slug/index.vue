@@ -87,7 +87,7 @@
                       </div>
                       <div class="reviews-details">
                         <div
-                          v-if="userDetail && userDetail.id === comment.user.id"
+                          v-if="user && user.id === comment.user.id"
                           class="delete-icon"
                           @click="deleteComment(comment.id)"
                         >
@@ -185,7 +185,7 @@
                   outlined
                   :label="
                     $t(
-                      !isAuthenticated
+                      !$auth.loggedIn
                         ? 'please_login_to_add_a_comment'
                         : 'comment'
                     )
@@ -193,7 +193,7 @@
                   v-model="form.message"
                   :rules="rules.message"
                   required
-                  :disabled="!isAuthenticated"
+                  :disabled="!$auth.loggedIn"
                 ></v-textarea>
                 <div class="text-center">
                   <v-btn
@@ -201,9 +201,9 @@
                     class=" submit-btn"
                     outlined
                     rounded
-                    :dark="!isAuthenticated"
+                    :dark="!$auth.loggedIn"
                     @click="submit(form.parent_comment_id)"
-                    :disabled="!isAuthenticated"
+                    :disabled="!$auth.loggedIn"
                   >
                     {{ $t("submit") }}</v-btn
                   >
@@ -238,7 +238,8 @@
 <script>
 import WatchCategoryCard from "@/components/WatchCategoryCard";
 import { APP_URL } from "@/configs/urls";
-import { mapState, mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const watchandlearnModule = createNamespacedHelpers("watchandlearn");
 
 export default {
   components: { WatchCategoryCard },
@@ -291,8 +292,11 @@ export default {
     };
   },
   computed: {
-    ...mapState(["WAL", "WAL_LIST", "WAL_COMMENTS"]),
-
+    ...watchandlearnModule.mapState([
+      "WAL",
+      "WAL_LIST",
+      "WAL_COMMENTS"
+    ]),
     currentURL() {
       if (process.browser) return window.location.href;
     },
@@ -302,29 +306,25 @@ export default {
     createMarkup(text) {
       return { __html: text };
     },
-    isAuthenticated() {
-      return this.$store.state.USER.isAuthenticated;
+    user() {
+      return this.$auth.user;
     }
   },
   async asyncData({ store, params }) {
-    await store.dispatch("POST_WAL_DETAIL", params.slug);
-    await store.dispatch("POST_WAL_GET_COMMENT", params.slug);
-
-    const userDetail = store.state.USER.user;
-    return {
-      userDetail
-    };
+    await store.dispatch("watchandlearn/POST_WAL_DETAIL", params.slug);
+    await store.dispatch("watchandlearn/POST_WAL_GET_COMMENT", params.slug);
   },
 
   methods: {
-    ...mapActions([
+    
+    ...watchandlearnModule.mapActions([
       "POST_WAL_COMMENT",
       "POST_WAL_GET_COMMENT",
       "POST_WAL_DELETE_COMMENT"
     ]),
 
     async deleteComment(id) {
-      if (!this.$store.state.USER.isAuthenticated) {
+      if (!this.$auth.loggedIn) {
         this.$store.commit("SET_CURRENT_PATH", this.$route.path);
         return this.$router.push("/login");
       } else {
@@ -338,7 +338,7 @@ export default {
     },
 
     async submit(id) {
-      if (!this.$store.state.USER.isAuthenticated) {
+      if (!this.$auth.loggedIn) {
         this.$store.commit("SET_CURRENT_PATH", this.$route.path);
         return this.$router.push("/login");
       } else {

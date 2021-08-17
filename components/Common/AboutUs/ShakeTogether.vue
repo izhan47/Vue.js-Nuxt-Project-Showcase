@@ -82,12 +82,6 @@ export default {
   methods: {
     goToPage() {
       this.dialog = true;
-      // const { user } = this.$store.state.USER;
-      // if (user) {
-      //   this.$router.push("/profile/add-business");
-      // } else {
-      //   this.$router.push("/login");
-      // }
     },
     async submit() {
       if (this.$refs.form.validate()) {
@@ -105,9 +99,6 @@ export default {
           message: "Thanks. We will contact you soon!"
         });
         this.dialog = false;
-        // for (const key in this.form) {
-        //   this.form[key] = "";
-        // }
         this.$refs.form.reset();
       }
     }

@@ -101,7 +101,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const petproModule = createNamespacedHelpers("petpro");
 export default {
   name: "pet-biz-events",
   data: () => ({
@@ -119,10 +120,10 @@ export default {
     }
   }),
   computed: {
-    ...mapState(["PET_PRO_REVIEW"])
+    ...petproModule.mapState(["PET_PRO_REVIEW"])
   },
   methods: {
-    ...mapActions([
+    ...petproModule.mapActions([
       "POST_PET_PRO_REVIEW",
       "POST_GET_REVIEWS",
       "POST_GET_MORE_REVIEWS"
@@ -140,7 +141,7 @@ export default {
       this.reviews = pet_pro_reviews;
     },
     async submitReview() {
-      if (!this.$store.state.USER.isAuthenticated) {
+      if (!this.$auth.loggedIn) {
         this.$store.commit("SET_CURRENT_PATH", this.$route.path);
         return this.$router.push("/login");
       } else {
@@ -174,9 +175,8 @@ export default {
   },
   created() {
     this.getReviews();
-    const { user } = this.$store.state.USER;
-    if (user) {
-      this.name = user.name;
+    if (this.$auth.loggedIn) {
+      this.name = this.$auth.user.name;
     }
   }
 };

@@ -63,7 +63,9 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const bestpetproductsModule = createNamespacedHelpers("bestpetproducts");
+const watchandlearnModule = createNamespacedHelpers("watchandlearn");
 
 export default {
   components: {
@@ -81,40 +83,28 @@ export default {
     };
   },
   computed: {
-    ...mapState(["WAL"]),
-
+    // ...watchandlearnModule.mapState(["WAL"]),
+    // ...bestpetproductsModule.mapState(["PRODUCT_REVIEW_LIST"]),
+    ...mapState({
+      watchandlearnModule: state => state.watchandlearn.WAL,
+      bestpetproductsModule: state => state.bestpetproducts.PRODUCT_REVIEW_LIST
+    }),
     URL() {
       return this.$route.params.slug;
     },
     reviewData() {
-      return this.$store.state.PRODUCT_REVIEW_LIST;
+      return this.PRODUCT_REVIEW_LIST;
     }
   },
   async created() {
     await this.POST_WAL_DETAIL(this.URL);
   },
   methods: {
-    ...mapActions(["POST_WAL_DETAIL", "POST_CLAIM_PRODUCT_REVIEW"]),
+    ...watchandlearnModule.mapActions(["POST_WAL_DETAIL"]),
+    ...bestpetproductsModule.mapActions(["POST_CLAIM_PRODUCT_REVIEW"]),
 
-    // submit() {
-    //   if (!this.$store.state.USER.isAuthenticated) {
-    //     return this.$router.push("/login");
-    //   } else {
-    //     let loader = true;
-    //     this.$store.commit("SHOW_LOADER", loader);
-    //     this.form.slug = this.WAL.slug;
-    //     this.$store.dispatch("comment", this.form).then(response => {
-    //       this.$store.commit("SHOW_LOADER", (loader = false));
-    //       this.$store.commit("SHOW_SNACKBAR", {
-    //         snackbar: true,
-    //         color: "green",
-    //         message: response.data.message
-    //       });
-    //     });
-    //   }
-    // },
     async claimDeal(deal) {
-      if (!this.$store.state.USER.isAuthenticated) {
+      if (!this.$auth.loggedIn) {
         this.$store.commit("SET_CURRENT_PATH", this.$route.path);
         return this.$router.push("/login");
       } else {

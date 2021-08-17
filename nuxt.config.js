@@ -2,7 +2,7 @@ import colors from "vuetify/es5/util/colors";
 // const config = require('./configs/config')
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: true,
+  ssr: false,
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -27,7 +27,6 @@ export default {
     { src: "~/plugins/i18n.js" ,  ssr: true},
     { src: "~/plugins/google-maps.js" ,ssr: false},
     { src: "~/plugins/aos.js", mode: "client" ,ssr: false },
-    { src: "~/plugins/vuex-persist", ssr: false },
     { src: "~/plugins/axios" },
     { src: "~/plugins/lazy-load.js" ,ssr: false},
     { src: "~/plugins/vue-awesome-swiper", mode: "client",ssr: false }
@@ -56,7 +55,27 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/axios", "nuxt-webfontloader"],
+  modules: ["@nuxtjs/axios", "nuxt-webfontloader" , '@nuxtjs/auth-next'],
+  auth:{
+    strategies:{
+      local:{
+        token:{
+          property:'token',
+          type:'Bearer',
+          maxAge:60*60*24*30
+        },
+        user:{
+          property:'data.user_details',
+          autoFetch:true
+        },
+        endpoints: {
+          login: { url: '/login', method: 'post' },
+          logout: { url: '/profile/logout', method: 'post' },
+          user: { url: '/profile/get-details', method: 'post' },
+        },
+      }
+    }
+  },
   webfontloader: {
     google: {
       families: ["Nunito+Sans:200,300,400,600,700,800,900&display=swap"]

@@ -35,7 +35,6 @@ export default {
   components: {},
   data() {
     return {
-      userDetail: "",
       showTab: 1
     };
   },
@@ -94,9 +93,7 @@ export default {
     }
   },
   methods: {},
-  created() {
-    this.userDetail = this.$store.state.USER.user;
-  }
+  created() {}
 };
 </script>
 

@@ -114,7 +114,8 @@
 
 <script>
 import ProductReviewCard from "@/components/ProductReviewCard";
-import { mapState, mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const bestpetproductsModule = createNamespacedHelpers("bestpetproducts");
 export default {
   name: "index.vue",
   data() {
@@ -141,10 +142,10 @@ export default {
   },
   components: { ProductReviewCard },
   computed: {
-    ...mapState(["PRODUCT_REVIEW_CATEGORY_LIST"]),
+    ...bestpetproductsModule.mapState(["PRODUCT_REVIEW_CATEGORY_LIST", "PRODUCT_REVIEW_LIST"]),
 
     reviewData() {
-      return this.$store.state.PRODUCT_REVIEW_LIST;
+      return this.PRODUCT_REVIEW_LIST;
     },
     totalPage() {
       return this.$store.state.PRODUCT_REVIEW_TOTAL_PAGE;
@@ -164,7 +165,7 @@ export default {
     this.FETCH_PRODUCT_REVIEW_CATEGORIES();
   },
   methods: {
-    ...mapActions([
+    ...bestpetproductsModule.mapActions([
       "FETCH_PRODUCT_REVIEW_CATEGORIES",
       "POST_PRODUCT_REVIEW_LIST"
     ]),

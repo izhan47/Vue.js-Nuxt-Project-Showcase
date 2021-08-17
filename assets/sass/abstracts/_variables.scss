@@ -14,8 +14,6 @@ $success: #28c76f;
 $danger: #ea5455;
 $warning: #ff9f43;
 $dark: #1e1e1e;
-//$grey: #b8c2cc;
-//$cultured: #dae1e7;
 $white: #ffffff;
 
 $purple: #332e80;
@@ -53,9 +51,6 @@ $black: #000000;
 =========================================================*/
 $font-family-primary : 'Nunito Sans', sans-serif;
 $font-family-secondary: 'Poppins', sans-serif;
-//$font-family-primary : 'Poppins', sans-serif;
-
-
 /*========================================================
         Font Size
 =========================================================*/
@@ -65,15 +60,16 @@ $font-size-60: 60px;
 $font-size-55: 55px;
 $font-size-51: 51px;
 $font-size-50: 50px;
+$font-size-48: 45px;
 $font-size-45: 45px;
 $font-size-40: 40px;
 $font-size-35: 35px;
 $font-size-32: 32px;
 $font-size-30: 30px;
 $font-size-28: 28px;
+$font-size-25: 25px;
 $font-size-24: 24px;
 $font-size-22: 22px;
-$font-size-25: 25px;
 $font-size-20: 20px;
 $font-size-18: 18px;
 $font-size-17: 17px;
@@ -107,8 +103,6 @@ $text-transform-capitalize:capitalize;
 $text-transform-inherit:inherit;
 $text-transform-uppercase:uppercase;
 $text-transform-initial:initial;
-
-
 /*========================================================
         Img Height
 =========================================================*/
@@ -126,4 +120,3 @@ $img-max-height-90:90px;
 $img-max-height-70:70px;
 $img-max-height-60:60px;
 $img-max-height-40:40px;
-
