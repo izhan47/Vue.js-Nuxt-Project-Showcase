@@ -83,12 +83,8 @@ export default {
     };
   },
   computed: {
-    // ...watchandlearnModule.mapState(["WAL"]),
-    // ...bestpetproductsModule.mapState(["PRODUCT_REVIEW_LIST"]),
-    ...mapState({
-      watchandlearnModule: state => state.watchandlearn.WAL,
-      bestpetproductsModule: state => state.bestpetproducts.PRODUCT_REVIEW_LIST
-    }),
+    ...watchandlearnModule.mapState(["WAL"]),
+    ...bestpetproductsModule.mapState(["PRODUCT_REVIEW_LIST"]),
     URL() {
       return this.$route.params.slug;
     },
